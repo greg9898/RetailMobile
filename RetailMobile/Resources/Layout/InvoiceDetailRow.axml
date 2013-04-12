@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/listStyle">    
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:gravity="center_vertical"
+        android:layout_centerVertical="true">
+
+           
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:layout_weight="1">
+
+          <ImageView
+       android:id="@+id/imgItemImage"
+       android:layout_height="0dp"
+       android:layout_width="0dp"
+       android:src="@drawable/no_image" />
+          <TextView
+              android:id="@+id/lblDetItemCode"
+              android:layout_height="wrap_content"
+              android:layout_width="0dp"
+              android:paddingLeft="2dp"
+              android:layout_weight="1"
+              android:textSize="10sp"
+              android:textColor="@color/foreground" />
+          <TextView
+              android:id="@+id/lblDetItemDesc"
+              android:layout_height="wrap_content"
+              android:layout_width="0dp"
+              android:layout_toRightOf="@id/lblDetItemCode"
+              android:paddingLeft="2dp"
+              android:layout_weight="1"
+              android:textSize="12sp"
+              android:textColor="@color/foreground" />
+          
+            <EditText
+                android:id="@+id/tbDetUnitPrice"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:background="@drawable/gridTextEditStyle"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:inputType="numberDecimal"
+                android:layout_weight="1"
+                android:paddingLeft="4dp"
+                android:textSize="12sp"
+                android:textColor="@color/foreground"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical" />
+            <EditText
+                android:id="@+id/tbDetQty"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:background="@drawable/gridTextEditStyle"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:inputType="numberDecimal"
+                android:layout_weight="1"
+                android:paddingLeft="4dp"
+                android:textSize="12sp"
+                android:textColor="@color/foreground"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical" />
+            <EditText
+                android:id="@+id/tbDetDisc"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:background="@drawable/gridTextEditStyle"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:inputType="numberDecimal"
+                android:layout_weight="1"
+                android:paddingLeft="4dp"
+                android:textSize="12sp"
+                android:textColor="@color/foreground"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical" />
+            <TextView
+                android:id="@+id/tbDetNetValue"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_weight="1"
+                android:paddingLeft="4dp"
+                android:textSize="12sp"
+                android:textColor="@color/foreground"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical" />
+            <TextView
+                android:id="@+id/tblDetVatValue"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_weight="1"
+                android:paddingLeft="4dp"
+                android:textSize="12sp"
+                android:textColor="@color/foreground"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

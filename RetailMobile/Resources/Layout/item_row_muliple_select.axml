@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/listStyle">
+    <RelativeLayout
+        android:id="@+id/layout_checkable_item_info"
+        android:clickable="true"
+        style="@style/wrapSelf">
+        <ImageView
+            android:id="@+id/imgItem"
+            android:layout_width="40dip"
+            android:layout_height="40dip"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/no_icon" />
+        <LinearLayout
+            style="@style/wrapSelf"
+            android:layout_toRightOf="@id/imgItem">
+            <TextView
+                android:id="@+id/tbItemCode"
+                style="@style/listRowTextViewStyle"
+                android:text="tbItemCode"
+                android:layout_weight="0.5" />
+            <TextView
+                android:id="@+id/tbItemName"
+                style="@style/listRowTextViewStyle"
+                android:text="tbItemName"
+                android:layout_weight="1" />
+            <TextView
+                android:id="@+id/tbItemTaxNum"
+                style="@style/listRowTextViewStyle"
+                android:text="tbItemTaxNum"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </RelativeLayout>
+    <EditText
+        android:id="@+id/tbQty"
+        android:inputType="number"
+        android:digits="0123456789"
+        android:selectAllOnFocus="true"
+        android:text="1"
+        android:textSize="12sp"
+        android:width="30dp"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/layout_checkable_item_info" />
+    <CheckBox
+        style="@style/wrapSelf"
+        android:id="@+id/checkBox"
+        android:checked="false"
+        android:width="30dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/tbQty"
+        android:layout_alignParentRight="true" />
+</RelativeLayout>

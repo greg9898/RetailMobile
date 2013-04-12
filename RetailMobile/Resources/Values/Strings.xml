@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Hello">Hello World, Click Me!</string>
+    <string name="app_name">RetailMobile</string>
+  <string name="empty"></string>
+  
+  <!-- item -->
+  <string name="lblCustomerCode">Code:</string>
+  <string name="lblCustomerName">Name:</string>
+  <string name="lblCustomerAddress">Address:</string>
+  <string name="lblCustomerPhone">Phone:</string>
+  <string name="lblEmptyList">No records</string>
+  <string name="lblCustDebt">Debt:</string>
+  <string name="lblCustTaxNum">Tax Num:</string>
+  <string name="miCustomers">Customers</string>
+  <string name="miItems">Items</string>
+  <string name="miInvoice">Order</string>
+  <string name="miReports">Reports</string>
+  <string name="miAddCustomer">Add Customer</string>
+  <string name="miEdit">Edit</string>
+  <string name="miDelete">Delete</string>  
+  <string name="miNew">Add New</string>
+  
+  <!-- item -->
+  <string name="lblItemCode">Code:</string>
+  <string name="lblItemName">Description:</string>
+  <string name="lblItemCategory1">Item Category 1:</string>
+  <string name="lblItemCategory2">Item Category 2:</string>
+  <string name="lblLongDesc">Long description:</string>
+  <string name="lblItemRetVal">Ret value:</string>
+  <string name="lblItemSaleVal">Sale value:</string>
+  <string name="lblDetailsCaption">Details</string>
+  
+  <string name="btnScan">Scan</string>
+  <string name="btnSave">Save</string>
+  <string name="btnSearch">Add Items</string>
+  <string name="btnSearchCustomer">Select customer</string>
+  <string name="lblCustomerCaption">Customer</string>
+  <string name="lblInvoiceInfoCaption">Order Info</string>
+  <string name="lblHtrnID">ID</string>
+  <string name="lblHtrnDate">Date</string>
+  <string name="lblHtrnExpl">Explanation</string>
+  <string name="lblHtrnNetValue">Net Value</string>
+  <string name="lblHtrnVatValue">Vat Value</string>
+  <string name="lblHtrnTotValue">Tot Value</string>
+  <string name="btnAddItems">Add Items</string>
+  <string name="btnCloseItemSearch">Close</string>
+  <string name="cbItemCategPrompt">Categ 1</string>
+  <string name="tvMenuCaptionItems">Items</string>
+  <string name="tvMenuCaptionCustomers">Customers</string>
+  <string name="tvMenuCaptionInvoices">Invoices</string>
+  <string name="tabInvoiceDetails">Invoice info</string>
+  <string name="tabInvoiceItems">Items</string>
+  <string name="alphabetEnglish">ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+  <string name="alphabetGreek">ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΨΩ</string>
+  <string name="btnAddNew">New</string>
+  <string name="btnList">List</string>
+  <string name="btnClose">Close</string>
+  <string name="btnOK">OK</string>
+  
+</resources>
+

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/parentBackground">
+    <ImageView
+        android:id="@+id/ivMenuIcon"
+        android:layout_width="50dip"
+        android:layout_height="50dip"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/no_icon" />
+    <TextView
+        android:id="@+id/tvMenuCaption"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/foreground"
+        android:textSize="25sp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1" />
+</LinearLayout>

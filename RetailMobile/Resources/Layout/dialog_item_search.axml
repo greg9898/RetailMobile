@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="1">
+    <ListView
+        android:id="@+id/lvItems"
+        style="@style/fillParent"
+        android:layout_weight="0.3"
+        android:divider="@android:color/black"
+        android:dividerHeight="1dp" />
+    <RelativeLayout
+        android:orientation="vertical"
+        style="@style/fillParent"
+        android:layout_weight="0.7"
+        android:background="@android:color/white">
+        <TextView
+            android:id="@+id/lblItemName"
+            style="@style/fillWidth"
+            android:text="@string/lblItemName"
+            android:textColor="@android:color/black" />
+        <EditText
+            android:id="@+id/tbSearch"
+            style="@style/fillWidth"
+            android:layout_below="@id/lblItemName" />
+        <TextView
+            android:id="@+id/lblItemRetVal"
+            style="@style/fillWidth"
+            android:text="@string/lblItemRetVal"
+            android:textColor="@android:color/black"
+            android:layout_below="@id/tbSearch" />
+        <EditText
+            android:id="@+id/tbRetVal"
+            android:inputType="numberDecimal"
+            style="@style/fillWidth"
+            android:layout_below="@id/lblItemRetVal" />
+        <TextView
+            android:id="@+id/lblItemCategory1"
+            style="@style/fillWidth"
+            android:text="@string/lblItemCategory1"
+            android:layout_below="@id/tbRetVal"
+            android:textColor="@android:color/black" />
+        <Spinner
+            android:id="@+id/cbCateg1"
+            android:layout_below="@id/lblItemCategory1"
+            style="@style/fillWidth" />
+        <TextView
+            android:id="@+id/lblItemCategory2"
+            style="@style/fillWidth"
+            android:text="@string/lblItemCategory2"
+            android:layout_below="@id/cbCateg1"
+            android:textColor="@android:color/black" />
+        <Spinner
+            android:id="@+id/cbCateg2"
+            android:layout_below="@id/lblItemCategory2"
+            style="@style/fillWidth" />
+        <Button
+            android:id="@+id/btnClose"
+            style="@style/menuButtonStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/btnClose" />
+        <Button
+            android:id="@+id/btnOK"
+            style="@style/menuButtonStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/btnClose"
+            android:text="@string/btnOK" />
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B6D94813-CF02-4D55-9634-A4CE53101C62}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RetailMobile</RootNamespace>
+    <AssemblyName>RetailMobile</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <AndroidApplication>true</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <TargetFrameworkVersion>v3.1</TargetFrameworkVersion>
+    <AndroidSupportedAbis>armeabi%3barmeabi-v7a%3bx86</AndroidSupportedAbis>
+    <AndroidStoreUncompressedFileExtensions />
+    <MandroidI18n />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
+    <AndroidLinkSkip />
+    <BundleAssemblies>False</BundleAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Android" />
+    <Reference Include="Mono.Android.Support.v4" />
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UltraliteMono">
+      <HintPath>DLLs\UltraliteMono.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Adapters\CheckableItemsAdapter.cs" />
+    <Compile Include="Adapters\TransDetAdapter.cs" />
+    <Compile Include="Adapters\MainMenuAdapter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Adapters\TransHedAdapter.cs" />
+    <Compile Include="Adapters\ItemsInfoAdapter.cs" />
+    <Compile Include="Adapters\CustomersAdapter.cs" />
+    <Compile Include="Base.cs" />
+    <Compile Include="CustomerDetails.cs" />
+    <Compile Include="CustomersList.cs" />
+    <Compile Include="CustomersListAdapter.cs" />
+    <Compile Include="Dialogs\ItemsSelectDialog.cs" />
+    <Compile Include="Dialogs\CustomerSelectDialog.cs" />
+    <Compile Include="Fragments\ActionBar.cs" />
+    <Compile Include="Fragments\BaseFragment.cs" />
+    <Compile Include="Fragments\MainMenuFragment.cs" />
+    <Compile Include="Fragments\InvoiceInfoFragment.cs" />
+    <Compile Include="Fragments\ItemFragment.cs" />
+    <Compile Include="Fragments\CustomerFragment.cs" />
+    <Compile Include="Fragments\DetailsActivity.cs" />
+    <Compile Include="Fragments\DetailsFragment.cs" />
+    <Compile Include="Fragments\TitlesFragment.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="InvoiceDetailsAdapter.cs" />
+    <Compile Include="InvoiceScreen.cs" />
+    <Compile Include="ItemDetails.cs" />
+    <Compile Include="ItemSearch.cs" />
+    <Compile Include="ItemsList.cs" />
+    <Compile Include="ItemsListAdapter.cs" />
+    <Compile Include="ItemsSearchAdapter.cs" />
+    <Compile Include="Library\CustomerInfo.cs" />
+    <Compile Include="Library\CustomerInfoList.cs" />
+    <Compile Include="Library\ItemInfo.cs" />
+    <Compile Include="Library\ItemInfoList.cs" />
+    <Compile Include="Library\TransDet.cs" />
+    <Compile Include="Library\TransDetList.cs" />
+    <Compile Include="Library\TransHed.cs" />
+    <Compile Include="Library\TransHedList.cs" />
+    <Compile Include="MainMenu.cs" />
+    <Compile Include="PreferencesUtil.cs" />
+    <AndroidResource Include="Resources\Drawable\menu_caption_background.xml" />
+    <Compile Include="Resources\Resource.Designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Adapters\SpinnerAdapter.cs" />
+    <Compile Include="Sync.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Assets\AboutAssets.txt" />
+    <AndroidResource Include="Resources\layout-land\InvoiceScreen.axml" />
+    <AndroidResource Include="Resources\Layout\InvoiceDetailRow.axml" />
+    <AndroidResource Include="Resources\Layout\InvoiceScreen.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\ItemDetails.axml" />
+    <AndroidResource Include="Resources\Layout\ItemInfoRow.axml" />
+    <AndroidResource Include="Resources\Layout\ItemSearch.axml" />
+    <AndroidResource Include="Resources\Layout\ItemSearchRow.axml" />
+    <AndroidResource Include="Resources\Layout\ItemsList.axml" />
+    <AndroidResource Include="Resources\Layout\MySpinner.axml" />
+    <AndroidResource Include="Resources\Layout\SpinnerRow.axml" />
+    <AndroidResource Include="Resources\Layout\CustomerDetails.axml" />
+    <AndroidResource Include="Resources\Layout\CustomerInfoRow.axml" />
+    <AndroidResource Include="Resources\Layout\CustomersList.axml" />
+    <AndroidResource Include="Resources\layout-land\MainMenu.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\MainMenuRow.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout-port\MainMenu.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\MainMenu.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\TransHedRow.axml" />
+    <AndroidResource Include="Resources\Layout\item_row_muliple_select.axml" />
+    <AndroidResource Include="Resources\Layout\InvoiceTabs.axml" />
+    <AndroidResource Include="Resources\Layout\InvoiceItemsSelect.axml" />
+    <AndroidResource Include="Resources\Layout\FragmentMainMenu.axml" />
+    <AndroidResource Include="Resources\Layout\main_action_bar.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\dialog_item_search.axml" />
+    <AndroidResource Include="Resources\Layout\dialog_customer_search.axml" />
+    <AndroidResource Include="Resources\Layout\TransDetRow.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Values\Strings.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <TransformFile Include="Properties\AndroidManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\filterTextEditBackground.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\filterTextEditBackgroundFocused.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\filterTextEditStyle.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\floppy_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\grass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\gridTextEditBackground.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\gridTextEditBackgroundFocused.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\gridTextEditStyle.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\header.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\invoice_icon64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\invoiceIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\itemsIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\kamenitza.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\line_chart_icon64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\main_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\MenuButtonBackgroundNormal.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\MenuButtonBackgroundPressed.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\MenuButtonStyle.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\night.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\no_icon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\no_image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\parentBackground.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\parentBackground1.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\reportsIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\search16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\shop_cart_add_icon32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\shop_cart_add_icon64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\shopping_basket_add_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\shopping_cart_icon64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\textEditBackground.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\textEditBackgroundFocused.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\TextEditStyle.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\tick_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\user_group_icon64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\window.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\zagorka.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\barcode_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\border.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\cash_register_icon64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\checkbox_unchecked_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\close_icon32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\close_icon64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\coins_icon64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\customersIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\delete_icon16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\delete_icon24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\door.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\edit_icon1_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\edit_icon16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\edit_icon32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Menu\CustomerListContextMenu.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Layout-LargeSKIP\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidJavaLibrary Include="lib\UltraLiteJNI12.jar" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidNativeLibrary Include="lib\armeabi\libultralitej12.so" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Values\Colors.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DLLs\UltraliteMono.dll" />
+    <AndroidResource Include="Resources\Values\Styles.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Drawable\button_selector.xml" />
+    <AndroidResource Include="Resources\Drawable\button_background.xml" />
+    <AndroidResource Include="Resources\Drawable\button_background_pressed.xml" />
+    <AndroidResource Include="Resources\Drawable\actionbar_background.xml" />
+    <AndroidResource Include="Resources\Values\dimens.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+     Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

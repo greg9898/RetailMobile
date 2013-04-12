@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/listStyle">
+  <TextView
+      android:id="@+id/tbCompID"
+          style="@style/listRowTextViewStyle"
+      android:layout_marginLeft="5dp" />
+  <TextView
+      android:id="@+id/tbCustName"
+          style="@style/listRowTextViewStyle"
+      android:layout_weight="1" />
+  <TextView
+      android:id="@+id/tbHtrnDocnum"
+          style="@style/listRowTextViewStyle"
+      android:layout_weight="1" />
+  <TextView
+      android:id="@+id/tbHtrnExpl"
+          style="@style/listRowTextViewStyle"
+      android:layout_weight="0.5" />
+</LinearLayout>

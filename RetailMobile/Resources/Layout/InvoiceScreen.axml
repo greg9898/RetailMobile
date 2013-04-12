@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/border" >
+  <LinearLayout
+  android:id="@+id/layoutHeader"
+  android:orientation="horizontal"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="1dp" >
+    <RelativeLayout
+        android:id="@+id/layoutCustomerInfo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.3"
+        android:layout_margin="1dp"
+        android:background="@drawable/border">
+
+      <ImageView
+        android:id="@+id/imgCustomersIcon"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/user_group_icon64"
+        />
+
+      <TextView
+        android:id="@+id/lblCustomerCaption"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:layout_toRightOf="@id/imgCustomersIcon"
+        android:text="@string/lblCustomerCaption"
+        android:textColor="@android:color/black"
+        />
+      <TextView
+        android:id="@+id/lblCustCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lblCustomerCaption"
+        android:layout_weight="1"
+        android:layout_alignParentLeft="true"
+        android:text="@string/lblCustomerCode"
+        android:layout_marginLeft="3dp"
+        android:textSize="10sp"
+        android:textColor="@android:color/black"
+        />
+      <TextView
+        android:id="@+id/tbCustCode"
+        android:layout_width="wrap_content"
+        android:minWidth="80dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lblCustomerCaption"
+        android:layout_toRightOf="@id/lblCustCode"
+        android:layout_marginLeft="2dp"
+        android:text="@string/empty"
+        android:textSize="10sp"
+        android:textColor="@android:color/black"
+        />
+
+      <TextView
+  android:id="@+id/lblCustName"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:layout_weight="1"
+  android:layout_below="@id/lblCustCode"
+  android:text="@string/lblCustomerName"
+  android:layout_marginLeft="3dp"
+  android:textSize="10sp"
+  android:textColor="@android:color/black"
+        />
+      <TextView
+        android:id="@+id/tbCustName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:layout_toRightOf="@id/lblCustName"
+        android:layout_below="@id/lblCustCode"
+        android:layout_marginLeft="2dp"
+        android:text="@string/empty"
+        android:textSize="10sp"
+        android:textColor="@android:color/black"
+        />
+
+      <TextView
+  android:id="@+id/lblCustAddress"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:layout_weight="1"
+  android:layout_below="@id/tbCustName"
+  android:text="@string/lblCustomerAddress"
+  android:layout_marginLeft="3dp"
+  android:textSize="10sp"
+  android:textColor="@android:color/black"
+        />
+      <TextView
+        android:id="@+id/tbCustAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:layout_toRightOf="@id/lblCustAddress"
+        android:layout_below="@id/tbCustName"
+        android:layout_marginLeft="2dp"
+        android:text="@string/empty"
+        android:textSize="10sp"
+        android:textColor="@android:color/black"
+        />
+
+      <TextView
+ android:id="@+id/lblCustPhone"
+ android:layout_width="wrap_content"
+ android:layout_height="wrap_content"
+  android:layout_below="@id/tbCustAddress"
+ android:text="@string/lblCustomerPhone"
+ android:layout_marginLeft="3dp"
+ android:textSize="10sp"
+ android:textColor="@android:color/black"
+        />
+      <TextView
+        android:id="@+id/tbCustPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/lblCustPhone"
+        android:layout_below="@id/tbCustAddress"
+        android:layout_marginLeft="2dp"
+        android:text="@string/empty"
+        android:textSize="10sp"
+        android:textColor="@android:color/black"
+        />
+
+      <TextView
+ android:id="@+id/lblCustDebt"
+ android:layout_width="wrap_content"
+ android:layout_height="wrap_content"
+ android:layout_weight="1"
+ android:layout_below="@id/tbCustPhone"
+ android:text="@string/lblCustDebt"
+ android:layout_marginLeft="3dp"
+ android:textSize="10sp"
+ android:textColor="@android:color/black"
+        />
+      <TextView
+        android:id="@+id/tbCustDebt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:layout_toRightOf="@id/lblCustDebt"
+        android:layout_below="@id/tbCustPhone"
+        android:layout_marginLeft="2dp"
+        android:text="@string/empty"
+        android:textSize="10sp"
+        android:textColor="@android:color/black"
+        />
+
+      <Button
+        android:id="@+id/btnSearchCustomer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/search16"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:text="@string/btnSearch"
+        android:textSize="8sp"
+        android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@id/tbCustDebt"
+        android:layout_margin="10dp"
+        />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layoutInvoiceInfo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="1dp"
+        android:layout_alignBottom="@id/layoutCustomerInfo"
+        android:background="@drawable/border">
+
+      <ImageView
+        android:id="@+id/imgInvoiceIcon"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/invoice_icon64"
+        />
+
+      <TextView
+        android:id="@+id/lblInvoiceInfoCaption"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/imgInvoiceIcon"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:text="@string/lblInvoiceInfoCaption"
+        android:textColor="@android:color/black"
+        />
+      <TextView
+        android:id="@+id/lblHtrnID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lblInvoiceInfoCaption"
+        android:layout_weight="1"
+        android:layout_alignParentLeft="true"
+        android:text="@string/lblHtrnID"
+        android:layout_marginLeft="3dp"
+        android:textSize="10sp"
+        android:textColor="@android:color/black"
+        />
+      <TextView
+        android:id="@+id/tbHtrnID"
+        android:layout_width="wrap_content"
+        android:minWidth="80dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lblInvoiceInfoCaption"
+        android:layout_toRightOf="@id/lblHtrnID"
+        android:layout_marginLeft="2dp"
+        android:text="@string/empty"
+        android:textSize="10sp"
+        android:textColor="@android:color/black"
+        />
+
+      <TextView
+        android:id="@+id/lblHtrnDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tbHtrnID"
+        android:layout_weight="1"
+        android:layout_alignParentLeft="true"
+        android:text="@string/lblHtrnDate"
+        android:layout_marginLeft="3dp"
+        android:textSize="10sp"
+        android:textColor="@android:color/black"
+        />
+      <TextView
+        android:id="@+id/tbHtrnDate"
+        android:layout_width="wrap_content"
+        android:minWidth="80dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tbHtrnID"
+        android:layout_toRightOf="@id/lblHtrnDate"
+        android:layout_marginLeft="2dp"
+        android:text="@string/empty"
+        android:textSize="10sp"
+        android:textColor="@android:color/black"
+        />
+
+      <TextView
+  android:id="@+id/lblHtrnExpln"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:layout_below="@id/tbHtrnDate"
+  android:layout_weight="1"
+  android:layout_alignParentLeft="true"
+  android:text="@string/lblHtrnExpl"
+  android:layout_marginLeft="3dp"
+  android:textSize="10sp"
+  android:textColor="@android:color/black"
+        />
+      <TextView
+        android:id="@+id/tbHtrnExpln"
+        android:layout_width="wrap_content"
+        android:minWidth="100dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tbHtrnDate"
+        android:layout_toRightOf="@id/lblHtrnExpln"
+        android:layout_marginLeft="2dp"
+        android:text="@string/empty"
+        android:textSize="10sp"
+        android:textColor="@android:color/black"
+        />
+
+      <TextView
+      android:id="@+id/lblHtrnNetValue"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/tbHtrnExpln"
+      android:layout_weight="1"
+      android:layout_alignParentLeft="true"
+      android:text="@string/lblHtrnNetValue"
+      android:layout_marginLeft="3dp"
+      android:textSize="10sp"
+      android:textColor="@android:color/black"
+        />
+      <TextView
+        android:id="@+id/tbHtrnNetValue"
+        android:layout_width="wrap_content"
+        android:minWidth="80dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tbHtrnExpln"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="2dp"
+        android:text="@string/empty"
+        android:textSize="10sp"
+        android:textColor="@android:color/black"
+        />
+
+      <TextView
+      android:id="@+id/lblHtrnVatValue"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/tbHtrnNetValue"
+      android:layout_weight="1"
+      android:layout_alignParentLeft="true"
+      android:text="@string/lblHtrnVatValue"
+      android:layout_marginLeft="3dp"
+      android:textSize="10sp"
+      android:textColor="@android:color/black"
+        />
+      <TextView
+        android:id="@+id/tbHtrnVatValue"
+        android:layout_width="wrap_content"
+        android:minWidth="80dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tbHtrnNetValue"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="2dp"
+        android:text="@string/empty"
+        android:textSize="10sp"
+        android:textColor="@android:color/black"
+        />
+
+      <TextView
+      android:id="@+id/lblHtrnTotValue"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/tbHtrnVatValue"
+      android:layout_weight="1"
+      android:layout_alignParentLeft="true"
+      android:text="@string/lblHtrnTotValue"
+      android:layout_marginLeft="3dp"
+      android:textSize="10sp"
+      android:textColor="@android:color/black"
+        />
+      <TextView
+        android:id="@+id/tbHtrnTotValue"
+        android:layout_width="wrap_content"
+        android:minWidth="80dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tbHtrnVatValue"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="2dp"
+        android:text="@string/empty"
+        android:textSize="10sp"
+        android:textColor="@android:color/black"
+        />
+
+    </RelativeLayout>
+
+  </LinearLayout>
+
+  <RelativeLayout
+    android:id="@+id/layoutDetails"
+    android:layout_weight="0.7"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_margin="1dp"
+    android:background="@drawable/border"
+    >
+    <TextView
+    android:id="@+id/lblDetailsCaption"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:text="@string/lblDetailsCaption"
+    android:textSize="14sp"
+    android:textColor="@android:color/black"
+      />
+    <LinearLayout
+      android:id="@+id/layoutDetailsGridCaptions"
+      android:layout_height="wrap_content"
+      android:layout_width="fill_parent"
+      android:layout_below="@id/lblDetailsCaption"
+      android:layout_marginLeft="142dp"
+      android:orientation="horizontal"
+      android:layout_weight="1"
+    >
+      <TextView
+  android:id="@+id/lblDetUnitPrice"
+  android:layout_height="wrap_content"
+  android:layout_width="fill_parent"
+  android:paddingLeft="4dp"
+  android:textSize="10sp"
+  android:text="Price"
+  android:layout_weight="1"
+  android:textColor="@android:color/black"
+        />
+
+      <TextView
+android:id="@+id/lblDetQty"
+android:layout_height="wrap_content"
+android:layout_width="fill_parent"
+android:layout_weight="1"
+android:paddingLeft="4dp"
+android:text="Qty"
+android:textSize="10sp"
+android:textColor="@android:color/black"
+        />
+
+      <TextView
+android:id="@+id/lblDetDisc"
+android:layout_height="wrap_content"
+android:layout_width="fill_parent"
+android:layout_weight="1"
+android:paddingLeft="4dp"
+android:text="Disc"
+android:textSize="10sp"
+android:textColor="@android:color/black"
+        />
+
+      <TextView
+android:id="@+id/lblDetNetValue"
+android:layout_height="wrap_content"
+android:layout_width="fill_parent"
+android:layout_weight="1"
+android:paddingLeft="4dp"
+android:text="Net"
+android:textSize="10sp"
+android:textColor="@android:color/black"
+        />
+
+      <TextView
+android:id="@+id/lblDetVatValue"
+android:layout_height="wrap_content"
+android:layout_width="fill_parent"
+android:layout_weight="1"
+android:paddingLeft="4dp"
+android:text="VAT"
+android:textSize="10sp"
+android:textColor="@android:color/black"
+        />
+
+    </LinearLayout>
+    <LinearLayout
+      android:id="@+id/layoutButtons"
+      android:orientation="horizontal"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      >
+      <Button
+        android:id="@+id/btnScan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnScan"
+        android:textSize="10sp"
+        android:background="@drawable/MenuButtonStyle"
+        android:drawableTop="@drawable/barcode_32"
+          />
+      <Button
+          android:id="@+id/btnSearchItems"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/btnSearch"
+          android:textSize="10sp"
+          android:background="@drawable/MenuButtonStyle"
+          android:drawableTop="@drawable/shopping_basket_add_32"
+          />
+      <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnSave"
+        android:textSize="10sp"
+        android:background="@drawable/MenuButtonStyle"
+        android:drawableTop="@drawable/floppy_32"
+          />
+    </LinearLayout>
+
+    <ListView
+  android:id="@+id/lvDetails"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:layout_below="@id/layoutDetailsGridCaptions"
+  android:layout_above="@id/layoutButtons"
+  android:layout_weight="2"
+      />
+
+  </RelativeLayout>
+
+</LinearLayout>
+

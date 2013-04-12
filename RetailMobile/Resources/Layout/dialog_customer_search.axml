@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="1">
+    <ListView
+        android:id="@+id/lvCustomers"
+        style="@style/fillParent"
+        android:layout_weight="0.3"
+        android:divider="@android:color/black"
+        android:dividerHeight="1dp" />
+    <RelativeLayout
+        android:orientation="vertical"
+        style="@style/fillParent"
+        android:layout_weight="0.7"
+        android:background="@android:color/white">
+        <TextView
+            android:id="@+id/lblCustomerCode"
+            style="@style/fillWidth"
+            android:text="@string/lblCustomerCode"
+            android:textColor="@android:color/black" />
+        <EditText
+            android:id="@+id/tbCustCode"
+            style="@style/fillWidth"
+            android:layout_below="@id/lblCustomerCode" />
+        <TextView
+            android:id="@+id/lblCustomerName"
+            style="@style/fillWidth"
+            android:text="@string/lblCustomerName"
+            android:textColor="@android:color/black"
+            android:layout_below="@id/tbCustCode" />
+        <EditText
+            android:id="@+id/tbCustName"
+            style="@style/fillWidth"
+            android:layout_below="@id/lblCustomerName" />
+        <Button
+            android:id="@+id/btnClose"
+            style="@style/menuButtonStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/btnClose" />
+        <Button
+            android:id="@+id/btnOK"
+            style="@style/menuButtonStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/btnClose"
+            android:text="@string/btnOK" />
+    </RelativeLayout>
+</LinearLayout>
