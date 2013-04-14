@@ -268,17 +268,24 @@ namespace RetailMobile
 		public static void Synchronize (Context ctx)
 		{
 			IConnection cn = GetConnection (ctx);
-			try {
-				//SyncParms.HTTP_STREAM, "sa", "Courier109"
-				SyncParms syncParams = cn.CreateSyncParms (0, "sa", PreferencesUtil.SyncModel);
-				syncParams.Publications = "pblMain1";
-				IStreamHTTPParms streamParams = syncParams.StreamParms;
-				streamParams.Host = PreferencesUtil.IP;
-				streamParams.Port = PreferencesUtil.Port;
+            try
+            {
+                //SyncParms.HTTP_STREAM, "sa", "Courier109"
+                SyncParms syncParams = cn.CreateSyncParms(0, "sa", PreferencesUtil.SyncModel);
+                syncParams.Publications = "pblMain1";
+                IStreamHTTPParms streamParams = syncParams.StreamParms;
+                streamParams.Host = PreferencesUtil.IP;
+                streamParams.Port = PreferencesUtil.Port;
 
-				cn.Synchronize (syncParams);
-				cn.Commit ();
-			} finally {
+                cn.Synchronize(syncParams);
+                cn.Commit();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally {
 				cn.Release ();
 			}
 		}
@@ -287,7 +294,7 @@ namespace RetailMobile
 		{
 			TimeSpan ss = TimeSpan.FromMilliseconds (date.Time);
 			DateTime Jan1st1970 = new DateTime (1970, 1, 1, 0, 0, 0);//, DateTimeKind.Local);
-			DateTime ddd = Jan1st1970.Add (ss);							
+			DateTime ddd = Jan1st1970.Add (ss);
 			return ddd;
 			//DateTime final = ddd.ToUniversalTime(); // Change to local-time
 			//return new DateTime(621355968000000000L + date.Time * 10000);

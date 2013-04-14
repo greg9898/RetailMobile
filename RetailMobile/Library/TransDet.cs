@@ -12,10 +12,10 @@ namespace RetailMobile.Library
 		public string ItemCode { get; set; }
 		public string ItemDesc { get; set; }
 
-		public int DtrnId { get; set; }
-		public int HtrnId { get; set; }
+		public double DtrnId { get; set; }
+		public double HtrnId { get; set; }
 		public int DtrnNum { get; set; }
-		public int ItemId { get; set; }
+		public double ItemId { get; set; }
 		public double DtrnQty1 { get; set; }
 		public double dtrn_unit_price { get; set; }
 		public double dtrn_disc_line1 { get; set; }
@@ -34,11 +34,11 @@ namespace RetailMobile.Library
 			DtrnQty1 = qty;
 		}
 
-		public void Save (Context ctx, TransHed header)
+		public void Save (IConnection conn, TransHed header)
 		{
 			CustomerInfo info = new CustomerInfo ();
 
-			using (IConnection conn = Sync.GetConnection(ctx)) {
+
 				IPreparedStatement ps;
 				if (IsNew) {
 					ps = conn.PrepareStatement (@"INSERT INTO trans_det
@@ -64,7 +64,18 @@ VALUES
            ,:dtrn_vat_value
 )");
 				} else {
-					ps = conn.PrepareStatement (@"UPDATE customers SET cst_cod = :cst_cod, cst_desc = :cst_desc WHERE cst_id = :cst_id");
+					ps = conn.PrepareStatement (@"UPDATE trans_det SET 
+            htrn_id = :htrn_id
+           ,dtrn_num = :dtrn_num
+           ,item_id = :item_id
+           ,dtrn_qty1 = :dtrn_qty1
+           ,dtrn_unit_price = :dtrn_unit_price
+           ,dtrn_disc_line1 = :dtrn_disc_line1
+           ,dtrn_net_value = :dtrn_net_value
+           ,dtrn_vat_value = :dtrn_vat_value
+WHERE dtrn_id = :dtrn_id
+");
+                    ps.Set("dtrn_vat_value", DtrnId);
 				}
 
 				ps.Set ("htrn_id", header.HtrnId);
@@ -77,20 +88,18 @@ VALUES
 
 				if (IsNew) {
 					ps.Execute ();
-					//IResultSet set = ps.ExecuteQuery();
-					/*if (set.Next())
+                    ps = conn.PrepareStatement(@"SELECT TOP 1 dtrn_id FROM trans_det ORDER BY dtrn_id DESC");
+
+                    IResultSet rs = ps.ExecuteQuery();
+                    if (rs.Next())
                     {
-                        dtrn_id = set.GetInt(0);
-                    }*/
+                        DtrnId = rs.GetDouble("dtrn_id");
+                    }
 				} else {
 					ps.Execute ();
 				}
 
 				ps.Close ();
-
-				conn.Commit ();
-				conn.Release ();
-			}
 
 		}
 	}

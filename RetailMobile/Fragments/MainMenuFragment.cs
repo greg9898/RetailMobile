@@ -54,13 +54,15 @@ namespace RetailMobile
 
         void btnListInvoices_Click(object sender, EventArgs e)
         {
-            FrameLayout f = this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment);
-            f.Visibility = ViewStates.Visible;
+            //FrameLayout f = this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment);
+            //f.Visibility = ViewStates.Visible;
             details = DetailsFragment.NewInstance((int)Base.MenuItems.Invoices);
             var ft = FragmentManager.BeginTransaction();
             ft.Replace(Resource.Id.details_fragment, details);
             ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
             ft.Commit();
+
+            this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Visible;
         }
 
         void btnListItems_Click(object sender, EventArgs e)

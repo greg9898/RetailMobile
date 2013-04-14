@@ -105,15 +105,21 @@
     <Compile Include="MainMenu.cs" />
     <Compile Include="PreferencesUtil.cs" />
     <AndroidResource Include="Resources\Drawable\menu_caption_background.xml" />
+    <AndroidResource Include="Resources\Drawable\my_edit_text_background_normal.xml" />
+    <AndroidResource Include="Resources\Drawable\my_edit_text_background_focused.xml" />
+    <AndroidResource Include="Resources\Drawable\my_edit_text_background_disabled.xml" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Adapters\SpinnerAdapter.cs" />
     <Compile Include="Sync.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\my_edit_text_selector2.xml" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
-    <AndroidResource Include="Resources\layout-land\InvoiceScreen.axml" />
+    <AndroidResource Include="Resources\layout-land\InvoiceScreen.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\Layout\InvoiceDetailRow.axml" />
     <AndroidResource Include="Resources\Layout\InvoiceScreen.axml">
       <SubType>Designer</SubType>
@@ -151,6 +157,9 @@
     <AndroidResource Include="Resources\Layout\dialog_item_search.axml" />
     <AndroidResource Include="Resources\Layout\dialog_customer_search.axml" />
     <AndroidResource Include="Resources\Layout\TransDetRow.axml" />
+    <Content Include="Resources\Drawable\my_edit_text_selector1.xml">
+      <SubType>AndroidResource</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Values\Strings.xml">

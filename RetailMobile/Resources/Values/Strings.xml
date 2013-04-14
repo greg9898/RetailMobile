@@ -20,7 +20,10 @@
   <string name="miEdit">Edit</string>
   <string name="miDelete">Delete</string>  
   <string name="miNew">Add New</string>
+  <string name="btnNew">New</string>
+  <string name="lblInvoice">Invoice</string>
   
+
   <!-- item -->
   <string name="lblItemCode">Code:</string>
   <string name="lblItemName">Description:</string>

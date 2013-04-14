@@ -42,8 +42,8 @@ namespace RetailMobile
 		{
 			View v = inflater.Inflate (Resource.Layout.InvoiceScreen, container, false);
 
-			header = new Library.TransHed ();
-			header.TransDetList = new Library.TransDetList ();
+			header = new Library.TransHed();
+
 			Button btnSearchItems = v.FindViewById<Button> (Resource.Id.btnSearchItems);
 			Button btnSearchCustomer = v.FindViewById<Button> (Resource.Id.btnSearchCustomer);
 			Button btnSave = v.FindViewById<Button> (Resource.Id.btnSave);
@@ -72,18 +72,28 @@ namespace RetailMobile
 			if (tbHtrnID != null)
 				tbHtrnID.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs> (tbHtrnID_TextChanged);
 					
-			tbHtrnID.Text = base.ObjectId.ToString ();
+			tbHtrnID.Text = base.ObjectId.ToString();
 
 			return v;
 		}
 
-		private void FillInvoiceFields (Library.TransHed th)
+        private void InitInvoiceScreen()
+        {
+            header = new Library.TransHed();
+            FillInvoiceFields();
+            FillCustomerFields(new Library.CustomerInfo());
+
+            detailsAdapter = new TransDetAdapter(this.Activity, header.TransDetList);
+            lvDetails.SetAdapter(detailsAdapter);
+        }
+
+		private void FillInvoiceFields ()
 		{
-			tbHtrnExpln.Text = th.HtrnExpl;
-			tbHtrnDate.Text = th.HtrnDate.ToString ();
-			tbHtrnNetValue.Text = th.HtrnNetVal.ToString ("######0.0##");
-			tbHtrnVatValue.Text = th.HtrnVatVal.ToString ("######0.0##");
-			tbHtrnTotValue.Text = th.HtrnTotValue.ToString ("######0.0##");
+			tbHtrnExpln.Text = header.HtrnExpl;
+            tbHtrnDate.Text = header.HtrnDate.ToString();
+            tbHtrnNetValue.Text = header.HtrnNetVal.ToString("######0.0##");
+            tbHtrnVatValue.Text = header.HtrnVatVal.ToString("######0.0##");
+            tbHtrnTotValue.Text = header.HtrnTotValue.ToString("######0.0##");
 		}
 
 		void btnSave_Click (object sender, EventArgs e)
@@ -98,16 +108,20 @@ namespace RetailMobile
 			header.HtrnDate = DateTime.Parse (tbHtrnDate.Text);
 			header.HtrnNetVal = double.Parse (tbHtrnNetValue.Text);
 			header.HtrnVatVal = double.Parse (tbHtrnVatValue.Text);
-
+            
 			header.Save (this.Activity);
+            InitInvoiceScreen();
 		}
 
 		void tbHtrnID_TextChanged (object sender, Android.Text.TextChangedEventArgs e)
 		{
-			Library.TransHed th = Library.TransHed.GetTransHed (this.Activity, double.Parse (((EditText)sender).Text));
-			if (th != null && tbHtrnExpln != null) {
-				FillInvoiceFields (th);
-				LoadCustomerData (th.CstId);
+			header = Library.TransHed.GetTransHed (this.Activity, double.Parse (((EditText)sender).Text));
+            if (header != null && tbHtrnExpln != null)
+            {
+                FillInvoiceFields();
+                LoadCustomerData(header.CstId);
+                detailsAdapter = new TransDetAdapter(this.Activity, header.TransDetList);
+                lvDetails.SetAdapter(detailsAdapter);
 			}
 		}
 
@@ -171,8 +185,6 @@ namespace RetailMobile
 			dialogItems.DismissEvent += (s, ee) =>
 			{
 				foreach (int itemId in dialogItems.CheckedItemIds.Keys) {
-					if (header.TransDetList == null)
-						header.TransDetList = new Library.TransDetList ();
 
 					Library.TransDet transDet = new Library.TransDet ();
 					transDet.LoadItemInfo (this.Activity, itemId, dialogItems.CheckedItemIds [itemId]);

@@ -10,12 +10,7 @@
           android:layout_width="match_parent"
           android:layout_height="50dp"/>
 
-  <fragment
-          class="RetailMobile.MainMenuFragment"
-          android:id="@+id/titles_fragment"
-          android:layout_width="wrap_content"          
-          android:layout_height="match_parent"
-          android:layout_below="@id/ActionBar"/>
+
   
   <LinearLayout
     android:orientation="horizontal"
@@ -24,6 +19,13 @@
     android:layout_toRightOf="@id/titles_fragment"
     android:layout_below="@id/ActionBar"
     >
+    
+      <fragment
+          class="RetailMobile.MainMenuFragment"
+          android:id="@+id/titles_fragment"
+          android:layout_width="0dp"
+          android:layout_weight="0.7"
+          android:layout_height="match_parent"/>
     
     <FrameLayout
         android:layout_width="0dp"

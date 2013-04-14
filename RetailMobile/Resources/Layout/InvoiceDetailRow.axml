@@ -15,13 +15,8 @@
             android:layout_width="fill_parent"
             android:layout_centerVertical="true"
             android:gravity="center_vertical"
-            android:layout_weight="1">
+            android:layout_weight="8">
 
-          <ImageView
-       android:id="@+id/imgItemImage"
-       android:layout_height="0dp"
-       android:layout_width="0dp"
-       android:src="@drawable/no_image" />
           <TextView
               android:id="@+id/lblDetItemCode"
               android:layout_height="wrap_content"
@@ -36,14 +31,15 @@
               android:layout_width="0dp"
               android:layout_toRightOf="@id/lblDetItemCode"
               android:paddingLeft="2dp"
-              android:layout_weight="1"
+              android:layout_weight="2"
               android:textSize="12sp"
               android:textColor="@color/foreground" />
-          
-            <EditText
+
+          <EditText
+            style="@style/myEditTextStyle"
                 android:id="@+id/tbDetUnitPrice"
                 android:layout_height="wrap_content"
-                android:layout_width="fill_parent"
+                android:layout_width="0dp"
                 android:background="@drawable/gridTextEditStyle"
                 android:selectAllOnFocus="true"
                 android:singleLine="true"
@@ -54,10 +50,11 @@
                 android:textColor="@color/foreground"
                 android:layout_centerVertical="true"
                 android:gravity="center_vertical" />
-            <EditText
+          <EditText
+            style="@style/myEditTextStyle"
                 android:id="@+id/tbDetQty"
                 android:layout_height="wrap_content"
-                android:layout_width="fill_parent"
+                android:layout_width="0dp"
                 android:background="@drawable/gridTextEditStyle"
                 android:selectAllOnFocus="true"
                 android:singleLine="true"
@@ -68,10 +65,11 @@
                 android:textColor="@color/foreground"
                 android:layout_centerVertical="true"
                 android:gravity="center_vertical" />
-            <EditText
+          <EditText
+            style="@style/myEditTextStyle"
                 android:id="@+id/tbDetDisc"
                 android:layout_height="wrap_content"
-                android:layout_width="fill_parent"
+                android:layout_width="0dp"
                 android:background="@drawable/gridTextEditStyle"
                 android:selectAllOnFocus="true"
                 android:singleLine="true"
@@ -84,8 +82,8 @@
                 android:gravity="center_vertical" />
             <TextView
                 android:id="@+id/tbDetNetValue"
-                android:layout_height="wrap_content"
-                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_width="0dp"
                 android:layout_weight="1"
                 android:paddingLeft="4dp"
                 android:textSize="12sp"
@@ -95,7 +93,7 @@
             <TextView
                 android:id="@+id/tblDetVatValue"
                 android:layout_height="wrap_content"
-                android:layout_width="fill_parent"
+                android:layout_width="0dp"
                 android:layout_weight="1"
                 android:paddingLeft="4dp"
                 android:textSize="12sp"

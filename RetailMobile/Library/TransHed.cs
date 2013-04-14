@@ -5,7 +5,7 @@ using Com.Ianywhere.Ultralitejni12;
 
 namespace RetailMobile.Library
 {
-	public class TransHed
+    public class TransHed
 	{
 		public bool IsNew = true;
 
@@ -14,6 +14,7 @@ namespace RetailMobile.Library
 		//public int bran_id { get; set; }
 		//public int store_id { get; set; }
 		//public int per_id { get; set; }
+
 		public DateTime HtrnDate { get; set; }
 
 		public double CstId { get; set; }
@@ -36,13 +37,25 @@ namespace RetailMobile.Library
 
 		public TransDetList TransDetList { get; set; }
 
-		public double HtrnTotValue
+        #region Customer Info
+        public string CustCod;
+        public string CustName;
+        #endregion
+
+        public double HtrnTotValue
 		{
 			get
 			{
 				return HtrnNetVal + HtrnVatVal;
 			}
 		}
+
+        public TransHed()
+        {
+            TransDetList = new Library.TransDetList();
+            HtrnDate = DateTime.Now;
+            HtrnEntryDate = DateTime.Now;
+        }
 
 		public void Save(Context ctx)
 		{
@@ -125,17 +138,19 @@ WHERE htrn_id = :htrn_id");
 
 				ps.Close();
 
+				if (TransDetList != null)
+				{
+					foreach (var detail in TransDetList)
+					{
+						detail.Save(conn, this);
+					}
+				}
+
 				conn.Commit();
 				conn.Release();
 			}
 
-			if (TransDetList != null)
-			{
-				foreach (var detail in TransDetList)
-				{
-					detail.Save(ctx, this);
-				}
-			}
+
 		}
 
 		public static TransHed GetTransHed(Context ctx, double htrnId)
@@ -169,6 +184,34 @@ FROM trans_hed WHERE htrn_id = :htrnId");
 					info.Fetch(result);
 				}
 
+				result.Close();
+
+				ps = conn.PrepareStatement(@"SELECT dtrn_id, htrn_id, trans_det.item_id, items.item_cod, items.item_desc, dtrn_unit_price, dtrn_qty1, dtrn_net_value, dtrn_vat_value 
+							FROM trans_det 
+							JOIN items ON items.item_id = trans_det.item_id
+							WHERE htrn_id = :htrn_id
+");
+                ps.Set("htrn_id", htrnId);
+
+				result = ps.ExecuteQuery();
+
+				if(info.TransDetList == null)
+					info.TransDetList = new TransDetList();
+
+				while (result.Next())
+				{
+					TransDet det = new TransDet();
+					det.DtrnId = result.GetDouble("dtrn_id");
+					det.HtrnId = result.GetDouble("htrn_id");
+					det.ItemId = result.GetDouble("item_id");
+					det.ItemCode = result.GetString("item_cod");
+					det.ItemDesc = result.GetString("item_desc");
+					det.dtrn_unit_price = result.GetDouble("dtrn_unit_price");
+					det.DtrnQty1 = result.GetDouble("dtrn_qty1");
+					det.dtrn_net_value = result.GetDouble("dtrn_net_value");
+					det.dtrn_vat_value = result.GetDouble("dtrn_vat_value");
+					info.TransDetList.Add(det);
+				}
 				result.Close();
 				ps.Close();
 				conn.Commit();

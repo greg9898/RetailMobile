@@ -4,4 +4,8 @@
   <color name="foreground">#000000</color>
   <color name="light_blue">#4497B3</color>
   <color name="dark_blue">#22708A</color>
+  <color name="yellow">#F7FFB0</color>
+  <color name="disabled_background">#CBCCC0</color>
+  
+
 </resources>
