@@ -45,15 +45,15 @@ namespace RetailMobile
             if (tbItemDesc != null)
                 tbItemDesc.Text = item.ItemDesc;
             if (tbUnitPrice != null)
-                tbUnitPrice.Text = item.dtrn_unit_price.ToString("c2");
+                tbUnitPrice.Text = item.DtrnUnitPrice.ToString("c2");
             if (tbQty1 != null)
                 tbQty1.Text = item.DtrnQty1.ToString("f3");
             if (tbDiscVal != null)
-                tbDiscVal.Text = item.dtrn_disc_line1.ToString("c2");
+                tbDiscVal.Text = item.DtrnDiscLine1.ToString("c2");
             if (tbNetVal != null)
-                tbNetVal.Text = item.dtrn_net_value.ToString("c2");
+                tbNetVal.Text = item.DtrnNetValue.ToString("c2");
             if (tbVatVal != null)
-                tbVatVal.Text = item.dtrn_vat_value.ToString("c2");
+                tbVatVal.Text = item.DtrnVatValue.ToString("c2");
 
             return view;
         }

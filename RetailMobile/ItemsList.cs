@@ -55,7 +55,7 @@ namespace RetailMobile
         protected override void OnListItemClick(ListView l, View v, int position, long id)
         {
             var ItemDetailsScreen = new Intent(this, typeof(ItemDetails));
-            ItemDetailsScreen.PutExtra("ItemID", _ItemInfoList[position].item_id.ToString());
+            ItemDetailsScreen.PutExtra("ItemID", _ItemInfoList[position].ItemId.ToString());
             StartActivity(ItemDetailsScreen);
         }
 

@@ -126,7 +126,15 @@ namespace RetailMobile
                 Category2 = cbCateg2Value,
                 RetVal = retVal
             });
-            lvItems.Adapter = new CheckableItemsAdapter(activity, itemInfoList);
+
+            CheckableItemsAdapter adapterItems = new CheckableItemsAdapter(activity, itemInfoList);
+            adapterItems.SingleItemSelectedEvent += () =>
+            {
+                _checkedItems = adapterItems.CheckedItemIds;
+                
+                Dismiss();
+            };
+            lvItems.Adapter = adapterItems;
         }
 
         public Dictionary<int, int> CheckedItemIds

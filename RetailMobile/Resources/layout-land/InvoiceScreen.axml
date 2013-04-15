@@ -4,49 +4,41 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/border">
-
-  <RelativeLayout
-    android:id="@+id/invoiceHeader"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
-    
-    <TextView
-      style="@style/headerText"
-      android:text="@string/lblInvoice"
-      />
-
-    <Button
-      style="@style/menuButtonStyle"
+    <RelativeLayout
+        android:id="@+id/invoiceHeader"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/headerText"
+            android:text="@string/lblInvoice" />
+        <Button
+            style="@style/menuButtonStyle"
             android:id="@+id/btnNew"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btnNew"
-        android:minWidth="100dp"
-      android:layout_marginRight="2dp"
-            android:layout_alignParentRight="true"/>
-
-    <Button
-      style="@style/menuButtonStyle"
-    android:id="@+id/btnSave"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/btnSave"
-      android:minWidth="100dp"
-      android:layout_marginRight="2dp"
-      android:layout_toLeftOf="@id/btnNew"/>
-
-    <Button
-        android:id="@+id/btnScan"
-        style="@style/menuButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="2dp"
-        android:layout_toLeftOf="@id/btnSave"
-        android:minWidth="100dp"
-        android:text="@string/btnSave" />
-    
-  </RelativeLayout>
-      
+            android:minWidth="100dp"
+            android:layout_marginRight="2dp"
+            android:layout_alignParentRight="true" />
+        <Button
+            style="@style/menuButtonStyle"
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btnSave"
+            android:minWidth="100dp"
+            android:layout_marginRight="2dp"
+            android:layout_toLeftOf="@id/btnNew" />
+        <Button
+            android:id="@+id/btnScan"
+            style="@style/menuButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
+            android:layout_toLeftOf="@id/btnSave"
+            android:minWidth="100dp"
+            android:text="@string/btnSave" />
+    </RelativeLayout>
     <LinearLayout
         android:id="@+id/layoutHeader"
         android:orientation="horizontal"
@@ -87,6 +79,7 @@
                 <LinearLayout
                     style="@style/fillWidth"
                     android:orientation="horizontal"
+                    android:layout_marginTop="2dp"
                     android:weightSum="3">
                     <TextView
                         android:id="@+id/lblCustCode"
@@ -97,7 +90,7 @@
                         android:textSize="12sp"
                         android:textColor="@android:color/black" />
                     <EditText
-                      style="@style/myEditTextStyle"
+                        style="@style/myEditTextStyle"
                         android:id="@+id/tbCustCode1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -106,6 +99,7 @@
                 <LinearLayout
                     style="@style/fillWidth"
                     android:orientation="horizontal"
+                    android:layout_marginTop="2dp"
                     android:weightSum="3">
                     <TextView
                         android:id="@+id/lblCustName"
@@ -115,8 +109,8 @@
                         android:text="@string/lblCustomerName"
                         android:textSize="12sp"
                         android:textColor="@android:color/black" />
-                  <EditText
-                    style="@style/myEditTextStyle"
+                    <EditText
+                        style="@style/myEditTextStyle"
                         android:id="@+id/tbCustName1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -125,6 +119,7 @@
                 <LinearLayout
                     style="@style/fillWidth"
                     android:orientation="horizontal"
+                    android:layout_marginTop="2dp"
                     android:weightSum="3">
                     <TextView
                         android:id="@+id/lblCustAddress"
@@ -134,16 +129,17 @@
                         android:text="@string/lblCustomerAddress"
                         android:textSize="12sp"
                         android:textColor="@android:color/black" />
-                  <EditText
-                    style="@style/myEditTextStyle"
-                      android:id="@+id/tbCustAddress"
-                      android:layout_width="0dp"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="2" />
+                    <EditText
+                        style="@style/myEditTextStyle"
+                        android:id="@+id/tbCustAddress"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2" />
                 </LinearLayout>
                 <LinearLayout
                     style="@style/fillWidth"
                     android:orientation="horizontal"
+                    android:layout_marginTop="2dp"
                     android:weightSum="3">
                     <TextView
                         android:id="@+id/lblCustPhone"
@@ -153,8 +149,8 @@
                         android:text="@string/lblCustomerPhone"
                         android:textSize="12sp"
                         android:textColor="@android:color/black" />
-                  <EditText
-                    style="@style/myEditTextStyle"
+                    <EditText
+                        style="@style/myEditTextStyle"
                         android:id="@+id/tbCustPhone"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -163,6 +159,7 @@
                 <LinearLayout
                     style="@style/fillWidth"
                     android:orientation="horizontal"
+                    android:layout_marginTop="2dp"
                     android:weightSum="3">
                     <TextView
                         android:id="@+id/lblCustDebt"
@@ -172,8 +169,8 @@
                         android:text="@string/lblCustDebt"
                         android:textSize="12sp"
                         android:textColor="@android:color/black" />
-                  <EditText
-                    style="@style/myEditTextStyle"
+                    <EditText
+                        style="@style/myEditTextStyle"
                         android:id="@+id/tbCustDebt"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -210,6 +207,7 @@
                 <LinearLayout
                     style="@style/fillWidth"
                     android:orientation="horizontal"
+                    android:layout_marginTop="2dp"
                     android:weightSum="3">
                     <TextView
                         android:id="@+id/lblHtrnID"
@@ -219,8 +217,8 @@
                         android:textSize="12sp"
                         android:textColor="@android:color/black"
                         android:text="@string/lblHtrnID" />
-                  <EditText
-                    style="@style/myEditTextStyle"
+                    <EditText
+                        style="@style/myEditTextStyle"
                         android:id="@+id/tbHtrnID"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -229,6 +227,7 @@
                 <LinearLayout
                     style="@style/fillWidth"
                     android:orientation="horizontal"
+                    android:layout_marginTop="2dp"
                     android:weightSum="3">
                     <TextView
                         android:id="@+id/lblHtrnDate"
@@ -238,8 +237,8 @@
                         android:textSize="12sp"
                         android:textColor="@android:color/black"
                         android:text="@string/lblHtrnDate" />
-                  <EditText
-                    style="@style/myEditTextStyle"
+                    <EditText
+                        style="@style/myEditTextStyle"
                         android:id="@+id/tbHtrnDate"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -248,6 +247,7 @@
                 <LinearLayout
                     style="@style/fillWidth"
                     android:orientation="horizontal"
+                    android:layout_marginTop="2dp"
                     android:weightSum="3">
                     <TextView
                         android:id="@+id/lblHtrnExpln"
@@ -257,16 +257,17 @@
                         android:layout_weight="1"
                         android:textSize="12sp"
                         android:textColor="@android:color/black" />
-                  <EditText
-                    style="@style/myEditTextStyle"
-                      android:id="@+id/tbHtrnExpln"
-                      android:layout_width="0dp"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="2" />
+                    <EditText
+                        style="@style/myEditTextStyle"
+                        android:id="@+id/tbHtrnExpln"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2" />
                 </LinearLayout>
                 <LinearLayout
                     style="@style/fillWidth"
                     android:orientation="horizontal"
+                    android:layout_marginTop="2dp"
                     android:weightSum="3">
                     <TextView
                         android:id="@+id/lblHtrnNetValue"
@@ -276,8 +277,8 @@
                         android:textSize="12sp"
                         android:textColor="@android:color/black"
                         android:text="@string/lblHtrnNetValue" />
-                  <EditText
-                    style="@style/myEditTextStyle"
+                    <EditText
+                        style="@style/myEditTextStyle"
                         android:id="@+id/tbHtrnNetValue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -286,6 +287,7 @@
                 <LinearLayout
                     style="@style/fillWidth"
                     android:orientation="horizontal"
+                    android:layout_marginTop="2dp"
                     android:weightSum="3">
                     <TextView
                         android:id="@+id/lblHtrnVatValue"
@@ -295,8 +297,8 @@
                         android:textSize="12sp"
                         android:textColor="@android:color/black"
                         android:text="@string/lblHtrnVatValue" />
-                  <EditText
-                    style="@style/myEditTextStyle"
+                    <EditText
+                        style="@style/myEditTextStyle"
                         android:id="@+id/tbHtrnVatValue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -305,6 +307,7 @@
                 <LinearLayout
                     style="@style/fillWidth"
                     android:orientation="horizontal"
+                    android:layout_marginTop="2dp"
                     android:weightSum="3">
                     <TextView
                         android:id="@+id/lblHtrnTotValue"
@@ -314,8 +317,8 @@
                         android:layout_weight="1"
                         android:textSize="12sp"
                         android:textColor="@android:color/black" />
-                  <EditText
-                    style="@style/myEditTextStyle"
+                    <EditText
+                        style="@style/myEditTextStyle"
                         android:id="@+id/tbHtrnTotValue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -324,36 +327,35 @@
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
-
-  <RelativeLayout
+    <RelativeLayout
         android:id="@+id/layoutDetails"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_margin="1dp"
         android:background="@color/yellow">
-      <TextView
-          android:id="@+id/lblDetailsCaption"
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content"
-          android:gravity="center"
-          android:text="@string/lblDetailsCaption"
-          android:textSize="14sp"
-          android:textColor="@android:color/black" />
-    <Button
-      style="@style/menuButtonStyle"
-          android:id="@+id/btnSearchItems"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/btnSearch"
-          android:paddingLeft="10dp"
-          android:paddingRight="10dp"
-          android:layout_alignParentRight="true"
-          android:layout_alignParentTop="true" />
-      <ListView
-          android:id="@+id/lvDetails"
-          android:layout_width="fill_parent"
-          android:layout_height="fill_parent"
-          android:layout_below="@id/lblDetailsCaption" />
+        <TextView
+            android:id="@+id/lblDetailsCaption"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:gravity="center"
+            android:text="@string/lblDetailsCaption"
+            android:textSize="14sp"
+            android:textColor="@android:color/black" />
+        <Button
+            style="@style/menuButtonStyle"
+            android:id="@+id/btnSearchItems"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btnSearch"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true" />
+        <ListView
+            android:id="@+id/lvDetails"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/btnSearchItems" />
     </RelativeLayout>
-
 </LinearLayout>

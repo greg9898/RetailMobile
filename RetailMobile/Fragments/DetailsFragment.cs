@@ -91,7 +91,7 @@ namespace RetailMobile
                 switch (ParentObjId)
                 {
                     case (int)Base.MenuItems.Items:
-                        long itemId = (long)((Library.ItemInfoList)_list)[index].item_id;
+                        long itemId = (long)((Library.ItemInfoList)_list)[index].ItemId;
 
                         if (detailFragment == null || detailFragment.ObjectId != itemId)
                         {

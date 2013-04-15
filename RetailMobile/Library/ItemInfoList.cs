@@ -27,7 +27,7 @@ namespace RetailMobile.Library
                 while (result.Next())
                 {
                     ItemInfo item = new ItemInfo();
-                    item.item_id = Convert.ToDecimal(result.GetDouble("item_id"));
+                    item.ItemId = Convert.ToDecimal(result.GetDouble("item_id"));
                     item.item_cod = result.GetString("item_cod");
                     item.item_cod = result.GetString("item_desc");
 
@@ -73,7 +73,7 @@ namespace RetailMobile.Library
                 while (result.Next())
                 {
                     ItemInfo item = new ItemInfo();
-                    item.item_id = Convert.ToDecimal(result.GetDouble("item_id"));
+                    item.ItemId = Convert.ToDecimal(result.GetDouble("item_id"));
                     item.item_cod = result.GetString("item_cod");
                     item.item_desc = result.GetString("item_desc");
 

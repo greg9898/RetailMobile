@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/listStyle">
     <RelativeLayout
         android:id="@+id/layout_checkable_item_info"
         android:clickable="true"
-        style="@style/wrapSelf">
+        style="@style/fillParent"
+        android:layout_weight="0.7">
         <ImageView
             android:id="@+id/imgItem"
             android:layout_width="40dip"
@@ -15,45 +16,57 @@
             android:layout_alignParentTop="true"
             android:src="@drawable/no_icon" />
         <LinearLayout
-            style="@style/wrapSelf"
+            style="@style/fillParent"
             android:layout_toRightOf="@id/imgItem">
             <TextView
                 android:id="@+id/tbItemCode"
                 style="@style/listRowTextViewStyle"
                 android:text="tbItemCode"
-                android:layout_weight="0.5" />
+                android:layout_marginLeft="5dp"
+                android:layout_weight="0.3" />
             <TextView
                 android:id="@+id/tbItemName"
                 style="@style/listRowTextViewStyle"
                 android:text="tbItemName"
                 android:layout_weight="1" />
             <TextView
-                android:id="@+id/tbItemTaxNum"
+                android:id="@+id/tbItemSaleVal"
                 style="@style/listRowTextViewStyle"
-                android:text="tbItemTaxNum"
-                android:layout_weight="1" />
+                android:text="tbItemSaleVal"
+                android:layout_weight="0.3" />
+            <TextView
+                android:id="@+id/tbItemRetVal"
+                style="@style/listRowTextViewStyle"
+                android:text="tbItemRetVal"
+                android:layout_weight="0.3" />
+            <TextView
+                android:id="@+id/tbItemLastBuyDate"
+                style="@style/listRowTextViewStyle"
+                android:text="tbItemLastBuyDate"
+                android:layout_weight="0.8" />
         </LinearLayout>
     </RelativeLayout>
     <EditText
         android:id="@+id/tbQty"
         android:inputType="number"
         android:digits="0123456789"
+        android:numeric="integer"
         android:selectAllOnFocus="true"
         android:text="1"
-        android:textSize="12sp"
-        android:width="30dp"
-        android:layout_width="60dp"
+        android:minWidth="60dp"
+        style="@style/myEditTextStyle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_toRightOf="@id/layout_checkable_item_info" />
+        android:layout_gravity="right|center"
+        android:layout_weight="0.2" />
     <CheckBox
         style="@style/wrapSelf"
         android:id="@+id/checkBox"
         android:checked="false"
-        android:width="30dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@id/tbQty"
-        android:layout_alignParentRight="true" />
-</RelativeLayout>
+        android:minWidth="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="right"
+        android:layout_weight="0.1" />
+</LinearLayout>

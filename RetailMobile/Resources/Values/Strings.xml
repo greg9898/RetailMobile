@@ -4,7 +4,7 @@
     <string name="app_name">RetailMobile</string>
   <string name="empty"></string>
   
-  <!-- item -->
+  <!-- customer -->
   <string name="lblCustomerCode">Code:</string>
   <string name="lblCustomerName">Name:</string>
   <string name="lblCustomerAddress">Address:</string>
@@ -23,7 +23,13 @@
   <string name="btnNew">New</string>
   <string name="lblInvoice">Invoice</string>
   
-
+  <!-- detail -->
+  <string name="lblDtrnQty">Qty:</string>
+  <string name="lblDtrn_unit_price">Unit price:</string>
+  <string name="lblDtrn_disc_line1">Disc line1:</string>
+  <string name="lblDtrn_net_value">Net value:</string>
+  <string name="lblDtrn_vat_value">Vat value:</string>
+  
   <!-- item -->
   <string name="lblItemCode">Code:</string>
   <string name="lblItemName">Description:</string>
@@ -40,12 +46,15 @@
   <string name="btnSearchCustomer">Select customer</string>
   <string name="lblCustomerCaption">Customer</string>
   <string name="lblInvoiceInfoCaption">Order Info</string>
+  
+  <!-- header -->
   <string name="lblHtrnID">ID</string>
   <string name="lblHtrnDate">Date</string>
   <string name="lblHtrnExpl">Explanation</string>
   <string name="lblHtrnNetValue">Net Value</string>
   <string name="lblHtrnVatValue">Vat Value</string>
   <string name="lblHtrnTotValue">Tot Value</string>
+  
   <string name="btnAddItems">Add Items</string>
   <string name="btnCloseItemSearch">Close</string>
   <string name="cbItemCategPrompt">Categ 1</string>
