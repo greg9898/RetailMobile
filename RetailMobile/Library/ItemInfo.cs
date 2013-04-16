@@ -17,6 +17,12 @@ namespace RetailMobile.Library
     {
         public decimal ItemId { get; set; }
 
+        public int ItemQty
+        {
+            get;
+            set;
+        }
+
         public string item_cod{ get; set; }
 
         public string item_desc { get; set; }
@@ -30,6 +36,11 @@ namespace RetailMobile.Library
         public decimal item_buy_val1 { get; set; }
 
         public DateTime ItemLastBuyDate{ get; set; }
+
+        public ItemInfo()
+        {
+            ItemQty = 1;
+        }
 
         public static ItemInfo GetItem(Context ctx, decimal itemID)
         {

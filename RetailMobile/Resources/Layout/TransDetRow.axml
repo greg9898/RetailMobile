@@ -9,86 +9,55 @@
     <TextView
         android:id="@+id/tbItemDesc"
         style="@style/listRowTextViewStyle"
-        android:layout_weight="4" />
-    <TextView
-        android:id="@+id/lblDtrnQty"
-        style="@style/listRowTextViewStyle"
-        android:text="@string/lblDtrnQty"
-        android:gravity="right|center"
-        android:layout_marginRight="2dp"
-        android:layout_weight="1.0" />
+        android:layout_weight="5" />
     <EditText
         android:id="@+id/tbDtrn_qty1"
         android:inputType="number"
         style="@style/myEditTextStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
         android:minWidth="20dp"
         android:layout_weight="0.5" />
-    <TextView
-        android:id="@+id/lblDtrn_unit_price"
-        style="@style/listRowTextViewStyle"
-        android:text="@string/lblDtrn_unit_price"
-        android:layout_marginRight="2dp"
-        android:gravity="right|center"
-        android:layout_weight="1.0" />
     <EditText
         android:id="@+id/tbDtrn_unit_price"
         android:inputType="number"
         style="@style/myEditTextStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
         android:minWidth="20dp"
         android:layout_weight="0.5" />
-    <TextView
-        android:id="@+id/lblDtrn_disc_line1"
-        style="@style/listRowTextViewStyle"
-        android:text="@string/lblDtrn_disc_line1"
-        android:layout_marginRight="2dp"
-        android:gravity="right|center"
-        android:layout_weight="1.0" />
     <EditText
         android:id="@+id/tbDtrn_disc_line1"
         android:inputType="number"
         style="@style/myEditTextStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
         android:minWidth="20dp"
         android:layout_weight="0.5" />
-    <TextView
-        android:id="@+id/lblDtrn_net_value"
-        style="@style/listRowTextViewStyle"
-        android:text="@string/lblDtrn_net_value"
-        android:layout_marginRight="2dp"
-        android:gravity="right|center"
-        android:layout_weight="1.0" />
     <EditText
         android:id="@+id/tbDtrn_net_value"
         android:inputType="number"
         style="@style/myEditTextStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
         android:minWidth="20dp"
         android:layout_weight="0.5" />
-    <TextView
-        android:id="@+id/lblDtrn_vat_value"
-        style="@style/listRowTextViewStyle"
-        android:text="@string/lblDtrn_vat_value"
-        android:layout_marginRight="2dp"
-        android:gravity="right|center"
-        android:layout_weight="1.0" />
     <EditText
         android:id="@+id/tbDtrn_vat_value"
         android:inputType="number"
         style="@style/myEditTextStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_marginRight="2dp"
+        android:layout_marginRight="20dp"
         android:minWidth="20dp"
         android:layout_weight="0.5" />
 </LinearLayout>

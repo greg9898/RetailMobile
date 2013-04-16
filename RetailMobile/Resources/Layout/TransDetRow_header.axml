@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/listStyle">
+    <TextView
+        android:id="@+id/lblDtrn_ItemCode"
+        style="@style/listRowHeaderStyle"
+        android:layout_marginLeft="5dp"
+        android:layout_weight="0.7" />
+    <TextView
+        android:id="@+id/tbItemDesc"
+        style="@style/listRowHeaderStyle"
+        android:layout_weight="5" />
+    <TextView
+        android:id="@+id/lblDtrnQty"
+        style="@style/listRowHeaderStyle"
+        android:text="@string/lblDtrnQty"
+        android:layout_weight="1.2" />
+    <TextView
+        android:id="@+id/lblDtrn_unit_price"
+        style="@style/listRowHeaderStyle"
+        android:text="@string/lblDtrn_unit_price"
+        android:layout_weight="1.2" />
+    <TextView
+        android:id="@+id/lblDtrn_disc_line1"
+        style="@style/listRowHeaderStyle"
+        android:text="@string/lblDtrn_disc_line1"
+        android:layout_weight="1.2" />
+    <TextView
+        android:id="@+id/lblDtrn_net_value"
+        style="@style/listRowHeaderStyle"
+        android:text="@string/lblDtrn_net_value"
+        android:layout_weight="1.2" />
+    <TextView
+        android:id="@+id/lblDtrn_vat_value"
+        style="@style/listRowHeaderStyle"
+        android:text="@string/lblDtrn_vat_value"
+        android:layout_weight="1.2" />
+</LinearLayout>

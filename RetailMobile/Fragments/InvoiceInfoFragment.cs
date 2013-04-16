@@ -1,15 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Android.Support.V4.App;
 using Android.Util;
 
 namespace RetailMobile
@@ -18,7 +11,7 @@ namespace RetailMobile
     {
         Library.TransHed header;
         TransDetAdapter detailsAdapter;
-        private ListView lvDetails;
+        ListView lvDetails;
         private EditText tbCustDesc;
         private EditText tbHtrnExpln;
         private EditText tbHtrnID;
@@ -52,6 +45,7 @@ namespace RetailMobile
             btnSave.Click += new EventHandler(btnSave_Click);
 
             lvDetails = v.FindViewById<ListView>(Resource.Id.lvDetails);
+            lvDetails.AddHeaderView(inflater.Inflate(Resource.Layout.TransDetRow_header, null));
             LoadDetailsAdapter();
 
             tbCustCode = v.FindViewById<EditText>(Resource.Id.tbCustCode1);

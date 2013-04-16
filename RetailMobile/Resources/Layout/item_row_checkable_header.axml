@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/listStyle"
+    android:layout_height="50dip">
+    <RelativeLayout
+        android:id="@+id/layout_checkable_item_info"
+        style="@style/fillParent"
+        android:layout_weight="0.2">
+        <TextView
+            android:id="@+id/lblHeaderImgItem"
+            android:layout_width="38dip"
+            android:layout_height="0dip"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true" />
+        <LinearLayout
+            style="@style/fillParent"
+            android:layout_toRightOf="@id/lblHeaderImgItem">
+            <TextView
+                android:id="@+id/lblHeaderItemCode"
+                style="@style/listRowHeaderStyle"
+                android:text="@string/lblHeaderItemCode"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="0.25" />
+            <TextView
+                android:id="@+id/lblHeaderItemName"
+                style="@style/listRowHeaderStyle"
+                android:text="@string/lblHeaderItemName"
+                android:layout_weight="0.8" />
+            <TextView
+                android:id="@+id/lblHeaderItemSaleVal"
+                style="@style/listRowHeaderStyle"
+                android:text="@string/lblHeaderItemSaleVal"
+                android:layout_weight="0.25" />
+            <TextView
+                android:id="@+id/lblHeaderItemRetVal"
+                style="@style/listRowHeaderStyle"
+                android:text="@string/lblHeaderItemRetVal"
+                android:layout_weight="0.25" />
+            <TextView
+                android:id="@+id/lblHeaderItemLastBuyDate"
+                style="@style/listRowHeaderStyle"
+                android:text="@string/lblHeaderItemLastBuyDate"
+                android:layout_weight="0.8" />
+        </LinearLayout>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/lblHeaderQty"
+        android:text="@string/lblHeaderQty"
+        style="@style/listRowHeaderStyle"
+        android:layout_width="fill_parent"
+        android:layout_weight="1" />
+</LinearLayout>

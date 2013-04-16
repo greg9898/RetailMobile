@@ -19,5 +19,10 @@ namespace RetailMobile
         public static string SyncModel = "RetailMobile";
 
         public static string DecimalFormat = "######0.0##";
+
+        /// <summary>
+        /// dd.mm.yyyy
+        /// </summary>
+        public static string DateFormatDateOnly = "dd.MM.yyyy";
     }
 }

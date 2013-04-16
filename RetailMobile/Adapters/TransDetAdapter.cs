@@ -15,11 +15,9 @@ namespace RetailMobile
 {
     public class TransDetAdapter : ArrayAdapter<Library.TransDet>
     { 
-        Library.TransDet detail ;
         Activity context = null;
         Library.TransDetList dataSource;
         public delegate void QtysChangedDeletegate();
-        
         public event QtysChangedDeletegate QtysChangedEvent;
 
         public TransDetAdapter(Activity context, Library.TransDetList list)
@@ -44,7 +42,13 @@ namespace RetailMobile
             EditText tbDtrn_net_value = view.FindViewById<EditText>(Resource.Id.tbDtrn_net_value);
             EditText tbDtrn_vat_value = view.FindViewById<EditText>(Resource.Id.tbDtrn_vat_value);
 
-            detail = dataSource[position];
+            Library.TransDet detail = dataSource[position];
+
+            tbDtrn_net_value.Tag = position;
+            tbDtrn_vat_value.Tag = position;
+            tbDtrn_qty1.Tag = position;
+            tbDtrn_disc_line1.Tag = position;
+
             lblItemCode.Text = detail.ItemCode;
             lblItemDesc.Text = detail.ItemDesc;
             tbDtrn_qty1.Text = detail.DtrnQty1.ToString();
@@ -64,6 +68,8 @@ namespace RetailMobile
 
         void tbDtrn_qty1_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
+            int index = int.Parse(((EditText)sender).Tag.ToString());
+            Library.TransDet detail = dataSource[index];
             detail.DtrnQty1 = double.Parse(e.Text.ToString());
             
             if (QtysChangedEvent != null)
@@ -74,6 +80,8 @@ namespace RetailMobile
 
         void tbDtrn_disc_line1_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
+            int index = int.Parse(((EditText)sender).Tag.ToString());
+            Library.TransDet detail = dataSource[index];
             detail.DtrnDiscLine1 = double.Parse((sender as EditText).Text);
             
             if (QtysChangedEvent != null)
@@ -84,6 +92,8 @@ namespace RetailMobile
 
         void netValueChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
+            int index = int.Parse(((EditText)sender).Tag.ToString());
+            Library.TransDet detail = dataSource[index];
             detail.DtrnNetValue = double.Parse((sender as EditText).Text);
 
             if (QtysChangedEvent != null)
@@ -94,6 +104,8 @@ namespace RetailMobile
 
         void vatValueChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
+            int index = int.Parse(((EditText)sender).Tag.ToString());
+            Library.TransDet detail = dataSource[index];
             detail.DtrnVatValue = double.Parse((sender as EditText).Text);
             
             if (QtysChangedEvent != null)

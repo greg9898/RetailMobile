@@ -59,6 +59,8 @@ namespace RetailMobile
             cbCateg1.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(cbCateg1_ItemSelected);
             cbCateg2.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(cbCateg1_ItemSelected);
 
+            //lvItems.AddHeaderView(context.LayoutInflater.Inflate(Resource.Layout.item_row_checkable_header, null));
+            
             btnOK.Click += new EventHandler(btnOKItem_Click);
         }
 
