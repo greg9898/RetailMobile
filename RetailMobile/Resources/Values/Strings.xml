@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="Hello">Hello World, Click Me!</string> 
+  <string name="app_name">Ασυρματη Παραγγελιοληψια</string> 
+  <string name="empty" /> 
+  
+ <!--  customer   --> 
+  <string name="lblCustomerCode">Κωδικός:</string> 
+  <string name="lblCustomerName">Ονομα:</string> 
+  <string name="lblCustomerAddress">Διεύθυνση:</string> 
+  <string name="lblCustomerPhone">Τηλέφωνο:</string> 
+  <string name="lblEmptyList">No records</string> 
+  <string name="lblCustDebt">Υπόλοιπο:</string> 
+  <string name="lblCustTaxNum">ΑΦΜ:</string> 
+  <string name="miCustomers">Πελάτες</string> 
+  <string name="miItems">Items</string>  
+  <string name="miInvoice">Order</string> 
+  <string name="miReports">Αναφορές</string> 
+  <string name="miAddCustomer">Προσθήκη Πελάτη</string> 
+  <string name="miEdit">Επεξεργασία</string> 
+  <string name="miDelete">Διαγραφή</string> 
+  <string name="miNew">Προσθήκη νέου</string> 
+  <string name="btnNew">Προσθήκη νέου</string> 
+  <string name="lblInvoice">Invoice</string> 
+  
+ <!--  detail   --> 
+  <string name="lblDtrnQty">Ποσότητα:</string> 
+  <string name="lblDtrn_unit_price">Τιμή Μονάδας:</string> 
+  <string name="lblDtrn_disc_line1">Εκπτωση:</string> 
+  <string name="lblDtrn_net_value">Καθαρή αξία:</string> 
+  <string name="lblDtrn_vat_value">Αξία ΦΠΑ:</string> 
+  
+ <!--  item   --> 
+  <string name="lblItemCode">Κωδικός:</string> 
+  <string name="lblItemName">Περιγραφή:</string> 
+  <string name="lblItemCategory1">Κατηγορία 1:</string> 
+  <string name="lblItemCategory2">Κατηγορία 2:</string> 
+  <string name="lblLongDesc">Περιγραφή:</string> 
+  <string name="lblItemRetVal">Λιανική τιμή:</string> 
+  <string name="lblItemSaleVal">Τιμή Πώλησης:</string> 
+  <string name="lblDetailsCaption">Details</string> 
+ <!--   item header   --> 
+  <string name="lblHeaderItemCode">Κωδικός</string> 
+  <string name="lblHeaderItemName">Περιγραφή</string> 
+  <string name="lblHeaderItemSaleVal">Λιανική τιμή</string> 
+  <string name="lblHeaderItemRetVal">Τιμή Πώλησης</string> 
+  <string name="lblHeaderItemLastBuyDate">Ημερομηνία Αγοράς</string> 
+  <string name="lblHeaderQty">Υπόλοιπο</string> 
+  <string name="btnScan">Σάρωση</string> 
+  <string name="btnSave">Αποθήκευση</string> 
+  <string name="btnSearch">Προσθήκη Ειδών</string> 
+  <string name="btnSearchCustomer">Επιλογή πελάτη</string> 
+  <string name="lblCustomerCaption">Πελάτης</string> 
+  <string name="lblInvoiceInfoCaption">Πληροφορίες παραγγελίας</string> 
+  
+ <!--  header   --> 
+  <string name="lblHtrnID">Α/Α</string> 
+  <string name="lblHtrnDate">Ημερομηνία</string> 
+  <string name="lblHtrnExpl">Αιτιολογία</string> 
+  <string name="lblHtrnNetValue">Καθαρή Αξία</string> 
+  <string name="lblHtrnVatValue">Αξία ΦΠΑ</string> 
+  <string name="lblHtrnTotValue">Συν. Αξία</string> 
+  <string name="btnAddItems">Προσθήκη Ειδών</string> 
+  <string name="btnCloseItemSearch">Κλείσιμο</string> 
+  <string name="cbItemCategPrompt">Κατηγορία 1</string> 
+  <string name="tvMenuCaptionItems">Είδη</string> 
+  <string name="tvMenuCaptionCustomers">Πελάτης</string> 
+  <string name="tvMenuCaptionInvoices">Τιμολόγια</string> 
+  <string name="tabInvoiceDetails">Invoice info</string> 
+  <string name="tabInvoiceItems">Είδη</string> 
+  <string name="alphabetEnglish">ABCDEFGHIJKLMNOPQRSTUVWXYZ</string> 
+  <string name="alphabetGreek">ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΨΩ</string> 
+  <string name="btnAddNew">Νέο</string> 
+  <string name="btnList">Λίστα</string> 
+  <string name="btnClose">Κλείσιμο</string> 
+  <string name="btnOK">OK</string> 
+ </resources>
