@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="Hello">Hello World, Click Me!</string> 
   <string name="app_name">Ασυρματη Παραγγελιοληψια</string> 
-  <string name="empty" /> 
+  <string name="empty"/>
   
  <!--  customer   --> 
   <string name="lblCustomerCode">Κωδικός:</string> 
@@ -39,6 +38,7 @@
   <string name="lblItemRetVal">Λιανική τιμή:</string> 
   <string name="lblItemSaleVal">Τιμή Πώλησης:</string> 
   <string name="lblDetailsCaption">Details</string> 
+  
  <!--   item header   --> 
   <string name="lblHeaderItemCode">Κωδικός</string> 
   <string name="lblHeaderItemName">Περιγραφή</string> 
@@ -66,8 +66,6 @@
   <string name="tvMenuCaptionItems">Είδη</string> 
   <string name="tvMenuCaptionCustomers">Πελάτης</string> 
   <string name="tvMenuCaptionInvoices">Τιμολόγια</string> 
-  <string name="tabInvoiceDetails">Invoice info</string> 
-  <string name="tabInvoiceItems">Είδη</string> 
   <string name="alphabetEnglish">ABCDEFGHIJKLMNOPQRSTUVWXYZ</string> 
   <string name="alphabetGreek">ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΨΩ</string> 
   <string name="btnAddNew">Νέο</string> 

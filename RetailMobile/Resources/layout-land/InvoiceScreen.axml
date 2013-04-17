@@ -37,7 +37,7 @@
             android:layout_marginRight="2dp"
             android:layout_toLeftOf="@id/btnSave"
             android:minWidth="100dp"
-            android:text="@string/btnSave" />
+            android:text="@string/btnScan" />
     </RelativeLayout>
     <LinearLayout
         android:id="@+id/layoutHeader"

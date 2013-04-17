@@ -27,7 +27,7 @@ namespace RetailMobile.Library
                 while (result.Next())
                 {
                     ItemInfo item = new ItemInfo();
-                    item.ItemId = Convert.ToDecimal(result.GetDouble("item_id"));
+                    item.ItemId = Convert.ToInt64(result.GetDouble("item_id"));
                     item.item_cod = result.GetString("item_cod");
                     item.item_cod = result.GetString("item_desc");
 
@@ -73,7 +73,7 @@ namespace RetailMobile.Library
                 while (result.Next())
                 {
                     ItemInfo item = new ItemInfo();
-                    item.ItemId = Convert.ToDecimal(result.GetDouble("item_id"));
+                    item.ItemId = Convert.ToInt64(result.GetDouble("item_id"));
                     item.item_cod = result.GetString("item_cod");
                     item.item_desc = result.GetString("item_desc");
 
@@ -93,7 +93,9 @@ namespace RetailMobile.Library
             public int Category2;
             public decimal RetVal;
 
-            public Criteria() { }
+            public Criteria()
+            {
+            }
             public Criteria(string desc, int category1, int category2, decimal retVal)
             {
                 ItemDesc = desc;

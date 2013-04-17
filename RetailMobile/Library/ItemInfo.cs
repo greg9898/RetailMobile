@@ -15,7 +15,7 @@ namespace RetailMobile.Library
 {
     public class ItemInfo
     {
-        public decimal ItemId { get; set; }
+        public long ItemId { get; set; }
 
         public int ItemQty
         {
@@ -34,6 +34,8 @@ namespace RetailMobile.Library
         public decimal item_sale_val1 { get; set; }
 
         public decimal item_buy_val1 { get; set; }
+
+        public int ItemVatId { get; set; }
 
         public DateTime ItemLastBuyDate{ get; set; }
 
@@ -62,7 +64,7 @@ FROM items WHERE item_id = :ItemID");
 
                 if (result.Next())
                 {
-                    info.ItemId = Convert.ToDecimal(result.GetDouble("item_id"));
+                    info.ItemId = Convert.ToInt64(result.GetDouble("item_id"));
                     info.item_cod = result.GetString("item_cod");
                     info.item_desc = result.GetString("item_desc");
                     info.item_long_desc = result.GetString("item_long_des");

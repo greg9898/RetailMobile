@@ -18,6 +18,7 @@ namespace RetailMobile
         Activity context = null;
         Library.TransDetList dataSource;
         public delegate void QtysChangedDeletegate();
+
         public event QtysChangedDeletegate QtysChangedEvent;
 
         public TransDetAdapter(Activity context, Library.TransDetList list)
@@ -58,6 +59,7 @@ namespace RetailMobile
             tbDtrn_net_value.Text = detail.DtrnNetValue.ToString();
             tbDtrn_vat_value.Text = detail.DtrnVatValue.ToString();
 
+            tbDtrn_unit_price.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbDtrnUnitPrice_TextChanged);
             tbDtrn_net_value.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(netValueChanged);
             tbDtrn_vat_value.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(vatValueChanged);
             tbDtrn_qty1.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbDtrn_qty1_TextChanged);
@@ -66,11 +68,24 @@ namespace RetailMobile
             return view;
         }
 
+        void tbDtrnUnitPrice_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
+        {
+            int index = int.Parse(((EditText)sender).Tag.ToString());
+            Library.TransDet detail = dataSource[index];
+            detail.DtrnUnitPrice = double.Parse(e.Text.ToString());
+            
+            if (QtysChangedEvent != null)
+            {
+                QtysChangedEvent();
+            }
+        }
+
         void tbDtrn_qty1_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
             int index = int.Parse(((EditText)sender).Tag.ToString());
             Library.TransDet detail = dataSource[index];
-            detail.DtrnQty1 = double.Parse(e.Text.ToString());
+            string qtyText = e.Text.ToString().Trim();
+            detail.DtrnQty1 = qtyText != "" ? double.Parse(qtyText) : 0;
             
             if (QtysChangedEvent != null)
             {

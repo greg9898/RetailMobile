@@ -166,8 +166,6 @@ WHERE htrn_id = :htrn_id");
                 conn.Commit();
                 conn.Release();
             }
-
-
         }
 
         public static TransHed GetTransHed(Context ctx, double htrnId)
@@ -220,7 +218,7 @@ FROM trans_hed WHERE htrn_id = :htrnId");
                     TransDet det = new TransDet();
                     det.DtrnId = result.GetDouble("dtrn_id");
                     det.HtrnId = result.GetDouble("htrn_id");
-                    det.ItemId = result.GetDouble("item_id");
+                    det.ItemId = (long)result.GetDouble("item_id");
                     det.ItemCode = result.GetString("item_cod");
                     det.ItemDesc = result.GetString("item_desc");
                     det.DtrnUnitPrice = result.GetDouble("dtrn_unit_price");

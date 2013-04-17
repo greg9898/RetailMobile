@@ -59,9 +59,18 @@ namespace RetailMobile
             cbCateg1.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(cbCateg1_ItemSelected);
             cbCateg2.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(cbCateg1_ItemSelected);
 
-            //lvItems.AddHeaderView(context.LayoutInflater.Inflate(Resource.Layout.item_row_checkable_header, null));
+            lvItems.FocusChange += new EventHandler<View.FocusChangeEventArgs>(lvItems_FocusChange);
+//            lvItems.AddHeaderView(context.LayoutInflater.Inflate(Resource.Layout.item_row_checkable_header, null));  boom! ((CheckableItemsAdapter)lvItems.Adapter).CheckedItemIds;
             
             btnOK.Click += new EventHandler(btnOKItem_Click);
+        }
+
+        void lvItems_FocusChange(object sender, View.FocusChangeEventArgs e)
+        {
+            if (e.HasFocus)
+            {
+                Log.Debug("lvItems_FocusChange", "lvItems_FocusChange if(e.HasFocus)");
+            }
         }
 
         private static void DebugAddGategLists(out List<KeyValuePair<int, string>> categ1List, out List<KeyValuePair<int, string>> categ2List)

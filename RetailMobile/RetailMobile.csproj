@@ -113,6 +113,7 @@
     <AndroidResource Include="Resources\Layout\item_row_checkable.axml" />
     <AndroidResource Include="Resources\Layout\item_row_checkable_header.axml" />
     <AndroidResource Include="Resources\Layout\TransDetRow_header.axml" />
+    <Compile Include="Common.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable\my_edit_text_selector2.xml" />

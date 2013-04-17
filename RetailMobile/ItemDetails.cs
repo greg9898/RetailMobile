@@ -32,7 +32,7 @@ namespace RetailMobile
             tbItemName = (EditText)FindViewById(Resource.Id.tbItemName);
 
             int ItemID = Intent.GetIntExtra("ItemID", 0);
-            Library.ItemInfo.GetItem(this, ItemID);
+            _Item = Library.ItemInfo.GetItem(this, ItemID);
             DataBind();
             /*DAL.ItemInfo.GetItemInfo(new CriteriaJ(this, ItemID), (o, e) =>
             {
@@ -47,14 +47,8 @@ namespace RetailMobile
                 }
             });*/
 
-
-
-
             //_Item.Code = "0012";
             //_Item.Name = "Zaeka Roger";
-
-
-
         }
 
 

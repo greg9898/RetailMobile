@@ -90,7 +90,7 @@ namespace RetailMobile
 
         void btnSave_Click(object sender, EventArgs e)
         {
-            if (tbHtrnNetValue.Text == "")
+            if (tbHtrnNetValue.Text.Trim() == "")
             {
                 tbHtrnNetValue.Text = "0";
             }
@@ -175,16 +175,21 @@ namespace RetailMobile
             isCustChanging = false;
         }
 
+        void FillHeaderCalcValues()
+        {
+            header.CalcValues();
+            tbHtrnNetValue.Text = header.HtrnNetVal.ToString(PreferencesUtil.DecimalFormat);
+            tbHtrnVatValue.Text = header.HtrnVatVal.ToString(PreferencesUtil.DecimalFormat);
+            tbHtrnTotValue.Text = header.HtrnTotValue.ToString(PreferencesUtil.DecimalFormat);
+        }
+
         void LoadDetailsAdapter()
         {
             detailsAdapter = new TransDetAdapter(Activity, header.TransDetList);
             detailsAdapter.QtysChangedEvent += () => 
             {
-                header.CalcValues();
+                FillHeaderCalcValues();
 
-                tbHtrnNetValue.Text = header.HtrnNetVal.ToString(PreferencesUtil.DecimalFormat);
-                tbHtrnVatValue.Text = header.HtrnVatVal.ToString(PreferencesUtil.DecimalFormat);
-                tbHtrnTotValue.Text = header.HtrnTotValue.ToString(PreferencesUtil.DecimalFormat);
             };
 
             lvDetails.SetAdapter(detailsAdapter);
@@ -199,11 +204,12 @@ namespace RetailMobile
                 {
 
                     Library.TransDet transDet = new Library.TransDet();
-                    transDet.LoadItemInfo(this.Activity, itemId, dialogItems.CheckedItemIds[itemId]);
+                    transDet.LoadItemInfo(this.Activity, itemId, dialogItems.CheckedItemIds[itemId], header.CstId);
                     Android.Util.Log.Debug("btnOKItem_Click", itemId + " " + transDet.ItemDesc);
                     header.TransDetList.Add(transDet);
                 }
  
+                FillHeaderCalcValues();
                 LoadDetailsAdapter();
             };
 

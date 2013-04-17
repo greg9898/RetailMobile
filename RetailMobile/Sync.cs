@@ -4,44 +4,47 @@ using Com.Ianywhere.Ultralitejni12;
 
 namespace RetailMobile
 {
-	public class Sync
-	{
-		public static string DatabaseName = "RetailMobile.udb";
+    public class Sync
+    {
+        public static string DatabaseName = "RetailMobile.udb";
 
-		public static IConnection GetConnection (Context ctx)
-		{
-			IConnection DBConnection = null;
-			IConfigPersistent Config = DatabaseManager.CreateConfigurationFileAndroid (DatabaseName, ctx);
+        public static IConnection GetConnection(Context ctx)
+        {
+            IConnection DBConnection = null;
+            IConfigPersistent Config = DatabaseManager.CreateConfigurationFileAndroid(DatabaseName, ctx);
 
-			// Connect to the database - CreateDatabase creates a new database
-			DBConnection = DatabaseManager.Connect (Config);
-			//DBConnection = DatabaseManager.CreateDatabase(Config);
-			return DBConnection;
-		}
+            // Connect to the database - CreateDatabase creates a new database
+            DBConnection = DatabaseManager.Connect(Config);
+            //DBConnection = DatabaseManager.CreateDatabase(Config);
+            return DBConnection;
+        }
 
-		public static void CreateDatabase (Context ctx)
-		{
-			IConnection DBConnection = null;
-			IConfigPersistent Config;
-			IPreparedStatement PreparedStatement;
-			try {
-				// Create a configuration for the connection - parameters are the database name and the Android context
-				Config = DatabaseManager.CreateConfigurationFileAndroid (DatabaseName, ctx);
-				bool connected = false;
-				try {
-					DBConnection = DatabaseManager.Connect (Config);
-					connected = true;
-				} catch (Exception ex) {
-					connected = false;
-				}
-				if (connected)
-					return;
+        public static void CreateDatabase(Context ctx)
+        {
+            IConnection DBConnection = null;
+            IConfigPersistent Config;
+            IPreparedStatement PreparedStatement;
+            try
+            {
+                // Create a configuration for the connection - parameters are the database name and the Android context
+                Config = DatabaseManager.CreateConfigurationFileAndroid(DatabaseName, ctx);
+                bool connected = false;
+                try
+                {
+                    DBConnection = DatabaseManager.Connect(Config);
+                    connected = true;
+                } catch
+                {
+                    connected = false;
+                }
+                if (connected)
+                    return;
 
-				// Connect to the database - CreateDatabase creates a new database
-				DBConnection = DatabaseManager.CreateDatabase (Config);
+                // Connect to the database - CreateDatabase creates a new database
+                DBConnection = DatabaseManager.CreateDatabase(Config);
 
-				// Create Users table
-				PreparedStatement = DBConnection.PrepareStatement (@"CREATE TABLE IF NOT EXISTS Users(
+                // Create Users table
+                PreparedStatement = DBConnection.PrepareStatement(@"CREATE TABLE IF NOT EXISTS Users(
 	user_id numeric(6, 0)  PRIMARY KEY DEFAULT AUTOINCREMENT,
 	user_cod varchar(15) NOT NULL,
 	user_pass varchar(60) NOT NULL,
@@ -57,11 +60,11 @@ namespace RetailMobile
 	user_group smallint NULL,
 	user_active smallint NULL)
  ");
-				PreparedStatement.Execute ();
-				PreparedStatement.Close ();
+                PreparedStatement.Execute();
+                PreparedStatement.Close();
 
-				// Create Items table
-				PreparedStatement = DBConnection.PrepareStatement (@"	CREATE TABLE IF NOT EXISTS Items(
+                // Create Items table
+                PreparedStatement = DBConnection.PrepareStatement(@"	CREATE TABLE IF NOT EXISTS Items(
 	item_id NUMERIC(9,0) PRIMARY KEY DEFAULT AUTOINCREMENT,
 	comp_id numeric(6, 0) NOT NULL,
 	item_cod varchar(25) NOT NULL,
@@ -118,11 +121,11 @@ namespace RetailMobile
 	vend_id numeric(9, 0) NULL )
 
 ");
-				PreparedStatement.Execute ();
-				PreparedStatement.Close ();
+                PreparedStatement.Execute();
+                PreparedStatement.Close();
 
-				// Create Customers table
-				PreparedStatement = DBConnection.PrepareStatement (@"CREATE TABLE IF NOT EXISTS customers(
+                // Create Customers table
+                PreparedStatement = DBConnection.PrepareStatement(@"CREATE TABLE IF NOT EXISTS customers(
 	cst_id numeric(9, 0) PRIMARY KEY DEFAULT AUTOINCREMENT,
 	comp_id numeric(6, 0) NOT NULL,
 	cst_cod varchar(40) NOT NULL,
@@ -158,11 +161,11 @@ namespace RetailMobile
 	CanInvoice varchar(1) NULL)
 
 ");
-				PreparedStatement.Execute ();
-				PreparedStatement.Close ();
+                PreparedStatement.Execute();
+                PreparedStatement.Close();
 
-				// Create TransHed table
-				PreparedStatement = DBConnection.PrepareStatement (@"CREATE TABLE IF NOT EXISTS trans_hed(
+                // Create TransHed table
+                PreparedStatement = DBConnection.PrepareStatement(@"CREATE TABLE IF NOT EXISTS trans_hed(
 	htrn_id numeric(9, 0) PRIMARY KEY DEFAULT AUTOINCREMENT,
 	comp_id numeric(6, 0)  NULL,
 	bran_id numeric(6, 0)  NULL,
@@ -211,11 +214,11 @@ namespace RetailMobile
 	cstmuadr_id numeric(6, 0) NULL,
 	vend_triangle_id numeric(9, 0) NULL)
 ");
-				PreparedStatement.Execute ();
-				PreparedStatement.Close ();
+                PreparedStatement.Execute();
+                PreparedStatement.Close();
 
-				// Create TransDet table
-				PreparedStatement = DBConnection.PrepareStatement (@"CREATE TABLE IF NOT EXISTS trans_det(
+                // Create TransDet table
+                PreparedStatement = DBConnection.PrepareStatement(@"CREATE TABLE IF NOT EXISTS trans_det(
 	dtrn_id numeric(9, 0) PRIMARY KEY DEFAULT AUTOINCREMENT,
 	htrn_id numeric(9, 0) NULL,
 	dtrn_num numeric(6, 0) NULL,
@@ -245,29 +248,31 @@ namespace RetailMobile
 	dtrn_date_exp datetime NULL) 
 	
 	");
-				PreparedStatement.Execute ();
-				PreparedStatement.Close ();
-				//IF NOT EXISTS 
-				PreparedStatement = DBConnection.PrepareStatement (@" CREATE PUBLICATION pblUsers(TABLE users)");
-				PreparedStatement.Execute ();
-				PreparedStatement.Close ();
+                PreparedStatement.Execute();
+                PreparedStatement.Close();
+                //IF NOT EXISTS 
+                PreparedStatement = DBConnection.PrepareStatement(@" CREATE PUBLICATION pblUsers(TABLE users)");
+                PreparedStatement.Execute();
+                PreparedStatement.Close();
 
-				PreparedStatement = DBConnection.PrepareStatement (@" CREATE PUBLICATION pblMain1 (TABLE users, TABLE items, TABLE customers, TABLE trans_hed, TABLE trans_det)");
-				PreparedStatement.Execute ();
-				PreparedStatement.Close ();
+                PreparedStatement = DBConnection.PrepareStatement(@" CREATE PUBLICATION pblMain1 (TABLE users, TABLE items, TABLE customers, TABLE trans_hed, TABLE trans_det)");
+                PreparedStatement.Execute();
+                PreparedStatement.Close();
 
-				DBConnection.Commit ();
-			} catch (Java.Lang.Exception ex) {
-				// Log any errors to the device debug log                
-				Android.Util.Log.Error ("UltraliteApplication", string.Format ("An error has occurred: {0}", ex.Message));
-			} finally {
-				DBConnection.Release ();
-			}
-		}
+                DBConnection.Commit();
+            } catch (Java.Lang.Exception ex)
+            {
+                // Log any errors to the device debug log                
+                Android.Util.Log.Error("UltraliteApplication", string.Format("An error has occurred: {0}", ex.Message));
+            } finally
+            {
+                DBConnection.Release();
+            }
+        }
 
-		public static void Synchronize (Context ctx)
-		{
-			IConnection cn = GetConnection (ctx);
+        public static void Synchronize(Context ctx)
+        {
+            IConnection cn = GetConnection(ctx);
             try
             {
                 //SyncParms.HTTP_STREAM, "sa", "Courier109"
@@ -280,24 +285,22 @@ namespace RetailMobile
                 cn.Synchronize(syncParams);
                 cn.Commit();
 
-            }
-            catch (Exception ex)
+            } catch
             {
-
+            } finally
+            {
+                cn.Release();
             }
-            finally {
-				cn.Release ();
-			}
-		}
+        }
 
-		public static DateTime JavaDateToDatetime (Java.Util.Date date)
-		{
-			TimeSpan ss = TimeSpan.FromMilliseconds (date.Time);
-			DateTime Jan1st1970 = new DateTime (1970, 1, 1, 0, 0, 0);//, DateTimeKind.Local);
-			DateTime ddd = Jan1st1970.Add (ss);
-			return ddd;
-			//DateTime final = ddd.ToUniversalTime(); // Change to local-time
-			//return new DateTime(621355968000000000L + date.Time * 10000);
-		}
-	}
+        public static DateTime JavaDateToDatetime(Java.Util.Date date)
+        {
+            TimeSpan ss = TimeSpan.FromMilliseconds(date.Time);
+            DateTime Jan1st1970 = new DateTime(1970, 1, 1, 0, 0, 0);//, DateTimeKind.Local);
+            DateTime ddd = Jan1st1970.Add(ss);
+            return ddd;
+            //DateTime final = ddd.ToUniversalTime(); // Change to local-time
+            //return new DateTime(621355968000000000L + date.Time * 10000);
+        }
+    }
 }
