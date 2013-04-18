@@ -10,44 +10,38 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Com.Ianywhere.Ultralitejni12;
-using Android.Util;
 
 namespace RetailMobile.Library
 {
-    public class TransHedList : List<TransHed>
-    {
-        internal static TransHedList GetTransHedList(Context ctx)
-        {   
-            TransHedList headers = new TransHedList();
-
-            using (IConnection conn = Sync.GetConnection(ctx))
-            {
-                IPreparedStatement ps = conn.PrepareStatement(@"
+	public class TransHedList : List<TransHed>
+	{
+		internal static TransHedList GetTransHedList(Context ctx)
+		{	
+			TransHedList headers = new TransHedList();
+			
+			using (IConnection conn = Sync.GetConnection(ctx))
+			{
+				IPreparedStatement ps = conn.PrepareStatement(@"
 SELECT 
-    htrn_Id, 
-    trans_hed.cst_Id, 
-    htrn_docnum, 
-    htrn_net_val, 
-    htrn_vat_val, 
-    htrn_date,
-    customers.cst_desc  
-FROM trans_hed
-LEFT OUTER JOIN customers ON customers.cst_id = trans_hed.cst_id ");
-                IResultSet result = ps.ExecuteQuery();
-
-                while (result.Next())
-                {
-                    TransHed header = new TransHed();
-                    header.FetchInfo(result);
-
-                    headers.Add(header);
-                }
-
-                ps.Close();
-                conn.Release();
-            }
-
-            return headers;
-        }
-    }
+	rtrans_hed.id, rtrans_hed.cust_id, trans_date, vouch_id, voser_id, docnum, htrn_explanation, rcustomer.cst_desc  
+FROM rtrans_hed
+LEFT OUTER JOIN rcustomer ON rcustomer.id = rtrans_hed.cust_id
+");
+				IResultSet result = ps.ExecuteQuery();
+				
+				while (result.Next())
+				{
+					TransHed header = new TransHed();
+					header.Fetch(result);
+					
+					headers.Add(header);
+				}
+				
+				ps.Close();
+				conn.Release ();
+			}
+			
+			return headers;
+		}
+	}
 }

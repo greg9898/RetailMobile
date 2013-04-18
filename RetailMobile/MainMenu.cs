@@ -19,7 +19,8 @@ namespace RetailMobile
         protected override void OnCreate(Bundle bundle)
         {   
             base.OnCreate(bundle);
-            Sync.CreateDatabase(this);
+            //Sync.CreateDatabase(this);
+			Sync.GenerateDatabase(this);
             Sync.Synchronize(this);
                         
             SetContentView(Resource.Layout.MainMenu);

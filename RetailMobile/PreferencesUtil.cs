@@ -4,7 +4,7 @@ namespace RetailMobile
     {
         public static string IP = "77.78.32.118";
         public static int Port = 2439;
-        public static string SyncModel = "RetailMobile";
+        public static string SyncModel = "RetailMobile2";
 
         public static string DecimalFormat = "######0.0##";
 
