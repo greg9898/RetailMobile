@@ -19,6 +19,8 @@ namespace RetailMobile.Library
 
         public double CstId { get; set; }
 
+        public string CstName{ get; set; }
+
         public int HtrnDocnum { get; set; }
 
         public double UserId { get; set; }
@@ -245,9 +247,23 @@ FROM trans_hed WHERE htrn_id = :htrnId");
             UserId = result.GetDouble("user_id");
             HtrnNetVal = result.GetDouble("htrn_net_val");
             HtrnVatVal = result.GetDouble("htrn_vat_val");
-            ;
+
             HtrnDate = Sync.JavaDateToDatetime(result.GetDate("htrn_date"));
 
+            IsNew = false;
+        }
+
+        public void FetchInfo(IResultSet result)
+        {
+            HtrnId = result.GetDouble("htrn_id");
+            CstId = result.GetDouble("cst_id");
+            HtrnDocnum = result.GetInt("htrn_docnum");
+            HtrnNetVal = result.GetDouble("htrn_net_val");
+            HtrnVatVal = result.GetDouble("htrn_vat_val");
+            
+            HtrnDate = Sync.JavaDateToDatetime(result.GetDate("htrn_date"));
+            CstName = result.GetString("cst_desc");
+            
             IsNew = false;
         }
     }

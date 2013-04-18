@@ -32,14 +32,15 @@ namespace RetailMobile
             if (view == null)
                 view = context.LayoutInflater.Inflate(Resource.Layout.TransHedRow, null);
 
-            //TextView tbCompID = (TextView)view.FindViewById(Resource.Id.tbCompID);
-            TextView tbHtrnDocnum = (TextView)view.FindViewById(Resource.Id.tbHtrnDocnum);
-            TextView tbHtrnExpl = (TextView)view.FindViewById(Resource.Id.tbHtrnExpl);
+            TextView tbHtrnDate = (TextView)view.FindViewById(Resource.Id.tbHtrnDate);
+            TextView tbHtrnNetVal = (TextView)view.FindViewById(Resource.Id.tbHtrnNetVal);
+            TextView tbHtrnVatVal = (TextView)view.FindViewById(Resource.Id.tbHtrnVatVal);
             TextView tbCustName = (TextView)view.FindViewById(Resource.Id.tbCustName);
 
-            tbHtrnDocnum.Text = item.HtrnDocnum.ToString();
-            tbHtrnExpl.Text = item.HtrnExpl;
-            tbCustName.Text = item.CstId.ToString();
+            tbHtrnDate.Text = item.HtrnDate.ToString(PreferencesUtil.DateFormatDateOnly);
+            tbHtrnNetVal.Text = item.HtrnNetVal.ToString(PreferencesUtil.DecimalFormat);
+            tbHtrnVatVal.Text = item.HtrnVatVal.ToString(PreferencesUtil.DecimalFormat);
+            tbCustName.Text = item.CstName;
 
             return view;
         }

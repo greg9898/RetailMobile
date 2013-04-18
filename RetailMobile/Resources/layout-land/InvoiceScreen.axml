@@ -7,7 +7,8 @@
     <RelativeLayout
         android:id="@+id/invoiceHeader"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp">
         <TextView
             style="@style/headerText"
             android:text="@string/lblInvoice" />
@@ -44,7 +45,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="1dp">
+        android:layout_margin="2dp">
         <RelativeLayout
             android:id="@+id/layoutCustomerInfo"
             android:layout_width="fill_parent"
@@ -183,7 +184,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_margin="1dp"
+            android:layout_margin="2dp"
             android:layout_alignBottom="@id/layoutCustomerInfo"
             android:background="@drawable/border">
             <ImageView
@@ -331,7 +332,7 @@
         android:id="@+id/layoutDetails"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_margin="1dp"
+        android:layout_margin="2dp"
         android:background="@color/yellow">
         <TextView
             android:id="@+id/lblDetailsCaption"

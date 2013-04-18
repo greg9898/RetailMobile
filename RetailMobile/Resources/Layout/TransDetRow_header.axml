@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/listStyle"
-    android:layout_height="50dip">
+    style="@style/listRowHeaderStyle">
     <TextView
         android:id="@+id/lblDtrn_ItemCode"
-        style="@style/listRowHeaderStyle"
+        style="@style/listRowTextViewHeaderStyle"
         android:text="@string/lblHeaderItemCode"
         android:layout_marginLeft="5dp"
         android:layout_weight="0.7" />
     <TextView
         android:id="@+id/tbItemDesc"
-        style="@style/listRowHeaderStyle"
+        style="@style/listRowTextViewHeaderStyle"
         android:text="@string/lblHeaderItemName"
         android:layout_marginRight="5dp"
         android:layout_weight="5" />
     <TextView
         android:id="@+id/lblDtrnQty"
-        style="@style/listRowHeaderStyle"
+        style="@style/listRowTextViewHeaderStyle"
         android:text="@string/lblDtrnQty"
         android:layout_width="30dp"
         android:layout_marginRight="20dp"
@@ -24,7 +23,7 @@
         android:layout_weight="0.5" />
     <TextView
         android:id="@+id/lblDtrn_unit_price"
-        style="@style/listRowHeaderStyle"
+        style="@style/listRowTextViewHeaderStyle"
         android:text="@string/lblDtrn_unit_price"
         android:layout_width="30dp"
         android:layout_marginRight="20dp"
@@ -32,7 +31,7 @@
         android:layout_weight="0.5" />
     <TextView
         android:id="@+id/lblDtrn_disc_line1"
-        style="@style/listRowHeaderStyle"
+        style="@style/listRowTextViewHeaderStyle"
         android:text="@string/lblDtrn_disc_line1"
         android:layout_width="30dp"
         android:layout_marginRight="20dp"
@@ -40,7 +39,7 @@
         android:layout_weight="0.5" />
     <TextView
         android:id="@+id/lblDtrn_net_value"
-        style="@style/listRowHeaderStyle"
+        style="@style/listRowTextViewHeaderStyle"
         android:text="@string/lblDtrn_net_value"
         android:layout_width="30dp"
         android:layout_marginRight="20dp"
@@ -48,7 +47,7 @@
         android:layout_weight="0.5" />
     <TextView
         android:id="@+id/lblDtrn_vat_value"
-        style="@style/listRowHeaderStyle"
+        style="@style/listRowTextViewHeaderStyle"
         android:text="@string/lblDtrn_vat_value"
         android:layout_width="30dp"
         android:layout_marginRight="20dp"

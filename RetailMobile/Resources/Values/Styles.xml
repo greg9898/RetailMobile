@@ -24,8 +24,12 @@
 		<item name="android:textColor">@android:color/white</item>
 		<item name="android:layout_marginTop">5dp</item>
 	</style>
-	<style name="listRowHeaderStyle" parent="@style/listRowTextViewStyle">
-		<item name="android:textStyle">bold</item>
+	<style name="listRowTextViewHeaderStyle" parent="@style/listRowTextViewStyle">
+		<item name="android:textStyle">bold|italic</item>
+	</style>
+		<style name="listRowHeaderStyle" parent="@style/listRowTextViewStyle">
+		<item name="android:textStyle">bold|italic</item>
+		<item name="android:background">@drawable/actionbar_background</item>
 	</style>
 	<style name="menuButtonStyle">
 		<item name="android:background">@drawable/button_selector</item>

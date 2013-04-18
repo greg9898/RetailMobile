@@ -12,15 +12,15 @@
   <string name="lblCustDebt">Υπόλοιπο:</string> 
   <string name="lblCustTaxNum">ΑΦΜ:</string> 
   <string name="miCustomers">Πελάτες</string> 
-  <string name="miItems">Items</string>  
-  <string name="miInvoice">Order</string> 
+  <string name="miItems">Είδη</string>  
+  <string name="miInvoice">Παραγγελίες</string> 
   <string name="miReports">Αναφορές</string> 
   <string name="miAddCustomer">Προσθήκη Πελάτη</string> 
   <string name="miEdit">Επεξεργασία</string> 
   <string name="miDelete">Διαγραφή</string> 
   <string name="miNew">Προσθήκη νέου</string> 
   <string name="btnNew">Προσθήκη νέου</string> 
-  <string name="lblInvoice">Invoice</string> 
+  <string name="lblInvoice">Παραγγελία</string> 
   
  <!--  detail   --> 
   <string name="lblDtrnQty">Ποσότητα:</string> 

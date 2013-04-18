@@ -7,6 +7,8 @@ namespace RetailMobile.Library
 {
     public class TransDet
     {
+        #region Properties
+
         public bool IsNew = true;
 
         public string ItemCode { get; set; }
@@ -37,6 +39,8 @@ namespace RetailMobile.Library
 
         public int ItemVatId { get; set; }
 
+        #endregion
+
         public void LoadItemInfo(Context ctx, decimal itemId, int qty, double cstId)
         {
             Log.Debug("LoadItemInfo", "itemID=" + itemId + ",qty=" + qty);
@@ -55,13 +59,13 @@ namespace RetailMobile.Library
 
             switch (ItemVatId)
             {
-                case 1:
+                case 10:
                     ItemVatValue = 0;
                     break;
-                case 2:
+                case 11:
                     ItemVatValue = 13;
                     break;
-                case 3:
+                case 12:
                     ItemVatValue = 23;
                     break;
             }
@@ -141,6 +145,7 @@ WHERE dtrn_id = :dtrn_id
 
             ps.Set("htrn_id", header.HtrnId);
             ps.Set("dtrn_num", DtrnNum);
+            ps.Set("dtrn_qty1", DtrnQty1);
             ps.Set("item_id", ItemId);
             ps.Set("dtrn_unit_price", DtrnUnitPrice);
             ps.Set("dtrn_disc_line1", DtrnDiscLine1);
@@ -222,50 +227,50 @@ where cst_kat_disc = (select cst_kat_disc from customer where  id = :cst_id)
             }
         }
 
-        public double GetItemPrice(Context ctx, long itemId)
-        {
-            using (IConnection conn = Sync.GetConnection(ctx))
-            {
-                IPreparedStatement ps = conn.PrepareStatement("select item_sale_val1 from items where item_id = :item_id ");//unit_price ?
-                ps.Set("item_id", itemId);
-                double unit_price = 0;
-            
-                IResultSet rs = ps.ExecuteQuery();
-                if (rs.Next())
-                {
-                    unit_price = rs.GetDouble("item_sale_val1");
-                }
-            
-                ps.Close();
-                conn.Commit();
-                conn.Release();
-                
-                return unit_price;
-            }
-        }
-        
-        public int GetItemVatId(Context ctx, long itemId)
-        {
-            using (IConnection conn = Sync.GetConnection(ctx))
-            {
-                const string query = @"select vat_id from items where item_id = :item_id";
-            
-                IPreparedStatement ps = conn.PrepareStatement(query);
-                ps.Set("item_id", itemId);
-                int vatId = 0;
-            
-                IResultSet rs = ps.ExecuteQuery();
-                if (rs.Next())
-                {
-                    vatId = (int)rs.GetDouble("vat_id");
-                }
-            
-                ps.Close();
-                conn.Commit();
-                conn.Release();
-            
-                return vatId;
-            }
-        }
+//        public double GetItemPrice(Context ctx, long itemId)
+//        {
+//            using (IConnection conn = Sync.GetConnection(ctx))
+//            {
+//                IPreparedStatement ps = conn.PrepareStatement("select item_sale_val1 from items where item_id = :item_id ");//unit_price ?
+//                ps.Set("item_id", itemId);
+//                double unit_price = 0;
+//            
+//                IResultSet rs = ps.ExecuteQuery();
+//                if (rs.Next())
+//                {
+//                    unit_price = rs.GetDouble("item_sale_val1");
+//                }
+//            
+//                ps.Close();
+//                conn.Commit();
+//                conn.Release();
+//                
+//                return unit_price;
+//            }
+//        }
+//        
+//        public int GetItemVatId(Context ctx, long itemId)
+//        {
+//            using (IConnection conn = Sync.GetConnection(ctx))
+//            {
+//                const string query = @"select vat_id from items where item_id = :item_id";
+//            
+//                IPreparedStatement ps = conn.PrepareStatement(query);
+//                ps.Set("item_id", itemId);
+//                int vatId = 0;
+//            
+//                IResultSet rs = ps.ExecuteQuery();
+//                if (rs.Next())
+//                {
+//                    vatId = (int)rs.GetDouble("vat_id");
+//                }
+//            
+//                ps.Close();
+//                conn.Commit();
+//                conn.Release();
+//            
+//                return vatId;
+//            }
+//        }
     }
 }

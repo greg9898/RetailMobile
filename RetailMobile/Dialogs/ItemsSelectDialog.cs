@@ -29,9 +29,9 @@ namespace RetailMobile
             : base(context, theme)
         {
             activity = context;
-            //dialogCustomers.Window.SetLayout(Android.Widget.RelativeLayout.LayoutParams.FillParent, Android.Widget.RelativeLayout.LayoutParams.FillParent);
             SetTitle(context.GetString(Resource.String.miItems));
             SetContentView(Resource.Layout.dialog_item_search);
+//            this.Window.SetLayout(RelativeLayout.LayoutParams.FillParent, RelativeLayout.LayoutParams.FillParent);
 
             Button btnOK = FindViewById<Button>(Resource.Id.btnOK);
             btnClose = FindViewById<Button>(Resource.Id.btnClose);
@@ -60,7 +60,7 @@ namespace RetailMobile
             cbCateg2.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(cbCateg1_ItemSelected);
 
             lvItems.FocusChange += new EventHandler<View.FocusChangeEventArgs>(lvItems_FocusChange);
-//            lvItems.AddHeaderView(context.LayoutInflater.Inflate(Resource.Layout.item_row_checkable_header, null));  boom! ((CheckableItemsAdapter)lvItems.Adapter).CheckedItemIds;
+            lvItems.AddHeaderView(context.LayoutInflater.Inflate(Resource.Layout.item_row_checkable_header, null));  
             
             btnOK.Click += new EventHandler(btnOKItem_Click);
         }
@@ -97,7 +97,9 @@ namespace RetailMobile
 
         void btnOKItem_Click(object sender, EventArgs e)
         {
-            _checkedItems = ((CheckableItemsAdapter)lvItems.Adapter).CheckedItemIds;
+            HeaderViewListAdapter adapter = (HeaderViewListAdapter)lvItems.Adapter;
+            CheckableItemsAdapter origAdapter = (CheckableItemsAdapter)adapter.WrappedAdapter;
+            _checkedItems = origAdapter.CheckedItemIds;
 
             Dismiss();//?
         }

@@ -3,103 +3,115 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-  <LinearLayout
-      android:id="@+id/miInvoices"
-      style="@style/menu_background"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:orientation="vertical">
-    <TextView
-        android:id="@+id/lblInvoice"
-        style="@style/menu_caption"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="@string/miInvoice" />
     <LinearLayout
+        android:id="@+id/miInvoices"
+        style="@style/menu_background"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-      <Button        
-          android:id="@+id/btnAddInvoice"
-          style="@style/menuButtonStyle"
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content"
-          android:text="@string/btnAddNew"
-          android:layout_weight="1" />
-      <Button
-          android:id="@+id/btnListInvoice"
-          style="@style/menuButtonStyle"
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content"
-          android:text="@string/btnList"
-          android:layout_weight="1" />
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/lblInvoice"
+            style="@style/menu_caption"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/miInvoice" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/dark_blue" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btnAddInvoice"
+                style="@style/menuButtonStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btnAddNew"
+                android:layout_weight="1" />
+            <Button
+                android:id="@+id/btnListInvoice"
+                style="@style/menuButtonStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btnList"
+                android:layout_weight="1" />
+        </LinearLayout>
     </LinearLayout>
-  </LinearLayout>
-  <LinearLayout
-      android:id="@+id/miItems"
-      style="@style/menu_background"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:orientation="vertical">
-    <TextView
-        android:id="@+id/lblItems"
-        style="@style/menu_caption"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="@string/miItems" />
     <LinearLayout
+        android:id="@+id/miItems"
+        style="@style/menu_background"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-      <Button
-          android:id="@+id/btnAddItem"
-          style="@style/menuButtonStyle"
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content"
-          android:text="@string/btnAddNew"
-          android:layout_weight="1" />
-      <Button
-          android:id="@+id/btnListItems"
-          style="@style/menuButtonStyle"
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content"
-          android:text="@string/btnList"
-          android:layout_weight="1" />
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/lblItems"
+            style="@style/menu_caption"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/miItems" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/dark_blue" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btnAddItem"
+                style="@style/menuButtonStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btnAddNew"
+                android:layout_weight="1" />
+            <Button
+                android:id="@+id/btnListItems"
+                style="@style/menuButtonStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btnList"
+                android:layout_weight="1" />
+        </LinearLayout>
     </LinearLayout>
-  </LinearLayout>
-  <LinearLayout
-      android:id="@+id/miCustomers"
-      style="@style/menu_background"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:orientation="vertical">
-    <TextView
-        android:id="@+id/lblCustomers"
-        style="@style/menu_caption"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="@string/miCustomers" />
     <LinearLayout
+        android:id="@+id/miCustomers"
+        style="@style/menu_background"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-      <Button
-          android:id="@+id/btnAddCustomer"
-          style="@style/menuButtonStyle"
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content"
-          android:text="@string/btnAddNew"
-          android:layout_weight="1" />
-      <Button
-          android:id="@+id/btnListCustomers"
-          style="@style/menuButtonStyle"
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content"
-          android:text="@string/btnList"
-          android:layout_weight="1" />
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/lblCustomers"
+            style="@style/menu_caption"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/miCustomers" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/dark_blue" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btnAddCustomer"
+                style="@style/menuButtonStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btnAddNew"
+                android:layout_weight="1" />
+            <Button
+                android:id="@+id/btnListCustomers"
+                style="@style/menuButtonStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btnList"
+                android:layout_weight="1" />
+        </LinearLayout>
     </LinearLayout>
-  </LinearLayout>
 </LinearLayout>

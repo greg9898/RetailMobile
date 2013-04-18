@@ -4,8 +4,9 @@
     <RelativeLayout
         android:id="@+id/layout_checkable_item_info"
         android:clickable="true"
-        style="@style/fillParent"
-        android:layout_weight="0.7">
+        style="@style/fillWidth"
+        android:layout_width="0dp"
+        android:layout_weight="1.1">
         <ImageView
             android:id="@+id/imgItem"
             android:layout_width="40dip"
@@ -28,7 +29,7 @@
                 android:id="@+id/tbItemName"
                 style="@style/listRowTextViewStyle"
                 android:text="tbItemName"
-                android:layout_weight="1" />
+                android:layout_weight="1.3" />
             <TextView
                 android:id="@+id/tbItemSaleVal"
                 style="@style/listRowTextViewStyle"
@@ -53,20 +54,19 @@
         android:numeric="integer"
         android:selectAllOnFocus="true"
         android:text="1"
-        android:minWidth="60dp"
         style="@style/myEditTextStyle"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_gravity="right|center"
-        android:layout_weight="0.2" />
+        android:layout_width="0dp"
+        android:layout_weight="0.1" />
     <CheckBox
-        style="@style/wrapSelf"
+        style="@style/fillParent"
         android:id="@+id/checkBox"
         android:checked="false"
-        android:minWidth="40dp"
+        android:layout_width="0dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_gravity="right"
-        android:layout_weight="0.1" />
+        android:layout_weight="0.05" />
 </LinearLayout>
