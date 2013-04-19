@@ -20,7 +20,7 @@ namespace RetailMobile
         Button btnCloseCust;
         EditText tbCustCode;
         EditText tbCustName;
-        double _custId;
+        long _custId;
 
         public CustomerSelectDialog(Activity context, int theme)
             : base(context, theme)
@@ -81,7 +81,7 @@ namespace RetailMobile
             }
         }
 
-        public double CustId
+        public long CustId
         {
             get { return _custId; }
         }

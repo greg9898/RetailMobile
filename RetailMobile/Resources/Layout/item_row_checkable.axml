@@ -36,9 +36,9 @@
                 android:text="tbItemSaleVal"
                 android:layout_weight="0.3" />
             <TextView
-                android:id="@+id/tbItemRetVal"
+                android:id="@+id/tbItemQtyLeft"
                 style="@style/listRowTextViewStyle"
-                android:text="tbItemRetVal"
+                android:text="tbItemQtyLeft"
                 android:layout_weight="0.3" />
             <TextView
                 android:id="@+id/tbItemLastBuyDate"

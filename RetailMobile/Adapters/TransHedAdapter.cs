@@ -37,7 +37,7 @@ namespace RetailMobile
             TextView tbHtrnVatVal = (TextView)view.FindViewById(Resource.Id.tbHtrnVatVal);
             TextView tbCustName = (TextView)view.FindViewById(Resource.Id.tbCustName);
 
-            tbHtrnDate.Text = item.HtrnDate.ToString(PreferencesUtil.DateFormatDateOnly);
+            tbHtrnDate.Text = item.TransDate.ToString(PreferencesUtil.DateFormatDateOnly);
             tbHtrnNetVal.Text = item.HtrnNetVal.ToString(PreferencesUtil.DecimalFormat);
             tbHtrnVatVal.Text = item.HtrnVatVal.ToString(PreferencesUtil.DecimalFormat);
             tbCustName.Text = item.CstName;

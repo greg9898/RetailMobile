@@ -55,7 +55,7 @@ namespace RetailMobile
         private void DataBind()
         {
             tbItemCode.Text = _Item.item_cod;
-            tbItemName.Text = _Item.item_desc;
+            tbItemName.Text = _Item.ItemDesc;
             //bindingManager.Bindings.Add(new SimpleApp.Binding(tbItemCode, "Text", _Item, DAL.ItemInfo.ItemCodProperty.Name));
             //bindingManager.Bindings.Add(new SimpleApp.Binding(tbItemName, "Text", _Item, DAL.ItemInfo.ItemDescProperty.Name));
 

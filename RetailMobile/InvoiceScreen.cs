@@ -16,6 +16,7 @@ namespace RetailMobile
     public class InvoiceScreen : Activity
     {
         public const int ITEMS_SEARCH = 2010;
+
         //SimpleApp.BindingManager bindingManager;
         Library.TransHed _header;
 

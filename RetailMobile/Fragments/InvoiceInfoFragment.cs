@@ -1,9 +1,9 @@
 using System;
 
 using Android.OS;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
-using Android.Util;
 
 namespace RetailMobile
 {
@@ -12,17 +12,17 @@ namespace RetailMobile
         Library.TransHed header;
         TransDetAdapter detailsAdapter;
         ListView lvDetails;
-        private EditText tbCustDesc;
-        private EditText tbHtrnExpln;
-        private EditText tbHtrnID;
-        private EditText tbCustCode;
-        private EditText tbCustAddress;
-        private EditText tbCustPhone;
-        private EditText tbCustDebt;
-        private EditText tbHtrnDate;
-        private EditText tbHtrnNetValue;
-        private EditText tbHtrnVatValue;
-        private EditText tbHtrnTotValue;
+        EditText tbCustDesc;
+        EditText tbHtrnExpln;
+        EditText tbHtrnID;
+        EditText tbCustCode;
+        EditText tbCustAddress;
+        EditText tbCustPhone;
+        EditText tbCustDebt;
+        EditText tbHtrnDate;
+        EditText tbHtrnNetValue;
+        EditText tbHtrnVatValue;
+        EditText tbHtrnTotValue;
 
         public static BaseFragment NewInstance(long objId)
         {
@@ -65,12 +65,12 @@ namespace RetailMobile
             if (tbHtrnID != null)
                 tbHtrnID.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbHtrnID_TextChanged);
                     
-            tbHtrnID.Text = base.ObjectId.ToString();
+            tbHtrnID.Text = ObjectId.ToString();
 
             return v;
         }
 
-        private void InitInvoiceScreen()
+        void InitInvoiceScreen()
         {
             header = new Library.TransHed();
             FillInvoiceFields();
@@ -79,10 +79,10 @@ namespace RetailMobile
             LoadDetailsAdapter();
         }
 
-        private void FillInvoiceFields()
+        void FillInvoiceFields()
         {
             tbHtrnExpln.Text = header.HtrnExpl;
-            tbHtrnDate.Text = header.HtrnDate.ToString();
+            tbHtrnDate.Text = header.TransDate.ToString();
             tbHtrnNetValue.Text = header.HtrnNetVal.ToString(PreferencesUtil.DecimalFormat);
             tbHtrnVatValue.Text = header.HtrnVatVal.ToString(PreferencesUtil.DecimalFormat);
             tbHtrnTotValue.Text = header.HtrnTotValue.ToString(PreferencesUtil.DecimalFormat);
@@ -99,17 +99,17 @@ namespace RetailMobile
                 tbHtrnVatValue.Text = "0";
             }
             header.HtrnExpl = tbHtrnExpln.Text;
-            header.HtrnDate = DateTime.Parse(tbHtrnDate.Text);
+            header.TransDate = DateTime.Parse(tbHtrnDate.Text);
             header.HtrnNetVal = double.Parse(tbHtrnNetValue.Text);
             header.HtrnVatVal = double.Parse(tbHtrnVatValue.Text);
             
-            header.Save(this.Activity);
+            header.Save(Activity);
             InitInvoiceScreen();
         }
 
         void tbHtrnID_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
-            header = Library.TransHed.GetTransHed(this.Activity, double.Parse(((EditText)sender).Text));
+            header = Library.TransHed.GetTransHed(Activity, double.Parse(((EditText)sender).Text));
             if (header != null && tbHtrnExpln != null)
             {
                 FillInvoiceFields();
@@ -128,7 +128,7 @@ namespace RetailMobile
             }
 
             Log.Debug("tbCustCode_TextChanged", "tbCustCode_TextChanged text=" + ((EditText)sender).Text);
-            Library.CustomerInfo c = Library.CustomerInfo.GetCustomer(this.Activity, ((EditText)sender).Text);
+            Library.CustomerInfo c = Library.CustomerInfo.GetCustomer(Activity, ((EditText)sender).Text);
 
             if (tbCustDesc != null)
             {
@@ -142,10 +142,10 @@ namespace RetailMobile
 
         void btnSearchCustomer_Click(object sender, EventArgs e)
         {
-            CustomerSelectDialog custDlg = new CustomerSelectDialog(this.Activity, Resource.Style.cust_dialogWrap);
+            CustomerSelectDialog custDlg = new CustomerSelectDialog(Activity, Resource.Style.cust_dialogWrap);
             custDlg.DismissEvent += (s, ee) =>
             {
-                header.CstId = (double)custDlg.CustId;
+                header.CstId = custDlg.CustId;
                 Log.Debug("btnSearchCustomer_Click", " header.cst_id =" + custDlg.CustId);
                 LoadCustomerData(custDlg.CustId);
             };
@@ -154,7 +154,7 @@ namespace RetailMobile
 
         private void LoadCustomerData(double custId)
         {
-            Library.CustomerInfo c = Library.CustomerInfo.GetCustomer(this.Activity, custId);
+            Library.CustomerInfo c = Library.CustomerInfo.GetCustomer(Activity, custId);
 
             if (tbCustDesc != null)
             {
@@ -197,14 +197,14 @@ namespace RetailMobile
 
         void btnSearchItems_Click(object sender, EventArgs e)
         {
-            ItemsSelectDialog dialogItems = new ItemsSelectDialog(this.Activity, Resource.Style.cust_dialog);
+            ItemsSelectDialog dialogItems = new ItemsSelectDialog(Activity, Resource.Style.cust_dialog, header);
             dialogItems.DismissEvent += (s, ee) =>
             {
                 foreach (int itemId in dialogItems.CheckedItemIds.Keys)
                 {
 
                     Library.TransDet transDet = new Library.TransDet();
-                    transDet.LoadItemInfo(this.Activity, itemId, dialogItems.CheckedItemIds[itemId], header.CstId);
+                    transDet.LoadItemInfo(Activity, itemId, dialogItems.CheckedItemIds[itemId], header.CstId);
                     Android.Util.Log.Debug("btnOKItem_Click", itemId + " " + transDet.ItemDesc);
                     header.TransDetList.Add(transDet);
                 }

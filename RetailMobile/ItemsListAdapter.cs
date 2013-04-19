@@ -36,7 +36,7 @@ namespace RetailMobile
             TextView tbItemName = (TextView)view.FindViewById(Resource.Id.tbItemName);
 
             tbItemCode.Text = item.item_cod;
-            tbItemName.Text = item.item_desc;
+            tbItemName.Text = item.ItemDesc;
 
             return view;
         }

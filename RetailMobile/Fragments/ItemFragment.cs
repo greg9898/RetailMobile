@@ -41,11 +41,11 @@ namespace RetailMobile
 			EditText tbItemRetVal = (EditText)view.FindViewById(Resource.Id.tbItemRetVal);
 			
 			tbItemCode.Text = item.item_cod;
-			tbItemName.Text = item.item_desc;
+			tbItemName.Text = item.ItemDesc;
 			tbLongDesc.Text = item.item_long_desc;
 			//tbItemRetVal.Text = item.item_ret_val1.ToString("######0.0##");
-			tbItemRetVal.Text = item.item_qty_left.ToString("######0.0##");
-			tbItemSaleVal.Text = item.item_sale_val1.ToString("######0.0##");
+			tbItemRetVal.Text = item.ItemQtyLeft.ToString("######0.0##");
+			tbItemSaleVal.Text = item.ItemSaleVal1.ToString("######0.0##");
 			
 			return view;
 		}

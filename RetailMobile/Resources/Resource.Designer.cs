@@ -320,14 +320,14 @@ namespace RetailMobile
 			// aapt resource value: 0x7f09002a
 			public const int btnAddItem = 2131296298;
 			
-			// aapt resource value: 0x7f090086
-			public const int btnAddItems = 2131296390;
+			// aapt resource value: 0x7f090087
+			public const int btnAddItems = 2131296391;
 			
 			// aapt resource value: 0x7f090019
 			public const int btnClose = 2131296281;
 			
-			// aapt resource value: 0x7f090087
-			public const int btnCloseItemSearch = 2131296391;
+			// aapt resource value: 0x7f090088
+			public const int btnCloseItemSearch = 2131296392;
 			
 			// aapt resource value: 0x7f09002f
 			public const int btnListCustomers = 2131296303;
@@ -380,11 +380,11 @@ namespace RetailMobile
 			// aapt resource value: 0x7f090023
 			public const int cbCateg2 = 2131296291;
 			
-			// aapt resource value: 0x7f090082
-			public const int cbItemCateg1 = 2131296386;
+			// aapt resource value: 0x7f090083
+			public const int cbItemCateg1 = 2131296387;
 			
-			// aapt resource value: 0x7f090084
-			public const int cbItemCateg2 = 2131296388;
+			// aapt resource value: 0x7f090085
+			public const int cbItemCateg2 = 2131296389;
 			
 			// aapt resource value: 0x7f09006c
 			public const int checkBox = 2131296364;
@@ -395,8 +395,8 @@ namespace RetailMobile
 			// aapt resource value: 0x7f09009a
 			public const int details_fragment = 2131296410;
 			
-			// aapt resource value: 0x7f090088
-			public const int imgChecked = 2131296392;
+			// aapt resource value: 0x7f090089
+			public const int imgChecked = 2131296393;
 			
 			// aapt resource value: 0x7f090010
 			public const int imgCustomer = 2131296272;
@@ -428,8 +428,8 @@ namespace RetailMobile
 			// aapt resource value: 0x7f090092
 			public const int layoutActionBar = 2131296402;
 			
-			// aapt resource value: 0x7f090085
-			public const int layoutBottomButtons = 2131296389;
+			// aapt resource value: 0x7f090086
+			public const int layoutBottomButtons = 2131296390;
 			
 			// aapt resource value: 0x7f09005a
 			public const int layoutButtons = 2131296346;
@@ -446,20 +446,20 @@ namespace RetailMobile
 			// aapt resource value: 0x7f090039
 			public const int layoutHeader = 2131296313;
 			
-			// aapt resource value: 0x7f09007b
-			public const int layoutHeaderFilter = 2131296379;
+			// aapt resource value: 0x7f09007c
+			public const int layoutHeaderFilter = 2131296380;
 			
 			// aapt resource value: 0x7f090043
 			public const int layoutInvoiceInfo = 2131296323;
 			
-			// aapt resource value: 0x7f09008d
-			public const int layoutItemCategs = 2131296397;
+			// aapt resource value: 0x7f09008e
+			public const int layoutItemCategs = 2131296398;
 			
-			// aapt resource value: 0x7f090089
-			public const int layoutItemInfoCodeName = 2131296393;
+			// aapt resource value: 0x7f09008a
+			public const int layoutItemInfoCodeName = 2131296394;
 			
-			// aapt resource value: 0x7f090090
-			public const int layoutItemPrices = 2131296400;
+			// aapt resource value: 0x7f090091
+			public const int layoutItemPrices = 2131296401;
 			
 			// aapt resource value: 0x7f090064
 			public const int layout_checkable_item_info = 2131296356;
@@ -545,14 +545,14 @@ namespace RetailMobile
 			// aapt resource value: 0x7f0900aa
 			public const int lblDtrn_vat_value = 2131296426;
 			
-			// aapt resource value: 0x7f09007c
-			public const int lblFilter = 2131296380;
-			
 			// aapt resource value: 0x7f09007d
-			public const int lblFilterCode = 2131296381;
+			public const int lblFilter = 2131296381;
 			
-			// aapt resource value: 0x7f09007f
-			public const int lblFilterDesc = 2131296383;
+			// aapt resource value: 0x7f09007e
+			public const int lblFilterCode = 2131296382;
+			
+			// aapt resource value: 0x7f090080
+			public const int lblFilterDesc = 2131296384;
 			
 			// aapt resource value: 0x7f09006d
 			public const int lblHeaderImgItem = 2131296365;
@@ -567,7 +567,7 @@ namespace RetailMobile
 			public const int lblHeaderItemName = 2131296367;
 			
 			// aapt resource value: 0x7f090071
-			public const int lblHeaderItemRetVal = 2131296369;
+			public const int lblHeaderItemQtyLeft = 2131296369;
 			
 			// aapt resource value: 0x7f090070
 			public const int lblHeaderItemSaleVal = 2131296368;
@@ -599,11 +599,11 @@ namespace RetailMobile
 			// aapt resource value: 0x7f090045
 			public const int lblInvoiceInfoCaption = 2131296325;
 			
-			// aapt resource value: 0x7f090081
-			public const int lblItemCat1ID = 2131296385;
+			// aapt resource value: 0x7f090082
+			public const int lblItemCat1ID = 2131296386;
 			
-			// aapt resource value: 0x7f090083
-			public const int lblItemCat2ID = 2131296387;
+			// aapt resource value: 0x7f090084
+			public const int lblItemCat2ID = 2131296388;
 			
 			// aapt resource value: 0x7f090020
 			public const int lblItemCategory1 = 2131296288;
@@ -740,11 +740,11 @@ namespace RetailMobile
 			// aapt resource value: 0x7f0900a5
 			public const int tbDtrn_vat_value = 2131296421;
 			
-			// aapt resource value: 0x7f09007e
-			public const int tbFilterCode = 2131296382;
+			// aapt resource value: 0x7f09007f
+			public const int tbFilterCode = 2131296383;
 			
-			// aapt resource value: 0x7f090080
-			public const int tbFilterDesc = 2131296384;
+			// aapt resource value: 0x7f090081
+			public const int tbFilterDesc = 2131296385;
 			
 			// aapt resource value: 0x7f090049
 			public const int tbHtrnDate = 2131296329;
@@ -770,17 +770,17 @@ namespace RetailMobile
 			// aapt resource value: 0x7f09004f
 			public const int tbHtrnVatValue = 2131296335;
 			
-			// aapt resource value: 0x7f09008e
-			public const int tbItemCateg1 = 2131296398;
-			
 			// aapt resource value: 0x7f09008f
-			public const int tbItemCateg2 = 2131296399;
+			public const int tbItemCateg1 = 2131296399;
+			
+			// aapt resource value: 0x7f090090
+			public const int tbItemCateg2 = 2131296400;
 			
 			// aapt resource value: 0x7f090066
 			public const int tbItemCode = 2131296358;
 			
-			// aapt resource value: 0x7f09007a
-			public const int tbItemDebt = 2131296378;
+			// aapt resource value: 0x7f09007b
+			public const int tbItemDebt = 2131296379;
 			
 			// aapt resource value: 0x7f0900a0
 			public const int tbItemDesc = 2131296416;
@@ -788,23 +788,23 @@ namespace RetailMobile
 			// aapt resource value: 0x7f09006a
 			public const int tbItemLastBuyDate = 2131296362;
 			
-			// aapt resource value: 0x7f09008c
-			public const int tbItemLongDesc = 2131296396;
+			// aapt resource value: 0x7f09008d
+			public const int tbItemLongDesc = 2131296397;
 			
 			// aapt resource value: 0x7f090067
 			public const int tbItemName = 2131296359;
 			
-			// aapt resource value: 0x7f090091
-			public const int tbItemQtyLeft = 2131296401;
-			
 			// aapt resource value: 0x7f090069
-			public const int tbItemRetVal = 2131296361;
+			public const int tbItemQtyLeft = 2131296361;
+			
+			// aapt resource value: 0x7f090079
+			public const int tbItemRetVal = 2131296377;
 			
 			// aapt resource value: 0x7f090068
 			public const int tbItemSaleVal = 2131296360;
 			
-			// aapt resource value: 0x7f090079
-			public const int tbItemTaxNum = 2131296377;
+			// aapt resource value: 0x7f09007a
+			public const int tbItemTaxNum = 2131296378;
 			
 			// aapt resource value: 0x7f090077
 			public const int tbLongDesc = 2131296375;
@@ -818,11 +818,11 @@ namespace RetailMobile
 			// aapt resource value: 0x7f09001d
 			public const int tbSearch = 2131296285;
 			
-			// aapt resource value: 0x7f09008a
-			public const int tbSearchItemCode = 2131296394;
-			
 			// aapt resource value: 0x7f09008b
-			public const int tbSearchItemName = 2131296395;
+			public const int tbSearchItemCode = 2131296395;
+			
+			// aapt resource value: 0x7f09008c
+			public const int tbSearchItemName = 2131296396;
 			
 			// aapt resource value: 0x7f09009e
 			public const int tbValue = 2131296414;
@@ -956,191 +956,200 @@ namespace RetailMobile
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f060038
-			public const int alphabetEnglish = 2131099704;
+			// aapt resource value: 0x7f060002
+			public const int SpinnerAll = 2131099650;
 			
-			// aapt resource value: 0x7f060039
-			public const int alphabetGreek = 2131099705;
+			// aapt resource value: 0x7f06003b
+			public const int alphabetEnglish = 2131099707;
+			
+			// aapt resource value: 0x7f06003c
+			public const int alphabetGreek = 2131099708;
 			
 			// aapt resource value: 0x7f060000
 			public const int app_name = 2131099648;
 			
-			// aapt resource value: 0x7f060032
-			public const int btnAddItems = 2131099698;
-			
-			// aapt resource value: 0x7f06003a
-			public const int btnAddNew = 2131099706;
-			
-			// aapt resource value: 0x7f06003c
-			public const int btnClose = 2131099708;
-			
-			// aapt resource value: 0x7f060033
-			public const int btnCloseItemSearch = 2131099699;
-			
-			// aapt resource value: 0x7f06003b
-			public const int btnList = 2131099707;
-			
-			// aapt resource value: 0x7f060011
-			public const int btnNew = 2131099665;
+			// aapt resource value: 0x7f060035
+			public const int btnAddItems = 2131099701;
 			
 			// aapt resource value: 0x7f06003d
-			public const int btnOK = 2131099709;
+			public const int btnAddNew = 2131099709;
 			
-			// aapt resource value: 0x7f060027
-			public const int btnSave = 2131099687;
+			// aapt resource value: 0x7f06003f
+			public const int btnClose = 2131099711;
 			
-			// aapt resource value: 0x7f060026
-			public const int btnScan = 2131099686;
+			// aapt resource value: 0x7f060036
+			public const int btnCloseItemSearch = 2131099702;
 			
-			// aapt resource value: 0x7f060028
-			public const int btnSearch = 2131099688;
+			// aapt resource value: 0x7f06003e
+			public const int btnList = 2131099710;
+			
+			// aapt resource value: 0x7f060012
+			public const int btnNew = 2131099666;
+			
+			// aapt resource value: 0x7f060040
+			public const int btnOK = 2131099712;
+			
+			// aapt resource value: 0x7f06002a
+			public const int btnSave = 2131099690;
 			
 			// aapt resource value: 0x7f060029
-			public const int btnSearchCustomer = 2131099689;
+			public const int btnScan = 2131099689;
 			
-			// aapt resource value: 0x7f060034
-			public const int cbItemCategPrompt = 2131099700;
+			// aapt resource value: 0x7f06002b
+			public const int btnSearch = 2131099691;
+			
+			// aapt resource value: 0x7f06002c
+			public const int btnSearchCustomer = 2131099692;
+			
+			// aapt resource value: 0x7f060037
+			public const int cbItemCategPrompt = 2131099703;
 			
 			// aapt resource value: 0x7f060001
 			public const int empty = 2131099649;
 			
-			// aapt resource value: 0x7f060007
-			public const int lblCustDebt = 2131099655;
-			
 			// aapt resource value: 0x7f060008
-			public const int lblCustTaxNum = 2131099656;
-			
-			// aapt resource value: 0x7f060004
-			public const int lblCustomerAddress = 2131099652;
-			
-			// aapt resource value: 0x7f06002a
-			public const int lblCustomerCaption = 2131099690;
-			
-			// aapt resource value: 0x7f060002
-			public const int lblCustomerCode = 2131099650;
-			
-			// aapt resource value: 0x7f060003
-			public const int lblCustomerName = 2131099651;
-			
-			// aapt resource value: 0x7f060005
-			public const int lblCustomerPhone = 2131099653;
-			
-			// aapt resource value: 0x7f06001f
-			public const int lblDetailsCaption = 2131099679;
-			
-			// aapt resource value: 0x7f060013
-			public const int lblDtrnQty = 2131099667;
-			
-			// aapt resource value: 0x7f060015
-			public const int lblDtrn_disc_line1 = 2131099669;
-			
-			// aapt resource value: 0x7f060016
-			public const int lblDtrn_net_value = 2131099670;
-			
-			// aapt resource value: 0x7f060014
-			public const int lblDtrn_unit_price = 2131099668;
-			
-			// aapt resource value: 0x7f060017
-			public const int lblDtrn_vat_value = 2131099671;
-			
-			// aapt resource value: 0x7f060006
-			public const int lblEmptyList = 2131099654;
-			
-			// aapt resource value: 0x7f060020
-			public const int lblHeaderItemCode = 2131099680;
-			
-			// aapt resource value: 0x7f060024
-			public const int lblHeaderItemLastBuyDate = 2131099684;
-			
-			// aapt resource value: 0x7f060021
-			public const int lblHeaderItemName = 2131099681;
-			
-			// aapt resource value: 0x7f060023
-			public const int lblHeaderItemRetVal = 2131099683;
-			
-			// aapt resource value: 0x7f060022
-			public const int lblHeaderItemSaleVal = 2131099682;
-			
-			// aapt resource value: 0x7f060025
-			public const int lblHeaderQty = 2131099685;
-			
-			// aapt resource value: 0x7f06002d
-			public const int lblHtrnDate = 2131099693;
-			
-			// aapt resource value: 0x7f06002e
-			public const int lblHtrnExpl = 2131099694;
-			
-			// aapt resource value: 0x7f06002c
-			public const int lblHtrnID = 2131099692;
-			
-			// aapt resource value: 0x7f06002f
-			public const int lblHtrnNetValue = 2131099695;
-			
-			// aapt resource value: 0x7f060031
-			public const int lblHtrnTotValue = 2131099697;
-			
-			// aapt resource value: 0x7f060030
-			public const int lblHtrnVatValue = 2131099696;
-			
-			// aapt resource value: 0x7f060012
-			public const int lblInvoice = 2131099666;
-			
-			// aapt resource value: 0x7f06002b
-			public const int lblInvoiceInfoCaption = 2131099691;
-			
-			// aapt resource value: 0x7f06001a
-			public const int lblItemCategory1 = 2131099674;
-			
-			// aapt resource value: 0x7f06001b
-			public const int lblItemCategory2 = 2131099675;
-			
-			// aapt resource value: 0x7f060018
-			public const int lblItemCode = 2131099672;
-			
-			// aapt resource value: 0x7f060019
-			public const int lblItemName = 2131099673;
-			
-			// aapt resource value: 0x7f06001d
-			public const int lblItemRetVal = 2131099677;
-			
-			// aapt resource value: 0x7f06001e
-			public const int lblItemSaleVal = 2131099678;
-			
-			// aapt resource value: 0x7f06001c
-			public const int lblLongDesc = 2131099676;
-			
-			// aapt resource value: 0x7f06000d
-			public const int miAddCustomer = 2131099661;
+			public const int lblCustDebt = 2131099656;
 			
 			// aapt resource value: 0x7f060009
-			public const int miCustomers = 2131099657;
+			public const int lblCustTaxNum = 2131099657;
 			
-			// aapt resource value: 0x7f06000f
-			public const int miDelete = 2131099663;
+			// aapt resource value: 0x7f060005
+			public const int lblCustomerAddress = 2131099653;
+			
+			// aapt resource value: 0x7f06002d
+			public const int lblCustomerCaption = 2131099693;
+			
+			// aapt resource value: 0x7f060003
+			public const int lblCustomerCode = 2131099651;
+			
+			// aapt resource value: 0x7f060004
+			public const int lblCustomerName = 2131099652;
+			
+			// aapt resource value: 0x7f060006
+			public const int lblCustomerPhone = 2131099654;
+			
+			// aapt resource value: 0x7f060021
+			public const int lblDetailsCaption = 2131099681;
+			
+			// aapt resource value: 0x7f060014
+			public const int lblDtrnQty = 2131099668;
+			
+			// aapt resource value: 0x7f060016
+			public const int lblDtrn_disc_line1 = 2131099670;
+			
+			// aapt resource value: 0x7f060017
+			public const int lblDtrn_net_value = 2131099671;
+			
+			// aapt resource value: 0x7f060015
+			public const int lblDtrn_unit_price = 2131099669;
+			
+			// aapt resource value: 0x7f060018
+			public const int lblDtrn_vat_value = 2131099672;
+			
+			// aapt resource value: 0x7f060007
+			public const int lblEmptyList = 2131099655;
+			
+			// aapt resource value: 0x7f060022
+			public const int lblHeaderItemCode = 2131099682;
+			
+			// aapt resource value: 0x7f060027
+			public const int lblHeaderItemLastBuyDate = 2131099687;
+			
+			// aapt resource value: 0x7f060023
+			public const int lblHeaderItemName = 2131099683;
+			
+			// aapt resource value: 0x7f060026
+			public const int lblHeaderItemQtyLeft = 2131099686;
+			
+			// aapt resource value: 0x7f060025
+			public const int lblHeaderItemRetVal = 2131099685;
+			
+			// aapt resource value: 0x7f060024
+			public const int lblHeaderItemSaleVal = 2131099684;
+			
+			// aapt resource value: 0x7f060028
+			public const int lblHeaderQty = 2131099688;
+			
+			// aapt resource value: 0x7f060030
+			public const int lblHtrnDate = 2131099696;
+			
+			// aapt resource value: 0x7f060031
+			public const int lblHtrnExpl = 2131099697;
+			
+			// aapt resource value: 0x7f06002f
+			public const int lblHtrnID = 2131099695;
+			
+			// aapt resource value: 0x7f060032
+			public const int lblHtrnNetValue = 2131099698;
+			
+			// aapt resource value: 0x7f060034
+			public const int lblHtrnTotValue = 2131099700;
+			
+			// aapt resource value: 0x7f060033
+			public const int lblHtrnVatValue = 2131099699;
+			
+			// aapt resource value: 0x7f060013
+			public const int lblInvoice = 2131099667;
+			
+			// aapt resource value: 0x7f06002e
+			public const int lblInvoiceInfoCaption = 2131099694;
+			
+			// aapt resource value: 0x7f06001b
+			public const int lblItemCategory1 = 2131099675;
+			
+			// aapt resource value: 0x7f06001c
+			public const int lblItemCategory2 = 2131099676;
+			
+			// aapt resource value: 0x7f060019
+			public const int lblItemCode = 2131099673;
+			
+			// aapt resource value: 0x7f06001a
+			public const int lblItemName = 2131099674;
+			
+			// aapt resource value: 0x7f06001f
+			public const int lblItemQtyLeft = 2131099679;
+			
+			// aapt resource value: 0x7f06001e
+			public const int lblItemRetVal = 2131099678;
+			
+			// aapt resource value: 0x7f060020
+			public const int lblItemSaleVal = 2131099680;
+			
+			// aapt resource value: 0x7f06001d
+			public const int lblLongDesc = 2131099677;
 			
 			// aapt resource value: 0x7f06000e
-			public const int miEdit = 2131099662;
-			
-			// aapt resource value: 0x7f06000b
-			public const int miInvoice = 2131099659;
+			public const int miAddCustomer = 2131099662;
 			
 			// aapt resource value: 0x7f06000a
-			public const int miItems = 2131099658;
+			public const int miCustomers = 2131099658;
 			
 			// aapt resource value: 0x7f060010
-			public const int miNew = 2131099664;
+			public const int miDelete = 2131099664;
+			
+			// aapt resource value: 0x7f06000f
+			public const int miEdit = 2131099663;
 			
 			// aapt resource value: 0x7f06000c
-			public const int miReports = 2131099660;
+			public const int miInvoice = 2131099660;
 			
-			// aapt resource value: 0x7f060036
-			public const int tvMenuCaptionCustomers = 2131099702;
+			// aapt resource value: 0x7f06000b
+			public const int miItems = 2131099659;
 			
-			// aapt resource value: 0x7f060037
-			public const int tvMenuCaptionInvoices = 2131099703;
+			// aapt resource value: 0x7f060011
+			public const int miNew = 2131099665;
 			
-			// aapt resource value: 0x7f060035
-			public const int tvMenuCaptionItems = 2131099701;
+			// aapt resource value: 0x7f06000d
+			public const int miReports = 2131099661;
+			
+			// aapt resource value: 0x7f060039
+			public const int tvMenuCaptionCustomers = 2131099705;
+			
+			// aapt resource value: 0x7f06003a
+			public const int tvMenuCaptionInvoices = 2131099706;
+			
+			// aapt resource value: 0x7f060038
+			public const int tvMenuCaptionItems = 2131099704;
 			
 			static String()
 			{

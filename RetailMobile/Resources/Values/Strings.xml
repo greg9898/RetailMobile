@@ -2,6 +2,7 @@
 <resources>
   <string name="app_name">Ασυρματη Παραγγελιοληψια</string> 
   <string name="empty"/>
+  <string name="SpinnerAll">Επιλογή όλων</string> 
   
  <!--  customer   --> 
   <string name="lblCustomerCode">Κωδικός:</string> 
@@ -36,6 +37,7 @@
   <string name="lblItemCategory2">Κατηγορία 2:</string> 
   <string name="lblLongDesc">Περιγραφή:</string> 
   <string name="lblItemRetVal">Λιανική τιμή:</string> 
+  <string name="lblItemQtyLeft">Υπόλοιπο</string> 
   <string name="lblItemSaleVal">Τιμή Πώλησης:</string> 
   <string name="lblDetailsCaption">Details</string> 
   
@@ -44,8 +46,10 @@
   <string name="lblHeaderItemName">Περιγραφή</string> 
   <string name="lblHeaderItemSaleVal">Λιανική τιμή</string> 
   <string name="lblHeaderItemRetVal">Τιμή Πώλησης</string> 
+  <string name="lblHeaderItemQtyLeft">Υπόλοιπο</string>
   <string name="lblHeaderItemLastBuyDate">Ημερομηνία Αγοράς</string> 
   <string name="lblHeaderQty">Υπόλοιπο</string> 
+  
   <string name="btnScan">Σάρωση</string> 
   <string name="btnSave">Αποθήκευση</string> 
   <string name="btnSearch">Προσθήκη Ειδών</string> 

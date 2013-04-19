@@ -5,7 +5,7 @@
         android:id="@+id/layout_checkable_item_info"
         style="@style/fillParent"
         android:layout_width="0dp"
-        android:layout_weight="1.0">
+        android:layout_weight="0.7">
         <TextView
             android:id="@+id/lblHeaderImgItem"
             android:layout_width="40dip"
@@ -34,9 +34,9 @@
                 android:text="@string/lblHeaderItemSaleVal"
                 android:layout_weight="0.3" />
             <TextView
-                android:id="@+id/lblHeaderItemRetVal"
+                android:id="@+id/lblHeaderItemQtyLeft"
                 style="@style/listRowTextViewHeaderStyle"
-                android:text="@string/lblHeaderItemRetVal"
+                android:text="@string/lblHeaderItemQtyLeft"
                 android:layout_weight="0.3" />
             <TextView
                 android:id="@+id/lblHeaderItemLastBuyDate"
@@ -49,7 +49,7 @@
         android:id="@+id/lblHeaderQty"
         android:text="@string/lblHeaderQty"
         style="@style/listRowTextViewHeaderStyle"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="45dp"
         android:layout_width="0dp"
         android:layout_weight="0.2"
         android:layout_gravity="right" />

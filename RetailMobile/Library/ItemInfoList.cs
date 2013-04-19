@@ -13,103 +13,101 @@ using Com.Ianywhere.Ultralitejni12;
 
 namespace RetailMobile.Library
 {
-	public class ItemInfoList : List<ItemInfo>
-	{
-		public static ItemInfoList GetItemInfoList(Context ctx)
-		{
-			ItemInfoList items = new ItemInfoList();
-			using (IConnection conn = Sync.GetConnection(ctx))
-			{
-				//IPreparedStatement ps = conn.PrepareStatement("SELECT item_id, item_cod, item_desc FROM items");
-				IPreparedStatement ps = conn.PrepareStatement("SELECT top 100 id, item_cod, item_desc FROM ritems");
-				
-				IResultSet result = ps.ExecuteQuery();
-				
-				while (result.Next())
-				{
-					ItemInfo item = new ItemInfo();
-					//item.ItemId = Convert.ToInt64(result.GetDouble("item_id"));
-					item.ItemId = result.GetInt("id");
-					item.item_cod = result.GetString("item_cod");
-					item.item_cod = result.GetString("item_desc");
-					
-					items.Add(item);
-				}
-				
-				ps.Close();
-				conn.Release ();
-			}
-			
-			return items;
-		}
-		
-		public static ItemInfoList GetItemInfoList(Context ctx, Criteria c)
-		{
-			ItemInfoList items = new ItemInfoList();
-			using (IConnection conn = Sync.GetConnection(ctx))
-			{
-				//string query = "SELECT item_id, item_cod, item_desc FROM items WHERE 1=1 ";
-				string query = "SELECT id, item_cod, item_desc FROM ritems WHERE 1=1 ";
-				
-				if (c.ItemDesc != "")
-				{
-					query += " AND item_desc like \'" + c.ItemDesc + "%\'";
-				}
-				
-				if (c.Category1 != 0)
-				{
-					//query += " AND item_ctg_id ";
-				}
-				
-				if (c.Category2 != 0)
-				{
-					
-				}
-				
-				/*if (c.RetVal != 0)
+    public class ItemInfoList : List<ItemInfo>
+    {
+        public static ItemInfoList GetItemInfoList(Context ctx)
+        {
+            return GetItemInfoList(ctx, new Criteria());
+        }
+        
+        public static ItemInfoList GetItemInfoList(Context ctx, Criteria c)
+        {
+            ItemInfoList items = new ItemInfoList();
+            using (IConnection conn = Sync.GetConnection(ctx))
+            {
+                //string query = "SELECT item_id, item_cod, item_desc FROM items WHERE 1=1 ";
+                string joinLastDate = "";
+                string fields = "";
+
+                if (c.CstId > 0)
                 {
-                    query += " AND item_ret_val1 = " + c.RetVal;
-                }*/
-				
-				IPreparedStatement ps = conn.PrepareStatement(query);
-				
-				IResultSet result = ps.ExecuteQuery();
-				
-				while (result.Next())
-				{
-					ItemInfo item = new ItemInfo();
-					//item.ItemId = Convert.ToInt64(result.GetDouble("item_id"));
-					item.ItemId = result.GetInt("id");
-					item.item_cod = result.GetString("item_cod");
-					item.item_desc = result.GetString("item_desc");
-					
-					items.Add(item);
-				}
-				
-				ps.Close();
-				conn.Release ();
-			}
-			
-			return items;
-		}
-		
-		public class Criteria
-		{
-			public string ItemDesc;
-			public int Category1;
-			public int Category2;
-			public decimal RetVal;
-			
-			public Criteria()
-			{
-			}
-			public Criteria(string desc, int category1, int category2, decimal retVal)
-			{
-				ItemDesc = desc;
-				Category1 = category1;
-				Category2 = category2;
-				RetVal = retVal;
-			}
-		}
-	}
+                    fields += @",
+    ritemlast.last_date";
+                    joinLastDate = @"
+LEFT OUTER JOIN ritemlast ON ritemlast.item_id = ritems.id AND ritemlast.cst_id = " + c.CstId;
+                }
+
+                string query = @"
+SELECT top 50 
+    ritems.id, 
+    ritems.item_cod, 
+    ritems.item_desc,
+    ritems.item_qty_left " +
+                    fields + @" 
+FROM ritems" +
+                    joinLastDate + @" 
+WHERE 1 = 1 ";
+                
+                if (c.ItemDesc != "")
+                {
+                    query += " AND ritems.item_desc like \'" + c.ItemDesc + "%\'";
+                }
+                
+                if (c.Category1 != 0)
+                {
+                    query += " AND ritems.item_ctg_id = " + c.Category1;
+                }
+                
+                if (c.Category2 != 0)
+                {
+                    query += " AND ritems.item_ctg2_id = " + c.Category2;               
+                }
+                
+                if (c.RetVal != 0)
+                {
+//                    query += " AND ritems.item_qty_left = " + c.RetVal;
+                }
+                
+                IPreparedStatement ps = conn.PrepareStatement(query);
+                
+                IResultSet result = ps.ExecuteQuery();
+                
+                while (result.Next())
+                {
+                    ItemInfo item = new ItemInfo()
+                    {
+                        ItemId = result.GetInt("id"),
+                        item_cod = result.GetString("item_cod"),
+                        ItemDesc = result.GetString("item_desc"),
+                        ItemQtyLeft = Convert.ToDecimal(result.GetDouble("item_qty_left"))
+                    };
+
+                    if (c.CstId > 0)
+                    {
+                        item.ItemLastBuyDate = Common.JavaDateToDatetime(result.GetDate("last_date"));
+                    }
+                    
+                    items.Add(item);
+                }
+                
+                ps.Close();
+                conn.Release();
+            }
+            
+            return items;
+        }
+        
+        public class Criteria
+        {
+            public string ItemDesc;
+            public int Category1;
+            public int Category2;
+            public decimal RetVal;
+            public long CstId;
+            
+            public Criteria()
+            {
+            }
+        }
+    }
 }

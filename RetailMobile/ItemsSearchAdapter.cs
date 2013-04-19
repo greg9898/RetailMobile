@@ -45,7 +45,7 @@ namespace RetailMobile
             if (tbItemCode != null)
                 tbItemCode.Text = item.item_cod;
             if (tbItemDesc != null)
-                tbItemDesc.Text = item.item_desc;
+                tbItemDesc.Text = item.ItemDesc;
             /*if (tbItemLongDesc != null)
                 tbItemLongDesc.Text = item.ItemLongDesc;
             if (tbItemCateg1 != null)

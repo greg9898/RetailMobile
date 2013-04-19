@@ -17,6 +17,7 @@ namespace RetailMobile
     public class ItemsSelectDialog : Dialog
     {
         Activity activity;
+        TransHed transHed;
         private ListView lvItems;
         private EditText tbSearch;
         private EditText tbRetVal;
@@ -25,9 +26,10 @@ namespace RetailMobile
         private Spinner cbCateg2;
         private Dictionary<int, int> _checkedItems = new Dictionary<int, int>();
 
-        public ItemsSelectDialog(Activity context, int theme)
+        public ItemsSelectDialog(Activity context, int theme, TransHed header)
             : base(context, theme)
         {
+            transHed = header;
             activity = context;
             SetTitle(context.GetString(Resource.String.miItems));
             SetContentView(Resource.Layout.dialog_item_search);
@@ -45,12 +47,11 @@ namespace RetailMobile
             tbRetVal.AfterTextChanged += new EventHandler<Android.Text.AfterTextChangedEventArgs>(tbSearch_AfterTextChanged);
             btnClose.Click += new EventHandler(btnCloseItems_Click);
 
-            List<KeyValuePair<int, string>> categ1List;
-            List<KeyValuePair<int, string>> categ2List;
-            DebugAddGategLists(out categ1List, out categ2List);
+            List<KeyValuePair<int, string>> categ1List = AddCategoryList(1);
+            List<KeyValuePair<int, string>> categ2List = AddCategoryList(2);
 
-            categ1List.Insert(0, new KeyValuePair<int, string>(0, "All"));
-            categ2List.Insert(0, new KeyValuePair<int, string>(0, "All"));
+            categ1List.Insert(0, new KeyValuePair<int, string>(0, activity.GetString(Resource.String.SpinnerAll)));
+            categ2List.Insert(0, new KeyValuePair<int, string>(0, activity.GetString(Resource.String.SpinnerAll)));
 
             SpinnerAdapter<int, string> categ1Adapter = new SpinnerAdapter<int, string>(activity, categ1List);
             SpinnerAdapter<int, string> categ2Adapter = new SpinnerAdapter<int, string>(activity, categ2List);
@@ -73,21 +74,17 @@ namespace RetailMobile
             }
         }
 
-        private static void DebugAddGategLists(out List<KeyValuePair<int, string>> categ1List, out List<KeyValuePair<int, string>> categ2List)
+        List<KeyValuePair<int, string>> AddCategoryList(int categTbl)
         {
-            categ1List = new List<KeyValuePair<int, string>>();
-            categ2List = new List<KeyValuePair<int, string>>();
-            for (int i = 1; i < 10; i++)
+            List<KeyValuePair<int, string>> categComboList = new List<KeyValuePair<int, string>>();
+            CategoryList categList = CategoryList.GetCategoryList(activity, categTbl);
+
+            foreach (Category c in categList)
             {
-                if (i % 2 == 0)
-                {
-                    categ1List.Add(new KeyValuePair<int, string>(i, "value " + i));
-                }
-                if (i % 3 == 0)
-                {
-                    categ2List.Add(new KeyValuePair<int, string>(i, "value  " + i));
-                }
+                categComboList.Add(new KeyValuePair<int, string>(c.Id, c.ItemCategDesc));
             }
+
+            return categComboList;
         }
 
         void cbCateg1_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
@@ -116,17 +113,17 @@ namespace RetailMobile
 
         private void ReloadItems()
         {
-            int cbCateg1Value = ((SpinnerAdapter<int, string>)cbCateg1.Adapter).GetSelectedValue(cbCateg1.SelectedItemPosition);
-            int cbCateg2Value = ((SpinnerAdapter<int, string>)cbCateg2.Adapter).GetSelectedValue(cbCateg2.SelectedItemPosition);
+            int cbCateg1Id = ((SpinnerAdapter<int, string>)cbCateg1.Adapter).GetSelectedValue(cbCateg1.SelectedItemPosition);
+            int cbCateg2Id = ((SpinnerAdapter<int, string>)cbCateg2.Adapter).GetSelectedValue(cbCateg2.SelectedItemPosition);
             decimal retVal = 0;
             decimal.TryParse(tbRetVal.Text.Trim(), out retVal);
 
             Log.Debug("ReloadItems tbSearch.Text=", tbSearch.Text);
-            Log.Debug("ReloadItems cbCateg1Value=", cbCateg1Value.ToString());
-            Log.Debug("ReloadItems cbCateg2Value=", cbCateg2Value.ToString());
+            Log.Debug("ReloadItems cbCateg1Value=", cbCateg1Id.ToString());
+            Log.Debug("ReloadItems cbCateg2Value=", cbCateg2Id.ToString());
             Log.Debug("ReloadItems retVal=", retVal.ToString());
 
-            if (cbCateg1Value == 0 & cbCateg2Value == 0 && retVal == 0 && tbSearch.Text == "")
+            if (cbCateg1Id == 0 & cbCateg2Id == 0 && retVal == 0 && tbSearch.Text == "")
             {
                 lvItems.Adapter = new CheckableItemsAdapter(activity, new Library.ItemInfoList());
                 return;
@@ -135,9 +132,10 @@ namespace RetailMobile
             Library.ItemInfoList itemInfoList = Library.ItemInfoList.GetItemInfoList(activity, new Library.ItemInfoList.Criteria()
             {
                 ItemDesc = tbSearch.Text,
-                Category1 = cbCateg1Value,
-                Category2 = cbCateg2Value,
-                RetVal = retVal
+                Category1 = cbCateg1Id,
+                Category2 = cbCateg2Id,
+                RetVal = retVal,
+                CstId = transHed.CstId
             });
 
             CheckableItemsAdapter adapterItems = new CheckableItemsAdapter(activity, itemInfoList);
