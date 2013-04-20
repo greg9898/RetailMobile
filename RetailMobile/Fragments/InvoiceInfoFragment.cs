@@ -100,8 +100,6 @@ namespace RetailMobile
             }
             header.HtrnExpl = tbHtrnExpln.Text;
             header.TransDate = DateTime.Parse(tbHtrnDate.Text);
-            header.HtrnNetVal = double.Parse(tbHtrnNetValue.Text);
-            header.HtrnVatVal = double.Parse(tbHtrnVatValue.Text);
             
             header.Save(Activity);
             InitInvoiceScreen();
@@ -114,7 +112,6 @@ namespace RetailMobile
             {
                 FillInvoiceFields();
                 LoadCustomerData(header.CstId);
-                LoadDetailsAdapter();
             }
         }
 
@@ -159,6 +156,8 @@ namespace RetailMobile
             if (tbCustDesc != null)
             {
                 FillCustomerFields(c);
+                
+                LoadDetailsAdapter();
             }
         }
 
@@ -177,7 +176,6 @@ namespace RetailMobile
 
         void FillHeaderCalcValues()
         {
-            header.CalcValues();
             tbHtrnNetValue.Text = header.HtrnNetVal.ToString(PreferencesUtil.DecimalFormat);
             tbHtrnVatValue.Text = header.HtrnVatVal.ToString(PreferencesUtil.DecimalFormat);
             tbHtrnTotValue.Text = header.HtrnTotValue.ToString(PreferencesUtil.DecimalFormat);
@@ -189,7 +187,7 @@ namespace RetailMobile
             detailsAdapter.QtysChangedEvent += () => 
             {
                 FillHeaderCalcValues();
-
+                detailsAdapter.NotifyDataSetChanged();
             };
 
             lvDetails.SetAdapter(detailsAdapter);

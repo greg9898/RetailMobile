@@ -23,7 +23,7 @@ namespace RetailMobile.Library
             {
                 IPreparedStatement ps = conn.PrepareStatement(@"
 SELECT 
-    rtrans_hed.id, rtrans_hed.cust_id, trans_date, docnum, htrn_explanation
+    rtrans_hed.id, rtrans_hed.cust_id, trans_date, docnum, htrn_explanation,
     rcustomer.cst_desc  
 FROM rtrans_hed
 LEFT OUTER JOIN rcustomer ON rcustomer.id = rtrans_hed.cust_id ");

@@ -40,6 +40,8 @@
   <string name="lblItemQtyLeft">Υπόλοιπο</string> 
   <string name="lblItemSaleVal">Τιμή Πώλησης:</string> 
   <string name="lblDetailsCaption">Details</string> 
+  <string name="lblItemInfoCaption">Item Info</string>
+  <string name="lblItemImage">Item Image</string> 
   
  <!--   item header   --> 
   <string name="lblHeaderItemCode">Κωδικός</string> 

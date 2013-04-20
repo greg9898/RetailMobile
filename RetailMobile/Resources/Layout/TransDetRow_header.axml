@@ -22,17 +22,17 @@
         android:minWidth="20dp"
         android:layout_weight="0.5" />
     <TextView
-        android:id="@+id/lblDtrn_unit_price"
+        android:id="@+id/lblDtrn_disc_line1"
         style="@style/listRowTextViewHeaderStyle"
-        android:text="@string/lblDtrn_unit_price"
+        android:text="@string/lblDtrn_disc_line1"
         android:layout_width="30dp"
         android:layout_marginRight="20dp"
         android:minWidth="20dp"
         android:layout_weight="0.5" />
     <TextView
-        android:id="@+id/lblDtrn_disc_line1"
+        android:id="@+id/lblDtrn_unit_price"
         style="@style/listRowTextViewHeaderStyle"
-        android:text="@string/lblDtrn_disc_line1"
+        android:text="@string/lblDtrn_unit_price"
         android:layout_width="30dp"
         android:layout_marginRight="20dp"
         android:minWidth="20dp"

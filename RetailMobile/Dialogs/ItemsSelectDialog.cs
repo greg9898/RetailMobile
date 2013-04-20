@@ -129,7 +129,7 @@ namespace RetailMobile
                 return;
             }
 
-            Library.ItemInfoList itemInfoList = Library.ItemInfoList.GetItemInfoList(activity, new Library.ItemInfoList.Criteria()
+            ItemInfoList itemInfoList = ItemInfoList.GetItemInfoList(activity, new ItemInfoList.Criteria()
             {
                 ItemDesc = tbSearch.Text,
                 Category1 = cbCateg1Id,

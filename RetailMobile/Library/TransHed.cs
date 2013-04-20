@@ -25,11 +25,46 @@ namespace RetailMobile.Library
         /// <summary>
         /// no taxes
         /// </summary>
-        public double HtrnNetVal { get; set; }
+        public double HtrnNetVal
+        {
+            get
+            { 
+                if (TransDetList == null)
+                {
+                    return 0;
+                }
+
+                double htrnNetVal = 0;
+                
+                foreach (TransDet d in TransDetList)
+                {
+                    htrnNetVal += d.DtrnNetValue;
+                }
+
+                return htrnNetVal;
+            }
+        }
         /// <summary>
         /// value added tax
         /// </summary>
-        public double HtrnVatVal { get; set; }
+        public double HtrnVatVal
+        {
+            get
+            { 
+                if (TransDetList == null)
+                {
+                    return 0;
+                }
+
+                double htrnVatVal = 0;
+                
+                foreach (TransDet d in TransDetList)
+                {
+                    htrnVatVal += d.DtrnVatValue;
+                }
+                return htrnVatVal;
+            }
+        }
         
         public DateTime HtrnEntryDate { get; set; }
         
@@ -38,24 +73,7 @@ namespace RetailMobile.Library
         public TransDetList TransDetList { get; set; }
         
         public string CstName{ get; set; }
-        
-        public void CalcValues()
-        {
-            HtrnNetVal = 0;
-            HtrnVatVal = 0;
-            
-            if (TransDetList == null)
-            {
-                return;
-            }
-            
-            foreach (TransDet d in TransDetList)
-            {
-                HtrnNetVal += d.DtrnNetValue;
-                HtrnVatVal += d.DtrnVatValue;
-            }
-        }
-        
+                
         #region Customer Info
         public string CustCod;
         public string CustName;
@@ -186,7 +204,6 @@ WHERE htrn_id = :htrn_id ");
                 transHed.TransDetList.Add(d);
             }
 
-            transHed.CalcValues();
             
             result.Close();
             ps.Close();

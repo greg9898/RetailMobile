@@ -21,20 +21,8 @@
         android:minWidth="20dp"
         android:layout_weight="0.5" />
     <EditText
-        android:id="@+id/tbDtrn_unit_price"
-        android:inputType="numberDecimal"
-        style="@style/myEditTextStyle"
-        android:layout_width="30dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="20dp"
-        android:minWidth="20dp"
-        android:layout_weight="0.5" />
-    <EditText
         android:id="@+id/tbDtrn_disc_line1"
         android:inputType="numberDecimal"
-        android:textStyle="bold"
-        android:focusable="false"
         style="@style/myEditTextStyle"
         android:layout_width="30dp"
         android:layout_height="wrap_content"
@@ -42,27 +30,24 @@
         android:layout_marginRight="20dp"
         android:minWidth="20dp"
         android:layout_weight="0.5" />
-    <EditText
-        android:id="@+id/tbDtrn_net_value"
-        android:inputType="numberDecimal"
-        android:textStyle="bold"
-        android:focusable="false"
-        style="@style/myEditTextStyle"
+    <TextView
+        android:id="@+id/lblDtrn_unit_price"
+        style="@style/listRowTextViewStyle"
         android:layout_width="30dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginRight="20dp"
         android:minWidth="20dp"
         android:layout_weight="0.5" />
-    <EditText
-        android:id="@+id/tbDtrn_vat_value"
-        android:inputType="numberDecimal"
-        android:textStyle="bold"
-        android:state_enabled="false"
-        style="@style/myEditTextStyle"
+    <TextView
+        android:id="@+id/lblDtrn_net_value"
+        style="@style/listRowTextViewStyle"
         android:layout_width="30dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
+        android:minWidth="20dp"
+        android:layout_weight="0.5" />
+    <TextView
+        android:id="@+id/lblDtrn_vat_value"
+        style="@style/listRowTextViewStyle"
+        android:layout_width="30dp"
         android:layout_marginRight="20dp"
         android:minWidth="20dp"
         android:layout_weight="0.5" />
