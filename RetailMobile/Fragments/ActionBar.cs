@@ -14,10 +14,14 @@ namespace RetailMobile.Fragments
 {
     public class ActionBar : Android.Support.V4.App.Fragment
     {
+		public delegate void SettingsCLickedDelegate();
+		public event SettingsCLickedDelegate SettingsClicked;
+
         public delegate void SyncCLickedDelegate();
         public event SyncCLickedDelegate SyncClicked;
 
         Button btnSync;
+		Button btnSettings;
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
             base.OnActivityCreated(savedInstanceState);
@@ -28,6 +32,10 @@ namespace RetailMobile.Fragments
             View v = inflater.Inflate(Resource.Layout.main_action_bar, container, true);
             btnSync = v.FindViewById<Button>(Resource.Id.btnSync);
             btnSync.Click += new EventHandler(btnSync_Click);
+
+			btnSettings = v.FindViewById<Button>(Resource.Id.btnSettings);
+			btnSettings.Click += new EventHandler(btnSettings_Click);
+
             return v;
         }
 
@@ -36,5 +44,12 @@ namespace RetailMobile.Fragments
             if (SyncClicked != null)
                 SyncClicked();
         }
+
+		void btnSettings_Click(object sender, EventArgs e)
+		{
+			if (SettingsClicked != null)
+				SettingsClicked();
+		}
+
     }
 }

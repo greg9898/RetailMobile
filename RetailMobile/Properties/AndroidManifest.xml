@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-	<uses-sdk />
-	<application android:debuggable="true" android:theme="@android:style/Theme.Light"></application>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="RetailMobile" android:versionName="1.0" android:versionCode="1">
+	<uses-sdk android:minSdkVersion="12" />
+	<application android:debuggable="true" android:theme="@android:style/Theme.Light" android:label="RetailMobile" android:icon="@drawable/icon"></application>
 	<uses-sdk android:minSdkVersion="10" android:targetSdkVersion="12" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

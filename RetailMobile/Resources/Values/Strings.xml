@@ -78,4 +78,8 @@
   <string name="btnList">Λίστα</string> 
   <string name="btnClose">Κλείσιμο</string> 
   <string name="btnOK">OK</string> 
+  <string name="lblIP">IP</string> 
+  <string name="lblPort">Port</string> 
+  <string name="lblSyncModel">Sync Model</string> 
+  <string name="Settings">Settings</string> 
  </resources>

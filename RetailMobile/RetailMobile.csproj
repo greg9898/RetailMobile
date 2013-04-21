@@ -116,6 +116,12 @@
     <Compile Include="Common.cs" />
     <Compile Include="Library\Category.cs" />
     <Compile Include="Library\CategoryList.cs" />
+    <Compile Include="Fragments\SettingsFragment.cs" />
+    <AndroidResource Include="Resources\Layout\SettingsFragment.axml" />
+    <AndroidResource Include="Resources\Layout\items_action_bar.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <Compile Include="Fragments\ItemActionBar.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable\my_edit_text_selector2.xml" />

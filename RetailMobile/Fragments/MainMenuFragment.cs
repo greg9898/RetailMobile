@@ -33,6 +33,10 @@ namespace RetailMobile
         {
             base.OnActivityCreated(savedInstanceState);
             View v = inflater.Inflate(Resource.Layout.FragmentMainMenu, container, false);
+			//Android.Support.V4.App.FragmentManager
+			RetailMobile.Fragments.ActionBar bar = (RetailMobile.Fragments.ActionBar)this.FragmentManager.FindFragmentById(Resource.Id.ActionBarMain);
+			//RetailMobile.Fragments.ActionBar bar = v.FindViewById<RetailMobile.Fragments.ActionBar>(Resource.Id.ActionBarMain);
+			bar.SettingsClicked += new RetailMobile.Fragments.ActionBar.SettingsCLickedDelegate(SettingsClicked);
 
             btnAddInvoice = v.FindViewById<Button>(Resource.Id.btnAddInvoice);
             btnListInvoices = v.FindViewById<Button>(Resource.Id.btnListInvoice); ;
@@ -51,6 +55,21 @@ namespace RetailMobile
 
             return v;
         }
+
+		void SettingsClicked()
+		{
+			this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Gone;
+
+			SettingsFragment settings = new SettingsFragment();
+			var ft = FragmentManager.BeginTransaction();
+			ft.Replace(Resource.Id.detailInfo_fragment, settings);
+			ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+			ft.Commit();
+
+			//RetailMobile.Fragments.ItemActionBar bar = (RetailMobile.Fragments.ItemActionBar)this.FragmentManager.FindFragmentById(Resource.Id.ActionBar);
+			//bar.AddButtonRight(1,"save",0);
+
+		}
 
         void btnListInvoices_Click(object sender, EventArgs e)
         {

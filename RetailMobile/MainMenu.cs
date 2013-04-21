@@ -19,12 +19,12 @@ namespace RetailMobile
         protected override void OnCreate(Bundle bundle)
         {   
             base.OnCreate(bundle);
-            //Sync.CreateDatabase(this);
+			PreferencesUtil.LoadSettings(this);
 			Sync.GenerateDatabase(this);
             Sync.Synchronize(this);
                         
             SetContentView(Resource.Layout.MainMenu);
-            RetailMobile.Fragments.ActionBar myActionBar = (RetailMobile.Fragments.ActionBar)SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
+            RetailMobile.Fragments.ActionBar myActionBar = (RetailMobile.Fragments.ActionBar)SupportFragmentManager.FindFragmentById(Resource.Id.ActionBarMain);
             myActionBar.SyncClicked += new Fragments.ActionBar.SyncCLickedDelegate(myActionBar_SyncClicked);
         }
 

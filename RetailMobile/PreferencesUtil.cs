@@ -1,7 +1,11 @@
+using Android.Content;
+
 namespace RetailMobile
 {
     public class PreferencesUtil
     {
+		private static string APP_SHARED_PREFS = "com.alphamobile.RetailPreferences";
+
         public static string IP = "77.78.32.118";
         public static int Port = 2439;
         public static string SyncModel = "RetailMobile2";
@@ -12,5 +16,27 @@ namespace RetailMobile
         /// dd.mm.yyyy
         /// </summary>
         public static string DateFormatDateOnly = "dd.MM.yyyy";
+
+		public static void SavePreferences(Context context)
+		{
+			ISharedPreferences appSharedPrefs = context.GetSharedPreferences(
+				APP_SHARED_PREFS,FileCreationMode.Private);
+			ISharedPreferencesEditor editor = appSharedPrefs.Edit();
+			editor.PutString("IP",IP);
+			editor.PutInt("Port",Port);
+			editor.PutString("SyncModel",SyncModel);
+			editor.Commit();
+		}
+
+		public static void LoadSettings(Context context) 
+		{
+			ISharedPreferences appSharedPrefs = context.GetSharedPreferences(
+				APP_SHARED_PREFS,FileCreationMode.Private);
+
+			IP = appSharedPrefs.GetString("IP","77.78.32.118");
+			Port = appSharedPrefs.GetInt("Port",2439);
+			SyncModel = appSharedPrefs.GetString("SyncModel","RetailMobile2");
+
+		}
     }
 }

@@ -14,98 +14,98 @@ using Android.Util;
 
 namespace RetailMobile.Library
 {
-    public class ItemInfo
-    {
-        public int ItemId { get; set; }
-        
-        public int ItemQty
-        {
-            get;
-            set;
-        }
-        
-        public string item_cod{ get; set; }
-        
-        /// <summary>
-        /// Item name
-        /// </summary>
-        /// <value>The item desc.</value>
-        public string ItemDesc { get; set; }
-        
-        public string item_long_desc { get; set; }
-        
-        /// <summary>
-        /// Unit price
-        /// </summary>
-        /// <value>The item_sale_val1.</value>
-        public decimal ItemSaleVal1 { get; set; }
-        
-        public decimal ItemQtyLeft { get; set; }
-        
-        public int ItemVatId { get; set; }
-        
-        public DateTime ItemLastBuyDate{ get; set; }
-        
-        public ItemInfo()
-        {
-            ItemQty = 1;
-        }
-        
-        public static ItemInfo GetItem(Context ctx, decimal itemID)
-        {
-            ItemInfo info = new ItemInfo();
-            
-            using (IConnection conn = Sync.GetConnection(ctx))
-            {
-                /*IPreparedStatement ps = conn.PrepareStatement(@"SELECT item_id, 
-item_cod, 
-item_desc, 
-item_long_des, 
-item_ret_val1, 
+	public class ItemInfo
+	{
+		public int ItemId { get; set; }
+		
+		public int ItemQty
+		{
+			get;
+			set;
+		}
+		
+		public string item_cod{ get; set; }
+		
+		/// <summary>
+		/// Item name
+		/// </summary>
+		/// <value>The item desc.</value>
+		public string ItemDesc { get; set; }
+		
+		public string item_long_desc { get; set; }
+		
+		/// <summary>
+		/// Unit price
+		/// </summary>
+		/// <value>The item_sale_val1.</value>
+		public decimal ItemSaleVal1 { get; set; }
+		
+		public decimal ItemQtyLeft { get; set; }
+		
+		public int ItemVatId { get; set; }
+		
+		public DateTime ItemLastBuyDate{ get; set; }
+		
+		public ItemInfo()
+		{
+			ItemQty = 1;
+		}
+		
+		public static ItemInfo GetItem(Context ctx, decimal itemID)
+		{
+			ItemInfo info = new ItemInfo();
+			
+			using (IConnection conn = Sync.GetConnection(ctx))
+			{
+				/*IPreparedStatement ps = conn.PrepareStatement(@"SELECT item_id,
+item_cod,
+item_desc,
+item_long_des,
+item_ret_val1,
 item_sale_val1 ,
 item_buy_val1
 FROM items WHERE item_id = :ItemID");*/
-                
-                IPreparedStatement ps = conn.PrepareStatement(@"SELECT 
-id, 
-item_cod, 
-item_desc, 
-item_alter_desc, 
-unit_price, 
+				
+				IPreparedStatement ps = conn.PrepareStatement(@"SELECT
+id,
+item_cod,
+item_desc,
+item_alter_desc,
+unit_price,
 item_qty_left ,
 item_vat,
 item_ctg_id,
 item_ctg_disc
 FROM ritems WHERE id = :ItemID");
-                ps.Set("ItemID", itemID.ToString());
-                
-                IResultSet result = ps.ExecuteQuery();
-                
-                if (result.Next())
-                {
-                    /*info.ItemId = Convert.ToInt64(result.GetDouble("item_id"));
-                    info.item_cod = result.GetString("item_cod");
-                    info.item_desc = result.GetString("item_desc");
-                    info.item_long_desc = result.GetString("item_long_des");
-                    info.item_ret_val1 = Convert.ToDecimal(result.GetDouble("item_ret_val1"));
-                    info.item_sale_val1 = Convert.ToDecimal(result.GetDouble("item_sale_val1"));
-                    info.item_buy_val1 = Convert.ToDecimal(result.GetDouble("item_buy_val1"));*/
-                    //info.ItemId = Convert.ToInt64(result.GetDouble("id"));
-                    info.ItemId = result.GetInt("id");
-                    info.item_cod = result.GetString("item_cod");
-                    info.ItemDesc = result.GetString("item_desc");
-                    info.item_long_desc = result.GetString("item_alter_desc");
-                    info.ItemSaleVal1 = Convert.ToDecimal(result.GetDouble("unit_price"));
-                    info.ItemQtyLeft = Convert.ToDecimal(result.GetDouble("item_qty_left"));
-                    info.ItemVatId = result.GetInt("item_vat");
-                    Log.Debug("item_vat", "item_vat=" + info.ItemVatId);
-                }
-                
-                ps.Close();
-                conn.Release();
-            }
-            
-            return info;
-        }
-    }
+				ps.Set("ItemID", itemID.ToString());
+				
+				IResultSet result = ps.ExecuteQuery();
+				
+				if (result.Next())
+				{
+					/*info.ItemId = Convert.ToInt64(result.GetDouble("item_id"));
+info.item_cod = result.GetString("item_cod");
+info.item_desc = result.GetString("item_desc");
+info.item_long_desc = result.GetString("item_long_des");
+info.item_ret_val1 = Convert.ToDecimal(result.GetDouble("item_ret_val1"));
+info.item_sale_val1 = Convert.ToDecimal(result.GetDouble("item_sale_val1"));
+info.item_buy_val1 = Convert.ToDecimal(result.GetDouble("item_buy_val1"));*/
+					//info.ItemId = Convert.ToInt64(result.GetDouble("id"));
+					info.ItemId = result.GetInt("id");
+					info.item_cod = result.GetString("item_cod");
+					info.ItemDesc = result.GetString("item_desc");
+					info.item_long_desc = result.GetString("item_alter_desc");
+					info.ItemSaleVal1 = Convert.ToDecimal(result.GetDouble("unit_price"));
+					info.ItemQtyLeft = Convert.ToDecimal(result.GetDouble("item_qty_left"));
+					info.ItemVatId = result.GetInt("item_vat");
+					Log.Debug("item_vat", "item_vat=" + info.ItemVatId);
+				}
+				
+				ps.Close();
+				conn.Release();
+			}
+			
+			return info;
+		}
+	}
 }
