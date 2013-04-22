@@ -1,72 +1,66 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Com.Ianywhere.Ultralitejni12;
 using Android.Util;
+using Com.Ianywhere.Ultralitejni12;
 
 namespace RetailMobile.Library
 {
-	public class CustomerInfoList : List<CustomerInfo>
-	{
-		public static CustomerInfoList GetCustomerInfoList(Context ctx, Criteria crit)
-		{
-			CustomerInfoList customers = new CustomerInfoList();
+    public class CustomerInfoList : List<CustomerInfo>
+    {
+        public static CustomerInfoList GetCustomerInfoList(Context ctx, Criteria crit)
+        {
+            CustomerInfoList customers = new CustomerInfoList();
 			
-			using (IConnection conn = Sync.GetConnection(ctx))
-			{
-				string query = @"
+            using (IConnection conn = Sync.GetConnection(ctx))
+            {
+                string query = @"
 SELECT TOP 100 id, cst_cod, cst_desc 
 FROM rcustomer
 WHERE 1=1 ";
-				if (crit.CustCode != "")
-				{
-					query += " AND cst_cod like \'" + crit.CustCode + "%\'";
-				}
+                if (crit.CustCode != "")
+                {
+                    query += " AND cst_cod like \'" + crit.CustCode + "%\'";
+                }
 				
-				if (crit.CustName != "")
-				{
-					query += " AND cst_desc like \'" + crit.CustName + "%\'";
-				}
+                if (crit.CustName != "")
+                {
+                    query += " AND cst_desc like \'" + crit.CustName + "%\'";
+                }
 				
-				Log.Debug("GetCustomerInfoList", query);
-				IPreparedStatement ps = conn.PrepareStatement(query);
-				IResultSet result = ps.ExecuteQuery();
+                Log.Debug("GetCustomerInfoList", query);
+                IPreparedStatement ps = conn.PrepareStatement(query);
+                IResultSet result = ps.ExecuteQuery();
 				
-				while (result.Next())
-				{
-					CustomerInfo customer = new CustomerInfo();
-					customer.CustID = result.GetInt("id");
-					customer.Code = result.GetString("cst_cod");
-					customer.Name = result.GetString("cst_desc");
+                while (result.Next())
+                {
+                    CustomerInfo customer = new CustomerInfo();
+                    customer.CustID = result.GetInt("id");
+                    customer.Code = result.GetString("cst_cod");
+                    customer.Name = result.GetString("cst_desc");
 					
-					customers.Add(customer);
-				}
+                    customers.Add(customer);
+                }
 				
-				ps.Close();
-			}
+                ps.Close();
+            }
 			
-			return customers;
-		}
+            return customers;
+        }
 		
-		public class Criteria
-		{
-			public string CustName;
-			public string CustCode;
+        public class Criteria
+        {
+            public string CustName;
+            public string CustCode;
 			
-			public Criteria() { }
-			public Criteria(string custName, string custCode)
-			{
-				CustName = custName;
-				CustCode = custCode;
-			}
-		}
-	}
+            public Criteria()
+            {
+            }
+            public Criteria(string custName, string custCode)
+            {
+                CustName = custName;
+                CustCode = custCode;
+            }
+        }
+    }
 }

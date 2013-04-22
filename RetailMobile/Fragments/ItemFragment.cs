@@ -56,11 +56,14 @@ namespace RetailMobile
         {
             ImageView myImage = new ImageView(Activity);
             myImage.SetImageResource(Resource.Drawable.night);
-//            myImage.Click - close
 
             Dialog dlgImg = new Dialog(Activity);
             dlgImg.Window.RequestFeature(WindowFeatures.NoTitle);
             dlgImg.SetContentView(myImage);
+            
+            myImage.Click += (s,ee) => {
+                dlgImg.Dismiss();
+            };
             dlgImg.Show();
         }
     }

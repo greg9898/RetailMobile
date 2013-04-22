@@ -22,7 +22,8 @@
             android:textColor="@android:color/black" />
         <EditText
             android:id="@+id/tbSearch"
-            style="@style/fillWidth"
+            style="@style/myEditTextStyle"
+            android:layout_height="wrap_content"
             android:layout_below="@id/lblItemName" />
         <TextView
             android:id="@+id/lblItemRetVal"
@@ -33,7 +34,8 @@
         <EditText
             android:id="@+id/tbRetVal"
             android:inputType="numberDecimal"
-            style="@style/fillWidth"
+            style="@style/myEditTextStyle"
+            android:layout_height="wrap_content"
             android:layout_below="@id/lblItemRetVal" />
         <TextView
             android:id="@+id/lblItemCategory1"
@@ -44,7 +46,10 @@
         <Spinner
             android:id="@+id/cbCateg1"
             android:layout_below="@id/lblItemCategory1"
-            style="@style/fillWidth" />
+            style="@style/mySpinnerStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown" />
         <TextView
             android:id="@+id/lblItemCategory2"
             style="@style/fillWidth"
@@ -54,7 +59,22 @@
         <Spinner
             android:id="@+id/cbCateg2"
             android:layout_below="@id/lblItemCategory2"
-            style="@style/fillWidth" />
+            style="@style/mySpinnerStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown" />
+        <TextView
+            android:id="@+id/lblItemSelectedInfo"
+            style="@style/fillWidth"
+            android:text=""
+            android:layout_below="@id/cbCateg2"
+            android:textColor="@android:color/black" />
+        <ImageView
+            android:id="@+id/imgItemSelected"
+            style="@style/fillWidth"
+            android:gravity="left|top"
+            android:layout_below="@id/lblItemSelectedInfo"
+            android:layout_above="@id/btnOK" />
         <Button
             android:id="@+id/btnClose"
             style="@style/menuButtonStyle"
