@@ -15,7 +15,7 @@
 	          class="RetailMobile.Fragments.ActionBar"
 	          android:id="@+id/ActionBarMain"
 	          android:layout_width="match_parent"
-	          android:layout_height="50dp"/>
+	          android:layout_height="wrap_content"/>
 	          
 	  	<fragment
 	        class="RetailMobile.MainMenuFragment"
@@ -34,7 +34,7 @@
           class="RetailMobile.Fragments.ActionBar"
           android:id="@+id/ActionBar"
           android:layout_width="match_parent"          
-          android:layout_height="50dp"/>
+          android:layout_height="wrap_content"/>
           
 		<LinearLayout 
 			android:orientation="horizontal"

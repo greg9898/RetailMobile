@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="action_bar_height">47dp</dimen>
+    <dimen name="action_bar_height">44dp</dimen>
     <dimen name="action_bar_button_height">47dp</dimen>
     <dimen name="action_bar_button_width">50dp</dimen>
-    <dimen name="action_bar_button_top_margin">0dp</dimen>
-    <dimen name="action_bar_button_bottom_margin">0dp</dimen>
-    <dimen name="action_bar_button_left_margin">0dp</dimen>
-    <dimen name="action_bar_button_right_margin">0dp</dimen>
+    <dimen name="action_bar_button_top_margin">2dp</dimen>
+    <dimen name="action_bar_button_bottom_margin">2dp</dimen>
+    <dimen name="action_bar_button_left_margin">3dp</dimen>
+    <dimen name="action_bar_button_right_margin">3dp</dimen>
   <dimen name="button_corners_radius">2dp</dimen>
 </resources>

@@ -8,10 +8,9 @@
         android:id="@+id/invoiceHeader"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_margin="2dp">
-        <TextView
-            style="@style/headerText"
-            android:text="@string/lblInvoice" />
+       
         <Button
             style="@style/menuButtonStyle"
             android:id="@+id/btnNew"

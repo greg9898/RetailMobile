@@ -122,8 +122,16 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <Compile Include="Fragments\ItemActionBar.cs" />
-    <Compile Include="Library\Statistic.cs" />
-    <Compile Include="Library\StatisticList.cs" />
+    <AndroidResource Include="Resources\Drawable\add_48.png" />
+    <AndroidResource Include="Resources\Drawable\save_48.png" />
+    <AndroidResource Include="Resources\Drawable\settings_48.png" />
+    <AndroidResource Include="Resources\Drawable\sync_48.png" />
+    <AndroidResource Include="Resources\Drawable\menu_button_background.xml" />
+    <AndroidResource Include="Resources\Drawable\menu_button_background_pressed.xml" />
+    <AndroidResource Include="Resources\Drawable\menu_button_selector.xml" />
+    <AndroidResource Include="Resources\Drawable\customers_64.png" />
+    <AndroidResource Include="Resources\Drawable\invoice_64.png" />
+    <AndroidResource Include="Resources\Drawable\items_64.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable\my_edit_text_selector2.xml" />
@@ -367,10 +375,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <ProjectReference Include="..\GraphView\GraphView.csproj">
-      <Project>{6FEBD275-0894-4D34-8DC3-AC562AA83437}</Project>
-      <Name>GraphView</Name>
-    </ProjectReference>
-  </ItemGroup>
 </Project>

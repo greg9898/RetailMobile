@@ -15,7 +15,7 @@
 	          class="RetailMobile.Fragments.ActionBar"
 	          android:id="@+id/ActionBarMain"
 	          android:layout_width="match_parent"
-	          android:layout_height="50dp"/>
+	          android:layout_height="@dimen/action_bar_height"/>
 	          
 	  	<fragment
 	        class="RetailMobile.MainMenuFragment"
@@ -25,32 +25,46 @@
 	</LinearLayout>
 	
 	<LinearLayout 
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="0dp"
     android:layout_height="fill_parent"
-    android:layout_weight="0.7"
-    >
-    	<fragment
+    android:layout_weight="0.7">
+    
+	        <LinearLayout 			
+		    android:layout_width="0dp"
+		    android:layout_height="fill_parent"
+		    android:orientation="vertical"
+		    android:layout_weight="1">
+		    
+		    <fragment
+          class="RetailMobile.Fragments.ItemActionBar"
+          android:id="@+id/ActionBarList"
+          android:layout_width="match_parent"          
+          android:layout_height="@dimen/action_bar_height"/>
+		    <FrameLayout
+		        	android:layout_width="match_parent"
+		        	android:layout_height="match_parent"		        	
+		        	android:id="@+id/details_fragment" />	
+	        </LinearLayout>   
+	        
+	        <LinearLayout 			
+		    android:layout_width="0dp"
+		    android:layout_height="fill_parent"
+		    android:orientation="vertical"
+		    android:layout_weight="2">
+		    
+		    <fragment
           class="RetailMobile.Fragments.ItemActionBar"
           android:id="@+id/ActionBar"
           android:layout_width="match_parent"          
-          android:layout_height="50dp"/>
-          
-		<LinearLayout 
-			android:orientation="horizontal"
-		    android:layout_width="fill_parent"
-		    android:layout_height="fill_parent">
-		    	<FrameLayout
-		        	android:layout_width="0dp"
-		        	android:layout_height="match_parent"
-		        	android:layout_weight="1"
-		        	android:id="@+id/details_fragment" />
+          android:layout_height="@dimen/action_bar_height"/>
+		    	
 			    <FrameLayout
-			        android:layout_width="0dp"
-			        android:layout_height="match_parent"
-			        android:layout_weight="2"
+			        android:layout_width="match_parent"
+			        android:layout_height="match_parent"			        
 			        android:id="@+id/detailInfo_fragment" />
 	        </LinearLayout>
+	        
         </LinearLayout>
 
   </LinearLayout>

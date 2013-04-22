@@ -6,6 +6,10 @@
   <color name="dark_blue">#22708A</color>
   <color name="yellow">#F7FFB0</color>
   <color name="disabled_background">#CBCCC0</color>
-  
+  <color name="action_bar1">#8FBBAF</color>
+  <color name="action_bar2">#8FBBAF</color>
+  <color name="menu_button1">#8FBBAF</color>
+  <color name="menu_button2">#8FBBAF</color>
+  <color name="action_bar_text">#FFFFFF</color>
 
 </resources>

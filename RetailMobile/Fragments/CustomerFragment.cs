@@ -4,7 +4,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using RetailMobile.Library;
-using Com.Jjoe64.Graphview;
+//using Com.Jjoe64.Graphview;
 using Android.Util;
 
 namespace RetailMobile
@@ -37,7 +37,7 @@ namespace RetailMobile
             tbCustName.Text = customer.Name;
 
 
-            StatisticList statList = StatisticList.GetStatisticList(Activity, customer.CustID);
+        /*    StatisticList statList = StatisticList.GetStatisticList(Activity, customer.CustID);
 
             // init example series data
             GraphViewSeries exampleSeries = new GraphViewSeries(new GraphView.GraphViewData[] {
@@ -57,7 +57,7 @@ namespace RetailMobile
             graphView.Orientation = Orientation.Horizontal;
 
             LinearLayout layout = (LinearLayout)view.FindViewById(Resource.Id.graph1);
-            layout.AddView(graphView);
+            layout.AddView(graphView);*/
           
 //            // custom static labels
 //            graphView.SetHorizontalLabels(new String[]

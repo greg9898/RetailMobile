@@ -15,11 +15,8 @@ namespace RetailMobile
 {
     public class MainMenuFragment : Android.Support.V4.App.Fragment
     {
-        Button btnAddInvoice;
         Button btnListInvoices;
-        Button btnAddItem;
         Button btnListItems;
-        Button btnAddCustomer;
         Button btnListCustomers;
         DetailsFragment details;
 
@@ -38,20 +35,14 @@ namespace RetailMobile
 			//RetailMobile.Fragments.ActionBar bar = v.FindViewById<RetailMobile.Fragments.ActionBar>(Resource.Id.ActionBarMain);
 			bar.SettingsClicked += new RetailMobile.Fragments.ActionBar.SettingsCLickedDelegate(SettingsClicked);
 
-            btnAddInvoice = v.FindViewById<Button>(Resource.Id.btnAddInvoice);
-            btnListInvoices = v.FindViewById<Button>(Resource.Id.btnListInvoice); ;
-            btnAddItem = v.FindViewById<Button>(Resource.Id.btnAddItem); ;
-            btnListItems = v.FindViewById<Button>(Resource.Id.btnListItems); ;
-            btnAddCustomer = v.FindViewById<Button>(Resource.Id.btnAddCustomer); ;
-            btnListCustomers = v.FindViewById<Button>(Resource.Id.btnListCustomers);
+            
+			btnListInvoices = v.FindViewById<Button>(Resource.Id.btnAddInvoice);
+			btnListItems = v.FindViewById<Button>(Resource.Id.btnAddItem);
+			btnListCustomers = v.FindViewById<Button>(Resource.Id.btnAddCustomer);
 
-            btnAddInvoice.Click += new EventHandler(btnAddInvoice_Click);
-            btnListInvoices.Click += new EventHandler(btnListInvoices_Click);
-            btnAddItem.Click += new EventHandler(btnAddItem_Click);
+			btnListInvoices.Click += new EventHandler(btnListInvoices_Click);
             btnListItems.Click += new EventHandler(btnListItems_Click);
-            btnAddCustomer.Click += new EventHandler(btnAddCustomer_Click);
             btnListCustomers.Click += new EventHandler(btnListCustomers_Click);
-
 
             return v;
         }

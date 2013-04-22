@@ -16,6 +16,8 @@ namespace RetailMobile
 {
     internal class DetailsFragment : Android.Support.V4.App.ListFragment
     {
+		const int ADD_BUTTON = 12287;
+		RetailMobile.Fragments.ItemActionBar actionBar;
         System.Collections.ICollection _list = null;
         private int _currentObjId = -1;
         bool _isDualPane = true;
@@ -29,6 +31,33 @@ namespace RetailMobile
         {
             get { return Arguments.GetInt("idLvl1", -1); }
         }
+
+		public override void OnViewCreated (View p0, Bundle p1)
+		{
+			base.OnViewCreated (p0, p1);
+
+			actionBar = (RetailMobile.Fragments.ItemActionBar)((Android.Support.V4.App.FragmentActivity)this.Activity).SupportFragmentManager.FindFragmentById(Resource.Id.ActionBarList);
+			actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
+			actionBar.AddButtonRight(ADD_BUTTON,"",Resource.Drawable.add_48);
+		}
+
+		void ActionBarButtonClicked(int id)
+		{
+			if(id == ADD_BUTTON)
+			{
+				try
+				{
+					var ft = FragmentManager.BeginTransaction();
+					//ft.Replace(Resource.Id.detailInfo_fragment, InvoiceFragment.NewInstance(invoiceId));
+					ft.Replace(Resource.Id.detailInfo_fragment, InvoiceInfoFragment.NewInstance(0));
+					ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+					ft.Commit();
+				}
+				catch(Exception ex)
+				{
+				}
+			}
+		}
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {

@@ -9,6 +9,7 @@ namespace RetailMobile
 {
     public class InvoiceInfoFragment : BaseFragment
     {
+		const int SAVE_BUTTON = 764;
         Library.TransHed header;
         TransDetAdapter detailsAdapter;
         ListView lvDetails;
@@ -23,6 +24,7 @@ namespace RetailMobile
         EditText tbHtrnNetValue;
         EditText tbHtrnVatValue;
         EditText tbHtrnTotValue;
+		RetailMobile.Fragments.ItemActionBar actionBar;
 
         public static BaseFragment NewInstance(long objId)
         {
@@ -36,6 +38,14 @@ namespace RetailMobile
             View v = inflater.Inflate(Resource.Layout.InvoiceScreen, container, false);
 
             header = new Library.TransHed();
+
+			actionBar = (RetailMobile.Fragments.ItemActionBar)((Android.Support.V4.App.FragmentActivity)this.Activity).SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
+			actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
+			string save = this.Activity.GetString(Resource.String.btnSave);
+			actionBar.AddButtonRight(SAVE_BUTTON,save,Resource.Drawable.save_48);
+
+			string title = this.Activity.GetString(Resource.String.lblInvoice);
+			actionBar.SetTitle(title);
 
             Button btnSearchItems = v.FindViewById<Button>(Resource.Id.btnSearchItems);
             Button btnSearchCustomer = v.FindViewById<Button>(Resource.Id.btnSearchCustomer);
@@ -70,6 +80,20 @@ namespace RetailMobile
             return v;
         }
 
+		void ActionBarButtonClicked(int id)
+		{
+			if(id == SAVE_BUTTON)
+			{
+				try
+				{
+					Save();
+				}
+				catch(Exception ex)
+				{
+				}
+			}
+		}
+
         void InitInvoiceScreen()
         {
             header = new Library.TransHed();
@@ -88,21 +112,26 @@ namespace RetailMobile
             tbHtrnTotValue.Text = header.HtrnTotValue.ToString(PreferencesUtil.DecimalFormat);
         }
 
+		private void Save()
+		{
+			if (tbHtrnNetValue.Text.Trim() == "")
+			{
+				tbHtrnNetValue.Text = "0";
+			}
+			if (tbHtrnVatValue.Text == "")
+			{
+				tbHtrnVatValue.Text = "0";
+			}
+			header.HtrnExpl = tbHtrnExpln.Text;
+			header.TransDate = DateTime.Parse(tbHtrnDate.Text);
+			
+			header.Save(Activity);
+			InitInvoiceScreen();
+		}
+
         void btnSave_Click(object sender, EventArgs e)
         {
-            if (tbHtrnNetValue.Text.Trim() == "")
-            {
-                tbHtrnNetValue.Text = "0";
-            }
-            if (tbHtrnVatValue.Text == "")
-            {
-                tbHtrnVatValue.Text = "0";
-            }
-            header.HtrnExpl = tbHtrnExpln.Text;
-            header.TransDate = DateTime.Parse(tbHtrnDate.Text);
-            
-            header.Save(Activity);
-            InitInvoiceScreen();
+			Save();
         }
 
         void tbHtrnID_TextChanged(object sender, Android.Text.TextChangedEventArgs e)

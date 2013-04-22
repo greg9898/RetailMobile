@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layoutActionBar"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="@dimen/action_bar_height"
     android:background="@drawable/actionbar_background" >
 
   <RelativeLayout
