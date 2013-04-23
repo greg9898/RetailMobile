@@ -132,6 +132,8 @@
     <AndroidResource Include="Resources\Drawable\customers_64.png" />
     <AndroidResource Include="Resources\Drawable\invoice_64.png" />
     <AndroidResource Include="Resources\Drawable\items_64.png" />
+    <Compile Include="Library\Statistic.cs" />
+    <Compile Include="Library\StatisticList.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable\my_edit_text_selector2.xml" />
@@ -375,4 +377,10 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <ProjectReference Include="..\GraphView\GraphView.csproj">
+      <Project>{6FEBD275-0894-4D34-8DC3-AC562AA83437}</Project>
+      <Name>GraphView</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

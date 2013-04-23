@@ -34,7 +34,7 @@ namespace RetailMobile.Library
         
         public static Statistic GetStatistic(Context ctx, int cstId)
         {
-            Statistic info = new Statistic();
+            Statistic info = new Statistic(); 
           
             using (IConnection conn = Sync.GetConnection(ctx))
             {       

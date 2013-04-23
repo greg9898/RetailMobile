@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 using Android.Content;
 using Com.Ianywhere.Ultralitejni12;
+using Android.Util;
 
 namespace RetailMobile.Library
 {
@@ -11,16 +12,22 @@ namespace RetailMobile.Library
         {
             StatisticList items = new StatisticList();
             using (IConnection conn = Sync.GetConnection(ctx))
-            {                 
-                IPreparedStatement ps = conn.PrepareStatement(@"
+            {         
+                string query = @"
 SELECT 
     cst_id, 
     item_kateg,
     month,
     amount_curr,
     amount_prev
-FROM rstatistic 
-WHERE cst_id = :cstId");
+FROM rstatistic ";
+
+                if (cstId > 0)
+                {
+                    query += @"
+WHERE cst_id = :cstId";
+                }
+                IPreparedStatement ps = conn.PrepareStatement(query);
                 
                 IResultSet result = ps.ExecuteQuery();
                 
@@ -29,7 +36,9 @@ WHERE cst_id = :cstId");
                     Statistic s = new Statistic();
                     s.Fetch(result);
                     items.Add(s);
-                }
+
+                    Log.Debug("StatisticList", "StatisticList CstId=" + s.CstId + " Month=" + s.Month);
+                } 
                 
                 ps.Close();
                 conn.Release();

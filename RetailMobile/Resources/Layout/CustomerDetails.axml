@@ -215,6 +215,7 @@
             android:minWidth="50dp"
             android:minHeight="150dp"
             android:id="@+id/graph1"
+            android:orientation="vertical"
             android:background="@color/disabled_background" />
     </ScrollView>
 </LinearLayout>

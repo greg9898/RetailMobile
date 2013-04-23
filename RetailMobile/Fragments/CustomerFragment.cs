@@ -4,7 +4,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using RetailMobile.Library;
-//using Com.Jjoe64.Graphview;
+using Com.Jjoe64.Graphview; 
 using Android.Util;
 
 namespace RetailMobile
@@ -22,6 +22,34 @@ namespace RetailMobile
             return detailsFrag;
         }
 
+        void DrawGraph(View view, System.Collections.Generic.IList<Statistic> statList)
+        {
+            GraphView.GraphViewData[] statGraphData = new GraphView.GraphViewData[statList.Count];
+            string[] horizontalLabels = new string[statList.Count];
+            string[] verticalLabels = new string[statList.Count];
+          
+            for (int i = 0; i < statList.Count; i++)
+            {
+                Statistic st = statList[i];
+                statGraphData[i] = new GraphView.GraphViewData(st.ItemKateg, st.AmountCurr);
+                horizontalLabels[i] = "Kateg " + st.ItemKateg.ToString();
+                verticalLabels[i] = "AmountCurr " + st.Month.ToString();
+            }
+
+            // init example series data
+            GraphViewSeries exampleSeries = new GraphViewSeries(statGraphData);
+            // graph with dynamically genereated horizontal and vertical labels
+            GraphView graphView = new BarGraphView(Activity, "GraphViewDemo");
+            graphView.SetHorizontalLabels(horizontalLabels);
+            graphView.SetVerticalLabels(verticalLabels);
+            graphView.AddSeries(exampleSeries);
+            graphView.SetScalable(false);
+            //            graphView.SetViewPort(0, 10);
+//            graphView.Orientation = Orientation.Vertical;
+            LinearLayout layout = (LinearLayout)view.FindViewById(Resource.Id.graph1);
+            layout.AddView(graphView);
+        }
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             View view = inflater.Inflate(Resource.Layout.CustomerDetails, container, false);
@@ -37,40 +65,50 @@ namespace RetailMobile
             tbCustName.Text = customer.Name;
 
 
-        /*    StatisticList statList = StatisticList.GetStatisticList(Activity, customer.CustID);
+            StatisticList statList = StatisticList.GetStatisticList(Activity, customer.CustID);
 
-            // init example series data
-            GraphViewSeries exampleSeries = new GraphViewSeries(new GraphView.GraphViewData[] {
-                          new GraphView.GraphViewData(1, 2.0d)
-                    ,     new GraphView.GraphViewData(2, 1.5d)
-                        , new GraphView.GraphViewData(2.5, 3.0d) // another frequency                        
-                        , new GraphView.GraphViewData(2.7, 3.5d) // another frequency
-                        , new GraphView.GraphViewData(3, 2.5d)
-                        , new GraphView.GraphViewData(4, 1.0d)
-                        , new GraphView.GraphViewData(5, 3.0d)
-            });
-            
-            // graph with dynamically genereated horizontal and vertical labels
-            GraphView graphView = new BarGraphView(Activity, "GraphViewDemo");
-            graphView.AddSeries(exampleSeries); // data
-            graphView.SetScalable(true);
-            graphView.Orientation = Orientation.Horizontal;
+            Statistic s = new Statistic();
+            s.CstId = customer.CustID;
+            s.AmountCurr = 10;
+            s.AmountPrev = 7;
+            s.ItemKateg = 5;
+            s.Month = 2;
+            statList.Add(s);
 
-            LinearLayout layout = (LinearLayout)view.FindViewById(Resource.Id.graph1);
-            layout.AddView(graphView);*/
-          
-//            // custom static labels
-//            graphView.SetHorizontalLabels(new String[]
-//            {
-//                "2 days ago",
-//                "yesterday",
-//                "today",
-//                "tomorrow"
-//            });
-//            graphView.SetVerticalLabels(new String[] {"high", "middle", "low"});
-//            graphView.AddSeries(exampleSeries); // data
-//            
+            s = new Statistic();
+            s.CstId = customer.CustID;
+            s.AmountCurr = 13;
+            s.AmountPrev = 17;
+            s.ItemKateg = 2;
+            s.Month = 2;
+            statList.Add(s);
 
+            s = new Statistic();
+            s.CstId = customer.CustID;
+            s.AmountCurr = 10;
+            s.AmountPrev = 27;
+            s.ItemKateg = 5;
+            s.Month = 6;
+            statList.Add(s);
+
+            s = new Statistic();
+            s.CstId = customer.CustID;
+            s.AmountCurr = 10;
+            s.AmountPrev = 22;
+            s.ItemKateg = 5;
+            s.Month = 7;
+            statList.Add(s);
+                        
+            s = new Statistic();
+            s.CstId = customer.CustID;
+            s.AmountCurr = 51;
+            s.AmountPrev = 31;
+            s.ItemKateg = 3;
+            s.Month = 1;
+            statList.Add(s);
+
+            DrawGraph(view, statList);
+                      
             return view;
         }
 
