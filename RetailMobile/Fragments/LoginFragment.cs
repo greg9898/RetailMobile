@@ -29,7 +29,7 @@ namespace RetailMobile
 			btnLogin = (Button)view.FindViewById(Resource.Id.btnLogin);
 			btnLogin.Click += new EventHandler(btnLogin_Click);
             
-			return view;
+			return view; 
         }
 
         void btnLogin_Click(object sender, EventArgs e)
