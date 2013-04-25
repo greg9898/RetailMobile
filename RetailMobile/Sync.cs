@@ -440,6 +440,17 @@ PRIMARY KEY ( trus_id ASC )
 )");
                 PreparedStatement.Execute();
                 PreparedStatement.Close();
+
+				PreparedStatement = DBConnection.PrepareStatement(@"CREATE TABLE IF NOT EXISTS rusers (
+deal_id integer NOT NULL,
+user_id integer NOT NULL,
+login_name VARCHAR(120) NOT NULL,
+user_pass VARCHAR(120) NOT NULL,
+user_active VARCHAR(120) NOT NULL,
+PRIMARY KEY ( deal_id ASC )
+)");
+				PreparedStatement.Execute();
+				PreparedStatement.Close();
 				
                 PreparedStatement = DBConnection.PrepareStatement(createTableRtransDet);
 				
@@ -450,6 +461,12 @@ PRIMARY KEY ( trus_id ASC )
 				
                 PreparedStatement.Execute();
                 PreparedStatement.Close();
+
+				//TABLE contact,
+				PreparedStatement = DBConnection.PrepareStatement(@" CREATE PUBLICATION pblUsers (
+TABLE rusers)");
+				PreparedStatement.Execute();
+				PreparedStatement.Close();
 				
                 //TABLE contact,
                 PreparedStatement = DBConnection.PrepareStatement(@" CREATE PUBLICATION pblMain1 (
@@ -464,7 +481,8 @@ TABLE rstatistic,
 TABLE rtranscust,
 TABLE rtrustees,
 TABLE rtrans_det,
-TABLE rtrans_hed)");
+TABLE rtrans_hed,
+TABLE rusers)");
                 PreparedStatement.Execute();
                 PreparedStatement.Close();
 				
@@ -487,9 +505,11 @@ TABLE rtrans_hed)");
                 //SyncParms.HTTP_STREAM, "sa", "Courier109"
                 SyncParms syncParams = cn.CreateSyncParms(0, "sa", PreferencesUtil.SyncModel);
                 syncParams.Publications = "pblMain1";
+
                 IStreamHTTPParms streamParams = syncParams.StreamParms;
                 streamParams.Host = PreferencesUtil.IP;
                 streamParams.Port = PreferencesUtil.Port;
+				syncParams.AuthenticationParms = Common.CurrentDealerID.ToString();
 				
                 cn.Synchronize(syncParams);
                 cn.Commit();
@@ -502,5 +522,30 @@ TABLE rtrans_hed)");
                 cn.Release();
             }
         }
+
+		public static void SyncUsers(Context ctx)
+		{
+			IConnection cn = GetConnection(ctx);
+			try
+			{
+				//SyncParms.HTTP_STREAM, "sa", "Courier109"
+				SyncParms syncParams = cn.CreateSyncParms(0, "sa", PreferencesUtil.SyncModel);
+				syncParams.Publications = "pblUsers";
+				
+				IStreamHTTPParms streamParams = syncParams.StreamParms;
+				streamParams.Host = PreferencesUtil.IP;
+				streamParams.Port = PreferencesUtil.Port;
+
+				cn.Synchronize(syncParams);
+				cn.Commit();
+				
+			} catch (Exception ex)
+			{
+				Android.Util.Log.Error("UltraliteApplication", string.Format("An error has occurred: {0}", ex.Message));
+			} finally
+			{
+				cn.Release();
+			}
+		}
     }
 }

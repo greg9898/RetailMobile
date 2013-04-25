@@ -82,4 +82,7 @@
   <string name="lblPort">Port</string> 
   <string name="lblSyncModel">Sync Model</string> 
   <string name="Settings">Settings</string> 
+  <string name="Username">Username</string> 
+  <string name="Password">Password</string> 
+  <string name="btnLogin">Login</string> 
  </resources>

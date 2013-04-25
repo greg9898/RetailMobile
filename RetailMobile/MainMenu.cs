@@ -21,11 +21,18 @@ namespace RetailMobile
             base.OnCreate(bundle);
 			PreferencesUtil.LoadSettings(this);
 			Sync.GenerateDatabase(this);
-            Sync.Synchronize(this);
-                        
+			Sync.SyncUsers(this);
+                                    
             SetContentView(Resource.Layout.MainMenu);
             RetailMobile.Fragments.ActionBar myActionBar = (RetailMobile.Fragments.ActionBar)SupportFragmentManager.FindFragmentById(Resource.Id.ActionBarMain);
             myActionBar.SyncClicked += new Fragments.ActionBar.SyncCLickedDelegate(myActionBar_SyncClicked);
+
+			//RetailMobile.LoginFragment loginFragment = (RetailMobile.LoginFragment)SupportFragmentManager.FindFragmentById(Resource.Id.detail);
+
+			var ft = SupportFragmentManager.BeginTransaction();
+			ft.Replace(Resource.Id.detailInfo_fragment, new LoginFragment());
+			ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+			ft.Commit();
         }
 
         void myActionBar_SyncClicked()

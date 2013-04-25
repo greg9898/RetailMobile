@@ -5,6 +5,8 @@ namespace RetailMobile
 {
     public static class Common
     {
+		public static int CurrentDealerID = 0;
+
         public static DateTime JavaDateToDatetime(Java.Util.Date date)
         {
             TimeSpan ss = TimeSpan.FromMilliseconds(date.Time);
