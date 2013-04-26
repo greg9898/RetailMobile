@@ -23,6 +23,11 @@
   <string name="btnNew">Προσθήκη νέου</string> 
   <string name="lblInvoice">Παραγγελία</string> 
   
+ <!--  customer statistics table  --> 
+  <string name="tvHeaderItemKategory">Item Category</string> 
+  <string name="tvHeaderAmountCurr">Amount current</string> 
+  <string name="tvHeaderAmountPrev">Amount previous</string> 
+  
  <!--  detail   --> 
   <string name="lblDtrnQty">Ποσότητα:</string> 
   <string name="lblDtrn_unit_price">Τιμή Μονάδας:</string> 

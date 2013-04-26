@@ -103,9 +103,6 @@
     <Compile Include="MainMenu.cs" />
     <Compile Include="PreferencesUtil.cs" />
     <AndroidResource Include="Resources\Drawable\menu_caption_background.xml" />
-    <AndroidResource Include="Resources\Drawable\my_edit_text_background_normal.xml" />
-    <AndroidResource Include="Resources\Drawable\my_edit_text_background_focused.xml" />
-    <AndroidResource Include="Resources\Drawable\my_edit_text_background_disabled.xml" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Adapters\SpinnerAdapter.cs" />
@@ -138,9 +135,20 @@
     <Compile Include="Fragments\LoginFragment.cs" />
     <Compile Include="Library\User.cs" />
     <AndroidResource Include="Resources\Drawable\back_48.png" />
+    <Compile Include="Calendar\CalendarAdapter.cs" />
+    <Compile Include="Calendar\CalendarView.cs" />
+    <Compile Include="Calendar\DateHelper.cs" />
+    <AndroidResource Include="Resources\Drawable\table_cell_bg.xml" />
+    <AndroidResource Include="Resources\Drawable\table_header_cell_bg.xml" />
+    <AndroidResource Include="Resources\Drawable\my_edit_text_selector1.xml" />
+    <AndroidResource Include="Resources\Drawable\my_edit_text_selector2.xml" />
+    <AndroidResource Include="Resources\Drawable\my_edit_text_background_disabled.xml" />
+    <AndroidResource Include="Resources\Drawable\my_edit_text_background_focused.xml" />
+    <AndroidResource Include="Resources\Drawable\my_edit_text_background_normal.xml" />
+    <AndroidResource Include="Resources\Layout\calendar.xml" />
+    <AndroidResource Include="Resources\Layout\calendar_item.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\my_edit_text_selector2.xml" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout-land\InvoiceScreen.axml">
@@ -182,9 +190,6 @@
     <AndroidResource Include="Resources\Layout\dialog_item_search.axml" />
     <AndroidResource Include="Resources\Layout\dialog_customer_search.axml" />
     <AndroidResource Include="Resources\Layout\TransDetRow.axml" />
-    <Content Include="Resources\Drawable\my_edit_text_selector1.xml">
-      <SubType>AndroidResource</SubType>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Values\Strings.xml">
@@ -352,6 +357,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Layout-LargeSKIP\" />
+    <Folder Include="Calendar\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidJavaLibrary Include="lib\UltraLiteJNI12.jar" />
