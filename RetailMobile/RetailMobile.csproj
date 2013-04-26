@@ -137,6 +137,7 @@
     <AndroidResource Include="Resources\Layout\LoginFragment.axml" />
     <Compile Include="Fragments\LoginFragment.cs" />
     <Compile Include="Library\User.cs" />
+    <AndroidResource Include="Resources\Drawable\back_48.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable\my_edit_text_selector2.xml" />

@@ -90,6 +90,7 @@ namespace RetailMobile
 				}
 				catch(Exception ex)
 				{
+					Log.Error("exception",ex.Message);
 				}
 			}
 		}

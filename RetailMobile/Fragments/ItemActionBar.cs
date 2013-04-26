@@ -55,6 +55,7 @@ namespace RetailMobile.Fragments
 
 		public void ClearButtons()
 		{
+			ButtonsAdded.Clear();
 			LeftButtons.RemoveAllViews();
 			RightButtons.RemoveAllViews();
 		}

@@ -6,9 +6,13 @@ namespace RetailMobile
     {
 		private static string APP_SHARED_PREFS = "com.alphamobile.RetailPreferences";
 
+		//87.203.80.42
+		//2439
         public static string IP = "77.78.32.118";
         public static int Port = 2439;
         public static string SyncModel = "RetailMobile2";
+		public static string Username = "";
+		public static string Password = "";
 
         public static string DecimalFormat = "######0.0##";
 
@@ -25,6 +29,8 @@ namespace RetailMobile
 			editor.PutString("IP",IP);
 			editor.PutInt("Port",Port);
 			editor.PutString("SyncModel",SyncModel);
+			editor.PutString("Username",Username);
+			editor.PutString("Password",Password);
 			editor.Commit();
 		}
 
@@ -36,7 +42,8 @@ namespace RetailMobile
 			IP = appSharedPrefs.GetString("IP","77.78.32.118");
 			Port = appSharedPrefs.GetInt("Port",2439);
 			SyncModel = appSharedPrefs.GetString("SyncModel","RetailMobile2");
-
+			Username = appSharedPrefs.GetString("Username","");
+			Password = appSharedPrefs.GetString("Password","");
 		}
     }
 }

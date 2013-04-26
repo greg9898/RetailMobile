@@ -85,4 +85,6 @@
   <string name="Username">Username</string> 
   <string name="Password">Password</string> 
   <string name="btnLogin">Login</string> 
+	<string name="Logout">Logout</string> 
+  
  </resources>

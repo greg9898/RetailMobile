@@ -73,6 +73,8 @@ namespace RetailMobile
             ft.Commit();
 
             this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Visible;
+			this.Activity.FindViewById<LinearLayout>(Resource.Id.layoutDetails).Visibility = ViewStates.Visible;
+			this.Activity.FindViewById<LinearLayout>(Resource.Id.layoutList).Visibility = ViewStates.Visible;
         }
 
         void btnListItems_Click(object sender, EventArgs e)
@@ -84,6 +86,10 @@ namespace RetailMobile
             ft.Replace(Resource.Id.details_fragment, details);
             ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
             ft.Commit();
+
+			this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Visible;
+			this.Activity.FindViewById<LinearLayout>(Resource.Id.layoutDetails).Visibility = ViewStates.Visible;
+			this.Activity.FindViewById<LinearLayout>(Resource.Id.layoutList).Visibility = ViewStates.Visible;
         }
 
         void btnListCustomers_Click(object sender, EventArgs e)
@@ -97,6 +103,10 @@ namespace RetailMobile
 
             ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
             ft.Commit();
+
+			this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Visible;
+			this.Activity.FindViewById<LinearLayout>(Resource.Id.layoutDetails).Visibility = ViewStates.Visible;
+			this.Activity.FindViewById<LinearLayout>(Resource.Id.layoutList).Visibility = ViewStates.Visible;
         }
 
         void btnAddInvoice_Click(object sender, EventArgs e)

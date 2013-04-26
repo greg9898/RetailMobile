@@ -24,7 +24,13 @@ namespace RetailMobile
 
         public long ObjectId
         {
-            get { return Arguments.GetLong("ObjectId", 0); }
+            get 
+			{ 
+				if(Arguments != null)
+					return Arguments.GetLong("ObjectId", 0); 
+				else
+					return 0;
+			}
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

@@ -18,7 +18,7 @@
         android:layout_weight="1"
         android:textColor="@android:color/black"
         android:text="@string/lblIP"
-        android:textSize="10sp"
+        android:textSize="16sp"
         />
     <EditText
         android:id="@+id/tbIP"
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="16sp"
         />
     </LinearLayout>
 
@@ -44,7 +44,7 @@
         android:layout_weight="1"
         android:text="@string/lblPort"
         android:textColor="@android:color/black"
-        android:textSize="10sp"
+        android:textSize="16sp"
         />
     <EditText
         android:id="@+id/tbPort"
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="16sp"
         />
     </LinearLayout>
     
@@ -70,7 +70,7 @@
         android:layout_weight="1"
         android:text="@string/lblSyncModel"
         android:textColor="@android:color/black"
-        android:textSize="10sp"
+        android:textSize="16sp"
         />
     <EditText
         android:id="@+id/tbSyncModel"
@@ -78,8 +78,18 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="16sp"
         />
     </LinearLayout>
+    
+    <Button
+    android:id="@+id/btnLogout"
+    style="@style/menuButtonStyle"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:text="@string/Logout"
+    />
        
   </LinearLayout>

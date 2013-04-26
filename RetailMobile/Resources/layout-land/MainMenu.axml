@@ -2,76 +2,95 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="horizontal"
-    android:background="@drawable/parentBackground">
+    android:background="@drawable/parentBackground"
+    android:baselineAligned="false"
+    android:orientation="horizontal" >
 
-  <LinearLayout 
-    android:orientation="vertical"
-    android:layout_width="0dp"
-    android:layout_height="fill_parent"
-    android:layout_weight="0.3"
-    >
-	    <fragment
-	          class="RetailMobile.Fragments.ActionBar"
-	          android:id="@+id/ActionBarMain"
-	          android:layout_width="match_parent"
-	          android:layout_height="@dimen/action_bar_height"/>
-	          <LinearLayout 
-  	android:id="@+id/LayoutMenu"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:visibility="gone"
-    >
-	  	<fragment
-	        class="RetailMobile.MainMenuFragment"
-	        android:id="@+id/titles_fragment"        
-	        android:layout_width="match_parent"
-	        android:layout_height="match_parent" />
-	</LinearLayout>
-	</LinearLayout>
-	
-	<LinearLayout 
-    android:orientation="horizontal"
-    android:layout_width="0dp"
-    android:layout_height="fill_parent"
-    android:layout_weight="0.7">
-    
-	        <LinearLayout 			
-		    android:layout_width="0dp"
-		    android:layout_height="fill_parent"
-		    android:orientation="vertical"
-		    android:layout_weight="1">
-		    
-		    <fragment
-          class="RetailMobile.Fragments.ItemActionBar"
-          android:id="@+id/ActionBarList"
-          android:layout_width="match_parent"          
-          android:layout_height="@dimen/action_bar_height"/>
-		    <FrameLayout
-		        	android:layout_width="match_parent"
-		        	android:layout_height="match_parent"		        	
-		        	android:id="@+id/details_fragment" />	
-	        </LinearLayout>   
-	        
-	        <LinearLayout 			
-		    android:layout_width="0dp"
-		    android:layout_height="fill_parent"
-		    android:orientation="vertical"
-		    android:layout_weight="2">
-		    
-		    <fragment
-          class="RetailMobile.Fragments.ItemActionBar"
-          android:id="@+id/ActionBar"
-          android:layout_width="match_parent"          
-          android:layout_height="@dimen/action_bar_height"/>
-		    	
-			    <FrameLayout
-			        android:layout_width="match_parent"
-			        android:layout_height="match_parent"			        
-			        android:id="@+id/detailInfo_fragment" />
-	        </LinearLayout>
-	        
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.2"
+        android:orientation="vertical" >
+
+        <fragment
+            android:id="@+id/ActionBarMain"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/action_bar_height"
+            class="RetailMobile.Fragments.ActionBar" />
+
+        <LinearLayout
+            android:id="@+id/LayoutMenu"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <fragment
+                android:id="@+id/titles_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                class="RetailMobile.MainMenuFragment" />
         </LinearLayout>
+    </LinearLayout>
+    
+    <View
+        	android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/action_bar1"
+        />
 
-  </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.7"
+        android:orientation="horizontal"
+        android:baselineAligned="false" >
+
+        <LinearLayout
+        	android:id="@+id/layoutList"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:orientation="vertical" >
+
+            <fragment
+                android:id="@+id/ActionBarList"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/action_bar_height"
+                class="RetailMobile.Fragments.ItemActionBar" />
+
+            <FrameLayout
+                android:id="@+id/details_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        
+        <View
+        	android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/action_bar1"
+        />
+        
+        <LinearLayout
+        	android:id="@+id/layoutDetails"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="2"
+            android:orientation="vertical" >
+
+            <fragment
+                android:id="@+id/ActionBar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/action_bar_height"
+                class="RetailMobile.Fragments.ItemActionBar" />
+                
+
+            <FrameLayout
+                android:id="@+id/detailInfo_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

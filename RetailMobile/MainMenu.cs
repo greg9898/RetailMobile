@@ -29,16 +29,48 @@ namespace RetailMobile
 
 			//RetailMobile.LoginFragment loginFragment = (RetailMobile.LoginFragment)SupportFragmentManager.FindFragmentById(Resource.Id.detail);
 
-			var ft = SupportFragmentManager.BeginTransaction();
-			ft.Replace(Resource.Id.detailInfo_fragment, new LoginFragment());
-			ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
-			ft.Commit();
+			if(string.IsNullOrEmpty(PreferencesUtil.Username) == false &&
+			   string.IsNullOrEmpty(PreferencesUtil.Password) == false &&
+			   LoginFragment.Login(this, PreferencesUtil.Username, PreferencesUtil.Password))
+			{
+				this.FindViewById<LinearLayout>(Resource.Id.LayoutMenu).Visibility = ViewStates.Visible;
+				this.FindViewById<LinearLayout>(Resource.Id.layoutList).Visibility = ViewStates.Visible;
+				this.FindViewById<LinearLayout>(Resource.Id.layoutDetails).Visibility = ViewStates.Visible;
+				this.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Visible;
+				
+				DetailsFragment details = DetailsFragment.NewInstance((int)Base.MenuItems.Invoices);
+				var ft = SupportFragmentManager.BeginTransaction();
+				ft.Replace(Resource.Id.details_fragment, details);
+				ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+				ft.Commit();
+				
+				ft = SupportFragmentManager.BeginTransaction();
+				//ft.Replace(Resource.Id.detailInfo_fragment, InvoiceFragment.NewInstance(invoiceId));
+				ft.Replace(Resource.Id.detailInfo_fragment, InvoiceInfoFragment.NewInstance(0));
+				ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+				ft.Commit();
+			}
+			else
+			{
+				var ft = SupportFragmentManager.BeginTransaction();
+				ft.Replace(Resource.Id.detailInfo_fragment, new LoginFragment());
+				ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+				ft.Commit();
+			}
+
         }
 
         void myActionBar_SyncClicked()
         {
             //start sync
-            Sync.Synchronize(this);
+			if(Common.CurrentDealerID == 0)
+			{
+				Sync.SyncUsers(this);
+			}
+			else
+			{
+            	Sync.Synchronize(this);
+			}
         }
      
     }
