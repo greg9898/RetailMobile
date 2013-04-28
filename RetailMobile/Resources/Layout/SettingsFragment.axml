@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
     android:orientation="vertical">
   
   <LinearLayout
@@ -82,13 +84,19 @@
         />
     </LinearLayout>
     
+     <Button
+    android:id="@+id/btnMainSync"
+    style="@style/menuButtonStyle"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/btnSync"
+    />
+    
     <Button
     android:id="@+id/btnLogout"
     style="@style/menuButtonStyle"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
     android:text="@string/Logout"
     />
        

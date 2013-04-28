@@ -462,6 +462,11 @@ PRIMARY KEY ( deal_id ASC )
                 PreparedStatement.Execute();
                 PreparedStatement.Close();
 
+				PreparedStatement = DBConnection.PrepareStatement(@" CREATE PUBLICATION pblUploadTrans (
+TABLE rtrans_hed, TABLE rtrans_det)");
+				PreparedStatement.Execute();
+				PreparedStatement.Close();
+
 				//TABLE contact,
 				PreparedStatement = DBConnection.PrepareStatement(@" CREATE PUBLICATION pblUsers (
 TABLE rusers)");
@@ -536,6 +541,31 @@ TABLE rusers)");
 				streamParams.Host = PreferencesUtil.IP;
 				streamParams.Port = PreferencesUtil.Port;
 
+				cn.Synchronize(syncParams);
+				cn.Commit();
+				
+			} catch (Exception ex)
+			{
+				Android.Util.Log.Error("UltraliteApplication", string.Format("An error has occurred: {0}", ex.Message));
+			} finally
+			{
+				cn.Release();
+			}
+		}
+
+		public static void SyncTrans(Context ctx)
+		{
+			IConnection cn = GetConnection(ctx);
+			try
+			{
+				//SyncParms.HTTP_STREAM, "sa", "Courier109"
+				SyncParms syncParams = cn.CreateSyncParms(0, "sa", PreferencesUtil.SyncModel);
+				syncParams.Publications = "pblUploadTrans";
+				
+				IStreamHTTPParms streamParams = syncParams.StreamParms;
+				streamParams.Host = PreferencesUtil.IP;
+				streamParams.Port = PreferencesUtil.Port;
+				
 				cn.Synchronize(syncParams);
 				cn.Commit();
 				

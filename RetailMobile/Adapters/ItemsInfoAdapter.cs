@@ -32,10 +32,10 @@ namespace RetailMobile
             if (view == null)
                 view = context.LayoutInflater.Inflate(Resource.Layout.ItemInfoRow, null);
 
-            TextView tbItemCode = (TextView)view.FindViewById(Resource.Id.tbItemCode);
+            //TextView tbItemCode = (TextView)view.FindViewById(Resource.Id.tbItemCode);
             TextView tbItemName = (TextView)view.FindViewById(Resource.Id.tbItemName);
 
-            tbItemCode.Text = item.item_cod;
+            //tbItemCode.Text = item.item_cod;
             tbItemName.Text = item.ItemDesc;
 
             return view;

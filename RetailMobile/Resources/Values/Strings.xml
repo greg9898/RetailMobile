@@ -91,5 +91,8 @@
   <string name="Password">Password</string> 
   <string name="btnLogin">Login</string> 
 	<string name="Logout">Logout</string> 
-  
+	<string name="btnSync">Synchronize</string>
+	<string name="Yes">Yes</string>
+	<string name="No">No</string>
+	<string name="ExitPrompt">Are you sure you want to exit?</string>	
  </resources>

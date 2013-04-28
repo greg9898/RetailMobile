@@ -24,6 +24,7 @@
                 style="@style/listRowTextViewStyle"
                 android:text="tbItemCode"
                 android:layout_marginLeft="5dp"
+                android:visibility="gone"
                 android:layout_weight="0.3" />
             <TextView
                 android:id="@+id/tbItemName"

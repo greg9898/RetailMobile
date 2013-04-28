@@ -16,7 +16,9 @@ namespace RetailMobile
 {
     public class ItemFragment : BaseFragment
     {
-        public static BaseFragment NewInstance(long objId)
+		RetailMobile.Fragments.ItemActionBar actionBar;
+
+		public static ItemFragment NewInstance(long objId)
         {
             var detailsFrag = new ItemFragment { Arguments = new Bundle() };
             detailsFrag.Arguments.PutLong("ObjectId", objId);
@@ -30,6 +32,9 @@ namespace RetailMobile
                 return null;
             }
             
+			actionBar = (RetailMobile.Fragments.ItemActionBar)((Android.Support.V4.App.FragmentActivity)this.Activity).SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
+			actionBar.SetTitle(this.Activity.GetString(Resource.String.miItems));
+
             ItemInfo item = ItemInfo.GetItem(Activity, ObjectId);
             
             View view = inflater.Inflate(Resource.Layout.ItemDetails, container, false);

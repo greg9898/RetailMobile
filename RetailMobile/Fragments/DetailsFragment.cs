@@ -75,16 +75,19 @@ namespace RetailMobile
             switch (ParentObjId)
             {
                 case (int)Base.MenuItems.Items:
+				actionBar.SetTitle(this.Activity.GetString(Resource.String.miItems));
                     Library.ItemInfoList itemInfoList = Library.ItemInfoList.GetItemInfoList(this.Activity);
                     _list = itemInfoList;
                     ListAdapter = new ItemsInfoAdapter(Activity, itemInfoList);
                     break;
                 case (int)Base.MenuItems.Customers:
+				actionBar.SetTitle(this.Activity.GetString(Resource.String.miCustomers));
                     Library.CustomerInfoList custInfoList = Library.CustomerInfoList.GetCustomerInfoList(this.Activity,new Library.CustomerInfoList.Criteria());
                     _list = custInfoList;
                     ListAdapter = new CustomersAdapter(Activity, custInfoList);
                     break;
                 case (int)Base.MenuItems.Invoices:
+				actionBar.SetTitle(this.Activity.GetString(Resource.String.miInvoice));
                     Library.TransHedList thedList = Library.TransHedList.GetTransHedList(this.Activity);
                     _list = thedList;
                     ListAdapter = new TransHedAdapter(Activity, thedList);

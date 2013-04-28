@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 using Android.App;
 using Android.Content;
@@ -22,6 +23,7 @@ namespace RetailMobile
 		EditText tbPort;
 		EditText tbSyncModel;
 		Button btnLogout;
+		Button btnSync;
 		RetailMobile.Fragments.ItemActionBar actionBar;
 
         public override void OnCreate(Bundle bundle)
@@ -38,11 +40,24 @@ namespace RetailMobile
 			tbPort = v.FindViewById<EditText>(Resource.Id.tbPort);
 			tbSyncModel = v.FindViewById<EditText>(Resource.Id.tbSyncModel);
 			btnLogout = v.FindViewById<Button>(Resource.Id.btnLogout);
+			btnSync = v.FindViewById<Button>(Resource.Id.btnMainSync);
+
+			if(Common.CurrentDealerID == 0)
+			{
+				btnLogout.Visibility = ViewStates.Gone;
+				btnSync.Visibility = ViewStates.Gone;
+			}
+			else
+			{
+				btnLogout.Visibility = ViewStates.Visible;
+				btnSync.Visibility = ViewStates.Visible;
+			}
 
 			tbIP.Text = PreferencesUtil.IP;
 			tbPort.Text = PreferencesUtil.Port.ToString();
 			tbSyncModel.Text = PreferencesUtil.SyncModel;
 
+			btnSync.Click +=new EventHandler(btnSync_Click);
 			btnLogout.Click += new EventHandler(btnLogout_Click);
 
 			this.Activity.FindViewById<LinearLayout>(Resource.Id.layoutList).Visibility = ViewStates.Gone;
@@ -58,6 +73,18 @@ namespace RetailMobile
 			actionBar.SetTitle(title);
 
 			return v;
+		}
+
+		void btnSync_Click(object sender, EventArgs e)
+		{
+			((MainMenu)this.Activity).ShowProgressBar();
+			System.Threading.Tasks.Task.Factory.StartNew(() =>Sync.Synchronize(this.Activity)
+			                                             ).ContinueWith(task =>this.Activity.RunOnUiThread(() =>((MainMenu)this.Activity).HideProgressBar()));
+
+
+
+			//Sync.Synchronize(this.Activity);
+
 		}
 
 		void btnLogout_Click(object sender, EventArgs e)

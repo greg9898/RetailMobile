@@ -13,6 +13,7 @@ namespace RetailMobile
         TextView tbCustCode;
         TextView tbCustName;
         CustomerInfo customer;
+		RetailMobile.Fragments.ItemActionBar actionBar;
         
         public static CustomerFragment NewInstance(long objId)
         {
@@ -24,6 +25,9 @@ namespace RetailMobile
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             View view = inflater.Inflate(Resource.Layout.CustomerDetails, container, false);
+
+			actionBar = (RetailMobile.Fragments.ItemActionBar)((Android.Support.V4.App.FragmentActivity)this.Activity).SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
+			actionBar.SetTitle(this.Activity.GetString(Resource.String.miCustomers));
             
             customer = CustomerInfo.GetCustomer(Activity, ObjectId);
             

@@ -44,6 +44,13 @@ namespace RetailMobile
             lvCustomers.ItemClick += new EventHandler<AdapterView.ItemClickEventArgs>(lvCustomers_ItemClick);
 
             btnOKCust.Click += new EventHandler(btnOKCust_Click);
+
+			Library.CustomerInfoList custInfoList = Library.CustomerInfoList.GetCustomerInfoList(activity, new Library.CustomerInfoList.Criteria()
+			                                                                                     {
+				CustCode = tbCustCode.Text,
+				CustName = tbCustName.Text
+			});
+			lvCustomers.Adapter = new CustomersAdapter(activity, custInfoList);
         }
 
         void lvCustomers_ItemClick(object sender, AdapterView.ItemClickEventArgs e)

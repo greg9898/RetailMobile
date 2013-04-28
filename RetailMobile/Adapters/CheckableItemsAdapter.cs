@@ -130,7 +130,11 @@ namespace RetailMobile
         {
             int index = int.Parse(((EditText)sender).Tag.ToString());
             Library.ItemInfo item = _ItemInfoList[index];
-            item.ItemQty = int.Parse(((EditText)sender).Text);
+			int res = 0;
+			if(int.TryParse(((EditText)sender).Text,out res))
+			{
+				item.ItemQty = res;
+			}            
         }
 
         void itemBox_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)

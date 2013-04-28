@@ -22,6 +22,7 @@ namespace RetailMobile.Fragments
 
         Button btnSync;
 		Button btnSettings;
+		ProgressBar pbSync;
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
             base.OnActivityCreated(savedInstanceState);
@@ -36,8 +37,22 @@ namespace RetailMobile.Fragments
 			btnSettings = v.FindViewById<Button>(Resource.Id.btnSettings);
 			btnSettings.Click += new EventHandler(btnSettings_Click);
 
+			pbSync = v.FindViewById<ProgressBar>(Resource.Id.pbSync1);
+
             return v;
         }
+
+		public void ShowProgress()
+		{
+			btnSync.Visibility = ViewStates.Invisible;
+			pbSync.Visibility = ViewStates.Visible;
+		}
+
+		public void HideProgress()
+		{
+			btnSync.Visibility = ViewStates.Visible;
+			pbSync.Visibility = ViewStates.Invisible;
+		}
 
         void btnSync_Click(object sender, EventArgs e)
         {

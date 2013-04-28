@@ -147,6 +147,7 @@
     <AndroidResource Include="Resources\Drawable\my_edit_text_background_normal.xml" />
     <AndroidResource Include="Resources\Layout\calendar.xml" />
     <AndroidResource Include="Resources\Layout\calendar_item.xml" />
+    <AndroidResource Include="Resources\Drawable\retail.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

@@ -68,6 +68,8 @@ WHERE 1 = 1 ";
 //                    query += " AND ritems.item_qty_left = " + c.RetVal;
                 }
                 
+				query += " ORDER BY ritems.item_desc ";
+
                 IPreparedStatement ps = conn.PrepareStatement(query);
                 
                 IResultSet result = ps.ExecuteQuery();

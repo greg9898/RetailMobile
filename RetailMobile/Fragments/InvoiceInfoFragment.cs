@@ -26,7 +26,7 @@ namespace RetailMobile
         EditText tbHtrnTotValue;
         RetailMobile.Fragments.ItemActionBar actionBar;
         
-        public static BaseFragment NewInstance(long objId)
+		public static InvoiceInfoFragment NewInstance(long objId)
         {
             var detailsFrag = new InvoiceInfoFragment { Arguments = new Bundle() };
             detailsFrag.Arguments.PutLong("ObjectId", objId);
@@ -42,6 +42,7 @@ namespace RetailMobile
             actionBar = (RetailMobile.Fragments.ItemActionBar)((Android.Support.V4.App.FragmentActivity)this.Activity).SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
             actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
             string save = this.Activity.GetString(Resource.String.btnSave);
+			actionBar.ClearButtons();
             actionBar.AddButtonRight(SAVE_BUTTON, save, Resource.Drawable.save_48);
             
             string title = this.Activity.GetString(Resource.String.lblInvoice);

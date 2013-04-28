@@ -72,6 +72,12 @@ namespace RetailMobile
             ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
             ft.Commit();
 
+			InvoiceInfoFragment detailsInfo = InvoiceInfoFragment.NewInstance(0);
+			ft = FragmentManager.BeginTransaction();
+			ft.Replace(Resource.Id.detailInfo_fragment, detailsInfo);
+			ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+			ft.Commit();
+
             this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Visible;
 			this.Activity.FindViewById<LinearLayout>(Resource.Id.layoutDetails).Visibility = ViewStates.Visible;
 			this.Activity.FindViewById<LinearLayout>(Resource.Id.layoutList).Visibility = ViewStates.Visible;
@@ -87,6 +93,12 @@ namespace RetailMobile
             ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
             ft.Commit();
 
+			ItemFragment detailsInfo = ItemFragment.NewInstance(0);
+			ft = FragmentManager.BeginTransaction();
+			ft.Replace(Resource.Id.detailInfo_fragment, detailsInfo);
+			ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+			ft.Commit();
+
 			this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Visible;
 			this.Activity.FindViewById<LinearLayout>(Resource.Id.layoutDetails).Visibility = ViewStates.Visible;
 			this.Activity.FindViewById<LinearLayout>(Resource.Id.layoutList).Visibility = ViewStates.Visible;
@@ -100,9 +112,14 @@ namespace RetailMobile
             details = DetailsFragment.NewInstance((int)Base.MenuItems.Customers);
             var ft = FragmentManager.BeginTransaction();
             ft.Replace(Resource.Id.details_fragment, details);
-
             ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
             ft.Commit();
+
+			CustomerFragment detailsInfo = CustomerFragment.NewInstance(0);
+			ft = FragmentManager.BeginTransaction();
+			ft.Replace(Resource.Id.detailInfo_fragment, detailsInfo);
+			ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+			ft.Commit();
 
 			this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Visible;
 			this.Activity.FindViewById<LinearLayout>(Resource.Id.layoutDetails).Visibility = ViewStates.Visible;

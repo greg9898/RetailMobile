@@ -73,7 +73,7 @@ namespace RetailMobile
 			{
 				Common.CurrentDealerID = user.deal_id;
 
-				Sync.Synchronize(ctx);
+				//Sync.Synchronize(ctx);
 
 				isSuccessful = true;
 				PreferencesUtil.Username = username;

@@ -13,19 +13,23 @@ using Android.Support.V4.App;
 
 namespace RetailMobile
 {
-    [Activity(Label = "Main menu", MainLauncher = true, Icon = "@drawable/icon", Theme = "@android:style/Theme.Light.NoTitleBar.Fullscreen")]
+	[Activity(Label = "Ασυρματη Παραγγελιοληψια", MainLauncher = true, Icon = "@drawable/retail", Theme = "@android:style/Theme.Light.NoTitleBar.Fullscreen")]
     public class MainMenu : Android.Support.V4.App.FragmentActivity
     {
+		RetailMobile.Fragments.ActionBar myActionBar;
         protected override void OnCreate(Bundle bundle)
         {   
             base.OnCreate(bundle);
 			PreferencesUtil.LoadSettings(this);
 			Sync.GenerateDatabase(this);
-			Sync.SyncUsers(this);
-                                    
-            SetContentView(Resource.Layout.MainMenu);
-            RetailMobile.Fragments.ActionBar myActionBar = (RetailMobile.Fragments.ActionBar)SupportFragmentManager.FindFragmentById(Resource.Id.ActionBarMain);
-            myActionBar.SyncClicked += new Fragments.ActionBar.SyncCLickedDelegate(myActionBar_SyncClicked);
+
+			SetContentView(Resource.Layout.MainMenu);
+			myActionBar = (RetailMobile.Fragments.ActionBar)SupportFragmentManager.FindFragmentById(Resource.Id.ActionBarMain);
+			myActionBar.SyncClicked += new Fragments.ActionBar.SyncCLickedDelegate(myActionBar_SyncClicked);
+
+			ShowProgressBar();
+			System.Threading.Tasks.Task.Factory.StartNew(() =>Sync.SyncUsers(this)).ContinueWith(task =>this.RunOnUiThread(() =>HideProgressBar()));
+			//Sync.SyncUsers(this);
 
 			//RetailMobile.LoginFragment loginFragment = (RetailMobile.LoginFragment)SupportFragmentManager.FindFragmentById(Resource.Id.detail);
 
@@ -60,18 +64,50 @@ namespace RetailMobile
 
         }
 
+		public void ShowProgressBar()
+		{
+			myActionBar.ShowProgress();
+		}
+
+		public void HideProgressBar()
+		{
+			myActionBar.HideProgress();
+		}
+
         void myActionBar_SyncClicked()
         {
+			ShowProgressBar();
+
             //start sync
 			if(Common.CurrentDealerID == 0)
 			{
-				Sync.SyncUsers(this);
+				System.Threading.Tasks.Task.Factory.StartNew(() =>Sync.SyncUsers(this)).ContinueWith(task =>this.RunOnUiThread(() =>HideProgressBar()));
 			}
 			else
 			{
-            	Sync.Synchronize(this);
+				System.Threading.Tasks.Task.Factory.StartNew(() =>Sync.SyncTrans(this)).ContinueWith(task =>this.RunOnUiThread(() =>HideProgressBar()));
 			}
         }
+
+		public override bool OnKeyDown (Keycode keyCode, KeyEvent e)
+		{
+			if(keyCode == Keycode.Back)
+			{
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.SetMessage(Resource.String.ExitPrompt)
+					.SetCancelable(false)
+						.SetPositiveButton(Resource.String.Yes,new EventHandler<DialogClickEventArgs>((o,ea)=>{
+							Finish();
+						}))
+						.SetNegativeButton(Resource.String.No,new EventHandler<DialogClickEventArgs>((o,ea)=>{
+
+						}));
+				AlertDialog alert = builder.Create();
+				alert.Show();
+				return true;
+			}
+			return base.OnKeyDown (keyCode, e);
+		}
      
     }
 }
