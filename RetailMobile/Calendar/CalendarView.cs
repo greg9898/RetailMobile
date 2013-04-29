@@ -14,6 +14,8 @@ namespace RetailMobile
     {        
         Context currentContext;
         System.DateTime selectedDate;
+		public delegate void DateSelectedDelegate(System.DateTime date);
+		public event DateSelectedDelegate DateSlected;
 
         public System.DateTime SelectedDate
         {
@@ -101,6 +103,8 @@ namespace RetailMobile
                     // setResult(RESULT_OK, intent);
 //                    selectedDate = DateHelper.GetDate(dateS);
                     selectedDate = System.DateTime.Parse(dateS);
+					if(DateSlected != null)
+						DateSlected(selectedDate);
                     Dismiss();
                 }
                     

@@ -2,13 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
     android:layout_height="fill_parent">
     
     		 <TextView
             android:layout_width="fill_parent"            
             android:layout_height="wrap_content"
             android:text="@string/Username"
-            android:textSize="24sp" />
+            android:textColor="@color/caption_text"
+            android:textSize="20sp" />
     
    			 <EditText
    			 android:id="@+id/tbUsername"
@@ -20,7 +23,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/Password"
-            android:textSize="24sp" />
+            android:textColor="@color/caption_text"
+            android:textSize="20sp" />
             
             <EditText
             android:id="@+id/tbPassword"
@@ -29,6 +33,7 @@
             android:textSize="24sp" />
             
             <Button
+            style="@style/mainButtonStyle"
             android:id="@+id/btnLogin"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

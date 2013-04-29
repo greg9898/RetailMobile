@@ -148,6 +148,10 @@
     <AndroidResource Include="Resources\Layout\calendar.xml" />
     <AndroidResource Include="Resources\Layout\calendar_item.xml" />
     <AndroidResource Include="Resources\Drawable\retail.png" />
+    <AndroidResource Include="Resources\Drawable\search_128.png" />
+    <AndroidResource Include="Resources\Drawable\minus_64.png" />
+    <AndroidResource Include="Resources\Drawable\plus_64.png" />
+    <AndroidResource Include="Resources\Drawable\main_button_selector.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

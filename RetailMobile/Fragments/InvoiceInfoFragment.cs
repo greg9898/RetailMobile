@@ -50,10 +50,10 @@ namespace RetailMobile
             
             Button btnSearchItems = v.FindViewById<Button>(Resource.Id.btnSearchItems);
             Button btnSearchCustomer = v.FindViewById<Button>(Resource.Id.btnSearchCustomer);
-            Button btnSave = v.FindViewById<Button>(Resource.Id.btnSave);
+            //Button btnSave = v.FindViewById<Button>(Resource.Id.btnSave);
             btnSearchCustomer.Click += new EventHandler(btnSearchCustomer_Click);
             btnSearchItems.Click += new EventHandler(btnSearchItems_Click);
-            btnSave.Click += new EventHandler(btnSave_Click);
+            //btnSave.Click += new EventHandler(btnSave_Click);
             
             lvDetails = v.FindViewById<ListView>(Resource.Id.lvDetails);
             lvDetails.AddHeaderView(inflater.Inflate(Resource.Layout.TransDetRow_header, null));
@@ -89,9 +89,13 @@ namespace RetailMobile
         void ShowCalendar(Android.Content.Context ctx, DateTime currentDate)
         {
             CalendarView calendarDlg = new CalendarView(ctx, currentDate);
-            calendarDlg.DismissEvent += (object sender, EventArgs e) => {
-                tbHtrnDate.Text = calendarDlg.SelectedDate.ToString(PreferencesUtil.DateFormatDateOnly);
-            };
+			calendarDlg.DateSlected +=	new CalendarView.DateSelectedDelegate((d)=>{
+				tbHtrnDate.Text = d.ToString(PreferencesUtil.DateFormatDateOnly);
+			});
+            /*calendarDlg.DismissEvent += (object sender, EventArgs e) => {
+				if(calendarDlg.SelectedDate != DateTime.MinValue)
+                	tbHtrnDate.Text = calendarDlg.SelectedDate.ToString(PreferencesUtil.DateFormatDateOnly);
+            };*/
             calendarDlg.Show();
         }
         

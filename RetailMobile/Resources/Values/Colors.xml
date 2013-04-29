@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="background">#FFFFFF</color>
+  <color name="background">#9EDFFF</color>
   <color name="foreground">#000000</color>
   <color name="light_blue">#4497B3</color>
   <color name="dark_blue">#22708A</color>
@@ -11,5 +11,9 @@
   <color name="menu_button1">#C1CDF5</color>
   <color name="menu_button2">#C1CDF5</color>
   <color name="action_bar_text">#FFFFFF</color>
-
+  <color name="main_background_1">#D0EAF7</color>
+  <color name="main_background_2">#D1E4ED</color>
+  <color name="caption_text">#495A91</color>
+  
 </resources>
+

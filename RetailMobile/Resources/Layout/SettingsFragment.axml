@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:orientation="vertical">
+    android:layout_marginRight="5dp">
   
+  <LinearLayout
+  android:id="@+id/layoutTop"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginRight="44dp"
+    >
+
+<Button
+    android:id="@+id/btnMainSync"
+    style="@style/menuButtonStyle"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/btnSync"
+    android:layout_marginTop="3dp"
+    />
+    
   <LinearLayout
   android:id="@+id/layoutIP"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:layout_marginTop="2dp"
     android:layout_marginRight="44dp"
     >
       <TextView
@@ -37,6 +54,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:layout_marginTop="2dp"
     android:layout_marginRight="44dp"
     >
       <TextView
@@ -63,6 +81,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:layout_marginTop="2dp"
     android:layout_marginRight="44dp"
     >
       <TextView
@@ -83,21 +102,16 @@
         android:textSize="16sp"
         />
     </LinearLayout>
-    
-     <Button
-    android:id="@+id/btnMainSync"
-    style="@style/menuButtonStyle"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/btnSync"
-    />
-    
+       
+  </LinearLayout>
+  
+  
     <Button
     android:id="@+id/btnLogout"
     style="@style/menuButtonStyle"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
     android:text="@string/Logout"
     />
-       
-  </LinearLayout>
+  </RelativeLayout>
