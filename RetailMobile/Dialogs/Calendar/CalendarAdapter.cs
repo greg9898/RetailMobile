@@ -19,24 +19,12 @@ namespace RetailMobile
         // references to our items
         public string[] days;
 
-        public string[] Days
-        {
-            get
-            {
-                return days;
-            }
-            set
-            {
-                days = value;
-            }
-        }
-        
         public CalendarAdapter(Context c, Calendar monthCalendar)
         {
             month = monthCalendar;
             selectedDate = (Calendar)monthCalendar.Clone();
             mContext = c;
-            month.Set(CalendarField.DayOfMonth, 1);
+//            month.Set(CalendarField.DayOfMonth, 1);
             this.items = new List<string>();
 
             RefreshDays();
@@ -66,10 +54,12 @@ namespace RetailMobile
             }
 
             dayView = (TextView)v.FindViewById(Resource.Id.date);
-            
+            ImageView iw = (ImageView)v.FindViewById(Resource.Id.date_icon);
+
             // disable empty days from the beginning
             if (days[position] == "")
             {
+                iw.Visibility = ViewStates.Invisible;
                 dayView.Clickable = false;
                 dayView.Focusable = false;
             } else
@@ -79,38 +69,16 @@ namespace RetailMobile
                     && days[position] == "" + selectedDate.Get(CalendarField.DayOfMonth))
                 {
                     v.SetBackgroundResource(Resource.Drawable.button_selector);
+                    iw.Visibility = ViewStates.Visible;
                 } else
                 {
                     v.SetBackgroundResource(Resource.Color.light_blue);
+                    iw.Visibility = ViewStates.Invisible;
                 }
             }
 
             dayView.Text = days[position];
-            
-            // create date string for comparison
-            string date = days[position];
-            
-            if (date.Length == 1)
-            {
-                date = "0" + date;
-            }
 
-            string monthStr = "" + (month.Get(CalendarField.Month) + 1);
-            if (monthStr.Length == 1)
-            {
-                monthStr = "0" + monthStr;
-            }
-            
-            // show icon if date is not empty and it exists in the items array
-            ImageView iw = (ImageView)v.FindViewById(Resource.Id.date_icon);
-            if (date.Length > 0 && items != null && items.Contains(date))
-            {
-                iw.Visibility = ViewStates.Visible;
-                ;
-            } else
-            {
-                iw.Visibility = ViewStates.Invisible;
-            }
             return v;
         }
 
@@ -124,27 +92,11 @@ namespace RetailMobile
 
         #endregion
 
-        public void SetItems(List<string> items)
-        {
-            for (int i = 0; i != items.Count; i++)
-            {
-                if (items[i].Length == 1)
-                {
-                    items[i] = "0" + items[i];
-                }
-            }
-
-            this.items = items;
-        }
-
         public void RefreshDays()
-        {
-            // clear items
-            items.Clear();
-            
+        {            
             int lastDay = month.GetActualMaximum(CalendarField.DayOfMonth);
             int firstDay = month.Get(CalendarField.DayOfWeek);
-            
+           
             // figure size of the array
             if (firstDay == 1)
             {

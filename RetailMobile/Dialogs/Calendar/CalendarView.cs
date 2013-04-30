@@ -13,21 +13,13 @@ namespace RetailMobile
     public class CalendarView : Dialog
     {        
         Context currentContext;
-        System.DateTime selectedDate;
-		public delegate void DateSelectedDelegate(System.DateTime date);
-		public event DateSelectedDelegate DateSlected;
-
-        public System.DateTime SelectedDate
-        {
-            get
-            {
-                return selectedDate;
-            }
-        }
+        public delegate void DateSelectedDelegate(System.DateTime date);
+        public event DateSelectedDelegate DateSlected;
         
         public CalendarView(Context context, System.DateTime currentDate):base(context, Resource.Style.cust_dialog)
         {
             currentContext = context;
+//            Window.RequestFeature(Android.Views.WindowFeatures.NoTitle);
 
             if (currentDate > new System.DateTime(1970, 1, 1, 0, 0, 0))
             {
@@ -37,9 +29,8 @@ namespace RetailMobile
             }
         }
         
-        public Calendar  month = Calendar.Instance;
-        public CalendarAdapter calendarAdapter;
-        public List<string> items; // container to store some random calendar items
+        Calendar  month = Calendar.Instance;
+        CalendarAdapter calendarAdapter;
         
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -47,15 +38,11 @@ namespace RetailMobile
             SetContentView(Resource.Layout.calendar);
 //            month = Calendar.Instance;
             
-            items = new List<string>();
             calendarAdapter = new CalendarAdapter(currentContext, month);
 
             GridView gridview = (GridView)FindViewById(Resource.Id.gridview);
             gridview.SetAdapter(calendarAdapter);
 
-            System.Threading.Thread th = new  System.Threading.Thread(new  System.Threading.ThreadStart(CalendarUpdater));
-            th.Start();
-            
             TextView title = (TextView)FindViewById(Resource.Id.title);
             title.Text = DateFormat.Format("MMMM yyyy", month);
             
@@ -102,9 +89,10 @@ namespace RetailMobile
                     string dateS = DateFormat.Format("yyyy-MM", month) + "-" + day;
                     // setResult(RESULT_OK, intent);
 //                    selectedDate = DateHelper.GetDate(dateS);
-                    selectedDate = System.DateTime.Parse(dateS);
-					if(DateSlected != null)
-						DateSlected(selectedDate);
+                    System.DateTime selectedDate = System.DateTime.Parse(dateS);
+
+                    if (DateSlected != null)
+                        DateSlected(selectedDate);
                     Dismiss();
                 }
                     
@@ -117,36 +105,8 @@ namespace RetailMobile
             
             calendarAdapter.RefreshDays();
             calendarAdapter.NotifyDataSetChanged();
-            System.Threading.Thread th = new  System.Threading.Thread(new  System.Threading.ThreadStart(CalendarUpdater));
-            th.Start();
             
             title.Text = DateFormat.Format("MMMM yyyy", month);
-        }
-        
-        public void OnNewIntent(Intent intent)
-        {
-            string date = intent.GetStringExtra("date");
-            string[] dateArr = date.Split('-'); // date format is yyyy-mm-dd
-            month.Set(int.Parse(dateArr[0]), int.Parse(dateArr[1]), int.Parse(dateArr[2]));
-        }
-        
-        public void CalendarUpdater()
-        {      
-            items.Clear();
-             
-            Date date = month.Time;
-            string dateString = DateHelper.GetDateString(date);
-                                  
-            items.Add(date.Day.ToString());
-            calendarAdapter.SetItems(items);
-            calendarAdapter.NotifyDataSetChanged();
-            /*
-             * for(int i=0;i<31;i++) { Random r = new Random();
-             * 
-             * if(r.nextInt(10)>6) { items.add(Integer.toString(i)); } }
-             * 
-             * adapter.setItems(items); adapter.notifyDataSetChanged();
-             */
         }
     }
 }

@@ -5,38 +5,34 @@
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
     android:layout_height="fill_parent">
-    
-    		 <TextView
-            android:layout_width="fill_parent"            
-            android:layout_height="wrap_content"
-            android:text="@string/Username"
-            android:textColor="@color/caption_text"
-            android:textSize="20sp" />
-    
-   			 <EditText
-   			 android:id="@+id/tbUsername"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="24sp" />
-            
-            <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/Password"
-            android:textColor="@color/caption_text"
-            android:textSize="20sp" />
-            
-            <EditText
-            android:id="@+id/tbPassword"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="24sp" />
-            
-            <Button
-            style="@style/mainButtonStyle"
-            android:id="@+id/btnLogin"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btnLogin"
-            android:textSize="24sp" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Username"
+        android:textColor="@color/caption_text"
+        android:textSize="20sp" />
+    <EditText
+        android:id="@+id/tbUsername"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Password"
+        android:textColor="@color/caption_text"
+        android:textSize="20sp" />
+    <EditText
+        android:id="@+id/tbPassword"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:textSize="24sp" />
+    <Button
+        style="@style/mainButtonStyle"
+        android:id="@+id/btnLogin"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btnLogin"
+        android:textSize="24sp" />
 </LinearLayout>

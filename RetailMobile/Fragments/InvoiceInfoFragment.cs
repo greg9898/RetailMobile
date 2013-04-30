@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using RetailMobile.Library;
 
 namespace RetailMobile
 {
@@ -26,7 +27,7 @@ namespace RetailMobile
         EditText tbHtrnTotValue;
         RetailMobile.Fragments.ItemActionBar actionBar;
         
-		public static InvoiceInfoFragment NewInstance(long objId)
+        public static InvoiceInfoFragment NewInstance(long objId)
         {
             var detailsFrag = new InvoiceInfoFragment { Arguments = new Bundle() };
             detailsFrag.Arguments.PutLong("ObjectId", objId);
@@ -42,7 +43,7 @@ namespace RetailMobile
             actionBar = (RetailMobile.Fragments.ItemActionBar)((Android.Support.V4.App.FragmentActivity)this.Activity).SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
             actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
             string save = this.Activity.GetString(Resource.String.btnSave);
-			actionBar.ClearButtons();
+            actionBar.ClearButtons();
             actionBar.AddButtonRight(SAVE_BUTTON, save, Resource.Drawable.save_48);
             
             string title = this.Activity.GetString(Resource.String.lblInvoice);
@@ -50,15 +51,16 @@ namespace RetailMobile
             
             Button btnSearchItems = v.FindViewById<Button>(Resource.Id.btnSearchItems);
             Button btnSearchCustomer = v.FindViewById<Button>(Resource.Id.btnSearchCustomer);
-            //Button btnSave = v.FindViewById<Button>(Resource.Id.btnSave);
+            Button btnAddValue = v.FindViewById<Button>(Resource.Id.btnAddValue);
+            Button btnSubstractValue = v.FindViewById<Button>(Resource.Id.btnSubstractValue);
             btnSearchCustomer.Click += new EventHandler(btnSearchCustomer_Click);
             btnSearchItems.Click += new EventHandler(btnSearchItems_Click);
-            //btnSave.Click += new EventHandler(btnSave_Click);
+            btnAddValue.Click += btnAddValue_Click;
+            btnSubstractValue.Click += btnSubstractValue_Click;
             
             lvDetails = v.FindViewById<ListView>(Resource.Id.lvDetails);
             lvDetails.AddHeaderView(inflater.Inflate(Resource.Layout.TransDetRow_header, null));
-            LoadDetailsAdapter();
-            
+
             tbCustCode = v.FindViewById<EditText>(Resource.Id.tbCustCode1);
             tbHtrnID = v.FindViewById<EditText>(Resource.Id.tbHtrnID);
             tbCustDesc = v.FindViewById<EditText>(Resource.Id.tbCustName1);
@@ -82,20 +84,18 @@ namespace RetailMobile
                 
                 ShowCalendar(v.Context, DateTime.ParseExact(tbHtrnDate.Text, PreferencesUtil.DateFormatDateOnly, System.Globalization.CultureInfo.InvariantCulture));
             };
-            
+
+            LoadDetailsAdapter();
+
             return v;
         }
         
         void ShowCalendar(Android.Content.Context ctx, DateTime currentDate)
         {
             CalendarView calendarDlg = new CalendarView(ctx, currentDate);
-			calendarDlg.DateSlected +=	new CalendarView.DateSelectedDelegate((d)=>{
-				tbHtrnDate.Text = d.ToString(PreferencesUtil.DateFormatDateOnly);
-			});
-            /*calendarDlg.DismissEvent += (object sender, EventArgs e) => {
-				if(calendarDlg.SelectedDate != DateTime.MinValue)
-                	tbHtrnDate.Text = calendarDlg.SelectedDate.ToString(PreferencesUtil.DateFormatDateOnly);
-            };*/
+            calendarDlg.DateSlected += new CalendarView.DateSelectedDelegate(d => {
+                tbHtrnDate.Text = d.ToString(PreferencesUtil.DateFormatDateOnly);
+            });
             calendarDlg.Show();
         }
         
@@ -228,7 +228,9 @@ namespace RetailMobile
             tbHtrnVatValue.Text = header.HtrnVatVal.ToString(PreferencesUtil.DecimalFormat);
             tbHtrnTotValue.Text = header.HtrnTotValue.ToString(PreferencesUtil.DecimalFormat);
         }
-        
+
+        TransDetAdapter.SelectedDetail selectedDetail = null;
+
         void LoadDetailsAdapter()
         {
             detailsAdapter = new TransDetAdapter(Activity, header.TransDetList);
@@ -237,10 +239,55 @@ namespace RetailMobile
                 FillHeaderCalcValues();
                 detailsAdapter.NotifyDataSetChanged();
             };
+            detailsAdapter.DetailFieldSelectedEvent += (selDetail) => {
+                selectedDetail = selDetail;
+            };
             
             lvDetails.SetAdapter(detailsAdapter);
+
+            FillHeaderCalcValues();
         }
         
+        void btnSubstractValue_Click(object sender, EventArgs e)
+        {
+            if (lvDetails.HasFocus && selectedDetail != null)
+            {
+                if (selectedDetail.Property == "QTY")
+                {
+                    if (selectedDetail.TransDetail.DtrnQty1 > 1)
+                    {
+                        selectedDetail.TransDetail.DtrnQty1--;
+                    }
+                } else if (selectedDetail.Property == "DISC")
+                {
+                    if (selectedDetail.TransDetail.DtrnDiscLine1 > 1)
+                    {
+                        selectedDetail.TransDetail.DtrnDiscLine1--;
+                    }
+                }
+                
+                detailsAdapter.NotifyDataSetChanged();
+//                lvDetails.SetSelection(selectedDetail.Position);
+            }
+        }
+        
+        void btnAddValue_Click(object sender, EventArgs e)
+        {
+            if (lvDetails.HasFocus && selectedDetail != null)
+            {
+                if (selectedDetail.Property == "QTY")
+                {
+                    selectedDetail.TransDetail.DtrnQty1++;
+                } else if (selectedDetail.Property == "DISC")
+                {
+                    selectedDetail.TransDetail.DtrnDiscLine1++;
+                }
+              
+                detailsAdapter.NotifyDataSetChanged();
+//                lvDetails.SetSelection(selectedDetail.Position);
+            }
+        }
+
         void btnSearchItems_Click(object sender, EventArgs e)
         {
             ItemsSelectDialog dialogItems = new ItemsSelectDialog(Activity, Resource.Style.cust_dialog, header);
@@ -249,13 +296,12 @@ namespace RetailMobile
                 foreach (int itemId in dialogItems.CheckedItemIds.Keys)
                 {
                     
-                    Library.TransDet transDet = new Library.TransDet();
+                    TransDet transDet = new TransDet();
                     transDet.LoadItemInfo(Activity, itemId, dialogItems.CheckedItemIds[itemId], header.CstId);
-                    Android.Util.Log.Debug("btnOKItem_Click", itemId + " " + transDet.ItemDesc);
+                    Log.Debug("btnOKItem_Click", itemId + " " + transDet.ItemDesc);
                     header.TransDetList.Add(transDet);
                 }
                 
-                FillHeaderCalcValues();
                 LoadDetailsAdapter();
             };
             

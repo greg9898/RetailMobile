@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    style="@style/fillWidth">
     <RelativeLayout
         android:id="@+id/header"
         android:orientation="horizontal"
@@ -10,8 +9,7 @@
         android:layout_height="wrap_content"
         style="@style/listRowHeaderStyle">
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            style="@style/fillWidth"
             android:gravity="left">
             <TextView
                 android:id="@+id/previous"
@@ -38,8 +36,7 @@
             android:gravity="center_horizontal"
             android:layout_toRightOf="@+id/previous" />
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            style="@style/fillWidth"
             android:gravity="right"
             android:layout_toRightOf="@+id/title">
             <TextView
@@ -58,11 +55,12 @@
     </RelativeLayout>
     <GridView
         android:id="@+id/gridview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:numColumns="7"
+        android:layout_width="fill_parent"
+        android:layout_height="130dp"
         android:verticalSpacing="2dp"
         android:horizontalSpacing="2dp"
+        android:isScrollContainer="false"
         android:stretchMode="columnWidth"
         android:gravity="center" />
 </LinearLayout>

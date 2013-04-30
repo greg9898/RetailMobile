@@ -36,14 +36,14 @@
             android:layout_below="@id/lblCustomerName" />
         <Button
             android:id="@+id/btnClose"
-            style="@style/menuButtonStyle"
+            style="@style/mainButtonStyle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:text="@string/btnClose" />
         <Button
             android:id="@+id/btnOK"
-            style="@style/menuButtonStyle"
+            style="@style/mainButtonStyle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/btnClose"

@@ -1,27 +1,26 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Android.Util;
+using RetailMobile.Library;
 
 namespace RetailMobile
 {
     public class TransDetAdapter : ArrayAdapter<Library.TransDet>
     { 
         Activity context = null;
-        Library.TransDetList dataSource;
+        EditText tbDtrn_qty1;
+        EditText tbDtrn_disc_line1;
+        TransDetList dataSource;
         public delegate void QtysChangedDeletegate();
 
+        public delegate void QtysSelectedDeletegate(SelectedDetail detail);
+        
         public event QtysChangedDeletegate QtysChangedEvent;
+        public event QtysSelectedDeletegate DetailFieldSelectedEvent;
 
-        public TransDetAdapter(Activity context, Library.TransDetList list)
+        public TransDetAdapter(Activity context, TransDetList list)
             : base(context, Resource.Layout.TransDetRow, list)
         {
             this.context = context;
@@ -37,9 +36,9 @@ namespace RetailMobile
 
             TextView lblItemCode = (TextView)view.FindViewById(Resource.Id.lblDtrn_ItemCode);
             TextView lblItemDesc = (TextView)view.FindViewById(Resource.Id.tbItemDesc);
-            EditText tbDtrn_qty1 = view.FindViewById<EditText>(Resource.Id.tbDtrn_qty1);
+            tbDtrn_qty1 = view.FindViewById<EditText>(Resource.Id.tbDtrn_qty1);
             TextView lblDtrn_unit_price = view.FindViewById<TextView>(Resource.Id.lblDtrn_unit_price);
-            EditText tbDtrn_disc_line1 = view.FindViewById<EditText>(Resource.Id.tbDtrn_disc_line1);
+            tbDtrn_disc_line1 = view.FindViewById<EditText>(Resource.Id.tbDtrn_disc_line1);
             TextView lblDtrn_net_value = view.FindViewById<TextView>(Resource.Id.lblDtrn_net_value);
             TextView lblDtrn_vat_value = view.FindViewById<TextView>(Resource.Id.lblDtrn_vat_value);
 
@@ -58,14 +57,46 @@ namespace RetailMobile
 
             tbDtrn_qty1.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbDtrn_qty1_TextChanged);
             tbDtrn_disc_line1.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbDtrn_disc_line1_TextChanged);
+            tbDtrn_qty1.FocusChange += tbQty_HandleFocusChange;
+            tbDtrn_disc_line1.FocusChange += tbQty_HandleFocusChange;
 
             return view;
+        }
+
+        void tbQty_HandleFocusChange(object sender, View.FocusChangeEventArgs e)
+        {          
+            if (DetailFieldSelectedEvent != null)
+            {
+                if (e.HasFocus)
+                {
+                    int index = int.Parse(((EditText)sender).Tag.ToString());
+
+                    if (sender.Equals(tbDtrn_qty1))
+                    {                      
+                        DetailFieldSelectedEvent(new SelectedDetail(){  
+                            Position = index,
+                            TransDetail = dataSource[index],
+                            Property = "QTY"
+                        });
+                    } else  if (sender.Equals(tbDtrn_disc_line1))
+                    {
+                        DetailFieldSelectedEvent(new SelectedDetail(){  
+                            Position = index,
+                            TransDetail = dataSource[index], 
+                            Property = "DISC"
+                        });
+                    }
+                } else
+                {
+                    DetailFieldSelectedEvent(null);
+                }
+            }
         }
 
         void tbDtrn_qty1_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
             int index = int.Parse(((EditText)sender).Tag.ToString());
-            Library.TransDet detail = dataSource[index];
+            TransDet detail = dataSource[index];
             string qtyText = e.Text.ToString().Trim();
             detail.DtrnQty1 = qtyText != "" ? double.Parse(qtyText) : 0;
             
@@ -78,12 +109,28 @@ namespace RetailMobile
         void tbDtrn_disc_line1_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
             int index = int.Parse(((EditText)sender).Tag.ToString());
-            Library.TransDet detail = dataSource[index];
+            TransDet detail = dataSource[index];
             detail.DtrnDiscLine1 = double.Parse((sender as EditText).Text);
             
             if (QtysChangedEvent != null)
             {
                 QtysChangedEvent();
+            }
+        }
+
+        public class SelectedDetail
+        {
+            public TransDet TransDetail = null;
+            public int Position = -1;
+            public string Property = "";
+
+            public static SelectedDetail Empty()
+            {
+                SelectedDetail d = new SelectedDetail();
+                d.TransDetail = null;
+                d.Position = -1;
+                d.Property = "";
+                return d;
             }
         }
     }

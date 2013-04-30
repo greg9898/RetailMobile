@@ -208,6 +208,7 @@
             android:minWidth="25px"
             android:minHeight="25px"
             android:text="Save"
+            style="@style/mainButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>

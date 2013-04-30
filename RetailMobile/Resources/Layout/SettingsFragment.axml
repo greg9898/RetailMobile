@@ -4,114 +4,94 @@
     android:layout_height="fill_parent"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp">
-  
-  <LinearLayout
-  android:id="@+id/layoutTop"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_marginRight="44dp"
-    >
-
-<Button
-    android:id="@+id/btnMainSync"
-    style="@style/menuButtonStyle"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/btnSync"
-    android:layout_marginTop="3dp"
-    />
-    
-  <LinearLayout
-  android:id="@+id/layoutIP"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginTop="2dp"
-    android:layout_marginRight="44dp"
-    >
-      <TextView
-        android:id="@+id/lblIP"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/layoutTop"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textColor="@android:color/black"
-        android:text="@string/lblIP"
-        android:textSize="16sp"
-        />
-    <EditText
-        android:id="@+id/tbIP"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        />
+        android:orientation="vertical"
+        android:layout_marginRight="44dp">
+        <Button
+            android:id="@+id/btnMainSync"
+            style="@style/mainButtonStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btnSync"
+            android:layout_marginTop="3dp" />
+        <LinearLayout
+            android:id="@+id/layoutIP"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="44dp">
+            <TextView
+                android:id="@+id/lblIP"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@android:color/black"
+                android:text="@string/lblIP"
+                android:textSize="16sp" />
+            <EditText
+                android:id="@+id/tbIP"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layoutPort"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="44dp">
+            <TextView
+                android:id="@+id/lblPort"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/lblPort"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+            <EditText
+                android:id="@+id/tbPort"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layoutSyncModel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="44dp">
+            <TextView
+                android:id="@+id/lblSyncModel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/lblSyncModel"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+            <EditText
+                android:id="@+id/tbSyncModel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
     </LinearLayout>
-
-   <LinearLayout
-  android:id="@+id/layoutPort"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginTop="2dp"
-    android:layout_marginRight="44dp"
-    >
-      <TextView
-        android:id="@+id/lblPort"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/lblPort"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        />
-    <EditText
-        android:id="@+id/tbPort"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        />
-    </LinearLayout>
-    
-     <LinearLayout
-  android:id="@+id/layoutSyncModel"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginTop="2dp"
-    android:layout_marginRight="44dp"
-    >
-      <TextView
-        android:id="@+id/lblSyncModel"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/lblSyncModel"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        />
-    <EditText
-        android:id="@+id/tbSyncModel"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        />
-    </LinearLayout>
-       
-  </LinearLayout>
-  
-  
     <Button
-    android:id="@+id/btnLogout"
-    style="@style/menuButtonStyle"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:text="@string/Logout"
-    />
-  </RelativeLayout>
+        android:id="@+id/btnLogout"
+        style="@style/mainButtonStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/Logout" />
+</RelativeLayout>

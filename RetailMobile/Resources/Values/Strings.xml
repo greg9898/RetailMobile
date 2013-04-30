@@ -95,4 +95,7 @@
 	<string name="Yes">Yes</string>
 	<string name="No">No</string>
 	<string name="ExitPrompt">Are you sure you want to exit?</string>	
+	
+<string name="SynchronizationComplete">Synchronization complete!</string>	
+<string name="SynchronizationInProgress">Synchronizing...</string>
  </resources>
