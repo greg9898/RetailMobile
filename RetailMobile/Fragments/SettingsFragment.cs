@@ -76,11 +76,14 @@ namespace RetailMobile
 
         void btnSync_Click(object sender, EventArgs e)
         {
-            btnSync.Text = this.Activity.GetString(Resource.String.SynchronizationInProgress);
+            //btnSync.Text = this.Activity.GetString(Resource.String.SynchronizationInProgress);
             ((MainMenu)this.Activity).ShowProgressBar();
             Task.Factory.StartNew(() => Sync.Synchronize(this.Activity)
-            ).ContinueWith(task => this.Activity.RunOnUiThread(() => ((MainMenu)this.Activity).HideProgressBar())
-            ).ContinueWith(task => this.Activity.RunOnUiThread(() => this.btnSync.Text = this.Activity.GetString(Resource.String.SynchronizationComplete)));
+			                      ).ContinueWith(task => this.Activity.RunOnUiThread(() =>{ 
+				((MainMenu)this.Activity).HideProgressBar();
+				Toast.MakeText(this.Activity.ApplicationContext,this.Activity.GetString(Resource.String.SynchronizationComplete),ToastLength.Short).Show();
+			})
+			               );//.ContinueWith(task => this.Activity.RunOnUiThread(() => this.btnSync.Text = this.Activity.GetString(Resource.String.SynchronizationComplete)));
 
             //Sync.Synchronize(this.Activity);
         }

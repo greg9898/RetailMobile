@@ -40,6 +40,8 @@ namespace RetailMobile
             }
             
             Library.ItemInfo item = _ItemInfoList[position];
+			if(item == null)
+				return view;
             
             CheckBox itemBox = view.FindViewById<CheckBox>(Resource.Id.checkBox);
             EditText tbQty = view.FindViewById<EditText>(Resource.Id.tbQty);
@@ -50,11 +52,16 @@ namespace RetailMobile
             TextView tbItemQtyLeft = (TextView)view.FindViewById(Resource.Id.tbItemQtyLeft);
             RelativeLayout layout_checkable_item = view.FindViewById<RelativeLayout>(Resource.Id.layout_checkable_item_info);
             
-            tbItemCode.Text = item.item_cod;
-            tbItemName.Text = item.ItemDesc;
-            tbItemLastBuyDate.Text = item.ItemLastBuyDate.ToString(PreferencesUtil.DateFormatDateOnly);
-            tbItemQtyLeft.Text = item.ItemQtyLeft.ToString(PreferencesUtil.DecimalFormat);
-            tbItemSaleVal.Text = item.ItemSaleVal1.ToString(PreferencesUtil.DecimalFormat);
+			if(tbItemCode != null)
+            	tbItemCode.Text = item.item_cod;
+			if(tbItemName != null)
+				tbItemName.Text = item.ItemDesc;
+			if(tbItemLastBuyDate != null)
+            	tbItemLastBuyDate.Text = item.ItemLastBuyDate.ToString(PreferencesUtil.DateFormatDateOnly);
+			if(tbItemQtyLeft != null)
+            	tbItemQtyLeft.Text = item.ItemQtyLeft.ToString(PreferencesUtil.DecimalFormat);
+			if(tbItemSaleVal != null)
+            	tbItemSaleVal.Text = item.ItemSaleVal1.ToString(PreferencesUtil.DecimalFormat);
             
             itemBox.Tag = position;
             itemBox.CheckedChange += new EventHandler<CompoundButton.CheckedChangeEventArgs>(itemBox_CheckedChange);

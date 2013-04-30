@@ -250,6 +250,8 @@ namespace RetailMobile
         
         void btnSubstractValue_Click(object sender, EventArgs e)
         {
+			detailsAdapter.SubstractValue();
+			/*
             if (lvDetails.HasFocus && selectedDetail != null)
             {
                 if (selectedDetail.Property == "QTY")
@@ -268,12 +270,14 @@ namespace RetailMobile
                 
                 detailsAdapter.NotifyDataSetChanged();
 //                lvDetails.SetSelection(selectedDetail.Position);
-            }
+            }*/
         }
         
         void btnAddValue_Click(object sender, EventArgs e)
         {
-            if (lvDetails.HasFocus && selectedDetail != null)
+			detailsAdapter.AddValue();
+
+            /*if (lvDetails.HasFocus && selectedDetail != null)
             {
                 if (selectedDetail.Property == "QTY")
                 {
@@ -285,7 +289,7 @@ namespace RetailMobile
               
                 detailsAdapter.NotifyDataSetChanged();
 //                lvDetails.SetSelection(selectedDetail.Position);
-            }
+            }*/
         }
 
         void btnSearchItems_Click(object sender, EventArgs e)

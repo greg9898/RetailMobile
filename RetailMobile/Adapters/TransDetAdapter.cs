@@ -9,6 +9,7 @@ namespace RetailMobile
 {
     public class TransDetAdapter : ArrayAdapter<Library.TransDet>
     { 
+		private static EditText lastFocusedControl;
         Activity context = null;
         EditText tbDtrn_qty1;
         EditText tbDtrn_disc_line1;
@@ -28,6 +29,22 @@ namespace RetailMobile
             dataSource = list;
         }
 
+		public void AddValue()
+		{
+			if( lastFocusedControl != null)
+			{
+				lastFocusedControl.Text =  (int.Parse(lastFocusedControl.Text) + 1).ToString();
+			}
+		}
+
+		public void SubstractValue()
+		{
+			if( lastFocusedControl != null)
+			{
+				lastFocusedControl.Text =  (int.Parse(lastFocusedControl.Text) - 1).ToString();
+			}
+		}
+
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             View view = convertView;
@@ -41,6 +58,20 @@ namespace RetailMobile
             tbDtrn_disc_line1 = view.FindViewById<EditText>(Resource.Id.tbDtrn_disc_line1);
             TextView lblDtrn_net_value = view.FindViewById<TextView>(Resource.Id.lblDtrn_net_value);
             TextView lblDtrn_vat_value = view.FindViewById<TextView>(Resource.Id.lblDtrn_vat_value);
+
+			//tbDtrn_qty1.Click += new EventHandler((o,e)=>{TransDetAdapter.lastFocusedControl = (EditText)o;});
+			/*tbDtrn_qty1.Touch += new EventHandler<View.TouchEventArgs>((o,e)=>
+				{
+				if(MotionEventActions.Up == e.Event.Action) {
+					TransDetAdapter.lastFocusedControl.SetBackgroundResource(Resource.Drawable.my_edit_text_background_normal);
+					TransDetAdapter.lastFocusedControl = (EditText)o;
+					TransDetAdapter.lastFocusedControl.SetBackgroundResource(Resource.Drawable.my_edit_text_background_focused);
+				}
+
+			});
+			*/
+			tbDtrn_qty1.Touch += new EventHandler<View.TouchEventArgs>(EditTextTouchUp);
+			tbDtrn_disc_line1.Touch += new EventHandler<View.TouchEventArgs>(EditTextTouchUp);
 
             Library.TransDet detail = dataSource[position];
 
@@ -62,6 +93,16 @@ namespace RetailMobile
 
             return view;
         }
+
+		private void EditTextTouchUp(object sender, View.TouchEventArgs e)
+		{			
+			if(MotionEventActions.Up == e.Event.Action) {
+				if(TransDetAdapter.lastFocusedControl != null)
+					TransDetAdapter.lastFocusedControl.SetBackgroundResource(Resource.Drawable.my_edit_text_background_normal);
+				TransDetAdapter.lastFocusedControl = (EditText)sender;
+				TransDetAdapter.lastFocusedControl.SetBackgroundResource(Resource.Drawable.my_edit_text_background_focused);
+			}
+		}
 
         void tbQty_HandleFocusChange(object sender, View.FocusChangeEventArgs e)
         {          
