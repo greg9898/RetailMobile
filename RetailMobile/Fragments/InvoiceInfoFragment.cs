@@ -76,14 +76,20 @@ namespace RetailMobile
             if (tbCustCode != null)
                 tbCustCode.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbCustCode_TextChanged);
             if (tbHtrnID != null)
+			{
                 tbHtrnID.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbHtrnID_TextChanged);
+				tbHtrnID.Text = ObjectId.ToString();
+			}
             
-            tbHtrnID.Text = ObjectId.ToString();
+			if(tbHtrnDate != null)
+			{
             tbHtrnDate.Focusable = false;
             tbHtrnDate.Click += (object sender, EventArgs e) => {
                 
-                ShowCalendar(v.Context, DateTime.ParseExact(tbHtrnDate.Text, PreferencesUtil.DateFormatDateOnly, System.Globalization.CultureInfo.InvariantCulture));
+                //ShowCalendar(v.Context, DateTime.ParseExact(tbHtrnDate.Text, PreferencesUtil.DateFormatDateOnly, System.Globalization.CultureInfo.InvariantCulture));
+				ShowCalendar(v.Context, header.TransDate);
             };
+			}
 
             LoadDetailsAdapter();
 
@@ -94,7 +100,11 @@ namespace RetailMobile
         {
             CalendarView calendarDlg = new CalendarView(ctx, currentDate);
             calendarDlg.DateSlected += new CalendarView.DateSelectedDelegate(d => {
-                tbHtrnDate.Text = d.ToString(PreferencesUtil.DateFormatDateOnly);
+				//PreferencesUtil.DateFormatDateOnly
+                tbHtrnDate.Text = d.ToShortDateString();
+				header.TransDate = DateTime.Parse(tbHtrnDate.Text);
+				DateTime now = DateTime.Now;
+				header.TransDate = new DateTime(header.TransDate.Year, header.TransDate.Month, header.TransDate.Day, now.Hour, now.Minute, now.Second);
             });
             calendarDlg.Show();
         }
@@ -143,6 +153,8 @@ namespace RetailMobile
             }
             header.HtrnExpl = tbHtrnExpln.Text;
             header.TransDate = DateTime.Parse(tbHtrnDate.Text);
+			DateTime now = DateTime.Now;
+			header.TransDate = new DateTime(header.TransDate.Year, header.TransDate.Month, header.TransDate.Day, now.Hour, now.Minute, now.Second);
             
             header.Save(Activity);
             InitInvoiceScreen();

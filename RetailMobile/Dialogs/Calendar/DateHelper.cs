@@ -38,6 +38,12 @@ namespace RetailMobile
         {
             return GetUTCDateString(GetDate(date));
         }
+
+		public static String GetLocalizedDateTimeString(DateTime date)
+		{
+			string dateS = date.ToShortDateString();
+			return dateS;
+		}
                         
         public static Date GetDate(String date)
         {

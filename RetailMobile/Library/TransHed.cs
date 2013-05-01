@@ -76,7 +76,7 @@ namespace RetailMobile.Library
         
         public string TransDateText { get
             {
-                return TransDate.ToString(PreferencesUtil.DateFormatDateOnly);
+				return TransDate.ToShortDateString();//TransDate.ToString(PreferencesUtil.DateFormatDateOnly);
             } }
         
         

@@ -70,26 +70,36 @@ namespace RetailMobile
 
 			});
 			*/
-			tbDtrn_qty1.Touch += new EventHandler<View.TouchEventArgs>(EditTextTouchUp);
-			tbDtrn_disc_line1.Touch += new EventHandler<View.TouchEventArgs>(EditTextTouchUp);
 
-            Library.TransDet detail = dataSource[position];
+			Library.TransDet detail = dataSource[position];
 
-            tbDtrn_qty1.Tag = position;
-            tbDtrn_disc_line1.Tag = position;
+			if(tbDtrn_qty1 != null)
+			{
+				//tbDtrn_qty1.Touch += new EventHandler<View.TouchEventArgs>(EditTextTouchUp);
+				tbDtrn_qty1.Tag = position;
+				tbDtrn_qty1.Text = detail.DtrnQty1.ToString();
+				tbDtrn_qty1.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbDtrn_qty1_TextChanged);            
+				tbDtrn_qty1.FocusChange += tbQty_HandleFocusChange;
+				tbDtrn_qty1.Touch += new EventHandler<View.TouchEventArgs>(EditTextTouchUp);
+			}
+			if(tbDtrn_disc_line1 != null)
+			{
+				//tbDtrn_disc_line1.Touch += new EventHandler<View.TouchEventArgs>(EditTextTouchUp);
+				tbDtrn_disc_line1.Tag = position;
+				tbDtrn_disc_line1.Text = detail.DtrnDiscLine1.ToString();
+				tbDtrn_disc_line1.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbDtrn_disc_line1_TextChanged);
+				tbDtrn_disc_line1.FocusChange += tbQty_HandleFocusChange;
+				tbDtrn_disc_line1.Touch += new EventHandler<View.TouchEventArgs>(EditTextTouchUp);
+			}
+
 
             lblItemCode.Text = detail.ItemCode;
             lblItemDesc.Text = detail.ItemDesc;
-            tbDtrn_qty1.Text = detail.DtrnQty1.ToString();
+            
             lblDtrn_unit_price.Text = detail.DtrnUnitPrice.ToString();
-            tbDtrn_disc_line1.Text = detail.DtrnDiscLine1.ToString();
+            
             lblDtrn_net_value.Text = detail.DtrnNetValue.ToString();
             lblDtrn_vat_value.Text = detail.DtrnVatValue.ToString();
-
-            tbDtrn_qty1.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbDtrn_qty1_TextChanged);
-            tbDtrn_disc_line1.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbDtrn_disc_line1_TextChanged);
-            tbDtrn_qty1.FocusChange += tbQty_HandleFocusChange;
-            tbDtrn_disc_line1.FocusChange += tbQty_HandleFocusChange;
 
             return view;
         }

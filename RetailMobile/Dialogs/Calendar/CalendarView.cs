@@ -85,7 +85,8 @@ namespace RetailMobile
                     {
                         day = "0" + day;
                     }
-                    // return chosen date as string format
+
+					// return chosen date as string format
                     string dateS = DateFormat.Format("yyyy-MM", month) + "-" + day;
                     // setResult(RESULT_OK, intent);
 //                    selectedDate = DateHelper.GetDate(dateS);
