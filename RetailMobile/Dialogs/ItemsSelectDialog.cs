@@ -74,9 +74,10 @@ namespace RetailMobile
 
 			itemInfoList = new ItemInfoList ();
 			itemInfoList.CurrentCriteria = new ItemInfoList.Criteria ();
+			itemInfoList.LoadItems(this.Context);
 
 			adapterItems = new CheckableItemsAdapter (activity, itemInfoList);
-			adapterItems.LoadData (0);			
+			//adapterItems.LoadData(0);
 			lvItems.Adapter = adapterItems;
 
 			adapterItems.SingleItemSelectedEvent += () =>
@@ -95,7 +96,7 @@ namespace RetailMobile
 
 			//ItemInfoList.LoadAdapterItems(context,0,adapterItems, new Library.ItemInfoList.Criteria());
 
-			lvItems.Scroll += new EventHandler<AbsListView.ScrollEventArgs> ((o,e) => {
+			/*lvItems.Scroll += new EventHandler<AbsListView.ScrollEventArgs> ((o,e) => {
 				if (scrollLoading) {
 					if (e.TotalItemCount > previousTotal) {
 						scrollLoading = false;
@@ -113,7 +114,7 @@ namespace RetailMobile
 
 					scrollLoading = true;
 				}
-			});
+			});*/
 
 		}
         

@@ -14,7 +14,7 @@ namespace RetailMobile
 	public class CheckableItemsAdapter : ArrayAdapter<Library.ItemInfo>, IScrollLoadble
 	{
 		private Activity context = null;
-		private Library.ItemInfoList _ItemInfoList;
+		public Library.ItemInfoList _ItemInfoList;
 		private Dictionary<int, int> _checkedItemIds = new Dictionary<int, int> ();
 		public delegate void SingleItemSelectedDeletegate ();
 
@@ -174,7 +174,9 @@ namespace RetailMobile
 		{
 			if (_ItemInfoList.CurrentCriteria == null)
 				_ItemInfoList.CurrentCriteria = new ItemInfoList.Criteria ();
-			Library.ItemInfoList.LoadAdapterItems (context, page, this, _ItemInfoList.CurrentCriteria);
+
+			Library.ItemInfoList.LoadAdapterItems(context, page, this, _ItemInfoList.CurrentCriteria);
+			this.NotifyDataSetChanged();
 		}
 
 

@@ -54,7 +54,7 @@ SELECT TOP 30
 					fields + @" 
 FROM ritems" +
 						joinLastDate + @" 
-WHERE 1 = 1 AND ritems.id > :LastLoadedID ";
+WHERE 1 = 1  ";
 				
 				if (c.ItemDesc != "")
 				{
@@ -80,8 +80,8 @@ WHERE 1 = 1 AND ritems.id > :LastLoadedID ";
 				query += " ORDER BY ritems.item_desc ";
 				
 				IPreparedStatement ps = conn.PrepareStatement(query);
-				ps.Set("LastLoadedID",lastLoadedID);
-				ps.Set("ItemDesc",c.ItemDesc);
+				if(c.ItemDesc != "")
+					ps.Set("ItemDesc",c.ItemDesc);
 				
 				IResultSet result = ps.ExecuteQuery();
 				
@@ -173,7 +173,6 @@ WHERE 1 = 1  ";
 						item_cod = result.GetString("item_cod"),
 						ItemDesc = result.GetString("item_desc"),
 						ItemQtyLeft = Convert.ToDecimal(result.GetDouble("item_qty_left"))
-						
 					};
 					
 					if (c.CstId > 0)
@@ -199,7 +198,7 @@ WHERE 1 = 1  ";
         
         public class Criteria
         {
-            public string ItemDesc;
+            public string ItemDesc = "";
             public int Category1;
             public int Category2;
             public decimal RetVal;
