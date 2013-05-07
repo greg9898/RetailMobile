@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace RetailMobile
 {
-    public class ItemsInfoAdapter : ArrayAdapter<Library.ItemInfo>
+    public class ItemsInfoAdapter : ArrayAdapter<Library.ItemInfo>, IScrollLoadble
     {
         Activity context = null;
         Library.ItemInfoList ItemInfoList;
@@ -27,7 +27,8 @@ namespace RetailMobile
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            var item = this.ItemInfoList[position];
+			var item = this.GetItem(position);
+            //var item = this.ItemInfoList[position];
             View view = convertView;
             if (view == null)
                 view = context.LayoutInflater.Inflate(Resource.Layout.ItemInfoRow, null);
@@ -40,5 +41,14 @@ namespace RetailMobile
 
             return view;
         }
+
+		#region IScrollLoadble implementation
+
+		public void LoadData (int page)
+		{
+			Library.ItemInfoList.LoadAdapterItems(context, page, this, new Library.ItemInfoList.Criteria());
+		}
+
+		#endregion
     }
 }

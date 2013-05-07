@@ -25,12 +25,18 @@ namespace RetailMobile
         {
             var detailsFrag = new DetailsFragment { Arguments = new Bundle() };
             detailsFrag.Arguments.PutInt("idLvl1", objId);
+
             return detailsFrag;
         }
         public int ParentObjId
         {
             get { return Arguments.GetInt("idLvl1", -1); }
         }
+
+		bool scrollLoading = false;
+		private int currentPage = 0;
+		private int previousTotal = 0;
+		//IScrollLoadble LoadableAdapter;
 
 		public override void OnViewCreated (View p0, Bundle p1)
 		{
@@ -39,6 +45,29 @@ namespace RetailMobile
 			actionBar = (RetailMobile.Fragments.ItemActionBar)((Android.Support.V4.App.FragmentActivity)this.Activity).SupportFragmentManager.FindFragmentById(Resource.Id.ActionBarList);
 			actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
 			actionBar.AddButtonRight(ADD_BUTTON,"",Resource.Drawable.add_48);
+
+			//this.ListView.SetOnScrollListener(new EndlessScrollListener((IScrollLoadble)this.ListView.Adapter));
+			//this.ListView.Scroll += new EventHandler<AbsListView.ScrollEventArgs>();
+
+			this.ListView.Scroll += new EventHandler<AbsListView.ScrollEventArgs>((o,e)=>{
+				if (scrollLoading)
+				{
+
+					if (e.TotalItemCount > previousTotal)
+					{
+						scrollLoading = false;
+						previousTotal = e.TotalItemCount;
+						currentPage++;
+					}
+				}
+				
+				if (!scrollLoading
+				    && (e.FirstVisibleItem + e.VisibleItemCount) + 10 >= e.TotalItemCount && e.TotalItemCount >= 10)
+				{
+					((IScrollLoadble)this.ListView.Adapter).LoadData(currentPage);
+					scrollLoading = true;
+				}
+			});
 		}
 
 		void ActionBarButtonClicked(int id)
@@ -76,9 +105,12 @@ namespace RetailMobile
             {
                 case (int)Base.MenuItems.Items:
 				actionBar.SetTitle(this.Activity.GetString(Resource.String.miItems));
-                    Library.ItemInfoList itemInfoList = Library.ItemInfoList.GetItemInfoList(this.Activity);
+				Library.ItemInfoList itemInfoList = new RetailMobile.Library.ItemInfoList();
+                    //Library.ItemInfoList itemInfoList = Library.ItemInfoList.GetItemInfoList(this.Activity);
                     _list = itemInfoList;
                     ListAdapter = new ItemsInfoAdapter(Activity, itemInfoList);
+					((IScrollLoadble)ListAdapter).LoadData(0);
+					//Library.ItemInfoList.LoadAdapterItems(this.Activity, (ItemsInfoAdapter)ListAdapter);
                     break;
                 case (int)Base.MenuItems.Customers:
 				actionBar.SetTitle(this.Activity.GetString(Resource.String.miCustomers));
@@ -124,7 +156,8 @@ namespace RetailMobile
                 switch (ParentObjId)
                 {
                     case (int)Base.MenuItems.Items:
-                        long itemId = (long)((Library.ItemInfoList)_list)[index].ItemId;
+					long itemId = ((Library.ItemInfo)((ItemsInfoAdapter)ListAdapter).GetItem(index)).ItemId;
+                       // long itemId = (long)((Library.ItemInfoList)_list)[index].ItemId;
 
                         if (detailFragment == null || detailFragment.ObjectId != itemId)
                         {

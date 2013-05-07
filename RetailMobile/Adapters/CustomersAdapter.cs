@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace RetailMobile
 {
-    public class CustomersAdapter : ArrayAdapter<Library.CustomerInfo>
+    public class CustomersAdapter : ArrayAdapter<Library.CustomerInfo>, IScrollLoadble 
     {
         Activity context = null;
         Library.CustomerInfoList customerInfoList;
@@ -47,5 +47,14 @@ namespace RetailMobile
 
             return view;
         }
+
+		#region IScrollLoadble implementation
+
+		public void LoadData (int page)
+		{
+
+		}
+
+		#endregion
     }
 }

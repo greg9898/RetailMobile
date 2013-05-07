@@ -153,6 +153,7 @@
     <Compile Include="Dialogs\Calendar\CalendarView.cs" />
     <Compile Include="Dialogs\Calendar\DateHelper.cs" />
     <Compile Include="Dialogs\Calendar\ExpandableHeightGridView.cs" />
+    <Compile Include="Interfaces\IScrollLoadble.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -363,6 +364,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Layout-LargeSKIP\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Base\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidJavaLibrary Include="lib\UltraLiteJNI12.jar" />

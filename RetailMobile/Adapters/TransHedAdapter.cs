@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace RetailMobile
 {
-    public class TransHedAdapter : ArrayAdapter<Library.TransHed>
+    public class TransHedAdapter : ArrayAdapter<Library.TransHed>, IScrollLoadble
     {
         Activity context = null;
         Library.TransHedList TransHedList;
@@ -44,5 +44,14 @@ namespace RetailMobile
 
             return view;
         }
+
+		#region IScrollLoadble implementation
+
+		public void LoadData (int page)
+		{
+
+		}
+
+		#endregion
     }
 }

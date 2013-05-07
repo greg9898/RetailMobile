@@ -11,7 +11,7 @@ namespace RetailMobile
 		//public static string IP = "";
         public static string IP = "77.78.32.118";
 		//public static string IP = "87.203.80.42";
-        public static int Port = 2439;
+        public static int Port = 2489;
         public static string SyncModel = "RetailMobile2";
 		//public static string SyncModel = "RetailMobile";
 		public static string Username = "";
@@ -44,7 +44,7 @@ namespace RetailMobile
 
 			IP = appSharedPrefs.GetString("IP","77.78.32.118");
 			//IP = appSharedPrefs.GetString("IP","");
-			Port = appSharedPrefs.GetInt("Port",2439);
+			Port = appSharedPrefs.GetInt("Port",2489);
 			//SyncModel = appSharedPrefs.GetString("SyncModel","RetailMobile");
 			SyncModel = appSharedPrefs.GetString("SyncModel","RetailMobile2");
 			Username = appSharedPrefs.GetString("Username","");

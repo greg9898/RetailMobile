@@ -16,6 +16,7 @@ namespace RetailMobile
 {
     public class ItemsSelectDialog : Dialog
     {
+		Context currentContext;
         Activity activity;
         TransHed transHed;
         private ListView lvItems;
@@ -25,10 +26,17 @@ namespace RetailMobile
         private Spinner cbCateg1;
         private Spinner cbCateg2;
         private Dictionary<int, int> _checkedItems = new Dictionary<int, int>();
+		CheckableItemsAdapter adapterItems;
+		ItemInfoList itemInfoList;
+
+		bool scrollLoading = false;
+		private int currentPage = 0;
+		private int previousTotal = 0;
         
         public ItemsSelectDialog(Activity context, int theme, TransHed header)
             : base(context, theme)
         {
+			currentContext = context;
             transHed = header;
             activity = context;
             SetTitle(context.GetString(Resource.String.miItems));
@@ -64,6 +72,49 @@ namespace RetailMobile
             lvItems.AddHeaderView(context.LayoutInflater.Inflate(Resource.Layout.item_row_checkable_header, null));
             
             btnOK.Click += new EventHandler(btnOKItem_Click);
+
+			itemInfoList = new ItemInfoList();
+			itemInfoList.CurrentCriteria = new ItemInfoList.Criteria();
+
+			adapterItems = new CheckableItemsAdapter(activity, itemInfoList);
+			adapterItems.LoadData(0);			
+			lvItems.Adapter = adapterItems;
+
+			adapterItems.SingleItemSelectedEvent += () =>
+			{
+				_checkedItems = adapterItems.CheckedItemIds;
+				
+				Dismiss();
+			};
+			adapterItems.SingleItemFocusedEvent += (item) =>
+			{
+				TextView lblItemSelectedInfo = FindViewById<TextView>(Resource.Id.lblItemSelectedInfo);
+				ImageView imgItemSelected = FindViewById<ImageView>(Resource.Id.imgItemSelected);
+				lblItemSelectedInfo.Text = item.ItemDesc;
+				imgItemSelected.SetImageResource(Resource.Drawable.night);//todo
+			};
+
+			//ItemInfoList.LoadAdapterItems(context,0,adapterItems, new Library.ItemInfoList.Criteria());
+
+			lvItems.Scroll += new EventHandler<AbsListView.ScrollEventArgs>((o,e)=>{
+				if (scrollLoading)
+				{
+					if (e.TotalItemCount > previousTotal)
+					{
+						scrollLoading = false;
+						previousTotal = e.TotalItemCount;
+						currentPage++;
+					}
+				}
+				
+				if (!scrollLoading
+				    && (e.FirstVisibleItem + e.VisibleItemCount) + 10 >= e.TotalItemCount && e.TotalItemCount >= 10)
+				{
+					((IScrollLoadble)lvItems.Adapter).LoadData(currentPage);
+					scrollLoading = true;
+				}
+			});
+
         }
         
         void lvItems_FocusChange(object sender, View.FocusChangeEventArgs e)
@@ -117,6 +168,7 @@ namespace RetailMobile
         
         private void ReloadItems()
         {
+			currentPage = 0;
             int cbCateg1Id = ((SpinnerAdapter<int, string>)cbCateg1.Adapter).GetSelectedValue(cbCateg1.SelectedItemPosition);
             int cbCateg2Id = ((SpinnerAdapter<int, string>)cbCateg2.Adapter).GetSelectedValue(cbCateg2.SelectedItemPosition);
             decimal retVal = 0;
@@ -133,30 +185,46 @@ namespace RetailMobile
                 return;
             }
             
-            ItemInfoList itemInfoList = ItemInfoList.GetItemInfoList(activity, new ItemInfoList.Criteria()
-                                                                     {
-                ItemDesc = tbSearch.Text,
-                Category1 = cbCateg1Id,
-                Category2 = cbCateg2Id,
-                RetVal = retVal,
-                CstId = transHed.CstId
-            });
+			ItemInfoList.Criteria crit = new ItemInfoList.Criteria()
+			{
+				ItemDesc = tbSearch.Text,
+				Category1 = cbCateg1Id,
+				Category2 = cbCateg2Id,
+				RetVal = retVal,
+				CstId = transHed.CstId
+			};
+
+			//itemInfoList = ItemInfoList.GetItemInfoList(activity,crit);
+			itemInfoList = new ItemInfoList();
+			itemInfoList.CurrentCriteria = crit;
+
+			adapterItems = new CheckableItemsAdapter(activity, itemInfoList);
+			adapterItems.LoadData(0);
+			/*ItemInfoList.LoadAdapterItems(currentContext,0,adapterItems,new ItemInfoList.Criteria()
+			                              {
+				ItemDesc = tbSearch.Text,
+				Category1 = cbCateg1Id,
+				Category2 = cbCateg2Id,
+				RetVal = retVal,
+				CstId = transHed.CstId
+			});*/
+
+			lvItems.Adapter = adapterItems;
+
+			adapterItems.SingleItemSelectedEvent += () =>
+			{
+				_checkedItems = adapterItems.CheckedItemIds;
+				
+				Dismiss();
+			};
+			adapterItems.SingleItemFocusedEvent += (item) =>
+			{
+				TextView lblItemSelectedInfo = FindViewById<TextView>(Resource.Id.lblItemSelectedInfo);
+				ImageView imgItemSelected = FindViewById<ImageView>(Resource.Id.imgItemSelected);
+				lblItemSelectedInfo.Text = item.ItemDesc;
+				imgItemSelected.SetImageResource(Resource.Drawable.night);//todo
+			};
             
-            CheckableItemsAdapter adapterItems = new CheckableItemsAdapter(activity, itemInfoList);
-            adapterItems.SingleItemSelectedEvent += () =>
-            {
-                _checkedItems = adapterItems.CheckedItemIds;
-                
-                Dismiss();
-            };
-            adapterItems.SingleItemFocusedEvent += (item) =>
-            {
-                TextView lblItemSelectedInfo = FindViewById<TextView>(Resource.Id.lblItemSelectedInfo);
-                ImageView imgItemSelected = FindViewById<ImageView>(Resource.Id.imgItemSelected);
-                lblItemSelectedInfo.Text = item.ItemDesc;
-                imgItemSelected.SetImageResource(Resource.Drawable.night);//todo
-            };
-            lvItems.Adapter = adapterItems;
         }
         
         public Dictionary<int, int> CheckedItemIds
