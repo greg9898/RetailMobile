@@ -250,6 +250,10 @@ namespace RetailMobile
             {
                 FillHeaderCalcValues();
                 detailsAdapter.NotifyDataSetChanged();
+
+				if (TransDetAdapter.lastFocusedControl != null) {
+					TransDetAdapter.lastFocusedControl.RequestFocus();
+				}
             };
             detailsAdapter.DetailFieldSelectedEvent += (selDetail) => {
                 selectedDetail = selDetail;
@@ -263,45 +267,11 @@ namespace RetailMobile
         void btnSubstractValue_Click(object sender, EventArgs e)
         {
 			detailsAdapter.SubstractValue();
-			/*
-            if (lvDetails.HasFocus && selectedDetail != null)
-            {
-                if (selectedDetail.Property == "QTY")
-                {
-                    if (selectedDetail.TransDetail.DtrnQty1 > 1)
-                    {
-                        selectedDetail.TransDetail.DtrnQty1--;
-                    }
-                } else if (selectedDetail.Property == "DISC")
-                {
-                    if (selectedDetail.TransDetail.DtrnDiscLine1 > 1)
-                    {
-                        selectedDetail.TransDetail.DtrnDiscLine1--;
-                    }
-                }
-                
-                detailsAdapter.NotifyDataSetChanged();
-//                lvDetails.SetSelection(selectedDetail.Position);
-            }*/
         }
         
         void btnAddValue_Click(object sender, EventArgs e)
         {
 			detailsAdapter.AddValue();
-
-            /*if (lvDetails.HasFocus && selectedDetail != null)
-            {
-                if (selectedDetail.Property == "QTY")
-                {
-                    selectedDetail.TransDetail.DtrnQty1++;
-                } else if (selectedDetail.Property == "DISC")
-                {
-                    selectedDetail.TransDetail.DtrnDiscLine1++;
-                }
-              
-                detailsAdapter.NotifyDataSetChanged();
-//                lvDetails.SetSelection(selectedDetail.Position);
-            }*/
         }
 
         void btnSearchItems_Click(object sender, EventArgs e)

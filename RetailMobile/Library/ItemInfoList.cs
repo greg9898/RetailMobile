@@ -58,7 +58,8 @@ WHERE 1 = 1 AND ritems.id > :LastLoadedID ";
 				
 				if (c.ItemDesc != "")
 				{
-					query += " AND ritems.item_desc like \'" + c.ItemDesc + "%\'";
+//					query += " AND ritems.item_desc like \'" + c.ItemDesc + "%\'";
+					query += " AND ritems.item_desc like :ItemDesc ";
 				}
 				
 				if (c.Category1 != 0)
@@ -74,13 +75,13 @@ WHERE 1 = 1 AND ritems.id > :LastLoadedID ";
 				if (c.RetVal != 0)
 				{
 					//                    query += " AND ritems.item_qty_left = " + c.RetVal;
-				}
-				
+				}				
 				
 				query += " ORDER BY ritems.item_desc ";
 				
 				IPreparedStatement ps = conn.PrepareStatement(query);
 				ps.Set("LastLoadedID",lastLoadedID);
+				ps.Set("ItemDesc",c.ItemDesc);
 				
 				IResultSet result = ps.ExecuteQuery();
 				
