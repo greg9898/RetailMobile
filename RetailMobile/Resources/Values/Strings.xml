@@ -71,6 +71,7 @@
   <string name="lblHtrnNetValue">Καθαρή Αξία</string> 
   <string name="lblHtrnVatValue">Αξία ΦΠΑ</string> 
   <string name="lblHtrnTotValue">Συν. Αξία</string> 
+  
   <string name="btnAddItems">Προσθήκη Ειδών</string> 
   <string name="btnCloseItemSearch">Κλείσιμο</string> 
   <string name="cbItemCategPrompt">Κατηγορία 1</string> 
@@ -98,4 +99,5 @@
 	
 <string name="SynchronizationComplete">Synchronization complete!</string>	
 <string name="SynchronizationInProgress">Synchronizing...</string>
+<string name="InvalidUserOrPass">Invalid username or password.</string>
  </resources>

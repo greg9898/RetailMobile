@@ -19,13 +19,13 @@ namespace RetailMobile
 		Context currentContext;
 		Activity activity;
 		TransHed transHed;
-		private ListView lvItems;
-		private EditText tbSearch;
-		private EditText tbRetVal;
-		private Button btnClose;
-		private Spinner cbCateg1;
-		private Spinner cbCateg2;
-		private Dictionary<int, int> _checkedItems = new Dictionary<int, int> ();
+		ListView lvItems;
+		EditText tbSearch;
+		EditText tbRetVal;
+		Button btnClose;
+		Spinner cbCateg1;
+		Spinner cbCateg2;
+		Dictionary<int, int> _checkedItems = new Dictionary<int, int> ();
 		CheckableItemsAdapter adapterItems;
 		ItemInfoList itemInfoList;
 		bool scrollLoading = false;
@@ -74,7 +74,7 @@ namespace RetailMobile
 
 			itemInfoList = new ItemInfoList ();
 			itemInfoList.CurrentCriteria = new ItemInfoList.Criteria ();
-			itemInfoList.LoadItems(this.Context);
+			itemInfoList.LoadItems (this.Context);
 
 			adapterItems = new CheckableItemsAdapter (activity, itemInfoList);
 			//adapterItems.LoadData(0);
@@ -96,7 +96,7 @@ namespace RetailMobile
 
 			//ItemInfoList.LoadAdapterItems(context,0,adapterItems, new Library.ItemInfoList.Criteria());
 
-			/*lvItems.Scroll += new EventHandler<AbsListView.ScrollEventArgs> ((o,e) => {
+			lvItems.Scroll += new EventHandler<AbsListView.ScrollEventArgs> ((o,e) => {
 				if (scrollLoading) {
 					if (e.TotalItemCount > previousTotal) {
 						scrollLoading = false;
@@ -114,7 +114,7 @@ namespace RetailMobile
 
 					scrollLoading = true;
 				}
-			});*/
+			});
 
 		}
         
