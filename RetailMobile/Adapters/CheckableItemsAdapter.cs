@@ -173,9 +173,6 @@ namespace RetailMobile
 
 		public void LoadData (int page)
 		{
-			if (_itemInfoList.CurrentCriteria == null)
-				_itemInfoList.CurrentCriteria = new ItemInfoList.Criteria ();
-
 			ItemInfoList.LoadAdapterItems (context, page, this, _itemInfoList.CurrentCriteria);
 			this.NotifyDataSetChanged ();
 		}

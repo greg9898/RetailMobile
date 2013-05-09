@@ -19,6 +19,18 @@ namespace RetailMobile.Library
 
 		public double  AmountPrev { get; set; }
 
+		public string AmountCurrText { 
+			get {
+				return AmountCurr.ToString (PreferencesUtil.CurrencyFormat);
+			}
+		}
+
+		public string AmountPrevText { 
+			get {
+				return AmountPrev.ToString (PreferencesUtil.CurrencyFormat);
+			}
+		}
+
         #endregion
         
 		public Statistic ()

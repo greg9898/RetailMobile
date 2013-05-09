@@ -72,11 +72,10 @@ namespace RetailMobile
             
 			btnOK.Click += new EventHandler (btnOKItem_Click);
 
-			itemInfoList = new ItemInfoList ();
-			itemInfoList.CurrentCriteria = new ItemInfoList.Criteria ();
-			itemInfoList.LoadItems (this.Context);
+//          itemInfoList = new ItemInfoList ();
+//		    itemInfoList.LoadItems (this.Context); no need of initial loading here
 
-			adapterItems = new CheckableItemsAdapter (activity, itemInfoList);
+			adapterItems = new CheckableItemsAdapter (activity, new ItemInfoList ());
 			//adapterItems.LoadData(0);
 			lvItems.Adapter = adapterItems;
 
@@ -97,16 +96,13 @@ namespace RetailMobile
 			//ItemInfoList.LoadAdapterItems(context,0,adapterItems, new Library.ItemInfoList.Criteria());
 
 			lvItems.Scroll += new EventHandler<AbsListView.ScrollEventArgs> ((o,e) => {
-				if (scrollLoading) {
-					if (e.TotalItemCount > previousTotal) {
-						scrollLoading = false;
-						previousTotal = e.TotalItemCount;
-						currentPage++;
-					}
+				if (scrollLoading && e.TotalItemCount > previousTotal) {
+					scrollLoading = false;
+					previousTotal = e.TotalItemCount;
+					currentPage++;
 				}
 				
-				if (!scrollLoading
-					&& (e.FirstVisibleItem + e.VisibleItemCount) + 10 >= e.TotalItemCount && e.TotalItemCount >= 10) {
+				if (!scrollLoading && (e.FirstVisibleItem + e.VisibleItemCount) + 10 >= e.TotalItemCount && e.TotalItemCount >= 10) {
 //					((IScrollLoadble)lvItems.Adapter).LoadData(currentPage);
 					HeaderViewListAdapter adapter = (HeaderViewListAdapter)lvItems.Adapter;
 					IScrollLoadble origAdapter = (IScrollLoadble)adapter.WrappedAdapter;
@@ -220,8 +216,7 @@ namespace RetailMobile
 				ImageView imgItemSelected = FindViewById<ImageView> (Resource.Id.imgItemSelected);
 				lblItemSelectedInfo.Text = item.ItemDesc;
 				imgItemSelected.SetImageResource (Resource.Drawable.night);//todo
-			};
-            
+			};            
 		}
         
 		public Dictionary<int, int> CheckedItemIds {

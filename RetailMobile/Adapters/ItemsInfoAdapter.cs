@@ -47,6 +47,7 @@ namespace RetailMobile
 		public void LoadData (int page)
 		{
 			Library.ItemInfoList.LoadAdapterItems (context, page, this, new Library.ItemInfoList.Criteria ());
+			this.NotifyDataSetChanged ();
 		}
 
 		#endregion

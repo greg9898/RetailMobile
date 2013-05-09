@@ -16,7 +16,7 @@ namespace RetailMobile.Library
 {
 	public class ItemInfoList : List<ItemInfo>
 	{
-		public Criteria CurrentCriteria;
+		public Criteria CurrentCriteria = new Criteria ();
 		int lastLoadedID = 0;
 
 		public ItemInfoList ()
