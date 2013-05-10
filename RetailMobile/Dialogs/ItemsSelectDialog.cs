@@ -203,6 +203,7 @@ namespace RetailMobile
 			});*/
 
 			lvItems.Adapter = adapterItems;
+			currentPage = 1;//	lvItems.LastVisiblePosition
 
 			adapterItems.SingleItemSelectedEvent += () =>
 			{

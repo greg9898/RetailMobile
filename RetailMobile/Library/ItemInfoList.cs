@@ -1,16 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
+using Android.Util;
 using Android.Widget;
 using Com.Ianywhere.Ultralitejni12;
-using Android.Util;
 
 namespace RetailMobile.Library
 {
@@ -154,7 +148,7 @@ WHERE 1 = 1  ";
 				
 				
 				query += " ORDER BY ritems.item_desc ";
-				
+				Log.Debug ("select items", query);
 				IPreparedStatement ps = conn.PrepareStatement (query);
 
 				IResultSet result = ps.ExecuteQuery ();

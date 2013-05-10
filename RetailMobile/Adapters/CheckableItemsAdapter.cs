@@ -15,7 +15,6 @@ namespace RetailMobile
 	{
 		Activity context = null;
 		ItemInfoList _itemInfoList;
-
 		private Dictionary<int, int> _checkedItemIds = new Dictionary<int, int> ();
 		public delegate void SingleItemSelectedDeletegate ();
 
@@ -35,49 +34,71 @@ namespace RetailMobile
 		public override View GetView (int position, View convertView, ViewGroup parent)
 		{
 			View view = convertView;
-            
+			ViewHolder holder;
+
 			if (view == null) {
 				view = context.LayoutInflater.Inflate (Resource.Layout.item_row_checkable, null);
+
+				holder = new ViewHolder ();
+				holder.itemBox = view.FindViewById<CheckBox> (Resource.Id.checkBox);
+				holder.tbQty = view.FindViewById<EditText> (Resource.Id.tbQty);
+				holder.tbItemCode = (TextView)view.FindViewById (Resource.Id.tbItemCode);
+				holder.tbItemName = (TextView)view.FindViewById (Resource.Id.tbItemName);
+				holder.tbItemLastBuyDate = (TextView)view.FindViewById (Resource.Id.tbItemLastBuyDate);
+				holder.tbItemSaleVal = (TextView)view.FindViewById (Resource.Id.tbItemSaleVal);
+				holder.tbItemQtyLeft = (TextView)view.FindViewById (Resource.Id.tbItemQtyLeft);
+				holder.layout_checkable_item = view.FindViewById<RelativeLayout> (Resource.Id.layout_checkable_item_info);
+
+				view.Tag = holder;
+			} else {			
+				holder = (ViewHolder)view.Tag;
 			}
             
-			//Library.ItemInfo item = _ItemInfoList[position];
-			Library.ItemInfo item = this.GetItem (position);
-			if (item == null)
+			ItemInfo item = this.GetItem (position);
+
+			if (item == null) {
 				return view;
-            
+			}
+		
 			try {
-				CheckBox itemBox = view.FindViewById<CheckBox> (Resource.Id.checkBox);
-				EditText tbQty = view.FindViewById<EditText> (Resource.Id.tbQty);
-				TextView tbItemCode = (TextView)view.FindViewById (Resource.Id.tbItemCode);
-				TextView tbItemName = (TextView)view.FindViewById (Resource.Id.tbItemName);
-				TextView tbItemLastBuyDate = (TextView)view.FindViewById (Resource.Id.tbItemLastBuyDate);
-				TextView tbItemSaleVal = (TextView)view.FindViewById (Resource.Id.tbItemSaleVal);
-				TextView tbItemQtyLeft = (TextView)view.FindViewById (Resource.Id.tbItemQtyLeft);
-				RelativeLayout layout_checkable_item = view.FindViewById<RelativeLayout> (Resource.Id.layout_checkable_item_info);
+				if (holder.tbItemCode != null)
+					holder.tbItemCode.Text = item.item_cod;
+				if (holder.tbItemName != null)
+					holder.tbItemName.Text = item.ItemDesc;
+				if (holder.tbItemLastBuyDate != null)
+					holder.tbItemLastBuyDate.Text = item.ItemLastBuyDate.ToString (PreferencesUtil.DateFormatDateOnly);
+				if (holder.tbItemQtyLeft != null)
+					holder.tbItemQtyLeft.Text = item.ItemQtyLeft.ToString (PreferencesUtil.DecimalFormat);
+				if (holder.tbItemSaleVal != null)
+					holder.tbItemSaleVal.Text = item.ItemSaleVal1.ToString (PreferencesUtil.DecimalFormat);
+				
+				holder.itemBox.CheckedChange -= new EventHandler<CompoundButton.CheckedChangeEventArgs> (itemBox_CheckedChange);
+				holder.itemBox.Checked = _checkedItemIds.ContainsKey (item.ItemId);
+				holder.itemBox.Tag = position;
+				holder.itemBox.CheckedChange += new EventHandler<CompoundButton.CheckedChangeEventArgs> (itemBox_CheckedChange);
             
-				if (tbItemCode != null)
-					tbItemCode.Text = item.item_cod;
-				if (tbItemName != null)
-					tbItemName.Text = item.ItemDesc;
-				if (tbItemLastBuyDate != null)
-					tbItemLastBuyDate.Text = item.ItemLastBuyDate.ToString (PreferencesUtil.DateFormatDateOnly);
-				if (tbItemQtyLeft != null)
-					tbItemQtyLeft.Text = item.ItemQtyLeft.ToString (PreferencesUtil.DecimalFormat);
-				if (tbItemSaleVal != null)
-					tbItemSaleVal.Text = item.ItemSaleVal1.ToString (PreferencesUtil.DecimalFormat);
+				holder.layout_checkable_item.Tag = position;
+				holder.layout_checkable_item.Touch += new EventHandler<View.TouchEventArgs> (layout_checkable_item_Touch);
             
-				itemBox.Tag = position;
-				itemBox.CheckedChange += new EventHandler<CompoundButton.CheckedChangeEventArgs> (itemBox_CheckedChange);
-            
-				layout_checkable_item.Tag = position;
-				layout_checkable_item.Touch += new EventHandler<View.TouchEventArgs> (layout_checkable_item_Touch);
-            
-				tbQty.Tag = position;
-				tbQty.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs> (tbQty_TextChanged);
+				holder.tbQty.Tag = position;
+				holder.tbQty.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs> (tbQty_TextChanged);
 			} catch (Exception ex) {
 				Log.Error ("exception", ex.Message);
 			}
+
 			return view;
+		}
+
+		class ViewHolder:Java.Lang.Object
+		{
+			public	CheckBox itemBox;
+			public	EditText tbQty ;
+			public	TextView tbItemCode;
+			public	TextView tbItemName ;
+			public	TextView tbItemLastBuyDate;
+			public	TextView tbItemSaleVal ;
+			public	TextView tbItemQtyLeft;
+			public	RelativeLayout layout_checkable_item;
 		}
 
 		/* variable for counting two successive up-down events */

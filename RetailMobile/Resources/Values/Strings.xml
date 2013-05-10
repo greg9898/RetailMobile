@@ -27,6 +27,9 @@
   <string name="tvHeaderItemKategory">Item Category</string> 
   <string name="tvHeaderAmountCurr">Amount current</string> 
   <string name="tvHeaderAmountPrev">Amount previous</string> 
+  <string name="lblStatisticByDateCaption">Caption..</string> 
+  <string name="lblStatisticDateFrom">from</string> 
+  <string name="lblStatisticDateTo">to</string> 
   
  <!--  detail   --> 
   <string name="lblDtrnQty">Ποσότητα:</string> 
