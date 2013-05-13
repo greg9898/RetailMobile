@@ -1,5 +1,4 @@
 using System;
-
 using Android.OS;
 using Android.Views;
 using Android.Widget;
@@ -17,10 +16,12 @@ namespace RetailMobile
 		RetailMobile.Fragments.ItemActionBar actionBar;
 		StatisticTabMonthly statisticTabMonthly;
 		StatisticTabByDate statisticTabByDate;
-        
+
 		public static CustomerFragment NewInstance (long objId)
 		{
-			var detailsFrag = new CustomerFragment { Arguments = new Bundle() };
+			var detailsFrag = new CustomerFragment {
+				Arguments = new Bundle ()
+			};
 			detailsFrag.Arguments.PutLong ("ObjectId", objId);
 			return detailsFrag;
 		}
@@ -28,7 +29,7 @@ namespace RetailMobile
 		public int CustId {
 			get { return Arguments.GetInt ("ObjectId", -1); }
 		}
-        
+
 		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
 			View view = inflater.Inflate (Resource.Layout.CustomerDetails, container, false);
@@ -71,7 +72,6 @@ namespace RetailMobile
 				PushFragments (statisticTabByDate);
 			}
 		}
-
 		/*
      * Initialize the tabs and set views and identifiers for the tabs
      */
@@ -79,24 +79,23 @@ namespace RetailMobile
 		{		
 			TabHost.TabSpec spec1 = mTabHost.NewTabSpec ("Monthly");
 			spec1.SetContent (Resource.Id.realtabcontent);
-			spec1.SetIndicator ("Monthly");
+			spec1.SetIndicator (this.Activity. LayoutInflater.Inflate( Resource.Layout.statistic_tab_button_month, null));//"Monthly", Resource.Drawable.statistic_date48);
 			mTabHost.AddTab (spec1);		
 		
 			TabHost.TabSpec spec2 = mTabHost.NewTabSpec ("By Date");
 			spec2.SetContent (Resource.Id.realtabcontent);
-			spec2.SetIndicator ("By Date");
+			spec2.SetIndicator (this.Activity. LayoutInflater.Inflate( Resource.Layout.statistic_tab_button_date, null));//"By Date", Resource.Drawable.statistic_month);
 			mTabHost.AddTab (spec2);
 
 			for (int i=0; i<mTabHost.TabWidget.ChildCount; i++) {
 				View tab = mTabHost.TabWidget.GetChildAt (i);
-				tab.SetBackgroundResource (Resource.Drawable.menu_button_selector);
+				tab.SetBackgroundResource (Resource.Drawable.main_button_selector);
 				tab.SetMinimumHeight (18);
 			}
 
-//			mTabHost.CurrentTab = 0;
+			mTabHost.SetCurrentTabByTag ("By Date");
 			mTabHost.SetCurrentTabByTag ("Monthly");
 		}
-	
 		/*
      * adds the fragment to the FrameLayout
      */
@@ -106,7 +105,7 @@ namespace RetailMobile
 			ft.Replace (Resource.Id.realtabcontent, fragment);
 			ft.Commit ();
 		}
-                
+
 		void btnSave_Click (object sender, EventArgs e)
 		{
 			try {
@@ -119,6 +118,5 @@ namespace RetailMobile
 				throw ex;
 			}
 		}
-        
 	}
 }

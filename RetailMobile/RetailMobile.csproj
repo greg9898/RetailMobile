@@ -158,6 +158,12 @@
     <AndroidResource Include="Resources\Layout\StatisticTabMonthly.axml" />
     <AndroidResource Include="Resources\Layout\StatisticTabByDate.axml" />
     <Compile Include="Fragments\StatisticTabByDate.cs" />
+    <AndroidResource Include="Resources\Layout\statistic_tab_button_month.axml" />
+    <AndroidResource Include="Resources\Layout\statistic_tab_button_date.axml" />
+    <AndroidResource Include="Resources\Drawable\statistics_date48.png" />
+    <AndroidResource Include="Resources\Drawable\statistics_month.png" />
+    <Compile Include="Library\TransCust.cs" />
+    <Compile Include="Library\TransCustList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

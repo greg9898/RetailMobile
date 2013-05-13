@@ -1,18 +1,18 @@
 using System.Collections.Generic;
-
 using Android.Content;
 using Com.Ianywhere.Ultralitejni12;
 using Android.Util;
 
 namespace RetailMobile.Library
 {
-	public class StatisticList : List<Statistic>
-	{
-		public static StatisticList GetStatisticList (Context ctx, int cstId)
-		{
-			StatisticList items = new StatisticList ();
-			using (IConnection conn = Sync.GetConnection(ctx)) {         
-				string query = @"
+    public class StatisticList : List<Statistic>
+    {
+        public static StatisticList GetStatisticListThisMonth(Context ctx, int cstId)
+        {
+            StatisticList items = new StatisticList();
+            using (IConnection conn = Sync.GetConnection(ctx))
+            {         
+                string query = @"
 SELECT 
     cst_id, 
     item_kateg,
@@ -23,28 +23,30 @@ SELECT
 FROM rstatistic
 JOIN ritem_categ ON ritem_categ.id = rstatistic.item_kateg";
 
-				if (cstId > 0) {
-					query += @"
+                if (cstId > 0)
+                {
+                    query += @"
 WHERE cst_id = :cstId AND month = " + System.DateTime.Now.Month;
-				}
+                }
 
-				IPreparedStatement ps = conn.PrepareStatement (query);
+                IPreparedStatement ps = conn.PrepareStatement(query);
                 
-				IResultSet result = ps.ExecuteQuery ();
+                IResultSet result = ps.ExecuteQuery();
                 
-				while (result.Next()) {
-					Statistic s = new Statistic ();
-					s.Fetch (result);
-					items.Add (s);
+                while (result.Next())
+                {
+                    Statistic s = new Statistic();
+                    s.Fetch(result);
+                    items.Add(s);
 
-					Log.Debug ("StatisticList", "StatisticList CstId=" + s.CstId + " Month=" + s.Month);
-				} 
+                    Log.Debug("StatisticList", "StatisticList CstId=" + s.CstId + " Month=" + s.Month);
+                } 
                 
-				ps.Close ();
-				conn.Release ();
-			}
+                ps.Close();
+                conn.Release();
+            }
             
-			return items;
-		}
-	}
+            return items;
+        }
+    }
 }

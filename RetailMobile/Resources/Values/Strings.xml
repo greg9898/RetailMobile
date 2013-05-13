@@ -30,6 +30,12 @@
   <string name="lblStatisticByDateCaption">Caption..</string> 
   <string name="lblStatisticDateFrom">from</string> 
   <string name="lblStatisticDateTo">to</string> 
+  <string name="lblStatisticByMonth">Month</string> 
+  <string name="lblStatisticByDate">by Date</string> 
+  <string name="btnStatisticSearch">Search</string> 
+  <string name="tvHeaderStatisticCredit">Credit</string> 
+  <string name="tvHeaderStatisticDebit">Debit</string> 
+  <string name="tvHeaderStatisticCreditMinusDebit">Credit-Debit</string> 
   
  <!--  detail   --> 
   <string name="lblDtrnQty">Ποσότητα:</string> 

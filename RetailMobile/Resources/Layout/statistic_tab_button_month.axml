@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/mainButtonStyle"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/statistic_tab_button_month"
+    android:minHeight="32dip"
+    android:gravity="center">
+    <ImageView
+        android:id="@+id/img_statistic_month"
+        android:layout_width="32dip"
+        android:layout_height="32dip"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/statistics_month" />
+    <TextView
+        android:id="@+id/lblStatisticByMonth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lblStatisticByMonth"
+        android:textColor="@android:color/white" />
+</LinearLayout>

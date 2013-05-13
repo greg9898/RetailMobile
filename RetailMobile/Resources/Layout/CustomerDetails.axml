@@ -195,6 +195,7 @@
         android:layout_weight="1">
         <LinearLayout
             android:orientation="vertical"
+            android:layout_alignParentBottom="true"
             style="@style/fillWidth">
             <FrameLayout
                 android:id="@android:id/tabcontent"
