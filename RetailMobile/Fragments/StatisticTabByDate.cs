@@ -82,6 +82,7 @@ namespace RetailMobile
             
             svStatistic = (ScrollView)this.Activity.FindViewById(Resource.Id.svStatisticByDate);
             var tblLayout = CreateTableReport(transCustList);
+            svStatistic.RemoveAllViews();
             svStatistic.AddView(tblLayout);
         }
 
@@ -104,7 +105,7 @@ namespace RetailMobile
         {
             tv.SetTextSize(Android.Util.ComplexUnitType.Dip, 12);
             tv.SetPadding(10, 5, 5, 2);
-            tv.SetBackgroundResource(Resource.Drawable.table_cell_bg);
+            tv.SetTextColor(Android.Content.Res.ColorStateList.ValueOf (Android.Graphics.Color.White));
         }
 
         static void SetHeaderCellStyle(TextView tvH)
@@ -112,16 +113,20 @@ namespace RetailMobile
             tvH.Typeface = Android.Graphics.Typeface.DefaultBold;
             tvH.SetTextSize(Android.Util.ComplexUnitType.Dip, 12);
             tvH.SetPadding(10, 5, 5, 2);
-            tvH.SetBackgroundResource(Resource.Drawable.table_header_cell_bg);
+//            tvH.SetBackgroundResource(Resource.Drawable.table_header_cell_bg);
             tvH.SetTextColor(Android.Content.Res.ColorStateList.ValueOf (Android.Graphics.Color.White));
         }
 
         TableLayout CreateTableReport(TransCustList transCustList)
         {
+            TableLayout.LayoutParams fillParams = new TableLayout.LayoutParams(ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.FillParent, 1.0f);
             Context ctx = this.Activity.ApplicationContext;
             TableLayout tblLayout = new TableLayout(ctx);
+            tblLayout.LayoutParameters = fillParams;
+            tblLayout.StretchAllColumns = true;
 			
             TableRow rowHeader = new TableRow(ctx);
+            rowHeader.SetBackgroundResource(Resource.Drawable.actionbar_background);
 			
             TextView tvItemKategH = new TextView(ctx);
             tvItemKategH.Text = "???";//view.Resources.GetText(Resource.String.tvHeaderItemKategory);
@@ -130,16 +135,19 @@ namespace RetailMobile
 			
             TextView tvCreditH = new TextView(ctx);
             tvCreditH.Text = this.Activity.Resources.GetText(Resource.String.tvHeaderStatisticCredit);
+            tvCreditH.Gravity = GravityFlags.Right;
             SetHeaderCellStyle(tvCreditH);
             rowHeader.AddView(tvCreditH);
 			
             TextView tvDebitH = new TextView(ctx);
             tvDebitH.Text = this.Activity.Resources.GetText(Resource.String.tvHeaderStatisticDebit);
+            tvDebitH.Gravity = GravityFlags.Right;
             SetHeaderCellStyle(tvDebitH);
             rowHeader.AddView(tvDebitH);
 
             TextView tvCreditMinusDebitH = new TextView(ctx);
             tvCreditMinusDebitH.Text = this.Activity.Resources.GetText(Resource.String.tvHeaderStatisticCreditMinusDebit);
+            tvCreditMinusDebitH.Gravity = GravityFlags.Right;
             SetHeaderCellStyle(tvCreditMinusDebitH);
             rowHeader.AddView(tvCreditMinusDebitH);
 			
@@ -148,6 +156,7 @@ namespace RetailMobile
             foreach (TransCust st in transCustList)
             {
                 TableRow row = new TableRow(ctx);
+                row.SetBackgroundResource(Resource.Drawable.button_selector);
 				
                 TextView tvItemKateg = new TextView(ctx);
                 tvItemKateg.Text = "???";
@@ -156,16 +165,19 @@ namespace RetailMobile
 				
                 TextView tvCredit = new TextView(ctx);
                 tvCredit.Text = st.Credit.ToString(PreferencesUtil.CurrencyFormat);
+                tvCredit.Gravity = GravityFlags.Right;
                 SetCellStyle(tvCredit);
                 row.AddView(tvCredit);
 				
                 TextView tvDebit = new TextView(ctx);
                 tvDebit.Text = st.Debit.ToString(PreferencesUtil.CurrencyFormat);
+                tvDebit.Gravity = GravityFlags.Right;
                 SetCellStyle(tvDebit);
                 row.AddView(tvDebit);
                 
                 TextView tvCreditMinusDebit = new TextView(ctx);
                 tvCreditMinusDebit.Text = st.CreditMinusDebit.ToString(PreferencesUtil.CurrencyFormat);
+                tvCreditMinusDebit.Gravity = GravityFlags.Right;
                 SetCellStyle(tvCreditMinusDebit);
                 row.AddView(tvCreditMinusDebit);
 				

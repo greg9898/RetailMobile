@@ -84,13 +84,13 @@ namespace RetailMobile
 			
             TextView tvAmountCurrH = new TextView(view.Context);
             tvAmountCurrH.Text = DateTime.Now.ToString("MMM yyyy");
-            tvAmountCurrH.Gravity = GravityFlags.Center;
+            tvAmountCurrH.Gravity = GravityFlags.Right;
             SetHeaderCellStyle(tvAmountCurrH);
             rowHeader.AddView(tvAmountCurrH);
 			
             TextView tvAmountPrevH = new TextView(view.Context);
             tvAmountPrevH.Text = DateTime.Now.AddYears(-1).ToString("MMM yyyy");
-            tvAmountPrevH.Gravity = GravityFlags.Center;
+            tvAmountPrevH.Gravity = GravityFlags.Right;
             SetHeaderCellStyle(tvAmountPrevH);
             rowHeader.AddView(tvAmountPrevH);
 			

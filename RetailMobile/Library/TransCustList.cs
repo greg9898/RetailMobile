@@ -126,6 +126,7 @@ WHERE 1 = 1 ";
                 s.Debit = i * 3.114m;
                 s.CreditMinusDebit = i * 0.462m;
                 s.DtrnDate = DateTime.Now.AddHours(i);
+                items.Add(s);
             }
            
             return items;
