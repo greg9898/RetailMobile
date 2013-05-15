@@ -372,9 +372,7 @@
     <AndroidResource Include="Resources\Menu\CustomerListContextMenu.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\Layout-LargeSKIP\" />
     <Folder Include="Interfaces\" />
-    <Folder Include="Base\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidJavaLibrary Include="lib\UltraLiteJNI12.jar" />

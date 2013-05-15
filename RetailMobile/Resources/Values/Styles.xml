@@ -4,27 +4,27 @@
 	<style name="myEditTextStyle" parent="android:style/Widget.EditText">
 		<item name="android:background">@drawable/my_edit_text_selector2</item>
 		<item name="android:textColor">@android:color/black</item>
-		<item name="android:textSize">12sp</item>
+		<item name="android:textSize">@dimen/normal_text_size</item>
 		<item name="android:padding">2dp</item>
 	</style>
 	<style name="mySpinnerStyle" parent="android:style/Widget.Spinner">
 		<item name="android:background">@drawable/my_edit_text_selector2</item>
 		<item name="android:textColor">@android:color/black</item>
-		<item name="android:textSize">12sp</item>
+		<item name="android:textSize">@dimen/normal_text_size</item>
 		<item name="android:padding">2dp</item>
 	</style>
 	<style name="listStyle">
 		<item name="android:background">@drawable/button_selector</item>
 		<item name="android:minHeight">34dip</item>
 		<item name="android:textColor">@android:color/black</item>
-		<item name="android:textSize">12sp</item>
+		<item name="android:textSize">@dimen/normal_text_size</item>
 		<item name="android:layout_width">fill_parent</item>
 		<item name="android:layout_height">fill_parent</item>
 	</style>
 	<style name="listRowTextViewStyle">
 		<item name="android:gravity">left|center</item>
 		<item name="android:minHeight">34dip</item>
-		<item name="android:textSize">12sp</item>
+		<item name="android:textSize">@dimen/normal_text_size</item>
 		<item name="android:layout_width">0dp</item>
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:textColor">@android:color/white</item>

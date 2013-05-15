@@ -53,19 +53,9 @@
                     android:layout_weight="1" />
                 <EditText
                     android:inputType="textPersonName"
+                    style="@style/myEditTextStyle"
                     android:id="@+id/tbCustomerCode"
-                    android:background="@drawable/TextEditStyle"
-                    android:paddingLeft="2dp"
-                    android:paddingRight="2dp"
-                    android:paddingTop="1dp"
-                    android:paddingBottom="1dp"
-                    android:text="1000"
-                    android:textColor="@color/foreground"
                     android:minWidth="100sp"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginBottom="2dp"
-                    android:textSize="12sp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3" />
@@ -94,18 +84,8 @@
                 <EditText
                     android:inputType="textPersonName"
                     android:id="@+id/tbCustomerName"
-                    android:background="@drawable/TextEditStyle"
-                    android:paddingLeft="2dp"
-                    android:paddingRight="2dp"
-                    android:paddingTop="1dp"
-                    android:paddingBottom="1dp"
-                    android:text="Radoslav"
+                    style="@style/myEditTextStyle"
                     android:minWidth="200sp"
-                    android:textColor="@color/foreground"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginBottom="2dp"
-                    android:textSize="12sp"
-                    android:gravity="center_vertical"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3" />
@@ -134,18 +114,8 @@
                 <EditText
                     android:inputType="textPersonName"
                     android:id="@+id/tbCustTaxNum"
-                    android:background="@drawable/TextEditStyle"
-                    android:paddingLeft="2dp"
-                    android:paddingRight="2dp"
-                    android:paddingTop="1dp"
-                    android:paddingBottom="1dp"
-                    android:text=""
+                    style="@style/myEditTextStyle"
                     android:minWidth="200sp"
-                    android:textColor="@color/foreground"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginBottom="2dp"
-                    android:textSize="12sp"
-                    android:gravity="center_vertical"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3" />
@@ -181,28 +151,30 @@
                     android:textSize="12sp" />
                 <EditText
                     android:id="@+id/tbCustAddress"
-                    android:background="@drawable/TextEditStyle"
-                    android:paddingLeft="2dp"
-                    android:paddingRight="2dp"
-                    android:paddingTop="1dp"
-                    android:paddingBottom="1dp"
-                    android:text=""
+                    style="@style/myEditTextStyle"
                     android:minWidth="200sp"
-                    android:textColor="@color/foreground"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginBottom="2dp"
-                    android:textSize="12sp"
-                    android:gravity="center_vertical"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+    <TextView
+        android:id="@+id/lblCustomerStatisticCaption"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:gravity="center"
+        android:layout_marginTop="5dip"
+        android:padding="4dp"
+        android:text="@string/lblCustomerStatisticCaption"
+        android:textColor="@color/foreground"
+        android:textSize="12sp" />
     <TabHost
         android:id="@+id/tabhost"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:padding="4dp"
         android:layout_weight="1">
         <LinearLayout
             android:orientation="vertical"
@@ -213,7 +185,13 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:tabStripEnabled="true"
+                android:layout_marginBottom="-6dp"
                 android:layout_weight="0" />
+            <LinearLayout
+                android:id="@+id/tabSelectedLine"
+                android:layout_width="fill_parent"
+                android:layout_height="6dip"
+                android:background="#449def" />
             <FrameLayout
                 android:id="@android:id/tabcontent"
                 android:layout_width="fill_parent"

@@ -36,6 +36,7 @@
   <string name="tvHeaderStatisticCredit">Credit</string> 
   <string name="tvHeaderStatisticDebit">Debit</string> 
   <string name="tvHeaderStatisticCreditMinusDebit">Credit-Debit</string> 
+    <string name="lblCustomerStatisticCaption">Statistics:</string> 
   
  <!--  detail   --> 
   <string name="lblDtrnQty">Ποσότητα:</string> 

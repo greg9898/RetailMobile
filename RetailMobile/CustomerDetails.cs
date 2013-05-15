@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-
 using Android.App;
 using Android.Content;
 using Android.Runtime;
@@ -34,33 +33,10 @@ namespace RetailMobile
             if (custID == 0)
             {
                 _customer = new CustomerInfo();
-                /*CustomerEdit.NewCustomer((o, e) =>
-                {
-                    if (e.Error != null)
-                    {
-                        throw (e.Error);
-                    }
-                    else
-                    {
-                        _customer = e.Object;
-                    }
-                });*/
             }
             else
             {
                 _customer = CustomerInfo.GetCustomer(this, custID);
-
-                /*CustomerEdit.GetCustomer(new CriteriaJ(this, custID), (o, e) =>
-                {
-                    if (e.Error != null)
-                    {
-                        throw (e.Error);
-                    }
-                    else
-                    {
-                        _customer = e.Object;
-                    }
-                });*/
             }
 
             tbCustomerCode = (EditText)FindViewById(Resource.Id.tbCustomerCode);
@@ -77,7 +53,6 @@ namespace RetailMobile
             //((Button)FindViewById(Resource.Id.btnSave)).Click += new EventHandler(Activity1_Click);
 
         }
-
 
         private void DataBind()
         {
@@ -119,7 +94,6 @@ namespace RetailMobile
             //            else
             //                lblCustTaxNumError.Visibility = ViewStates.Gone;
         }
-
         //void btnSaveClick(object sender, EventArgs e)
         public void btnSaveClick(View v)
         {
@@ -146,7 +120,6 @@ namespace RetailMobile
                 throw ex;
             }
         }
-
     }
 }
 

@@ -7,5 +7,12 @@
     <dimen name="action_bar_button_bottom_margin">2dp</dimen>
     <dimen name="action_bar_button_left_margin">3dp</dimen>
     <dimen name="action_bar_button_right_margin">3dp</dimen>
-  <dimen name="button_corners_radius">2dp</dimen>
+    
+    <dimen name="button_corners_radius">2dp</dimen>
+    
+    <dimen name="normal_text_size">12sp</dimen>
+    <dimen name="main_button_text_size">18sp</dimen>
+    
+    <dimen name="main_menu_icon_size">64dp</dimen>
+    <dimen name="main_menu_text_size">16sp</dimen>
 </resources>

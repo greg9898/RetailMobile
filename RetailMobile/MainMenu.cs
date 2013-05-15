@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -10,6 +9,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Support.V4.App;
+using Android.Util;
 
 namespace RetailMobile
 {
@@ -53,14 +53,14 @@ namespace RetailMobile
                 ft.Replace(Resource.Id.detailInfo_fragment, InvoiceInfoFragment.NewInstance(0));
                 ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
                 ft.Commit();
-            } else
+            }
+            else
             {
                 var ft = SupportFragmentManager.BeginTransaction();
                 ft.Replace(Resource.Id.detailInfo_fragment, new LoginFragment());
                 ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
                 ft.Commit();
             }
-
         }
 
         public void ShowProgressBar()
@@ -81,7 +81,8 @@ namespace RetailMobile
             if (Common.CurrentDealerID == 0)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(() => Sync.SyncUsers(this)).ContinueWith(task => this.RunOnUiThread(() => HideProgressBar()));
-            } else
+            }
+            else
             {
                 System.Threading.Tasks.Task.Factory.StartNew(() => Sync.SyncTrans(this)).ContinueWith(task => this.RunOnUiThread(() => HideProgressBar()));
             }
@@ -106,6 +107,5 @@ namespace RetailMobile
             }
             return base.OnKeyDown(keyCode, e);
         }
-     
     }
 }

@@ -8,89 +8,75 @@
         style="@style/menu_background"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
-       <ImageView
-       android:id="@+id/imgInvoice"
-       android:layout_width="64dp"
-       android:layout_height="64dp"
-       android:src="@drawable/invoice_64"
-       />
-            <Button
-                android:id="@+id/btnAddInvoice"
-                style="@style/menuButtonStyle"
-                android:layout_width="fill_parent"
-                android:layout_height="64dp"
-                android:layout_toRightOf="@id/imgInvoice"
-                android:layout_marginLeft="2dp"
-                android:text="@string/miInvoice"
-                android:background="@android:color/transparent"
-                android:gravity="left"
-                android:layout_weight="1" />
-            
-    </RelativeLayout>
-    
-    <TextView
+        <ImageView
+            android:id="@+id/imgInvoice"
+            android:layout_width="@dimen/main_menu_icon_size"
+            android:layout_height="@dimen/main_menu_icon_size"
+            android:src="@drawable/invoice_64" />
+        <Button
+            android:id="@+id/btnAddInvoice"
+            style="@style/menuButtonStyle"
             android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@color/dark_blue" />   
-    
+            android:layout_height="64dp"
+            android:layout_toRightOf="@id/imgInvoice"
+            android:layout_marginLeft="2dp"
+            android:text="@string/miInvoice"
+            android:background="@android:color/transparent"
+            android:gravity="left"
+            android:layout_weight="1" />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/dark_blue" />
     <RelativeLayout
         android:id="@+id/miItems"
         style="@style/menu_background"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"> 
-        
+        android:layout_height="wrap_content">
         <ImageView
-       android:id="@+id/imgItems"
-       android:layout_width="64dp"
-       android:layout_height="64dp"
-       android:src="@drawable/items_64"
-       />
-             
-            <Button
-                android:id="@+id/btnAddItem"
-                style="@style/menuButtonStyle"
-                android:layout_width="fill_parent"
-                android:layout_height="64dp"
-                android:layout_toRightOf="@id/imgItems"
-                android:background="@android:color/transparent"
-                android:layout_marginLeft="2dp"
-                android:gravity="left"
-                android:text="@string/miItems" />
-    </RelativeLayout>
-    
-    <TextView
+            android:id="@+id/imgItems"
+            android:layout_width="@dimen/main_menu_icon_size"
+            android:layout_height="@dimen/main_menu_icon_size"
+            android:src="@drawable/items_64" />
+        <Button
+            android:id="@+id/btnAddItem"
+            style="@style/menuButtonStyle"
             android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@color/dark_blue" />
-            
+            android:layout_height="64dp"
+            android:layout_toRightOf="@id/imgItems"
+            android:background="@android:color/transparent"
+            android:layout_marginLeft="2dp"
+            android:gravity="left"
+            android:text="@string/miItems" />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/dark_blue" />
     <RelativeLayout
         android:id="@+id/miCustomers"
         style="@style/menu_background"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
-        
         <ImageView
-       android:id="@+id/imgCustomers"
-       android:layout_width="64dp"
-       android:layout_height="64dp"
-       android:src="@drawable/customers_64"
-       />
-                  
-             <Button
-                android:id="@+id/btnAddCustomer"
-                style="@style/menuButtonStyle"
-                android:layout_width="fill_parent"
-                android:layout_height="64dp"
-                android:layout_toRightOf="@id/imgCustomers"
-                android:background="@android:color/transparent"
-                android:layout_marginLeft="2dp"
-                android:gravity="left"
-                android:text="@string/miCustomers" />
-       
-    </RelativeLayout>
-    
-    <TextView
+            android:id="@+id/imgCustomers"
+            android:layout_width="@dimen/main_menu_icon_size"
+            android:layout_height="@dimen/main_menu_icon_size"
+            android:src="@drawable/customers_64" />
+        <Button
+            android:id="@+id/btnAddCustomer"
+            style="@style/menuButtonStyle"
             android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@color/dark_blue" />
+            android:layout_height="64dp"
+            android:layout_toRightOf="@id/imgCustomers"
+            android:background="@android:color/transparent"
+            android:layout_marginLeft="2dp"
+            android:gravity="left"
+            android:text="@string/miCustomers" />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/dark_blue" />
 </LinearLayout>
