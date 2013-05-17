@@ -149,13 +149,10 @@
                 android:layout_alignBaseline="@id/tbCustDebt"
                 android:layout_margin="10dp" />
         </RelativeLayout>
-        
-         <View
-        	android:layout_width="1dp"
+        <View
+            android:layout_width="1dp"
             android:layout_height="fill_parent"
-            android:background="@color/action_bar1"
-        />
-        
+            android:background="@color/action_bar1" />
         <RelativeLayout
             android:id="@+id/layoutInvoiceInfo"
             android:layout_width="fill_parent"
@@ -325,7 +322,6 @@
         android:layout_height="fill_parent"
         android:layout_margin="1dp"
         android:background="@drawable/border">
-        
         <TextView
             android:id="@+id/lblDetailsCaption"
             android:layout_width="fill_parent"

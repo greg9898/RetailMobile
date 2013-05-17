@@ -27,7 +27,7 @@
                 android:id="@+id/lblCustomerInfoCaption"
                 android:text="Customer Info"
                 android:textColor="@color/foreground"
-                android:textSize="12sp"
+                android:textSize="@dimen/caption_text_size"
                 android:gravity="center"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
@@ -47,7 +47,7 @@
                     android:id="@+id/lblCustomerCode"
                     android:gravity="center_vertical"
                     android:textColor="@color/foreground"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/normal_text_size"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -77,7 +77,7 @@
                     android:id="@+id/lblCustomerName"
                     android:gravity="center_vertical"
                     android:textColor="@color/foreground"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/normal_text_size"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -110,7 +110,7 @@
                     android:text="@string/lblCustTaxNum"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/foreground"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/normal_text_size" />
                 <EditText
                     android:inputType="textPersonName"
                     android:id="@+id/tbCustTaxNum"
@@ -128,7 +128,7 @@
                 android:text="Tax number is not valid"
                 android:textColor="#FF3333"
                 android:visibility="gone"
-                android:textSize="8sp" />
+                android:textSize="@dimen/normal_text_size" />
             <LinearLayout
                 android:orientation="horizontal"
                 android:minWidth="25px"
@@ -148,7 +148,7 @@
                     android:gravity="center_vertical"
                     android:text="@string/lblCustomerAddress"
                     android:textColor="@color/foreground"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/normal_text_size" />
                 <EditText
                     android:id="@+id/tbCustAddress"
                     style="@style/myEditTextStyle"
@@ -169,7 +169,7 @@
         android:padding="4dp"
         android:text="@string/lblCustomerStatisticCaption"
         android:textColor="@color/foreground"
-        android:textSize="12sp" />
+        android:textSize="@dimen/caption_text_size" />
     <TabHost
         android:id="@+id/tabhost"
         android:layout_width="fill_parent"
@@ -209,14 +209,10 @@
     <LinearLayout
         android:id="@+id/llBottom"
         android:orientation="horizontal"
-        android:minWidth="25px"
-        android:minHeight="25px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <Button
             android:id="@+id/btnSave"
-            android:minWidth="25px"
-            android:minHeight="25px"
             android:text="Save"
             style="@style/mainButtonStyle"
             android:layout_width="wrap_content"

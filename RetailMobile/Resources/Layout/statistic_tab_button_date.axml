@@ -5,12 +5,12 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:id="@+id/statistic_tab_button_month"
-    android:minHeight="32dip"
+    android:minHeight="@dimen/button_height"
     android:gravity="center">
     <ImageView
         android:id="@+id/img_statistic_month"
-        android:layout_width="32dip"
-        android:layout_height="32dip"
+        android:layout_width="@dimen/button_height"
+        android:layout_height="@dimen/button_height"
         android:layout_marginRight="10dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -20,6 +20,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lblStatisticByDate"
-        android:textSize="18sp"
+        android:textSize="@dimen/main_button_text_size"
         android:textColor="@android:color/white" />
 </LinearLayout>

@@ -222,12 +222,21 @@
                     android:layout_height="wrap_content"
                     android:layout_width="0dp"
                     android:layout_weight="1" />
-                <ImageView
-                    android:id="@+id/imgItemDetail"
+                <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:src="@drawable/night" />
+                    android:layout_height="fill_parent"
+                    android:layout_weight="3">
+                    <ImageView
+                        android:id="@+id/imgItemDetail"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:src="@drawable/night" />
+                    <Button
+                        android:id="@+id/btnViewImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="View full size" />
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

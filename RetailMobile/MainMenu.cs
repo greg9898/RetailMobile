@@ -16,6 +16,17 @@ namespace RetailMobile
     [Activity(Label = "Ασυρματη Παραγγελιοληψια", MainLauncher = true, Icon = "@drawable/retail", Theme = "@android:style/Theme.Light.NoTitleBar.Fullscreen")]
     public class MainMenu : Android.Support.V4.App.FragmentActivity
     {
+        public enum MenuItems
+        {
+            Items = 0
+,
+            Customers = 1
+,
+            Invoices = 2
+,
+            CheckableItemsTest = 3
+        }
+
         RetailMobile.Fragments.ActionBar myActionBar;
 
         protected override void OnCreate(Bundle bundle)
@@ -26,7 +37,7 @@ namespace RetailMobile
 
             SetContentView(Resource.Layout.MainMenu);
             myActionBar = (RetailMobile.Fragments.ActionBar)SupportFragmentManager.FindFragmentById(Resource.Id.ActionBarMain);
-            myActionBar.SyncClicked += new Fragments.ActionBar.SyncCLickedDelegate(myActionBar_SyncClicked);
+            myActionBar.SyncClicked += new Fragments.ActionBar.SyncCLickedDelegate(MyActionBar_SyncClicked);
 
             ShowProgressBar();
             System.Threading.Tasks.Task.Factory.StartNew(() => Sync.SyncUsers(this)).ContinueWith(task => this.RunOnUiThread(() => HideProgressBar()));
@@ -42,7 +53,7 @@ namespace RetailMobile
                 this.FindViewById<LinearLayout>(Resource.Id.layoutDetails).Visibility = ViewStates.Visible;
                 this.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Visible;
                 
-                DetailsFragment details = DetailsFragment.NewInstance((int)Base.MenuItems.Invoices);
+                DetailsFragment details = DetailsFragment.NewInstance((int)MainMenu.MenuItems.Invoices);
                 var ft = SupportFragmentManager.BeginTransaction();
                 ft.Replace(Resource.Id.details_fragment, details);
                 ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
@@ -73,7 +84,7 @@ namespace RetailMobile
             myActionBar.HideProgress();
         }
 
-        void myActionBar_SyncClicked()
+        void MyActionBar_SyncClicked()
         {
             ShowProgressBar();
 

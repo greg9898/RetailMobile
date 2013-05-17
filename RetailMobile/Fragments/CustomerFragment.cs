@@ -28,11 +28,6 @@ namespace RetailMobile
             return detailsFrag;
         }
 
-        public int CustId
-        {
-            get { return Arguments.GetInt("ObjectId", -1); }
-        }
-
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             View view = inflater.Inflate(Resource.Layout.CustomerDetails, container, false);
@@ -42,7 +37,7 @@ namespace RetailMobile
             actionBar.SetTitle(this.Activity.GetString (Resource.String.miCustomers));
             view.FindViewById<FrameLayout>(Resource.Id.realtabcontent).Visibility = ViewStates.Gone;
 
-            customer = CustomerInfo.GetCustomer(Activity, ObjectId);
+            customer = CustomerInfo.GetCustomer(Activity, this.ObjectId);
             
             tbCustCode = (TextView)view.FindViewById(Resource.Id.tbCustomerCode);
             tbCustName = (TextView)view.FindViewById(Resource.Id.tbCustomerName);
@@ -51,8 +46,8 @@ namespace RetailMobile
             tbCustCode.Text = customer.Code;
             tbCustName.Text = customer.Name;
 
-            statisticTabMonthly = StatisticTabMonthly.NewInstance(CustId);
-            statisticTabByDate = StatisticTabByDate.NewInstance(CustId);
+            statisticTabMonthly = StatisticTabMonthly.NewInstance(this.ObjectId);
+            statisticTabByDate = StatisticTabByDate.NewInstance(this.ObjectId);
 
             mTabHost = (TabHost)view.FindViewById(Resource.Id.tabhost);
             mTabHost.TabChanged += tabHost_HandleTabChanged; 

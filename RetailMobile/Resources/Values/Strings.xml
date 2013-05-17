@@ -44,6 +44,7 @@
   <string name="lblDtrn_disc_line1">Εκπτωση:</string> 
   <string name="lblDtrn_net_value">Καθαρή αξία:</string> 
   <string name="lblDtrn_vat_value">Αξία ΦΠΑ:</string> 
+    <string name="delete_detail_question">Delete detail {0}?</string>
   
  <!--  item   --> 
   <string name="lblItemCode">Κωδικός:</string> 

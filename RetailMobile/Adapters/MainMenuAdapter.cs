@@ -18,7 +18,7 @@ namespace RetailMobile
         Activity context = null;
 
         public MainMenuAdapter(Activity context)
-            : base(context, Resource.Layout.MainMenuRow, Enum.GetNames(typeof(Base.MenuItems)))
+            : base(context, Resource.Layout.MainMenuRow, Enum.GetNames(typeof(MainMenu.MenuItems)))
         {
             this.context = context;
         }
@@ -34,20 +34,20 @@ namespace RetailMobile
 
             switch (position)
             {
-                case (int)Base.MenuItems.Items:
+                case (int)MainMenu.MenuItems.Items:
                     tvMenuCaption.Text = this.context.GetString(Resource.String.tvMenuCaptionItems);
                     ivMenuIcon.SetImageResource(Resource.Drawable.itemsIcon);
                     break;
-                case (int)Base.MenuItems.Customers:
+                case (int)MainMenu.MenuItems.Customers:
                     tvMenuCaption.Text = this.context.GetString(Resource.String.tvMenuCaptionCustomers);
                     ivMenuIcon.SetImageResource(Resource.Drawable.customersIcon);
                     break;
-                case (int)Base.MenuItems.Invoices:
+                case (int)MainMenu.MenuItems.Invoices:
                     tvMenuCaption.Text = this.context.GetString(Resource.String.tvMenuCaptionInvoices);
                     ivMenuIcon.SetImageResource(Resource.Drawable.invoiceIcon);
                     break;
                 default:
-                    tvMenuCaption.Text =Base.MenuItems.CheckableItemsTest.ToString(); //Enum.GetName(typeof(TitlesFragment), (TitlesFragment.MenuItems)position);
+                    tvMenuCaption.Text =MainMenu.MenuItems.CheckableItemsTest.ToString(); //Enum.GetName(typeof(TitlesFragment), (TitlesFragment.MenuItems)position);
                     break;
             }
 

@@ -47,7 +47,7 @@ namespace RetailMobile
 				this.Activity.FindViewById<LinearLayout> (Resource.Id.layoutDetails).Visibility = ViewStates.Visible;
 				this.Activity.FindViewById<FrameLayout> (Resource.Id.details_fragment).Visibility = ViewStates.Visible;
 				
-				DetailsFragment details = DetailsFragment.NewInstance ((int)Base.MenuItems.Invoices);
+				DetailsFragment details = DetailsFragment.NewInstance ((int)MainMenu.MenuItems.Invoices);
 				var ft = FragmentManager.BeginTransaction ();
 				ft.Replace (Resource.Id.details_fragment, details);
 				ft.SetTransition (Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);

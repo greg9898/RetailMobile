@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="AppTheme" parent="android:Theme.Light" />
+        <style name="myEditTextStyle" parent="android:style/Widget.EditText">
+        <item name="android:background">@drawable/my_edit_text_selector2</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/normal_text_size</item>
+        <item name="android:padding">2dp</item>
+    </style>
+    <style name="mySpinnerStyle" parent="android:style/Widget.Spinner">
+        <item name="android:background">@drawable/my_edit_text_selector2</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/normal_text_size</item>
+        <item name="android:padding">2dp</item>
+    </style>
+    <style name="listStyle">
+        <item name="android:background">@drawable/button_selector</item>
+        <item name="android:minHeight">@dimen/list_row_height</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/normal_text_size</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+    <style name="listRowTextViewStyle">
+        <item name="android:gravity">left|center</item>
+        <item name="android:minHeight">@dimen/list_row_height</item>
+        <item name="android:textSize">@dimen/normal_text_size</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_marginTop">5dp</item>
+    </style>
+    <style name="listRowTextViewHeaderStyle" parent="@style/listRowTextViewStyle">
+        <item name="android:textStyle">bold|italic</item>
+    </style>
+        <style name="listRowHeaderStyle" parent="@style/listRowTextViewStyle">
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:background">@drawable/actionbar_background</item>
+    </style>
+    <style name="menuButtonStyle">
+        <item name="android:background">@drawable/menu_button_selector</item>
+        <item name="android:minHeight">@dimen/button_height</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/main_button_text_size</item>
+    </style>
+    <style name="mainButtonStyle">
+        <item name="android:background">@drawable/main_button_selector</item>
+        <item name="android:minHeight">@dimen/button_height</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/main_button_text_size</item>
+    </style>
+        <style name="headerText" parent="@style/wrapSelf">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="menu_caption">
+        <item name="android:minHeight">35dip</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="menu_background">
+        <item name="android:background">@drawable/menu_caption_background</item>
+    </style>
+    <style name="fillWidth">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="fillHeight">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+    <style name="fillParent">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+    <style name="wrapSelf">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="ActionBarButton">
+        <item name="android:layout_width">@dimen/action_bar_button_width</item>
+        <item name="android:layout_height">@dimen/action_bar_button_height</item>
+        <item name="android:layout_marginBottom">@dimen/action_bar_button_bottom_margin</item>
+        <item name="android:layout_marginTop">@dimen/action_bar_button_top_margin</item>
+    </style>
+    <style name="ActionBarButtonLeft" parent="@style/ActionBarButton">
+        <item name="android:layout_marginLeft">@dimen/action_bar_button_left_margin</item>
+        <item name="android:layout_alignParentLeft">true</item>
+    </style>
+    <style name="ActionBarButtonRight" parent="@style/ActionBarButton">
+        <item name="android:layout_marginRight">@dimen/action_bar_button_right_margin</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
+    <style name="MyWindowTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">8sp</item>       
+        <item name="android:textStyle">bold|italic</item>
+    </style>
+    <style name="dialog_title_style" parent="android:Widget.TextView">
+        <item name="android:background">@drawable/actionbar_background</item>
+        <item name="android:textAppearance">@style/MyWindowTitle</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="cust_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowTitleStyle">@style/dialog_title_style</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:background">@android:color/white</item>
+    </style>
+    <style name="cust_dialogWrap" parent="@android:style/Theme.Dialog">
+        <item name="android:windowTitleStyle">@style/dialog_title_style</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:background">@android:color/white</item>
+    </style>
+</resources>

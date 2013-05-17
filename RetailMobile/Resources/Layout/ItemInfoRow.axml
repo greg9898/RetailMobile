@@ -5,15 +5,16 @@
         android:id="@+id/imgItem"
         android:layout_width="40dip"
         android:layout_height="40dip"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="2dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:src="@drawable/no_icon" />
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_toRightOf="@id/imgItem">        
+        android:layout_toRightOf="@id/imgItem">
         <TextView
             android:id="@+id/tbItemName"
             style="@style/listRowTextViewStyle"
@@ -21,10 +22,10 @@
         <TextView
             android:id="@+id/tbItemTaxNum"
             style="@style/listRowTextViewStyle"
-            android:layout_weight="1" />
+            android:layout_weight="0.3" />
         <TextView
             android:id="@+id/tbItemDebt"
             style="@style/listRowTextViewStyle"
-            android:layout_weight="0.5" />
+            android:layout_weight="0.3" />
     </LinearLayout>
 </RelativeLayout>

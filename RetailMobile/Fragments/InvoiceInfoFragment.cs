@@ -4,6 +4,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using RetailMobile.Library;
+using Android.Content;
 
 namespace RetailMobile
 {
@@ -39,7 +40,7 @@ namespace RetailMobile
             
             header = new Library.TransHed();
             
-            actionBar = (RetailMobile.Fragments.ItemActionBar)((Android.Support.V4.App.FragmentActivity)this.Activity).SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
+            actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
             actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
             string save = this.Activity.GetString(Resource.String.btnSave);
             actionBar.ClearButtons();
@@ -100,7 +101,6 @@ namespace RetailMobile
                 tbHtrnTotValue.Enabled = false;
 
                 tbCustCode.Enabled = false;
-                ;
                 tbHtrnID.Enabled = false;
 
                 tbHtrnDate.Enabled = false;

@@ -1,5 +1,4 @@
 using System;
-
 using Android.App;
 using Android.Views;
 using Android.Widget;
@@ -7,174 +6,258 @@ using RetailMobile.Library;
 
 namespace RetailMobile
 {
-	public class TransDetAdapter : ArrayAdapter<Library.TransDet>
-	{ 
-		public static EditText lastFocusedControl;
-		Activity context = null;
-		EditText tbDtrn_qty1;
-		EditText tbDtrn_disc_line1;
-		TransDetList dataSource;
-		public delegate void QtysChangedDeletegate ();
+    public class TransDetAdapter : ArrayAdapter<Library.TransDet>
+    { 
+        public static EditText lastFocusedControl;
+        Android.Support.V4.App.FragmentActivity context = null;
+        EditText tbDtrn_qty1;
+        EditText tbDtrn_disc_line1;
+        TransDetList dataSource;
 
-		public delegate void QtysSelectedDeletegate (SelectedDetail detail);
+        public delegate void QtysChangedDeletegate();
 
-		public event QtysChangedDeletegate QtysChangedEvent;
-		public event QtysSelectedDeletegate DetailFieldSelectedEvent;
+        public delegate void QtysSelectedDeletegate(SelectedDetail detail);
 
-		public TransDetAdapter (Activity context, TransDetList list)
+        public event QtysChangedDeletegate QtysChangedEvent;
+        public event QtysSelectedDeletegate DetailFieldSelectedEvent;
+
+        public TransDetAdapter(Android.Support.V4.App.FragmentActivity context, TransDetList list)
             : base(context, Resource.Layout.TransDetRow, list)
-		{
-			this.context = context;
+        {
+            this.context = context;
 
-			dataSource = list;
-		}
+            dataSource = list;
+        }
 
-		public void AddValue ()
-		{
-			if (lastFocusedControl != null) {
-				lastFocusedControl.Text = (int.Parse (lastFocusedControl.Text) + 1).ToString ();
-			}
-		}
+        public void AddValue()
+        {
+            if (lastFocusedControl != null)
+            {
+                lastFocusedControl.Text = (int.Parse(lastFocusedControl.Text) + 1).ToString();
+            }
+        }
 
-		public void SubstractValue ()
-		{
-			if (lastFocusedControl != null) {
-				lastFocusedControl.Text = (int.Parse (lastFocusedControl.Text) - 1).ToString ();
-			}
-		}
+        public void SubstractValue()
+        {
+            if (lastFocusedControl != null)
+            {
+                lastFocusedControl.Text = (int.Parse(lastFocusedControl.Text) - 1).ToString();
+            }
+        }
 
-		public override View GetView (int position, View convertView, ViewGroup parent)
-		{
-			View view = convertView;
-			if (view == null)
-				view = context.LayoutInflater.Inflate (Resource.Layout.TransDetRow, null);
+        public override View GetView(int position, View convertView, ViewGroup parent)
+        {
+            View view = convertView;
+            ViewHolder holder;
 
-			TextView lblItemCode = (TextView)view.FindViewById (Resource.Id.lblDtrn_ItemCode);
-			TextView lblItemDesc = (TextView)view.FindViewById (Resource.Id.tbItemDesc);
-			tbDtrn_qty1 = view.FindViewById<EditText> (Resource.Id.tbDtrn_qty1);
-			TextView lblDtrn_unit_price = view.FindViewById<TextView> (Resource.Id.lblDtrn_unit_price);
-			tbDtrn_disc_line1 = view.FindViewById<EditText> (Resource.Id.tbDtrn_disc_line1);
-			TextView lblDtrn_net_value = view.FindViewById<TextView> (Resource.Id.lblDtrn_net_value);
-			TextView lblDtrn_vat_value = view.FindViewById<TextView> (Resource.Id.lblDtrn_vat_value);
+            if (view == null)
+            {
+                view = context.LayoutInflater.Inflate(Resource.Layout.TransDetRow, null);
+                holder = new ViewHolder();
+                holder.position = position;
 
-			TransDet detail = dataSource [position];
+                holder.lblItemCode = (TextView)view.FindViewById(Resource.Id.lblDtrn_ItemCode);
+                holder.lblItemDesc = (TextView)view.FindViewById(Resource.Id.tbItemDesc);
+                holder.tbDtrn_qty1 = view.FindViewById<EditText>(Resource.Id.tbDtrn_qty1);
+                holder.lblDtrn_unit_price = view.FindViewById<TextView>(Resource.Id.lblDtrn_unit_price);
+                holder.tbDtrn_disc_line1 = view.FindViewById<EditText>(Resource.Id.tbDtrn_disc_line1);
+                holder.lblDtrn_net_value = view.FindViewById<TextView>(Resource.Id.lblDtrn_net_value);
+                holder.lblDtrn_vat_value = view.FindViewById<TextView>(Resource.Id.lblDtrn_vat_value);
 
-			if (tbDtrn_qty1 != null) {
-				tbDtrn_qty1.Tag = position;
-				tbDtrn_qty1.FocusableInTouchMode = true;
-				tbDtrn_qty1.Text = detail.DtrnQty1.ToString ();
-				tbDtrn_qty1.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs> (tbDtrn_qty1_TextChanged);            
-				tbDtrn_qty1.FocusChange += tbQty_HandleFocusChange;
-				tbDtrn_qty1.Touch += new EventHandler<View.TouchEventArgs> (EditTextTouchUp);
-//				tbDtrn_qty1.Click += EditText_Click;
-			}
-			if (tbDtrn_disc_line1 != null) {
-				tbDtrn_disc_line1.Tag = position;
-				tbDtrn_disc_line1.FocusableInTouchMode = true;
-				tbDtrn_disc_line1.Text = detail.DtrnDiscLine1.ToString ();
-				tbDtrn_disc_line1.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs> (tbDtrn_disc_line1_TextChanged);
-				tbDtrn_disc_line1.FocusChange += tbQty_HandleFocusChange;
-				tbDtrn_disc_line1.Touch += new EventHandler<View.TouchEventArgs> (EditTextTouchUp);
-//				tbDtrn_disc_line1.Click += EditText_Click;
-			}
+                tbDtrn_disc_line1 = holder.tbDtrn_disc_line1;
+                tbDtrn_qty1 = holder.tbDtrn_qty1;
 
-			lblItemCode.Text = detail.ItemCode;
-			lblItemDesc.Text = detail.ItemDesc;
+                view.Tag = holder;
+            }
+            else
+            {            
+                holder = (ViewHolder)view.Tag;
+            }
+
+            TransDet detail = dataSource[position];
+
+            if (detail == null)
+            {
+                return view;
+            }
+
+            view.LongClick += rowView_HandleLongClick;
+
+            holder.tbDtrn_qty1.Tag = position;
+            holder.tbDtrn_qty1.FocusableInTouchMode = true;
+            holder.tbDtrn_qty1.Text = detail.DtrnQty1.ToString();
+            holder.tbDtrn_qty1.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbDtrn_qty1_TextChanged);            
+            holder.tbDtrn_qty1.FocusChange += tbQty_HandleFocusChange;
+            holder.tbDtrn_qty1.Touch += new EventHandler<View.TouchEventArgs>(EditTextTouchUp);
+
+            holder.tbDtrn_disc_line1.Tag = position;
+            holder.tbDtrn_disc_line1.FocusableInTouchMode = true;
+            holder.tbDtrn_disc_line1.Text = detail.DtrnDiscLine1.ToString();
+            holder.tbDtrn_disc_line1.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbDtrn_disc_line1_TextChanged);
+            holder.tbDtrn_disc_line1.FocusChange += tbQty_HandleFocusChange;
+            holder.tbDtrn_disc_line1.Touch += new EventHandler<View.TouchEventArgs>(EditTextTouchUp);
+
+            holder.lblItemCode.Text = detail.ItemCode;
+            holder.lblItemDesc.Text = detail.ItemDesc;
             
-			lblDtrn_unit_price.Text = detail.DtrnUnitPrice.ToString ();
+            holder.lblDtrn_unit_price.Text = detail.DtrnUnitPrice.ToString();
             
-			lblDtrn_net_value.Text = detail.DtrnNetValue.ToString ();
-			lblDtrn_vat_value.Text = detail.DtrnVatValue.ToString ();
+            holder.lblDtrn_net_value.Text = detail.DtrnNetValue.ToString();
+            holder.lblDtrn_vat_value.Text = detail.DtrnVatValue.ToString();
 
-			return view;
-		}
+            return view;
+        }
 
-		void EditText_Click (object sender, EventArgs e)
-		{
-			if (TransDetAdapter.lastFocusedControl != null) {
-				TransDetAdapter.lastFocusedControl.SetBackgroundResource (Resource.Drawable.my_edit_text_background_normal);
-			}
+        class ViewHolder:Java.Lang.Object
+        {
+            public TextView lblItemCode ;
+            public  TextView lblItemDesc ;
+            public  EditText tbDtrn_qty1;
+            public   TextView lblDtrn_unit_price  ;
+            public  EditText tbDtrn_disc_line1;
+            public    TextView lblDtrn_net_value ;
+            public   TextView lblDtrn_vat_value;
+            public int position;
+        }
 
-			TransDetAdapter.lastFocusedControl = (EditText)sender;
-			TransDetAdapter.lastFocusedControl.SetBackgroundResource (Resource.Drawable.my_edit_text_background_focused);
-		}
+        void rowView_HandleLongClick(object sender, View.LongClickEventArgs e)
+        {
+            View rowView = sender as View;
+            int position = ((ViewHolder)rowView.Tag).position;
+            TransDet d = this.GetItem(position);
+            string question = string.Format(context.Resources.GetText( Resource.String.delete_detail_question), d.ItemDesc);
 
-		private void EditTextTouchUp (object sender, View.TouchEventArgs e)
-		{			
+            new DialogDeleteDetail(question, position, this).Show(context.SupportFragmentManager, "dialog");
+        }
+
+        public class DialogDeleteDetail : Android.Support.V4.App.DialogFragment
+        {
+            ArrayAdapter adapter;
+            int position;
+            string questionDelYesNo;
+
+            public DialogDeleteDetail(string questionDelete, int pos, ArrayAdapter adapter)
+            {
+                position = pos;
+                questionDelYesNo = questionDelete;
+                this.adapter = adapter;
+            }
+
+            public override Android.App.Dialog OnCreateDialog(Android.OS.Bundle savedInstanceState)
+            {
+                var builder = new Android.App.AlertDialog.Builder(Activity);
+                builder.SetMessage(questionDelYesNo);
+                builder.SetPositiveButton(Resources.GetText( Resource.String.Yes), (sender, args) =>
+                {
+                    adapter.Remove(adapter.GetItem(position));
+                    adapter.NotifyDataSetChanged();
+                });
+                builder.SetNegativeButton(Resources.GetText( Resource.String.No), (sender, args) =>
+                {
+                    this.Dismiss();
+                });
+
+                return builder.Create();
+            }
+        }
+
+        void EditText_Click(object sender, EventArgs e)
+        {
+            if (TransDetAdapter.lastFocusedControl != null)
+            {
+                TransDetAdapter.lastFocusedControl.SetBackgroundResource(Resource.Drawable.my_edit_text_background_normal);
+            }
+
+            TransDetAdapter.lastFocusedControl = (EditText)sender;
+            TransDetAdapter.lastFocusedControl.SetBackgroundResource(Resource.Drawable.my_edit_text_background_focused);
+        }
+
+        private void EditTextTouchUp(object sender, View.TouchEventArgs e)
+        {			
 //			if (MotionEventActions.Up == e.Event.Action ) {  disallow text edit ?
-			switch (e.Event.Action & MotionEventActions.Mask) {
-			case MotionEventActions.Up:
-				if (TransDetAdapter.lastFocusedControl != null)
-					TransDetAdapter.lastFocusedControl.SetBackgroundResource (Resource.Drawable.my_edit_text_background_normal);
-				TransDetAdapter.lastFocusedControl = (EditText)sender;
-				TransDetAdapter.lastFocusedControl.SetBackgroundResource (Resource.Drawable.my_edit_text_background_focused);
-				TransDetAdapter.lastFocusedControl.RequestFocus();
-				break;
-			}
-		}
+            switch (e.Event.Action & MotionEventActions.Mask)
+            {
+                case MotionEventActions.Up:
+                    if (TransDetAdapter.lastFocusedControl != null)
+                        TransDetAdapter.lastFocusedControl.SetBackgroundResource(Resource.Drawable.my_edit_text_background_normal);
+                    TransDetAdapter.lastFocusedControl = (EditText)sender;
+                    TransDetAdapter.lastFocusedControl.SetBackgroundResource(Resource.Drawable.my_edit_text_background_focused);
+                    TransDetAdapter.lastFocusedControl.RequestFocus();
+                    break;
+            }
+        }
 
-		void tbQty_HandleFocusChange (object sender, View.FocusChangeEventArgs e)
-		{          
-			if (DetailFieldSelectedEvent != null) {
-				if (e.HasFocus) {
-					int index = int.Parse (((EditText)sender).Tag.ToString ());
+        void tbQty_HandleFocusChange(object sender, View.FocusChangeEventArgs e)
+        {          
+            if (DetailFieldSelectedEvent != null)
+            {
+                if (e.HasFocus)
+                {
+                    int index = int.Parse(((EditText)sender).Tag.ToString ());
 
-					if (sender.Equals (tbDtrn_qty1)) {                      
-						DetailFieldSelectedEvent (new SelectedDetail (){  
+                    if (sender.Equals(tbDtrn_qty1))
+                    {                      
+                        DetailFieldSelectedEvent(new SelectedDetail (){  
                             Position = index,
                             TransDetail = dataSource[index],
                             Property = "QTY"
                         });
-					} else if (sender.Equals (tbDtrn_disc_line1)) {
-						DetailFieldSelectedEvent (new SelectedDetail (){  
+                    }
+                    else if (sender.Equals(tbDtrn_disc_line1))
+                    {
+                        DetailFieldSelectedEvent(new SelectedDetail (){  
                             Position = index,
                             TransDetail = dataSource[index], 
                             Property = "DISC"
                         });
-					}
-				} else {
-					DetailFieldSelectedEvent (null);
-				}
-			}
-		}
+                    }
+                }
+                else
+                {
+                    DetailFieldSelectedEvent(null);
+                }
+            }
+        }
 
-		void tbDtrn_qty1_TextChanged (object sender, Android.Text.TextChangedEventArgs e)
-		{
-			int index = int.Parse (((EditText)sender).Tag.ToString ());
-			TransDet detail = dataSource [index];
-			string qtyText = e.Text.ToString ().Trim ();
-			detail.DtrnQty1 = qtyText != "" ? double.Parse (qtyText) : 0;
+        void tbDtrn_qty1_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
+        {
+            int index = int.Parse(((EditText)sender).Tag.ToString ());
+            TransDet detail = dataSource[index];
+            string qtyText = e.Text.ToString().Trim();
+            detail.DtrnQty1 = qtyText != "" ? double.Parse(qtyText) : 0;
             
-			if (QtysChangedEvent != null) {
-				QtysChangedEvent ();
-			}
-		}
+            if (QtysChangedEvent != null)
+            {
+                QtysChangedEvent();
+            }
+        }
 
-		void tbDtrn_disc_line1_TextChanged (object sender, Android.Text.TextChangedEventArgs e)
-		{
-			int index = int.Parse (((EditText)sender).Tag.ToString ());
-			TransDet detail = dataSource [index];
-			detail.DtrnDiscLine1 = double.Parse ((sender as EditText).Text);
+        void tbDtrn_disc_line1_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
+        {
+            int index = int.Parse(((EditText)sender).Tag.ToString ());
+            TransDet detail = dataSource[index];
+            detail.DtrnDiscLine1 = double.Parse((sender as EditText).Text);
             
-			if (QtysChangedEvent != null) {
-				QtysChangedEvent ();
-			}
-		}
+            if (QtysChangedEvent != null)
+            {
+                QtysChangedEvent();
+            }
+        }
 
-		public class SelectedDetail
-		{
-			public TransDet TransDetail = null;
-			public int Position = -1;
-			public string Property = "";
+        public class SelectedDetail
+        {
+            public TransDet TransDetail = null;
+            public int Position = -1;
+            public string Property = "";
 
-			public static SelectedDetail Empty ()
-			{
-				SelectedDetail d = new SelectedDetail ();
-				d.TransDetail = null;
-				d.Position = -1;
-				d.Property = "";
-				return d;
-			}
-		}
-	}
+            public static SelectedDetail Empty()
+            {
+                SelectedDetail d = new SelectedDetail();
+                d.TransDetail = null;
+                d.Position = -1;
+                d.Property = "";
+                return d;
+            }
+        }
+    }
 }

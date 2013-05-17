@@ -22,7 +22,7 @@
             android:layout_marginLeft="2dp"
             android:text="@string/miInvoice"
             android:background="@android:color/transparent"
-            android:gravity="left"
+            android:gravity="left|center"
             android:layout_weight="1" />
     </RelativeLayout>
     <TextView
@@ -47,7 +47,7 @@
             android:layout_toRightOf="@id/imgItems"
             android:background="@android:color/transparent"
             android:layout_marginLeft="2dp"
-            android:gravity="left"
+            android:gravity="left|center"
             android:text="@string/miItems" />
     </RelativeLayout>
     <TextView
@@ -72,7 +72,7 @@
             android:layout_toRightOf="@id/imgCustomers"
             android:background="@android:color/transparent"
             android:layout_marginLeft="2dp"
-            android:gravity="left"
+            android:gravity="left|center"
             android:text="@string/miCustomers" />
     </RelativeLayout>
     <TextView

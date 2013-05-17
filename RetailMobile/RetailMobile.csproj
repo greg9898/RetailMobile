@@ -68,7 +68,6 @@
     <Compile Include="Adapters\TransHedAdapter.cs" />
     <Compile Include="Adapters\ItemsInfoAdapter.cs" />
     <Compile Include="Adapters\CustomersAdapter.cs" />
-    <Compile Include="Base.cs" />
     <Compile Include="CustomerDetails.cs" />
     <Compile Include="CustomersList.cs" />
     <Compile Include="CustomersListAdapter.cs" />
@@ -164,6 +163,7 @@
     <AndroidResource Include="Resources\Drawable\statistics_month.png" />
     <Compile Include="Library\TransCust.cs" />
     <Compile Include="Library\TransCustList.cs" />
+    <AndroidResource Include="Resources\values-hdpi\dimens.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -373,6 +373,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
+    <Folder Include="Resources\values-hdpi\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidJavaLibrary Include="lib\UltraLiteJNI12.jar" />

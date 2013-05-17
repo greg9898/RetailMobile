@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="action_bar_height">44dp</dimen>
-    <dimen name="action_bar_button_height">47dp</dimen>
-    <dimen name="action_bar_button_width">50dp</dimen>
+    <dimen name="action_bar_height">30dp</dimen>
+    <dimen name="action_bar_button_height">30dp</dimen>
+    <dimen name="action_bar_button_width">33dp</dimen>
     <dimen name="action_bar_button_top_margin">2dp</dimen>
     <dimen name="action_bar_button_bottom_margin">2dp</dimen>
-    <dimen name="action_bar_button_left_margin">3dp</dimen>
-    <dimen name="action_bar_button_right_margin">3dp</dimen>
+    <dimen name="action_bar_button_left_margin">2dp</dimen>
+    <dimen name="action_bar_button_right_margin">2dp</dimen>
+    <dimen name="action_bar_text_size">11sp</dimen>
     
     <dimen name="button_corners_radius">2dp</dimen>
     
-    <dimen name="normal_text_size">12sp</dimen>
-    <dimen name="main_button_text_size">18sp</dimen>
+    <dimen name="normal_text_size">11sp</dimen>
+    <dimen name="main_button_text_size">12sp</dimen>
     
-    <dimen name="main_menu_icon_size">64dp</dimen>
-    <dimen name="main_menu_text_size">16sp</dimen>
+    <dimen name="main_menu_icon_size">48dp</dimen>
+    <dimen name="main_menu_text_size">14sp</dimen>
+    
+    <dimen name="caption_text_size">13sp</dimen>
+    
+    <dimen name="list_row_height">26dp</dimen>
+    <dimen name="button_height">26dp</dimen>
 </resources>

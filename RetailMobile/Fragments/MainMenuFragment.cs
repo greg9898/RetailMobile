@@ -66,7 +66,7 @@ namespace RetailMobile
         {
             //FrameLayout f = this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment);
             //f.Visibility = ViewStates.Visible;
-            details = DetailsFragment.NewInstance((int)Base.MenuItems.Invoices);
+            details = DetailsFragment.NewInstance((int)MainMenu.MenuItems.Invoices);
             var ft = FragmentManager.BeginTransaction();
             ft.Replace(Resource.Id.details_fragment, details);
             ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
@@ -87,7 +87,7 @@ namespace RetailMobile
         {
             FrameLayout f = this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment);
             f.Visibility = ViewStates.Visible;
-            details = DetailsFragment.NewInstance((int)Base.MenuItems.Items);
+            details = DetailsFragment.NewInstance((int)MainMenu.MenuItems.Items);
             var ft = FragmentManager.BeginTransaction();
             ft.Replace(Resource.Id.details_fragment, details);
             ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
@@ -109,7 +109,7 @@ namespace RetailMobile
             FrameLayout f = this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment);
             f.Visibility = ViewStates.Visible;
 
-            details = DetailsFragment.NewInstance((int)Base.MenuItems.Customers);
+            details = DetailsFragment.NewInstance((int)MainMenu.MenuItems.Customers);
             var ft = FragmentManager.BeginTransaction();
             ft.Replace(Resource.Id.details_fragment, details);
             ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
