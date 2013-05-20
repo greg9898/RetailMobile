@@ -14,11 +14,29 @@
         android:orientation="vertical"
         style="@style/fillParent"
         android:layout_weight="0.7"
+        android:layout_marginTop="1dp"
         android:background="@android:color/white">
+        <Button
+            android:id="@+id/btnOK"
+            style="@style/mainButtonStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:text="@string/btnOK" />
+         <Button
+            android:id="@+id/btnClose"
+            style="@style/mainButtonStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+	        android:layout_below="@id/btnOK"
+	        android:layout_marginTop="1dp"
+            android:text="@string/btnClose" />        
         <TextView
             android:id="@+id/lblItemName"
             style="@style/fillWidth"
             android:text="@string/lblItemName"
+            android:layout_below="@id/btnClose"
+            android:layout_marginTop="1dp"
             android:textColor="@android:color/black" />
         <EditText
             android:id="@+id/tbSearch"
@@ -71,23 +89,9 @@
             android:textColor="@android:color/black" />
         <ImageView
             android:id="@+id/imgItemSelected"
-            style="@style/fillWidth"
+            style="@style/fillParent"
             android:gravity="left|top"
-            android:layout_below="@id/lblItemSelectedInfo"
-            android:layout_above="@id/btnOK" />
-        <Button
-            android:id="@+id/btnClose"
-            style="@style/mainButtonStyle"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:text="@string/btnClose" />
-        <Button
-            android:id="@+id/btnOK"
-            style="@style/mainButtonStyle"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/btnClose"
-            android:text="@string/btnOK" />
+            android:layout_below="@id/lblItemSelectedInfo" />
+       
     </RelativeLayout>
 </LinearLayout>

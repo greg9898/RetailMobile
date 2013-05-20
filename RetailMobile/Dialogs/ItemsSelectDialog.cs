@@ -216,8 +216,11 @@ namespace RetailMobile
 				TextView lblItemSelectedInfo = FindViewById<TextView> (Resource.Id.lblItemSelectedInfo);
 				ImageView imgItemSelected = FindViewById<ImageView> (Resource.Id.imgItemSelected);
 				lblItemSelectedInfo.Text = item.ItemDesc;
-				imgItemSelected.SetImageResource (Resource.Drawable.night);//todo
-			};            
+				//imgItemSelected.SetImageResource (Resource.Drawable.night);//todo
+                //tincho da go vidi
+                //ItemInfo itemInfo = ItemInfo.GetItem(currentContext, item.ItemId);
+                //imgItemSelected.SetImageBitmap(itemInfo.ItemImage);
+			};
 		}
         
 		public Dictionary<int, int> CheckedItemIds {

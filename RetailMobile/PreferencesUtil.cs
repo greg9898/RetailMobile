@@ -8,8 +8,8 @@ namespace RetailMobile
 
 		//87.203.80.42
 		//2439
-		//public static string IP = "";
-		public static string IP = "77.78.32.118";
+		public static string IP = "";
+		//public static string IP = "77.78.32.118";
 		//public static string IP = "87.203.80.42";
 		public static int Port = 2489;
 		public static string SyncModel = "RetailMobile2";
@@ -44,8 +44,9 @@ namespace RetailMobile
 				APP_SHARED_PREFS, FileCreationMode.Private);
 
 			IP = appSharedPrefs.GetString ("IP", "77.78.32.118");
-			//IP = appSharedPrefs.GetString("IP","");
+            //IP = appSharedPrefs.GetString("IP","85.72.39.236");
 			Port = appSharedPrefs.GetInt ("Port", 2489);
+            //Port = appSharedPrefs.GetInt ("Port", 2639);
 			//SyncModel = appSharedPrefs.GetString("SyncModel","RetailMobile");
 			SyncModel = appSharedPrefs.GetString ("SyncModel", "RetailMobile2");
 			Username = appSharedPrefs.GetString ("Username", "");

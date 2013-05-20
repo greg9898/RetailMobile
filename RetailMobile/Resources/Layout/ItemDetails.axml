@@ -200,44 +200,25 @@
                     android:gravity="center_vertical"
                     android:layout_weight="3" />
             </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:weightSum="4"
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_marginLeft="5dip"
-                android:layout_marginRight="5dip"
-                android:layout_marginTop="4dip"
-                android:id="@+id/layoutImg"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:text="@string/lblItemImage"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:id="@+id/lblItemImage"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/foreground"
-                    android:textSize="13sp"
-                    android:minWidth="70sp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="1" />
+
                 <RelativeLayout
-                    android:layout_width="0dp"
+                    android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="3">
+                    <Button
+                        android:id="@+id/btnViewImage"
+                        style="@style/mainButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="View full size" />
                     <ImageView
                         android:id="@+id/imgItemDetail"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:src="@drawable/night" />
-                    <Button
-                        android:id="@+id/btnViewImage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="View full size" />
-                </RelativeLayout>
-            </LinearLayout>
+                        android:src="@drawable/night"
+                        android:layout_toRightOf="@id/btnViewImage" />
+                    
+                </RelativeLayout>            
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

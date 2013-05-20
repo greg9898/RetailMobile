@@ -216,6 +216,8 @@ namespace RetailMobile
         void btnSearchCustomer_Click(object sender, EventArgs e)
         {
             CustomerSelectDialog custDlg = new CustomerSelectDialog(Activity, Resource.Style.cust_dialogWrap);
+            custDlg.Window.SetLayout(WindowManagerLayoutParams.FillParent, WindowManagerLayoutParams.FillParent);
+
             custDlg.DismissEvent += (s, ee) =>
             {
                 header.CstId = custDlg.CustId;
