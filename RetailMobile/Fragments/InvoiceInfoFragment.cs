@@ -37,17 +37,14 @@ namespace RetailMobile
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             View v = inflater.Inflate(Resource.Layout.InvoiceScreen, container, false);
-            
+
             header = new Library.TransHed();
-            
+
             actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
             actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
-            string save = this.Activity.GetString(Resource.String.btnSave);
             actionBar.ClearButtons();
-            actionBar.AddButtonRight(SAVE_BUTTON, save, Resource.Drawable.save_48);
-            
-            string title = this.Activity.GetString(Resource.String.lblInvoice);
-            actionBar.SetTitle(title);
+            actionBar.AddButtonRight(SAVE_BUTTON, this.Activity.GetString(Resource.String.btnSave), Resource.Drawable.save_48);
+            actionBar.SetTitle(this.Activity.GetString(Resource.String.lblInvoice));
             
             Button btnSearchItems = v.FindViewById<Button>(Resource.Id.btnSearchItems);
             Button btnSearchCustomer = v.FindViewById<Button>(Resource.Id.btnSearchCustomer);
@@ -79,36 +76,55 @@ namespace RetailMobile
             
             tbHtrnDate.Focusable = false;
             tbHtrnDate.Click += (object sender, EventArgs e) => {
-                
-                //ShowCalendar(v.Context, DateTime.ParseExact(tbHtrnDate.Text, PreferencesUtil.DateFormatDateOnly, System.Globalization.CultureInfo.InvariantCulture));
                 ShowCalendar(v.Context, header.TransDate);
             };
 
             LoadDetailsAdapter();
 
-            if (this.ObjectId > 0)
-            {
-                tbCustCode .Enabled = false;
-                tbHtrnID .Enabled = false;
-                tbCustDesc.Enabled = false;
-                tbCustAddress .Enabled = false;
-                tbCustPhone.Enabled = false;
-                tbCustDebt .Enabled = false;
-                tbHtrnExpln .Enabled = false;
-                tbHtrnDate .Enabled = false;
-                tbHtrnNetValue .Enabled = false;
-                tbHtrnVatValue.Enabled = false;
-                tbHtrnTotValue.Enabled = false;
-
-                tbCustCode.Enabled = false;
-                tbHtrnID.Enabled = false;
-
-                tbHtrnDate.Enabled = false;
-                btnSearchCustomer.Enabled = false;
-                btnSearchItems.Enabled = false;
-            }
+//            if (this.ObjectId > 0)
+//            {
+//                tbCustCode .Enabled = false;
+//                tbHtrnID .Enabled = false;
+//                tbCustDesc.Enabled = false;
+//                tbCustAddress .Enabled = false;
+//                tbCustPhone.Enabled = false;
+//                tbCustDebt .Enabled = false;
+//                tbHtrnExpln .Enabled = false;
+//                tbHtrnDate .Enabled = false;
+//                tbHtrnNetValue .Enabled = false;
+//                tbHtrnVatValue.Enabled = false;
+//                tbHtrnTotValue.Enabled = false;
+//
+//                tbCustCode.Enabled = false;
+//                tbHtrnID.Enabled = false;
+//
+//                tbHtrnDate.Enabled = false;
+//                btnSearchCustomer.Enabled = false;
+//                btnSearchItems.Enabled = false;
+//                lvDetails.Clickable = false;
+//                lvDetails.Focusable = false;
+//                lvDetails.FocusableInTouchMode = false;
+//                btnAddValue.Enabled = false;
+//                btnSubstractValue.Enabled = false;
+//           
+//                HeaderViewListAdapter adapter = (HeaderViewListAdapter)lvDetails.Adapter;
+//                TransDetAdapter origAdapter = (TransDetAdapter)adapter.WrappedAdapter;
+//                origAdapter.Disable();
+//            }
 
             return v;
+        }
+
+        public override void OnDestroyView()
+        {
+            base.OnDestroyView();
+            actionBar.ActionButtonClicked -= new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
+        }
+
+        public override void OnPause()
+        {
+            base.OnPause();
+            actionBar.ActionButtonClicked -= new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
         }
 
         void ShowCalendar(Android.Content.Context ctx, DateTime currentDate)
@@ -134,7 +150,7 @@ namespace RetailMobile
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("exception", ex.Message);
+                    Log.Error("ActionBarButtonClicked SAVE_BUTTON", "ActionBarButtonClicked SAVE_BUTTON " + ex.Message);
                 }
             }
         }
@@ -157,8 +173,20 @@ namespace RetailMobile
             tbHtrnTotValue.Text = header.HtrnTotValue.ToString(PreferencesUtil.DecimalFormat);
         }
 
-        private void Save()
+        void Save()
         {
+            if (header.CstId == 0)
+            {
+                Toast.MakeText(this.Activity, "Select customer!", ToastLength.Short).Show();
+                return;
+            }
+
+            if (header.TransDetList == null || header.TransDetList.Count == 0)
+            {
+                Toast.MakeText(this.Activity, "Choose details!", ToastLength.Short).Show();
+                return;
+            }
+
             if (tbHtrnNetValue.Text.Trim() == "")
             {
                 tbHtrnNetValue.Text = "0";
@@ -167,6 +195,7 @@ namespace RetailMobile
             {
                 tbHtrnVatValue.Text = "0";
             }
+
             header.HtrnExpl = tbHtrnExpln.Text;
             header.TransDate = DateTime.Parse(tbHtrnDate.Text);
             DateTime now = DateTime.Now;
@@ -174,11 +203,6 @@ namespace RetailMobile
             
             header.Save(Activity);
             InitInvoiceScreen();
-        }
-
-        void btnSave_Click(object sender, EventArgs e)
-        {
-            Save();
         }
 
         void tbHtrnID_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
@@ -300,7 +324,6 @@ namespace RetailMobile
             {
                 foreach (int itemId in dialogItems.CheckedItemIds.Keys)
                 {
-                    
                     TransDet transDet = new TransDet();
                     transDet.LoadItemInfo(Activity, itemId, dialogItems.CheckedItemIds[itemId], header.CstId);
                     Log.Debug("btnOKItem_Click", itemId + " " + transDet.ItemDesc);

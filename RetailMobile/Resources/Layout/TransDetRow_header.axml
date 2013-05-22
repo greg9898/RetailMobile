@@ -18,7 +18,7 @@
         style="@style/listRowTextViewHeaderStyle"
         android:text="@string/lblDtrnQty"
         android:layout_width="30dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="10dp"
         android:minWidth="20dp"
         android:layout_weight="0.5" />
     <TextView
@@ -26,7 +26,7 @@
         style="@style/listRowTextViewHeaderStyle"
         android:text="@string/lblDtrn_disc_line1"
         android:layout_width="30dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="10dp"
         android:minWidth="20dp"
         android:layout_weight="0.5" />
     <TextView
@@ -34,7 +34,7 @@
         style="@style/listRowTextViewHeaderStyle"
         android:text="@string/lblDtrn_unit_price"
         android:layout_width="30dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="10dp"
         android:minWidth="20dp"
         android:layout_weight="0.5" />
     <TextView
@@ -42,7 +42,7 @@
         style="@style/listRowTextViewHeaderStyle"
         android:text="@string/lblDtrn_net_value"
         android:layout_width="30dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="10dp"
         android:minWidth="20dp"
         android:layout_weight="0.5" />
     <TextView
@@ -50,7 +50,7 @@
         style="@style/listRowTextViewHeaderStyle"
         android:text="@string/lblDtrn_vat_value"
         android:layout_width="30dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="10dp"
         android:minWidth="20dp"
         android:layout_weight="0.5" />
 </LinearLayout>

@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using RetailMobile.Library;
+using Android.Util;
 
 namespace RetailMobile
 {
@@ -90,7 +91,7 @@ namespace RetailMobile
             }
             catch (Exception ex)
             {
-                //e.printStackTrace();
+                Log.Debug("btnViewImage_Click", ex.Message);
             }
         }
 

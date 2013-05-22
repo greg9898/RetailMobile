@@ -1,5 +1,4 @@
 using System;
-
 using Android.Content;
 using Com.Ianywhere.Ultralitejni12;
 
@@ -8,7 +7,7 @@ namespace RetailMobile.Library
     public class TransHed
     {
         public bool IsNew = true;
-        
+
         public int HtrnId { get; set; }
         //public int comp_id { get; set; }
         //public int bran_id { get; set; }
@@ -16,11 +15,11 @@ namespace RetailMobile.Library
         //public int per_id { get; set; }
         
         public DateTime TransDate { get; set; }
-        
+
         public long CstId { get; set; }
-        
+
         public int HtrnDocnum { get; set; }
-        
+
         public double UserId { get; set; }
         /// <summary>
         /// no taxes
@@ -65,21 +64,19 @@ namespace RetailMobile.Library
                 return htrnVatVal;
             }
         }
-        
+
         public DateTime HtrnEntryDate { get; set; }
-        
+
         public string HtrnExpl { get; set; }
-        
+
         public TransDetList TransDetList { get; set; }
-        
+
         public string CstName{ get; set; }
-        
+
         public string TransDateText { get
             {
-				return TransDate.ToShortDateString();//TransDate.ToString(PreferencesUtil.DateFormatDateOnly);
+                return TransDate.ToShortDateString();//TransDate.ToString(PreferencesUtil.DateFormatDateOnly);
             } }
-        
-        
         #region Customer Info
         public string CustCod;
         public string CustName;
@@ -92,14 +89,14 @@ namespace RetailMobile.Library
                 return HtrnNetVal + HtrnVatVal;
             }
         }
-        
+
         public TransHed()
         {
             TransDetList = new Library.TransDetList();
             TransDate = DateTime.Now;
             HtrnEntryDate = DateTime.Now;
         }
-        
+
         public void Save(Context ctx)
         {
             CustomerInfo info = new CustomerInfo();
@@ -124,7 +121,8 @@ VALUES
 :htrn_expl
 )");
                     //SELECT last_insert_id();
-                } else
+                }
+                else
                 {
                     ps = conn.PrepareStatement(@"
 UPDATE rtrans_hed SET
@@ -136,7 +134,7 @@ docnum = :htrn_docnum,
 htrn_explanation = :htrn_expl
 WHERE id = :htrn_id");
                     
-                    ps.Set("htrnId", HtrnId);
+                    ps.Set("htrn_id", HtrnId);
                 }
                 
                 //ps.Set("comp_id", comp_id);
@@ -165,7 +163,8 @@ WHERE id = :htrn_id");
                     {
                         HtrnId = rs.GetInt("id");
                     }
-                } else
+                }
+                else
                 {
                     ps.Execute();
                 }
@@ -184,7 +183,7 @@ WHERE id = :htrn_id");
                 conn.Release();
             }
         }
-        
+
         internal static void FetchDetails(TransHed transHed, IConnection conn)
         {
             IPreparedStatement ps = conn.PrepareStatement(@"
@@ -208,17 +207,16 @@ WHERE htrn_id = :htrn_id ");
                 TransDet d = new TransDet();
                 d.Fetch(result);
                 transHed.TransDetList.Add(d);
-            }
-            
+            }            
             
             result.Close();
             ps.Close();
         }
-        
+
         public static TransHed GetTransHed(Context ctx, double htrnId)
         {
             TransHed transHed = new TransHed();
-            
+
             if (htrnId == 0)
             {
                 return transHed;
@@ -255,7 +253,7 @@ WHERE rtrans_hed.id = :htrnId ";
             
             return transHed;
         }
-        
+
         public void Fetch(IResultSet result)
         {
             HtrnId = result.GetInt("id");

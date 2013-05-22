@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using Android.App;
 using Android.Views;
 using Android.Widget;
@@ -11,195 +10,217 @@ using Android.Util;
 
 namespace RetailMobile
 {
-	public class CheckableItemsAdapter : ArrayAdapter<Library.ItemInfo>, IScrollLoadble
-	{
-		Activity context = null;
-		ItemInfoList _itemInfoList;
-		private Dictionary<int, int> _checkedItemIds = new Dictionary<int, int> ();
-		public delegate void SingleItemSelectedDeletegate ();
+    public class CheckableItemsAdapter : ArrayAdapter<Library.ItemInfo>, IScrollLoadble
+    {
+        Activity context = null;
+        ItemInfoList _itemInfoList;
+        Dictionary<int, int> _checkedItemIds = new Dictionary<int, int>();
 
-		public delegate void SingleItemFocusedDeletegate (ItemInfo item);
+        public delegate void SingleItemSelectedDeletegate();
 
-		public event SingleItemFocusedDeletegate SingleItemFocusedEvent;
-		public event SingleItemSelectedDeletegate SingleItemSelectedEvent;
-        
-		public CheckableItemsAdapter (Activity context, Library.ItemInfoList list)
+        public delegate void SingleItemFocusedDeletegate(ItemInfo item);
+
+        public event SingleItemFocusedDeletegate SingleItemFocusedEvent;
+        public event SingleItemSelectedDeletegate SingleItemSelectedEvent;
+
+        public CheckableItemsAdapter(Activity context, Library.ItemInfoList list)
             : base(context, Resource.Layout.item_row_checkable, list)
-		{
-			this.context = context;
+        {
+            this.context = context;
             
-			_itemInfoList = list;
-		}
-        
-		public override View GetView (int position, View convertView, ViewGroup parent)
-		{
-			View view = convertView;
-			ViewHolder holder;
+            _itemInfoList = list;
+        }
 
-			if (view == null) {
-				view = context.LayoutInflater.Inflate (Resource.Layout.item_row_checkable, null);
+        public override View GetView(int position, View convertView, ViewGroup parent)
+        {
+            View view = convertView;
+            ViewHolder holder;
 
-				holder = new ViewHolder ();
-				holder.itemBox = view.FindViewById<CheckBox> (Resource.Id.checkBox);
-				holder.tbQty = view.FindViewById<EditText> (Resource.Id.tbQty);
-				holder.tbItemCode = (TextView)view.FindViewById (Resource.Id.tbItemCode);
-				holder.tbItemName = (TextView)view.FindViewById (Resource.Id.tbItemName);
-				holder.tbItemLastBuyDate = (TextView)view.FindViewById (Resource.Id.tbItemLastBuyDate);
-				holder.tbItemSaleVal = (TextView)view.FindViewById (Resource.Id.tbItemSaleVal);
-				holder.tbItemQtyLeft = (TextView)view.FindViewById (Resource.Id.tbItemQtyLeft);
-				holder.layout_checkable_item = view.FindViewById<RelativeLayout> (Resource.Id.layout_checkable_item_info);
+            if (view == null)
+            {
+                view = context.LayoutInflater.Inflate(Resource.Layout.item_row_checkable, null);
 
-				view.Tag = holder;
-			} else {			
-				holder = (ViewHolder)view.Tag;
-			}
+                holder = new ViewHolder();
+                holder.itemBox = view.FindViewById<CheckBox>(Resource.Id.checkBox);
+                holder.tbQty = view.FindViewById<EditText>(Resource.Id.tbQty);
+                holder.tbItemCode = (TextView)view.FindViewById(Resource.Id.tbItemCode);
+                holder.tbItemName = (TextView)view.FindViewById(Resource.Id.tbItemName);
+                holder.tbItemLastBuyDate = (TextView)view.FindViewById(Resource.Id.tbItemLastBuyDate);
+                holder.tbItemSaleVal = (TextView)view.FindViewById(Resource.Id.tbItemSaleVal);
+                holder.tbItemQtyLeft = (TextView)view.FindViewById(Resource.Id.tbItemQtyLeft);
+                holder.layout_checkable_item = view.FindViewById<RelativeLayout>(Resource.Id.layout_checkable_item_info);
+
+                view.Tag = holder;
+            }
+            else
+            {			
+                holder = (ViewHolder)view.Tag;
+            }
             
-			ItemInfo item = this.GetItem (position);
+            ItemInfo item = this.GetItem(position);
 
-			if (item == null) {
-				return view;
-			}
+            if (item == null)
+            {
+                return view;
+            }
 		
-			try {
-				if (holder.tbItemCode != null)
-					holder.tbItemCode.Text = item.item_cod;
-				if (holder.tbItemName != null)
-					holder.tbItemName.Text = item.ItemDesc;
-				if (holder.tbItemLastBuyDate != null)
-					holder.tbItemLastBuyDate.Text = item.ItemLastBuyDate.ToString (PreferencesUtil.DateFormatDateOnly);
-				if (holder.tbItemQtyLeft != null)
-					holder.tbItemQtyLeft.Text = item.ItemQtyLeft.ToString (PreferencesUtil.DecimalFormat);
-				if (holder.tbItemSaleVal != null)
-					holder.tbItemSaleVal.Text = item.ItemSaleVal1.ToString (PreferencesUtil.DecimalFormat);
+            try
+            {
+                if (holder.tbItemCode != null)
+                    holder.tbItemCode.Text = item.item_cod;
+                if (holder.tbItemName != null)
+                    holder.tbItemName.Text = item.ItemDesc;
+                if (holder.tbItemLastBuyDate != null)
+                    holder.tbItemLastBuyDate.Text = item.ItemLastBuyDate.ToString(PreferencesUtil.DateFormatDateOnly);
+                if (holder.tbItemQtyLeft != null)
+                    holder.tbItemQtyLeft.Text = item.ItemQtyLeft.ToString(PreferencesUtil.DecimalFormat);
+                if (holder.tbItemSaleVal != null)
+                    holder.tbItemSaleVal.Text = item.ItemSaleVal1.ToString(PreferencesUtil.DecimalFormat);
 				
-				holder.itemBox.CheckedChange -= new EventHandler<CompoundButton.CheckedChangeEventArgs> (itemBox_CheckedChange);
-				holder.itemBox.Checked = _checkedItemIds.ContainsKey (item.ItemId);
-				holder.itemBox.Tag = position;
-				holder.itemBox.CheckedChange += new EventHandler<CompoundButton.CheckedChangeEventArgs> (itemBox_CheckedChange);
+                holder.itemBox.CheckedChange -= new EventHandler<CompoundButton.CheckedChangeEventArgs>(itemBox_CheckedChange);
+                holder.itemBox.Checked = _checkedItemIds.ContainsKey(item.ItemId);
+                holder.itemBox.Tag = position;
+                holder.itemBox.CheckedChange += new EventHandler<CompoundButton.CheckedChangeEventArgs>(itemBox_CheckedChange);
             
-				holder.layout_checkable_item.Tag = position;
-				holder.layout_checkable_item.Touch += new EventHandler<View.TouchEventArgs> (layout_checkable_item_Touch);
+                holder.layout_checkable_item.Tag = position;
+                holder.layout_checkable_item.Touch += new EventHandler<View.TouchEventArgs>(layout_checkable_item_Touch);
             
-				holder.tbQty.Tag = position;
-				holder.tbQty.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs> (tbQty_TextChanged);
-			} catch (Exception ex) {
-				Log.Error ("exception", ex.Message);
-			}
+                holder.tbQty.Tag = position;
+                holder.tbQty.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbQty_TextChanged);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("exception", ex.Message);
+            }
 
-			return view;
-		}
+            return view;
+        }
 
-		class ViewHolder:Java.Lang.Object
-		{
-			public	CheckBox itemBox;
-			public	EditText tbQty ;
-			public	TextView tbItemCode;
-			public	TextView tbItemName ;
-			public	TextView tbItemLastBuyDate;
-			public	TextView tbItemSaleVal ;
-			public	TextView tbItemQtyLeft;
-			public	RelativeLayout layout_checkable_item;
-		}
-
+        class ViewHolder:Java.Lang.Object
+        {
+            public	CheckBox itemBox;
+            public	EditText tbQty ;
+            public	TextView tbItemCode;
+            public	TextView tbItemName ;
+            public	TextView tbItemLastBuyDate;
+            public	TextView tbItemSaleVal ;
+            public	TextView tbItemQtyLeft;
+            public	RelativeLayout layout_checkable_item;
+        }
 		/* variable for counting two successive up-down events */
-		int clickCount = 0;
+        int clickCount = 0;
 		/*variable for storing the time of first click*/
-		DateTime startTime;
+        DateTime startTime;
 		/* constant for defining the time duration between the click that can be considered as double-tap */
-		const long MAX_DURATION = 500;
+        const long MAX_DURATION = 500;
 
-		void layout_checkable_item_Touch (object sender, View.TouchEventArgs e)
-		{
-			switch (e.Event.Action & MotionEventActions.Mask) {
-			case MotionEventActions.Up:
-				clickCount++;
+        void layout_checkable_item_Touch(object sender, View.TouchEventArgs e)
+        {
+            switch (e.Event.Action & MotionEventActions.Mask)
+            {
+                case MotionEventActions.Up:
+                    clickCount++;
                     
-				RelativeLayout layout_checkable_item = (RelativeLayout)sender;
-				int index = int.Parse (layout_checkable_item.Tag.ToString ());
+                    RelativeLayout layout_checkable_item = (RelativeLayout)sender;
+                    int index = int.Parse(layout_checkable_item.Tag.ToString ());
                     //ItemInfo item = _ItemInfoList[index];
-				ItemInfo item = this.GetItem (index);
+                    ItemInfo item = this.GetItem(index);
 
-				if (clickCount == 1) {
-					startTime = DateTime.Now;   
+                    if (clickCount == 1)
+                    {
+                        startTime = DateTime.Now;   
 
-					if (SingleItemFocusedEvent != null) {
-						SingleItemFocusedEvent (item);
-					}
-				} else if (clickCount == 2) {
-					long duration = (long)new  TimeSpan ((DateTime.Now - startTime).Ticks).TotalMilliseconds;
+                        if (SingleItemFocusedEvent != null)
+                        {
+                            SingleItemFocusedEvent(item);
+                        }
+                    }
+                    else if (clickCount == 2)
+                    {
+                        long duration = (long)new  TimeSpan((DateTime.Now - startTime).Ticks).TotalMilliseconds;
 
-					if (duration <= MAX_DURATION) {
-						_checkedItemIds.Clear ();
-						int itemId = (int)item.ItemId;
-						_checkedItemIds.Add (itemId, item.ItemQty);
+                        if (duration <= MAX_DURATION)
+                        {
+                            _checkedItemIds.Clear();
+                            int itemId = (int)item.ItemId;
+                            _checkedItemIds.Add(itemId, item.ItemQty);
                             
-						if (SingleItemSelectedEvent != null) {
-							SingleItemSelectedEvent ();
-						}
+                            if (SingleItemSelectedEvent != null)
+                            {
+                                SingleItemSelectedEvent();
+                            }
 
-						clickCount = 0;
-						duration = 0;
-					} else {
-						clickCount = 1;
-						startTime = DateTime.Now;
+                            clickCount = 0;
+                            duration = 0;
+                        }
+                        else
+                        {
+                            clickCount = 1;
+                            startTime = DateTime.Now;
 
-						if (SingleItemFocusedEvent != null) {
-							SingleItemFocusedEvent (item);
-						}
-					}
-				}
-				break;    
-			}
-		}
-        
-		void tbQty_TextChanged (object sender, Android.Text.TextChangedEventArgs e)
-		{
-			int index = int.Parse (((EditText)sender).Tag.ToString ());
-			//Library.ItemInfo item = _ItemInfoList[index];
-			Library.ItemInfo item = this.GetItem (index);
-			int res = 0;
-			if (int.TryParse (((EditText)sender).Text, out res)) {
-				item.ItemQty = res;
+                            if (SingleItemFocusedEvent != null)
+                            {
+                                SingleItemFocusedEvent(item);
+                            }
+                        }
+                    }
+                    break;    
+            }
+        }
 
-				if (_checkedItemIds.ContainsKey (item.ItemId)) {
-					_checkedItemIds [item.ItemId] = item.ItemQty;
-				}
-			}            
-		}
+        void tbQty_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
+        {
+            int index = int.Parse(((EditText)sender).Tag.ToString ());
+            //Library.ItemInfo item = _ItemInfoList[index];
+            Library.ItemInfo item = this.GetItem(index);
+            int res = 0;
+            if (int.TryParse(((EditText)sender).Text, out res))
+            {
+                item.ItemQty = res;
 
-		void itemBox_CheckedChange (object sender, CompoundButton.CheckedChangeEventArgs e)
-		{
-			CheckBox itemBox = (CheckBox)sender;
-			int index = int.Parse (itemBox.Tag.ToString ());
-			//Library.ItemInfo item = _ItemInfoList[index];
-			Library.ItemInfo item = this.GetItem (index);
-			int itemId = (int)item.ItemId;
-			if (e.IsChecked) {
-				if (!_checkedItemIds.ContainsKey (itemId)) {
-					_checkedItemIds.Add (itemId, item.ItemQty);
-				}
-			} else {
-				if (_checkedItemIds.ContainsKey (itemId)) {
-					_checkedItemIds.Remove (itemId);
-				}
-			}
-		}
-        
-		public Dictionary<int, int> CheckedItemIds {
-			get { return _checkedItemIds; }
-		}
-		
+                if (_checkedItemIds.ContainsKey(item.ItemId))
+                {
+                    _checkedItemIds[item.ItemId] = item.ItemQty;
+                }
+            }            
+        }
+
+        void itemBox_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
+        {
+            CheckBox itemBox = (CheckBox)sender;
+            int index = int.Parse(itemBox.Tag.ToString ());
+            //Library.ItemInfo item = _ItemInfoList[index];
+            Library.ItemInfo item = this.GetItem(index);
+            int itemId = (int)item.ItemId;
+            if (e.IsChecked)
+            {
+                if (!_checkedItemIds.ContainsKey(itemId))
+                {
+                    _checkedItemIds.Add(itemId, item.ItemQty);
+                }
+            }
+            else
+            {
+                if (_checkedItemIds.ContainsKey(itemId))
+                {
+                    _checkedItemIds.Remove(itemId);
+                }
+            }
+        }
+
+        public Dictionary<int, int> CheckedItemIds
+        {
+            get { return _checkedItemIds; }
+        }
 		#region IScrollLoadble implementation
 
 
-		public void LoadData (int page)
-		{
-			ItemInfoList.LoadAdapterItems (context, page, this, _itemInfoList.CurrentCriteria);
-			this.NotifyDataSetChanged ();
-		}
-
-
+        public void LoadData(int page)
+        {
+            ItemInfoList.LoadAdapterItems(context, page, this, _itemInfoList.CurrentCriteria);
+            this.NotifyDataSetChanged();
+        }
 		#endregion
 
-	}
+    }
 }

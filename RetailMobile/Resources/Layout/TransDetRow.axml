@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/listStyle">
+    style="@style/listStyle"
+    android:weightSum="10">
     <TextView
         android:id="@+id/lblDtrn_ItemCode"
         style="@style/listRowTextViewStyle"
         android:layout_marginLeft="5dp"
-        android:layout_weight="0.7" />
+        android:layout_weight="0.9"
+        android:text="lblDtrn_ItemCode" />
     <TextView
         android:id="@+id/tbItemDesc"
         style="@style/listRowTextViewStyle"
-        android:layout_weight="5" />
+        android:layout_weight="6.6"
+        android:text="tbItemDesc" />
     <EditText
         android:id="@+id/tbDtrn_qty1"
         android:inputType="number"
@@ -17,8 +20,10 @@
         android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="10dp"
         android:minWidth="20dp"
+        android:gravity="right"
+        android:text="tbDtrn_qty1"
         android:layout_weight="0.5" />
     <EditText
         android:id="@+id/tbDtrn_disc_line1"
@@ -27,28 +32,36 @@
         android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="10dp"
         android:minWidth="20dp"
+        android:gravity="right"
+        android:text="tbDtrn_disc_line1"
         android:layout_weight="0.5" />
     <TextView
         android:id="@+id/lblDtrn_unit_price"
         style="@style/listRowTextViewStyle"
         android:layout_width="30dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="10dp"
         android:minWidth="20dp"
+        android:gravity="right"
+        android:text="lblDtrn_unit_price"
         android:layout_weight="0.5" />
     <TextView
         android:id="@+id/lblDtrn_net_value"
         style="@style/listRowTextViewStyle"
         android:layout_width="30dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="10dp"
         android:minWidth="20dp"
+        android:gravity="right"
+        android:text="lblDtrn_net_value"
         android:layout_weight="0.5" />
     <TextView
         android:id="@+id/lblDtrn_vat_value"
         style="@style/listRowTextViewStyle"
         android:layout_width="30dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="10dp"
         android:minWidth="20dp"
+        android:gravity="right"
+        android:text="lblDtrn_vat_value"
         android:layout_weight="0.5" />
 </LinearLayout>

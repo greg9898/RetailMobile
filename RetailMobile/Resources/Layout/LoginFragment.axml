@@ -10,29 +10,29 @@
         android:layout_height="wrap_content"
         android:text="@string/Username"
         android:textColor="@color/caption_text"
-        android:textSize="20sp" />
+        android:textSize="@dimen/main_menu_text_size" />
     <EditText
+        style="@style/myEditTextStyle"
         android:id="@+id/tbUsername"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24sp" />
+        android:layout_height="wrap_content" />
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/Password"
         android:textColor="@color/caption_text"
-        android:textSize="20sp" />
+        android:textSize="@dimen/main_menu_text_size" />
     <EditText
+        style="@style/myEditTextStyle"
         android:id="@+id/tbPassword"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:textSize="24sp" />
+        android:inputType="textPassword" />
     <Button
         style="@style/mainButtonStyle"
         android:id="@+id/btnLogin"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btnLogin"
-        android:textSize="24sp" />
+        android:layout_marginTop="3dp"
+        android:text="@string/btnLogin" />
 </LinearLayout>

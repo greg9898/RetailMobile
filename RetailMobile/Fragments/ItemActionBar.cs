@@ -20,8 +20,8 @@ namespace RetailMobile.Fragments
         public event ActionButtonCLickedDelegate ActionButtonClicked;
 
         TextView titleView;
-        LinearLayout LeftButtons;
-        LinearLayout RightButtons;
+        LinearLayout leftButtons;
+        LinearLayout rightButtons;
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
@@ -33,11 +33,16 @@ namespace RetailMobile.Fragments
             View v = inflater.Inflate(Resource.Layout.items_action_bar, container, true);
             titleView = v.FindViewById<TextView>(Resource.Id.lblCaption);
             ButtonsAdded = new List<int>();
-            LeftButtons = v.FindViewById<LinearLayout>(Resource.Id.LeftButtons);
-            RightButtons = v.FindViewById<LinearLayout>(Resource.Id.RightButtons);
+            leftButtons = v.FindViewById<LinearLayout>(Resource.Id.LeftButtons);
+            rightButtons = v.FindViewById<LinearLayout>(Resource.Id.RightButtons);
             //btnSync = v.FindViewById<Button>(Resource.Id.btnSync);
             //btnSync.Click += new EventHandler(btnSync_Click);
             return v;
+        }
+
+        public override void OnPause()
+        {
+            base.OnPause();
         }
 
         public void SetTitle(string title)
@@ -47,22 +52,22 @@ namespace RetailMobile.Fragments
 
         public void AddButtonLeft(int id, string text, int resourceID)
         {
-            AddButton(LeftButtons, id, text, resourceID);
+            AddButton(leftButtons, id, text, resourceID);
         }
 
         public void AddButtonRight(int id, string text, int resourceID)
         {
-            AddButton(RightButtons, id, text, resourceID);
+            AddButton(rightButtons, id, text, resourceID);
         }
 
         public void ClearButtons()
         {
             ButtonsAdded.Clear();
-            LeftButtons.RemoveAllViews();
-            RightButtons.RemoveAllViews();
+            leftButtons.RemoveAllViews();
+            rightButtons.RemoveAllViews();
         }
 
-        void AddButton(LinearLayout parent, int id, string text, int resourceID)
+        void AddButton(ViewGroup parent, int id, string text, int resourceID)
         {
             if (ButtonsAdded.Contains(id))
                 return;
@@ -83,13 +88,13 @@ namespace RetailMobile.Fragments
                 btn.SetBackgroundResource(resourceID);
             }
             btn.Tag = id;
-            btn.Click += new EventHandler(ActionButton_Clicked);
+            btn.Click += BtnClick; 
             rlButton.AddView(btn);
             ButtonsAdded.Add(id);
             //btn.LayoutParameters = new RelativeLayout.LayoutParams();
         }
 
-        private void ActionButton_Clicked(object sender, EventArgs e)
+        void BtnClick(object sender, EventArgs e)
         {
             if (ActionButtonClicked != null)
                 ActionButtonClicked((int)((Button)sender).Tag);

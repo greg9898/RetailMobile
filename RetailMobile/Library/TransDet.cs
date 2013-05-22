@@ -1,4 +1,3 @@
-
 using Android.Content;
 using Com.Ianywhere.Ultralitejni12;
 using Android.Util;
@@ -10,19 +9,18 @@ namespace RetailMobile.Library
         double dtrnQty1;
         double dtrnDiscLine1;
         double dtrnDiscLine2;
-
         public bool IsNew = true;
-        
+
         public string ItemCode { get; set; }
-        
+
         public string ItemDesc { get; set; }
-        
+
         public int DtrnId { get; set; }
-        
+
         public int HtrnId { get; set; }
-        
+
         public int DtrnNum { get; set; }
-        
+
         public int ItemId { get; set; }
 
         public double DtrnQty1
@@ -38,7 +36,7 @@ namespace RetailMobile.Library
                 CalcValues();
             }
         }
-        
+
         public double DtrnUnitPrice { get; set; }
 
         public double DtrnDiscLine1
@@ -78,15 +76,15 @@ namespace RetailMobile.Library
                 CalcValues();
             }
         }
-        
+
         public double DtrnNetValue { get; set; }
-        
+
         public double DtrnVatValue { get; set; }
-        
+
         public double ItemVatValue { get; set; }
-        
+
         public int ItemVatId { get; set; }
-        
+
         public void LoadItemInfo(Context ctx, decimal itemId, int qty, double cstId)
         {
             Log.Debug("LoadItemInfo", "itemID=" + itemId + ",qty=" + qty);
@@ -120,9 +118,8 @@ namespace RetailMobile.Library
         }
 
         double dtrnDiscValue1;
-
         double dtrnDiscValue2;
-        
+
         internal void CalcDiscount(Context ctx, double cstId)
         {
             dtrnDiscValue1 = 0;
@@ -141,7 +138,8 @@ namespace RetailMobile.Library
                 {
                     dtrnDiscValue2 = System.Math.Round(((1 * DtrnUnitPrice) - dtrnDiscValue1) * (DtrnDiscLine2 / 100), 2);
                 }
-            } else
+            }
+            else
             {
                 DtrnDiscLine1 = 0;
                 DtrnDiscLine2 = 0;
@@ -167,8 +165,10 @@ namespace RetailMobile.Library
             DtrnQty1 = result.GetDouble("qty1");
             DtrnNetValue = result.GetDouble("net_value");
             DtrnVatValue = result.GetDouble("vat_value");
+
+            IsNew = false;
         }
-        
+
         public void Save(IConnection conn, TransHed header)
         {
             CustomerInfo info = new CustomerInfo();
@@ -189,9 +189,9 @@ VALUES
        ,:dtrn_unit_price
        ,:dtrn_disc_line1
        ,:dtrn_net_value
-       ,:dtrn_vat_value
-)");
-            } else
+       ,:dtrn_vat_value )");
+            }
+            else
             {
                 ps = conn.PrepareStatement(@"
 UPDATE rtrans_det SET 
@@ -203,9 +203,8 @@ UPDATE rtrans_det SET
            ,disc_line1 = :dtrn_disc_line1
            ,net_value = :dtrn_net_value
            ,vat_value = :dtrn_vat_value
-WHERE id = :dtrn_id
-");
-                ps.Set("dtrn_vat_value", DtrnId);
+WHERE id = :dtrn_id ");
+                ps.Set("dtrn_id", DtrnId);
             }
             
             ps.Set("htrn_id", header.HtrnId);
@@ -227,7 +226,8 @@ WHERE id = :dtrn_id
                 {
                     DtrnId = rs.GetInt("id");
                 }
-            } else
+            }
+            else
             {
                 ps.Execute();
             }
@@ -235,7 +235,7 @@ WHERE id = :dtrn_id
             ps.Close();
             
         }
-        
+
         public double GetDiscount(Context ctx, long itemId, long cstId)
         {
             using (IConnection conn = Sync.GetConnection(ctx))
@@ -263,7 +263,6 @@ where cst_kat_disc = (select cst_kat_disc from rcustomer where  id = :cst_id)
                 return discount;
             }
         }
-  
         /// <summary>
         /// TODO: add column disc_per2 into disc table
         /// </summary>
@@ -298,7 +297,6 @@ where cst_kat_disc = (select cst_kat_disc from rcustomer where  id = :cst_id)
                 return discount;
             }
         }
-        
 //      public double GetItemPrice(Context ctx, long itemId)
 //      {
 //          using (IConnection conn = Sync.GetConnection(ctx))

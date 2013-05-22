@@ -118,20 +118,20 @@ WHERE 1 = 1 ";
                 conn.Release();
             }
           
-            for (int i=0; i<40; i++)
-            {
-                TransCust s = new TransCust();
-                s.CstId = c.CustId;
-                s.Credit = i * 3.26m;
-                s.Debit = i * 3.114m;
-                s.CreditMinusDebit = i * 0.462m;
-                s.DtrnDate = DateTime.Now.AddHours(i);
-
-                if ((c.DateFrom == DateTime.MinValue || s.DtrnDate > c.DateFrom) && (c.DateTo == DateTime.MinValue || s.DtrnDate <= c.DateTo))
-                {
-                    items.Add(s);
-                }
-            }
+//            for (int i=0; i<40; i++)
+//            {
+//                TransCust s = new TransCust();
+//                s.CstId = c.CustId;
+//                s.Credit = i * 3.26m;
+//                s.Debit = i * 3.114m;
+//                s.CreditMinusDebit = i * 0.462m;
+//                s.DtrnDate = DateTime.Now.AddHours(i);
+//
+//                if ((c.DateFrom == DateTime.MinValue || s.DtrnDate > c.DateFrom) && (c.DateTo == DateTime.MinValue || s.DtrnDate <= c.DateTo))
+//                {
+//                    items.Add(s);
+//                }
+//            }
            
             return items;
         }

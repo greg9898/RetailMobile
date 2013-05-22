@@ -42,7 +42,7 @@ namespace RetailMobile
             
             allStatList = StatisticList.GetStatisticListThisMonth(Activity, CustId);
 			
-            DebugAddStatistics();
+//            DebugAddStatistics();
 			
             ScrollView svStatistic = (ScrollView)view.FindViewById(Resource.Id.svStatistic);
             var tblLayout = CreateTableReport(view, allStatList);

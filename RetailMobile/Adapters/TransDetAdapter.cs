@@ -8,6 +8,7 @@ namespace RetailMobile
 {
     public class TransDetAdapter : ArrayAdapter<Library.TransDet>
     { 
+        bool disabled = false;
         public static EditText lastFocusedControl;
         Android.Support.V4.App.FragmentActivity context = null;
         EditText tbDtrn_qty1;
@@ -25,7 +26,7 @@ namespace RetailMobile
             : base(context, Resource.Layout.TransDetRow, list)
         {
             this.context = context;
-
+      
             dataSource = list;
         }
 
@@ -50,6 +51,13 @@ namespace RetailMobile
             View view = convertView;
             ViewHolder holder;
 
+            TransDet detail = dataSource[position];
+
+            if (detail == null)
+            {
+                return view;
+            }
+
             if (view == null)
             {
                 view = context.LayoutInflater.Inflate(Resource.Layout.TransDetRow, null);
@@ -68,55 +76,61 @@ namespace RetailMobile
                 tbDtrn_qty1 = holder.tbDtrn_qty1;
 
                 view.Tag = holder;
+
+                view.LongClick += rowView_HandleLongClick;
+
+                holder.tbDtrn_qty1.Tag = position;
+                holder.tbDtrn_qty1.FocusableInTouchMode = true;
+                holder.tbDtrn_qty1.Text = detail.DtrnQty1.ToString();
+                holder.tbDtrn_qty1.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbDtrn_qty1_TextChanged);            
+                holder.tbDtrn_qty1.FocusChange += tbQty_HandleFocusChange;
+                holder.tbDtrn_qty1.Touch += new EventHandler<View.TouchEventArgs>(EditTextTouchUp);
+
+                holder.tbDtrn_disc_line1.Tag = position;
+                holder.tbDtrn_disc_line1.FocusableInTouchMode = true;
+                holder.tbDtrn_disc_line1.Text = detail.DtrnDiscLine1.ToString();
+                holder.tbDtrn_disc_line1.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbDtrn_disc_line1_TextChanged);
+                holder.tbDtrn_disc_line1.FocusChange += tbQty_HandleFocusChange;
+                holder.tbDtrn_disc_line1.Touch += new EventHandler<View.TouchEventArgs>(EditTextTouchUp);
             }
             else
             {            
                 holder = (ViewHolder)view.Tag;
             }
 
-            TransDet detail = dataSource[position];
-
-            if (detail == null)
-            {
-                return view;
-            }
-
-            view.LongClick += rowView_HandleLongClick;
-
-            holder.tbDtrn_qty1.Tag = position;
-            holder.tbDtrn_qty1.FocusableInTouchMode = true;
-            holder.tbDtrn_qty1.Text = detail.DtrnQty1.ToString();
-            holder.tbDtrn_qty1.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbDtrn_qty1_TextChanged);            
-            holder.tbDtrn_qty1.FocusChange += tbQty_HandleFocusChange;
-            holder.tbDtrn_qty1.Touch += new EventHandler<View.TouchEventArgs>(EditTextTouchUp);
-
-            holder.tbDtrn_disc_line1.Tag = position;
-            holder.tbDtrn_disc_line1.FocusableInTouchMode = true;
-            holder.tbDtrn_disc_line1.Text = detail.DtrnDiscLine1.ToString();
-            holder.tbDtrn_disc_line1.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbDtrn_disc_line1_TextChanged);
-            holder.tbDtrn_disc_line1.FocusChange += tbQty_HandleFocusChange;
-            holder.tbDtrn_disc_line1.Touch += new EventHandler<View.TouchEventArgs>(EditTextTouchUp);
-
             holder.lblItemCode.Text = detail.ItemCode;
             holder.lblItemDesc.Text = detail.ItemDesc;
             
-            holder.lblDtrn_unit_price.Text = detail.DtrnUnitPrice.ToString();
+            holder.lblDtrn_unit_price.Text = detail.DtrnUnitPrice.ToString(PreferencesUtil.CurrencyFormat);
             
-            holder.lblDtrn_net_value.Text = detail.DtrnNetValue.ToString();
-            holder.lblDtrn_vat_value.Text = detail.DtrnVatValue.ToString();
+            holder.lblDtrn_net_value.Text = detail.DtrnNetValue.ToString(PreferencesUtil.CurrencyFormat);
+            holder.lblDtrn_vat_value.Text = detail.DtrnVatValue.ToString(PreferencesUtil.CurrencyFormat);
+
+            if (disabled)
+            {
+                holder.tbDtrn_disc_line1.Enabled = false;
+                holder.tbDtrn_qty1.Enabled = false;
+                holder.tbDtrn_disc_line1.Focusable = false;
+                holder.tbDtrn_qty1.Focusable = false;
+            }
 
             return view;
+        }
+
+        public void Disable()
+        {
+            disabled = true;
         }
 
         class ViewHolder:Java.Lang.Object
         {
             public TextView lblItemCode ;
-            public  TextView lblItemDesc ;
-            public  EditText tbDtrn_qty1;
-            public   TextView lblDtrn_unit_price  ;
-            public  EditText tbDtrn_disc_line1;
-            public    TextView lblDtrn_net_value ;
-            public   TextView lblDtrn_vat_value;
+            public TextView lblItemDesc ;
+            public EditText tbDtrn_qty1;
+            public TextView lblDtrn_unit_price  ;
+            public EditText tbDtrn_disc_line1;
+            public TextView lblDtrn_net_value ;
+            public TextView lblDtrn_vat_value;
             public int position;
         }
 
