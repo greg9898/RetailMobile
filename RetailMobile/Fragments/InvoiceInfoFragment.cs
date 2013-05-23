@@ -34,6 +34,14 @@ namespace RetailMobile
             return detailsFrag;
         }
 
+        public Library.TransHed Header
+        {
+            get
+            {
+                return header;
+            }
+        }
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             View v = inflater.Inflate(Resource.Layout.InvoiceScreen, container, false);
@@ -285,9 +293,9 @@ namespace RetailMobile
 
         TransDetAdapter.SelectedDetail selectedDetail = null;
 
-        void LoadDetailsAdapter()
+        public  void LoadDetailsAdapter()
         {
-            detailsAdapter = new TransDetAdapter(Activity, header.TransDetList);
+            detailsAdapter = new TransDetAdapter(Activity, header.TransDetList, this);
             detailsAdapter.QtysChangedEvent += () => 
             {
                 FillHeaderCalcValues();

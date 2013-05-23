@@ -14,6 +14,7 @@ namespace RetailMobile
         EditText tbDtrn_qty1;
         EditText tbDtrn_disc_line1;
         TransDetList dataSource;
+        InvoiceInfoFragment parentView;
 
         public delegate void QtysChangedDeletegate();
 
@@ -22,12 +23,13 @@ namespace RetailMobile
         public event QtysChangedDeletegate QtysChangedEvent;
         public event QtysSelectedDeletegate DetailFieldSelectedEvent;
 
-        public TransDetAdapter(Android.Support.V4.App.FragmentActivity context, TransDetList list)
+        public TransDetAdapter(Android.Support.V4.App.FragmentActivity context, TransDetList list, InvoiceInfoFragment baseFragment)
             : base(context, Resource.Layout.TransDetRow, list)
         {
             this.context = context;
       
             dataSource = list;
+            parentView = baseFragment;
         }
 
         public void AddValue()
@@ -138,19 +140,18 @@ namespace RetailMobile
         {
             View rowView = sender as View;
             int position = ((ViewHolder)rowView.Tag).position;
-            TransDet d = this.GetItem(position);
-            string question = string.Format(context.Resources.GetText( Resource.String.delete_detail_question), d.ItemDesc);
+            string question = string.Format(context.Resources.GetText( Resource.String.delete_detail_question), dataSource[position].ItemDesc);
 
             new DialogDeleteDetail(question, position, this).Show(context.SupportFragmentManager, "dialog");
         }
 
         public class DialogDeleteDetail : Android.Support.V4.App.DialogFragment
         {
-            ArrayAdapter adapter;
+            TransDetAdapter adapter;
             int position;
             string questionDelYesNo;
 
-            public DialogDeleteDetail(string questionDelete, int pos, ArrayAdapter adapter)
+            public DialogDeleteDetail(string questionDelete, int pos, TransDetAdapter adapter)
             {
                 position = pos;
                 questionDelYesNo = questionDelete;
@@ -161,10 +162,14 @@ namespace RetailMobile
             {
                 var builder = new Android.App.AlertDialog.Builder(Activity);
                 builder.SetMessage(questionDelYesNo);
-                builder.SetPositiveButton(Resources.GetText( Resource.String.Yes), (sender, args) =>
+                builder.SetPositiveButton(Resources.GetText( Resource.String.Yes), delegate(object sender, Android.Content.DialogClickEventArgs args)
                 {
-                    adapter.Remove(adapter.GetItem(position));
-                    adapter.NotifyDataSetChanged();
+                    TransDet d = adapter.parentView.Header.TransDetList[position];
+                 
+//                    adapter.Remove(d);
+//                    adapter.NotifyDataSetChanged();
+                    adapter.parentView.Header.MarkDetailDeleted(d);
+                    adapter.parentView.LoadDetailsAdapter();
                 });
                 builder.SetNegativeButton(Resources.GetText( Resource.String.No), (sender, args) =>
                 {

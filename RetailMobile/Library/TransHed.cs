@@ -71,12 +71,32 @@ namespace RetailMobile.Library
 
         public TransDetList TransDetList { get; set; }
 
+        public TransDetList TransDetListDeleted { get; set; }
+
         public string CstName{ get; set; }
 
         public string TransDateText { get
             {
                 return TransDate.ToShortDateString();//TransDate.ToString(PreferencesUtil.DateFormatDateOnly);
             } }
+
+        public void MarkDetailDeleted(TransDet d)
+        {
+            d.IsDeleted = true;
+
+            if (d.IsNew)
+            {
+                TransDetList.Remove(d);
+            }
+            else
+            {
+                if (TransDetListDeleted == null)
+                {
+                    TransDetListDeleted = new TransDetList();
+                }
+                TransDetListDeleted.Add(d);
+            }
+        }
         #region Customer Info
         public string CustCod;
         public string CustName;

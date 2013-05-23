@@ -10,6 +10,7 @@ namespace RetailMobile.Library
         double dtrnDiscLine1;
         double dtrnDiscLine2;
         public bool IsNew = true;
+        public bool IsDeleted = false;
 
         public string ItemCode { get; set; }
 
@@ -174,8 +175,14 @@ namespace RetailMobile.Library
             CustomerInfo info = new CustomerInfo();
             
             IPreparedStatement ps;
+
             if (IsNew)
             {
+                if (IsDeleted)
+                {
+                    return;
+                }
+
                 ps = conn.PrepareStatement(@"INSERT INTO rtrans_det
     (   
         htrn_id, dtrn_num, item_id, qty1, unit_price, disc_line1, net_value, vat_value
@@ -190,6 +197,32 @@ VALUES
        ,:dtrn_disc_line1
        ,:dtrn_net_value
        ,:dtrn_vat_value )");
+
+                ps.Set("htrn_id", header.HtrnId);
+                ps.Set("dtrn_num", DtrnNum);
+                ps.Set("item_id", ItemId);
+                ps.Set("dtrn_qty1", DtrnQty1);
+                ps.Set("dtrn_unit_price", DtrnUnitPrice);
+                ps.Set("dtrn_disc_line1", DtrnDiscLine1);
+                ps.Set("dtrn_net_value", DtrnNetValue);
+                ps.Set("dtrn_vat_value", DtrnVatValue);
+
+                ps.Execute();
+
+                ps = conn.PrepareStatement(@"SELECT TOP 1 id FROM rtrans_det ORDER BY id DESC");
+
+                IResultSet rs = ps.ExecuteQuery();
+                if (rs.Next())
+                {
+                    DtrnId = rs.GetInt("id");
+                }
+            }
+            else if (IsDeleted)
+            {
+                ps = conn.PrepareStatement(@"
+DELETE FROM rtrans_det WHERE id = :dtrn_id ");
+                ps.Set("dtrn_id", DtrnId);
+                ps.Execute();
             }
             else
             {
@@ -204,36 +237,21 @@ UPDATE rtrans_det SET
            ,net_value = :dtrn_net_value
            ,vat_value = :dtrn_vat_value
 WHERE id = :dtrn_id ");
+
                 ps.Set("dtrn_id", DtrnId);
-            }
-            
-            ps.Set("htrn_id", header.HtrnId);
-            ps.Set("dtrn_num", DtrnNum);
-            ps.Set("item_id", ItemId);
-            ps.Set("dtrn_qty1", DtrnQty1);
-            ps.Set("dtrn_unit_price", DtrnUnitPrice);
-            ps.Set("dtrn_disc_line1", DtrnDiscLine1);
-            ps.Set("dtrn_net_value", DtrnNetValue);
-            ps.Set("dtrn_vat_value", DtrnVatValue);
-            
-            if (IsNew)
-            {
-                ps.Execute();
-                ps = conn.PrepareStatement(@"SELECT TOP 1 id FROM rtrans_det ORDER BY id DESC");
-                
-                IResultSet rs = ps.ExecuteQuery();
-                if (rs.Next())
-                {
-                    DtrnId = rs.GetInt("id");
-                }
-            }
-            else
-            {
+                ps.Set("htrn_id", header.HtrnId);
+                ps.Set("dtrn_num", DtrnNum);
+                ps.Set("item_id", ItemId);
+                ps.Set("dtrn_qty1", DtrnQty1);
+                ps.Set("dtrn_unit_price", DtrnUnitPrice);
+                ps.Set("dtrn_disc_line1", DtrnDiscLine1);
+                ps.Set("dtrn_net_value", DtrnNetValue);
+                ps.Set("dtrn_vat_value", DtrnVatValue);
+
                 ps.Execute();
             }
-            
-            ps.Close();
-            
+                             
+            ps.Close();            
         }
 
         public double GetDiscount(Context ctx, long itemId, long cstId)
