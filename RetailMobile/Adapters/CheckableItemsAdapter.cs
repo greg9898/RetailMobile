@@ -12,8 +12,12 @@ namespace RetailMobile
 {
     public class CheckableItemsAdapter : ArrayAdapter<Library.ItemInfo>, IScrollLoadble
     {
+        public delegate void ItemImageSelectedDelegate(Android.Graphics.Bitmap image);
+        public event  ItemImageSelectedDelegate  ItemImageSelected;
+
         Activity context = null;
         ItemInfoList _itemInfoList;
+        public ItemsSelectDialog Parent;
         Dictionary<int, int> _checkedItemIds = new Dictionary<int, int>();
 
         public delegate void SingleItemSelectedDeletegate();
@@ -42,6 +46,7 @@ namespace RetailMobile
 
                 holder = new ViewHolder();
                 holder.itemBox = view.FindViewById<CheckBox>(Resource.Id.checkBox);
+                holder.btnItemImage = view.FindViewById<Button>(Resource.Id.btnItemImage);
                 holder.tbQty = view.FindViewById<EditText>(Resource.Id.tbQty);
                 holder.tbItemCode = (TextView)view.FindViewById(Resource.Id.tbItemCode);
                 holder.tbItemName = (TextView)view.FindViewById(Resource.Id.tbItemName);
@@ -66,6 +71,9 @@ namespace RetailMobile
 		
             try
             {
+                if (holder.btnItemImage != null)
+                    holder.btnItemImage.SetBackgroundDrawable(new Android.Graphics.Drawables.BitmapDrawable(item.ItemImage));
+                holder.btnItemImage.Click += new EventHandler(btnItemImageClicked);
                 if (holder.tbItemCode != null)
                     holder.tbItemCode.Text = item.item_cod;
                 if (holder.tbItemName != null)
@@ -96,8 +104,18 @@ namespace RetailMobile
             return view;
         }
 
+        public void btnItemImageClicked(object sender, EventArgs e)
+        {
+            Android.Graphics.Bitmap image = ((Android.Graphics.Drawables.BitmapDrawable)((Button)sender).Background).Bitmap;
+            //show image in default image viewer
+            //_itemInfoList.show//
+            if (ItemImageSelected != null)
+                ItemImageSelected(image);
+        }
+
         class ViewHolder:Java.Lang.Object
         {
+            public Button btnItemImage;
             public	CheckBox itemBox;
             public	EditText tbQty ;
             public	TextView tbItemCode;

@@ -1,9 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?> 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    
+	<fragment
+		android:id="@+id/ActionBarDialog1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_bar_height"
+        class="RetailMobile.Fragments.ItemActionBar" />
+            
+<LinearLayout 
+	android:layout_below="@id/ActionBarDialog1"
     android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:weightSum="1">
+    android:weightSum="1">    
     <ListView
         android:id="@+id/lvItems"
         style="@style/fillParent"
@@ -14,7 +25,7 @@
         android:orientation="vertical"
         style="@style/fillParent"
         android:layout_weight="0.7"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="30dp"
         android:background="@android:color/white">
         <Button
             android:id="@+id/btnOK"
@@ -87,11 +98,23 @@
             android:text=""
             android:layout_below="@id/cbCateg2"
             android:textColor="@android:color/black" />
-        <ImageView
-            android:id="@+id/imgItemSelected"
+         <RelativeLayout
+            android:id="@+id/layoutItem"
             style="@style/fillParent"
-            android:gravity="left|top"
-            android:layout_below="@id/lblItemSelectedInfo" />
+            android:layout_below="@id/lblItemSelectedInfo">
+				<ImageView
+        			android:id="@+id/imgItemSelected"
+            		style="@style/fillParent"
+            		android:gravity="left|top"/>
+            	<Button
+            		android:id="@+id/btnShowImage"
+            		style="@style/mainButtonStyle"
+            		android:layout_width="wrap_content"
+    				android:layout_height="wrap_content"
+    				android:text="@string/btnFullSizeImage"/>
+            </RelativeLayout>
+        
        
     </RelativeLayout>
 </LinearLayout>
+</RelativeLayout>

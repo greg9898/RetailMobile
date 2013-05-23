@@ -50,6 +50,7 @@ SELECT TOP 30
     ritems.ID, 
     ritems.item_cod, 
     ritems.item_desc,
+    ritems.item_image,
     ritems.item_qty_left " +
 					fields + @" 
 FROM ritems" +
@@ -89,7 +90,26 @@ WHERE 1 = 1  ";
 						ItemDesc = result.GetString("item_desc"),
 						ItemQtyLeft = Convert.ToDecimal(result.GetDouble("item_qty_left"))
 						
+
 					};
+
+                    byte[] signatureBytes = result.GetBytes("item_image");
+                    try
+                    {
+                        if (signatureBytes.Length > 0)
+                        {
+                            item.ItemImage = Android.Graphics.BitmapFactory.DecodeByteArray(signatureBytes,
+                                                                                            0, signatureBytes.Length);
+                        }
+                        else
+                        {
+                            item.ItemImage = null;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        item.ItemImage = null;
+                    }
 					
 					if (c.CstId > 0) {
 						item.ItemLastBuyDate = Common.JavaDateToDatetime (result.GetDate ("last_date"));
@@ -124,6 +144,7 @@ SELECT TOP 30 START AT " + offset + @"
     ritems.ID, 
     ritems.item_cod, 
     ritems.item_desc,
+    ritems.item_image,
     ritems.item_qty_left " +
 					fields + @" 
 FROM ritems" +
@@ -162,6 +183,24 @@ WHERE 1 = 1  ";
 						ItemQtyLeft = Convert.ToDecimal(result.GetDouble("item_qty_left"))
 					};
 					
+                    byte[] signatureBytes = result.GetBytes("item_image");
+                    try
+                    {
+                        if (signatureBytes.Length > 0)
+                        {
+                            item.ItemImage = Android.Graphics.BitmapFactory.DecodeByteArray(signatureBytes,
+                                                                                            0, signatureBytes.Length);
+                        }
+                        else
+                        {
+                            item.ItemImage = null;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        item.ItemImage = null;
+                    }
+
 					if (c.CstId > 0) {
 						item.ItemLastBuyDate = Common.JavaDateToDatetime (result.GetDate ("last_date"));
 					}

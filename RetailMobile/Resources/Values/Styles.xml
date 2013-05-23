@@ -117,4 +117,10 @@
 		<item name="android:layout_height">fill_parent</item>
 		<item name="android:background">@android:color/white</item>
 	</style>
+    <style name="actionDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:background">@android:color/white</item>
+    </style>
 </resources>

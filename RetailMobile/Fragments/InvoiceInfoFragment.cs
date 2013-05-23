@@ -325,9 +325,11 @@ namespace RetailMobile
             detailsAdapter.AddValue();
         }
 
+        ItemsSelectDialog dialogItems;
         void btnSearchItems_Click(object sender, EventArgs e)
         {
-            ItemsSelectDialog dialogItems = new ItemsSelectDialog(Activity, Resource.Style.cust_dialog, header);
+            dialogItems = new ItemsSelectDialog(Activity, Resource.Style.actionDialog, header);
+            dialogItems.Window.SetLayout(WindowManagerLayoutParams.FillParent, WindowManagerLayoutParams.FillParent);
             dialogItems.DismissEvent += (s, ee) =>
             {
                 foreach (int itemId in dialogItems.CheckedItemIds.Keys)

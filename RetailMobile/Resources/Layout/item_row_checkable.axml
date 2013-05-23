@@ -7,8 +7,9 @@
         style="@style/fillWidth"
         android:layout_width="0dp"
         android:layout_weight="1.1">
-        <ImageView
-            android:id="@+id/imgItem"
+        
+        <Button
+ 			android:id="@+id/btnItemImage"
             android:layout_width="40dip"
             android:layout_height="40dip"
             android:layout_marginTop="2dp"
@@ -16,10 +17,11 @@
             android:layout_marginLeft="5dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:src="@drawable/no_icon" />
+            android:background="@drawable/no_icon"
+/>
         <LinearLayout
             style="@style/fillParent"
-            android:layout_toRightOf="@id/imgItem">
+            android:layout_toRightOf="@id/btnItemImage">
             <TextView
                 android:id="@+id/tbItemCode"
                 style="@style/listRowTextViewStyle"

@@ -111,4 +111,6 @@
 <string name="SynchronizationComplete">Synchronization complete!</string>	
 <string name="SynchronizationInProgress">Synchronizing...</string>
 <string name="InvalidUserOrPass">Invalid username or password.</string>
+<string name="btnFullSizeImage">View full size</string>
+
  </resources>
