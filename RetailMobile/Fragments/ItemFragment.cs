@@ -59,6 +59,8 @@ namespace RetailMobile
 
         void btnViewImage_Click(object sender, EventArgs e)
         {
+            if (item.ItemImage == null)
+                return;
 
             string root = System.IO.Path.Combine(Android.OS.Environment.ExternalStorageDirectory.ToString(), "DCIM");
             //string root = Android.OS.Environment.DirectoryPictures.ToString();
@@ -70,9 +72,12 @@ namespace RetailMobile
             string saveFile = System.IO.Path.Combine(myDir.FullName, fname);
             System.IO.FileInfo fi = new System.IO.FileInfo(saveFile);
 
-
-            if (fi.Exists)
-                fi.Delete();
+                if (fi.Exists)
+            {
+                Java.IO.File test = new Java.IO.File(saveFile);
+                test.Delete(); 
+                //fi.Delete();
+            }
             try
             {
                 //System.IO.StreamWriter sw = new System.IO.StreamWriter(saveFile);

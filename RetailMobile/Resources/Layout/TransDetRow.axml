@@ -25,6 +25,7 @@
         android:minWidth="20dp"
         android:gravity="right"
         android:text="tbDtrn_qty1"
+        android:selectAllOnFocus="true"
         android:layout_weight="0.5" />
     <EditText
         android:id="@+id/tbDtrn_disc_line1"
@@ -38,6 +39,7 @@
         android:minWidth="20dp"
         android:gravity="right"
         android:text="tbDtrn_disc_line1"
+        android:selectAllOnFocus="true"
         android:layout_weight="0.5" />
     <TextView
         android:id="@+id/lblDtrn_unit_price"

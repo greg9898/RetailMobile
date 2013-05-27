@@ -4,6 +4,8 @@ namespace RetailMobile
 {
 	public class PreferencesUtil
 	{
+        private static bool IsDebug = true;
+
 		private static string APP_SHARED_PREFS = "com.alphamobile.RetailPreferences";
 
 		//87.203.80.42
@@ -42,13 +44,24 @@ namespace RetailMobile
 		{
 			ISharedPreferences appSharedPrefs = context.GetSharedPreferences (
 				APP_SHARED_PREFS, FileCreationMode.Private);
-
-			IP = appSharedPrefs.GetString ("IP", "77.78.32.118");
-            //IP = appSharedPrefs.GetString("IP","85.72.39.236");
-			Port = appSharedPrefs.GetInt ("Port", 2489);
+            if (IsDebug)
+            {
+                IP = appSharedPrefs.GetString("IP", "77.78.32.118");
+                Port = appSharedPrefs.GetInt("Port", 2489);
+                SyncModel = appSharedPrefs.GetString ("SyncModel", "RetailMobile2");
+            }
+            else
+            {
+                IP = appSharedPrefs.GetString("IP", "");
+                Port = appSharedPrefs.GetInt("Port", 2489);
+                SyncModel = appSharedPrefs.GetString ("SyncModel", "RetailMobile3");
+            }
+			//IP = appSharedPrefs.GetString ("IP", "77.78.32.118");
+            //IP = appSharedPrefs.GetString("IP","");
+			//Port = appSharedPrefs.GetInt ("Port", 2489);
             //Port = appSharedPrefs.GetInt ("Port", 2639);
 			//SyncModel = appSharedPrefs.GetString("SyncModel","RetailMobile");
-			SyncModel = appSharedPrefs.GetString ("SyncModel", "RetailMobile2");
+			SyncModel = appSharedPrefs.GetString ("SyncModel", "RetailMobile3");
 			Username = appSharedPrefs.GetString ("Username", "");
 			Password = appSharedPrefs.GetString ("Password", "");
 		}

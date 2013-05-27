@@ -209,6 +209,9 @@ namespace RetailMobile
 
         void btnShowImage_Click(object sender, EventArgs e)
         {
+            if (imgItemSelected.Drawable == null)
+                return;
+
             Android.Graphics.Bitmap bmp = ((Android.Graphics.Drawables.BitmapDrawable)imgItemSelected.Drawable).Bitmap;
             if (bmp == null)
                 return;
@@ -223,9 +226,13 @@ namespace RetailMobile
             string saveFile = System.IO.Path.Combine(myDir.FullName, fname);
             System.IO.FileInfo fi = new System.IO.FileInfo(saveFile);
 
-
             if (fi.Exists)
-                fi.Delete();
+            {
+                Java.IO.File test = new Java.IO.File(saveFile);
+                test.Delete(); 
+                //fi.Delete();
+            }
+
             try
             {
                 //System.IO.StreamWriter sw = new System.IO.StreamWriter(saveFile);

@@ -299,12 +299,12 @@ namespace RetailMobile
             detailsAdapter.QtysChangedEvent += () => 
             {
                 FillHeaderCalcValues();
-                detailsAdapter.NotifyDataSetChanged();
+                //detailsAdapter.NotifyDataSetChanged();
 
-                if (TransDetAdapter.lastFocusedControl != null)
-                {
-                    TransDetAdapter.lastFocusedControl.RequestFocus();
-                }
+                //if (TransDetAdapter.lastFocusedControl != null)
+                //{
+                    //TransDetAdapter.lastFocusedControl.RequestFocus();
+                //}
             };
             detailsAdapter.DetailFieldSelectedEvent += (selDetail) => {
                 selectedDetail = selDetail;
