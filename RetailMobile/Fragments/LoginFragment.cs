@@ -65,6 +65,8 @@ namespace RetailMobile
 
 		public static bool Login (Android.Content.Context ctx, string username, string password)
 		{
+            //throw new Exception("This is a crash");
+
 			bool isSuccessful = false;
 
 			User user = User.Login (ctx, username, password);

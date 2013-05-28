@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="RetailMobile" android:versionName="1.0" android:versionCode="1">
-	<application android:debuggable="true" android:theme="@android:style/Theme.Light" android:label="RetailMobile" android:icon="@drawable/icon"></application>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.am.retail_mobile" android:versionName="1.0" android:versionCode="1">
+	<application android:debuggable="true" android:theme="@android:style/Theme.Light" android:label="RetailMobile" android:icon="@drawable/icon">
+		<meta-data android:name="com.crashlytics.ApiKey" android:value="45e4e75c0fd6725ef28e0f33fcb945538f06c869" />
+	</application>
 	<uses-sdk android:minSdkVersion="10" android:targetSdkVersion="12" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

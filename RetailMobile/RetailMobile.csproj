@@ -61,7 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapters\CheckableItemsAdapter.cs" />
-    <Compile Include="Adapters\TransDetAdapter.cs" />
     <Compile Include="Adapters\MainMenuAdapter.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -164,6 +163,7 @@
     <Compile Include="Library\TransCust.cs" />
     <Compile Include="Library\TransCustList.cs" />
     <AndroidResource Include="Resources\values-hdpi\dimens.xml" />
+    <Compile Include="Adapters\TransDetAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -408,5 +408,12 @@
       <Project>{6FEBD275-0894-4D34-8DC3-AC562AA83437}</Project>
       <Name>GraphView</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Crashlytics\Crashlytics.csproj">
+      <Project>{2E37C733-32FF-4FA7-872F-B93C6961F37D}</Project>
+      <Name>Crashlytics</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidEmbeddedJavaLibrary Include="lib\crashlytics.jar" />
   </ItemGroup>
 </Project>

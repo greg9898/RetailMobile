@@ -37,6 +37,8 @@ namespace RetailMobile
             PreferencesUtil.LoadSettings(this);
             Sync.GenerateDatabase(this);
 
+            Crashlytics.Android.Crashlytics1.Start(this);
+
             SetContentView(Resource.Layout.MainMenu);
             myActionBar = (RetailMobile.Fragments.ActionBar)SupportFragmentManager.FindFragmentById(Resource.Id.ActionBarMain);
             myActionBar.SyncClicked += new Fragments.ActionBar.SyncCLickedDelegate(MyActionBar_SyncClicked);
@@ -44,6 +46,7 @@ namespace RetailMobile
             ShowProgressBar();
             System.Threading.Tasks.Task.Factory.StartNew(() => Sync.SyncUsers(this)).ContinueWith(task => this.RunOnUiThread(() => HideProgressBar()));
             //Sync.SyncUsers(this);
+
 
             //RetailMobile.LoginFragment loginFragment = (RetailMobile.LoginFragment)SupportFragmentManager.FindFragmentById(Resource.Id.detail);
 
