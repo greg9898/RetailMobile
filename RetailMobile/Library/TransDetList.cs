@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -14,6 +13,17 @@ namespace RetailMobile.Library
 {
     public class TransDetList:List<TransDet>
     {
-        
+        public TransDet GetByItemId(int itemId)
+        {
+            foreach (TransDet d in this)
+            {
+                if (d.ItemId == itemId)
+                {
+                    return d;
+                }
+            }
+
+            return null;
+        }
     }
 }

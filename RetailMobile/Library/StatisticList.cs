@@ -7,7 +7,7 @@ namespace RetailMobile.Library
 {
     public class StatisticList : List<Statistic>
     {
-        public static StatisticList GetStatisticListThisMonth(Context ctx, int cstId)
+        public static StatisticList GetStatisticListThisMonth(Context ctx, long cstId)
         {
             StatisticList items = new StatisticList();
             using (IConnection conn = Sync.GetConnection(ctx))

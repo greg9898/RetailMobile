@@ -1,14 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Android.Support.V4.App;
 using RetailMobile.Library;
 
 namespace RetailMobile
@@ -25,11 +18,6 @@ namespace RetailMobile
             return detailsFrag;
         }
 
-        public int CustId
-        {
-            get { return Arguments.GetInt("ObjectId", -1); }
-        }
-
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             if (container == null)
@@ -40,7 +28,7 @@ namespace RetailMobile
 
             View view = inflater.Inflate(Resource.Layout.StatisticTabMonthly, container, false);
             
-            allStatList = StatisticList.GetStatisticListThisMonth(Activity, CustId);
+            allStatList = StatisticList.GetStatisticListThisMonth(Activity, ObjectId);
 			
 //            DebugAddStatistics();
 			
@@ -122,46 +110,6 @@ namespace RetailMobile
             }
 			
             return tblLayout;
-        }
-
-        void DebugAddStatistics()
-        {
-            Statistic s = new Statistic();
-            s.CstId = CustId;
-            s.AmountCurr = 10;
-            s.AmountPrev = 7;
-            s.ItemKateg = 930;
-            s.ItemKategDesc = Category.GetCategory(this.Activity.ApplicationContext, s.ItemKateg, 1).ItemCategDesc;
-            s.Month = 5;
-            allStatList.Add(s);
-						
-            s = new Statistic();
-            s.CstId = CustId;
-            s.AmountCurr = 10;
-            s.AmountPrev = 27;
-            s.ItemKateg = 9584;
-            s.ItemKategDesc = Category.GetCategory(this.Activity.ApplicationContext, s.ItemKateg, 1).ItemCategDesc;
-            s.Month = 6;
-            allStatList.Add(s);
-
-            s = new Statistic();
-            s.CstId = CustId;
-            s.AmountCurr = 151;
-            s.AmountPrev = 231;
-            s.ItemKateg = 9910;
-            s.ItemKategDesc = Category.GetCategory(this.Activity.ApplicationContext, s.ItemKateg, 1).ItemCategDesc;
-            s.Month = 1;
-            allStatList.Add(s);
-					
-            s = new Statistic();
-            s.CstId = CustId;
-            s.AmountCurr = 13;
-            s.AmountPrev = 17;
-            s.ItemKateg = 9552;
-            s.ItemKategDesc = Category.GetCategory(this.Activity.ApplicationContext, s.ItemKateg, 1).ItemCategDesc;
-            s.Month = 2;
-            allStatList.Add(s);
-			
         }
     }
 }

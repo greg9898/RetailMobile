@@ -34,6 +34,11 @@ namespace RetailMobile
         protected override void OnCreate(Bundle bundle)
         {   
             base.OnCreate(bundle);
+
+            AndroidEnvironment.UnhandledExceptionRaiser += (sender, e) => {
+                Common.LogException(e.Exception);// proper solution not yet found :/
+            };
+
             PreferencesUtil.LoadSettings(this);
             Sync.GenerateDatabase(this);
 
@@ -46,8 +51,6 @@ namespace RetailMobile
             ShowProgressBar();
             System.Threading.Tasks.Task.Factory.StartNew(() => Sync.SyncUsers(this)).ContinueWith(task => this.RunOnUiThread(() => HideProgressBar()));
             //Sync.SyncUsers(this);
-
-
             //RetailMobile.LoginFragment loginFragment = (RetailMobile.LoginFragment)SupportFragmentManager.FindFragmentById(Resource.Id.detail);
 
             if (!string.IsNullOrEmpty(PreferencesUtil.Username) && !string.IsNullOrEmpty(PreferencesUtil.Password) &&

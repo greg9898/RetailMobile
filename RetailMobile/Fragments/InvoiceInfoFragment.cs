@@ -303,7 +303,7 @@ namespace RetailMobile
 
                 //if (TransDetAdapter.lastFocusedControl != null)
                 //{
-                    //TransDetAdapter.lastFocusedControl.RequestFocus();
+                //TransDetAdapter.lastFocusedControl.RequestFocus();
                 //}
             };
             detailsAdapter.DetailFieldSelectedEvent += (selDetail) => {
@@ -326,6 +326,7 @@ namespace RetailMobile
         }
 
         ItemsSelectDialog dialogItems;
+
         void btnSearchItems_Click(object sender, EventArgs e)
         {
             dialogItems = new ItemsSelectDialog(Activity, Resource.Style.actionDialog, header);
@@ -334,10 +335,18 @@ namespace RetailMobile
             {
                 foreach (int itemId in dialogItems.CheckedItemIds.Keys)
                 {
-                    TransDet transDet = new TransDet();
-                    transDet.LoadItemInfo(Activity, itemId, dialogItems.CheckedItemIds[itemId], header.CstId);
-                    Log.Debug("btnOKItem_Click", itemId + " " + transDet.ItemDesc);
-                    header.TransDetList.Add(transDet);
+                    TransDet detOld = header.TransDetList.GetByItemId(itemId);
+
+                    if (detOld != null)
+                    {
+                        detOld.LoadItemInfo(Activity, itemId, (int)detOld.DtrnQty1 + dialogItems.CheckedItemIds[itemId], header.CstId);
+                    }
+                    else
+                    {
+                        TransDet transDet = new TransDet();
+                        transDet.LoadItemInfo(Activity, itemId, dialogItems.CheckedItemIds[itemId], header.CstId);
+                        header.TransDetList.Add(transDet);
+                    }
                 }
                 
                 LoadDetailsAdapter();
