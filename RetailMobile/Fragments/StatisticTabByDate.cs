@@ -23,11 +23,6 @@ namespace RetailMobile
             return detailsFrag;
         }
 
-        public int CustId
-        {
-            get { return Arguments.GetInt("ObjectId", -1); }
-        }
-
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             if (container == null)
@@ -70,12 +65,12 @@ namespace RetailMobile
         {
             DateTime dtFrom;
             DateTime dtTo;
-            DateTime.TryParseExact(tbStatisticDateFrom.Text, PreferencesUtil.DateFormatDateOnly, CultureInfo.InvariantCulture, DateTimeStyles.None, out dtFrom);
-            DateTime.TryParseExact(tbStatisticDateTo.Text, PreferencesUtil.DateFormatDateOnly, CultureInfo.InvariantCulture, DateTimeStyles.None, out dtTo);
+            DateTime.TryParseExact(tbStatisticDateFrom.Text, Common.DateFormatDateOnly, CultureInfo.InvariantCulture, DateTimeStyles.None, out dtFrom);
+            DateTime.TryParseExact(tbStatisticDateTo.Text, Common.DateFormatDateOnly, CultureInfo.InvariantCulture, DateTimeStyles.None, out dtTo);
 
             TransCustList transCustList = TransCustList.GetTransCustListStatistic(this.Activity.ApplicationContext, new TransCustList.Criteria()
             {  
-                CustId = this.CustId, 
+                CustId = (int)this.ObjectId, 
                 DateFrom = dtFrom,
                 DateTo = dtTo,
             });
@@ -89,14 +84,14 @@ namespace RetailMobile
         void ShowCalendar(Context ctx, TextView tvDate)
         {
             DateTime dt;
-            if (!DateTime.TryParseExact(tvDate.Text, PreferencesUtil.DateFormatDateOnly, CultureInfo.InvariantCulture, DateTimeStyles.None, out dt))
+            if (!DateTime.TryParseExact(tvDate.Text, Common.DateFormatDateOnly, CultureInfo.InvariantCulture, DateTimeStyles.None, out dt))
             {
                 dt = DateTime.Now.Date;
             }
 
             CalendarView calendarDlg = new CalendarView(ctx, dt);
             calendarDlg.DateSlected += new CalendarView.DateSelectedDelegate(d => {
-				tvDate.Text = d.ToString (PreferencesUtil.DateFormatDateOnly);
+				tvDate.Text = d.ToString (Common.DateFormatDateOnly);
 			});
             calendarDlg.Show();
         }
@@ -164,19 +159,19 @@ namespace RetailMobile
                 row.AddView(tvItemKateg);
 				
                 TextView tvCredit = new TextView(ctx);
-                tvCredit.Text = st.Credit.ToString(PreferencesUtil.CurrencyFormat);
+                tvCredit.Text = st.Credit.ToString(Common.CurrencyFormat);
                 tvCredit.Gravity = GravityFlags.Right;
                 SetCellStyle(tvCredit);
                 row.AddView(tvCredit);
 				
                 TextView tvDebit = new TextView(ctx);
-                tvDebit.Text = st.Debit.ToString(PreferencesUtil.CurrencyFormat);
+                tvDebit.Text = st.Debit.ToString(Common.CurrencyFormat);
                 tvDebit.Gravity = GravityFlags.Right;
                 SetCellStyle(tvDebit);
                 row.AddView(tvDebit);
                 
                 TextView tvCreditMinusDebit = new TextView(ctx);
-                tvCreditMinusDebit.Text = st.CreditMinusDebit.ToString(PreferencesUtil.CurrencyFormat);
+                tvCreditMinusDebit.Text = st.CreditMinusDebit.ToString(Common.CurrencyFormat);
                 tvCreditMinusDebit.Gravity = GravityFlags.Right;
                 SetCellStyle(tvCreditMinusDebit);
                 row.AddView(tvCreditMinusDebit);

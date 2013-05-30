@@ -22,6 +22,7 @@
   <string name="miNew">Προσθήκη νέου</string> 
   <string name="btnNew">Προσθήκη νέου</string> 
   <string name="lblInvoice">Παραγγελία</string> 
+   <string name="CustomerSavedSuccessMsg">Customer saved</string> 
   
  <!--  customer statistics table  --> 
   <string name="tvHeaderItemKategory">Item Category</string> 
@@ -98,6 +99,8 @@
   <string name="lblIP">IP</string> 
   <string name="lblPort">Port</string> 
   <string name="lblSyncModel">Sync Model</string> 
+  <string name="lblSyncUser">SyncModel Username</string> 
+  <string name="lblSyncPass">SyncModel Password</string> 
   <string name="Settings">Settings</string> 
   <string name="Username">Username</string> 
   <string name="Password">Password</string> 

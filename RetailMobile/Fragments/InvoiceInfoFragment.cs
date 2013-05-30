@@ -139,7 +139,7 @@ namespace RetailMobile
         {
             CalendarView calendarDlg = new CalendarView(ctx, currentDate);
             calendarDlg.DateSlected += new CalendarView.DateSelectedDelegate(d => {
-				//PreferencesUtil.DateFormatDateOnly
+				//Common.DateFormatDateOnly
 				tbHtrnDate.Text = d.ToShortDateString ();
 				header.TransDate = DateTime.Parse (tbHtrnDate.Text);
 				DateTime now = DateTime.Now;
@@ -176,9 +176,9 @@ namespace RetailMobile
         {
             tbHtrnExpln.Text = header.HtrnExpl;
             tbHtrnDate.Text = header.TransDateText;
-            tbHtrnNetValue.Text = header.HtrnNetVal.ToString(PreferencesUtil.DecimalFormat);
-            tbHtrnVatValue.Text = header.HtrnVatVal.ToString(PreferencesUtil.DecimalFormat);
-            tbHtrnTotValue.Text = header.HtrnTotValue.ToString(PreferencesUtil.DecimalFormat);
+            tbHtrnNetValue.Text = header.HtrnNetVal.ToString(Common.DecimalFormat);
+            tbHtrnVatValue.Text = header.HtrnVatVal.ToString(Common.DecimalFormat);
+            tbHtrnTotValue.Text = header.HtrnTotValue.ToString(Common.DecimalFormat);
         }
 
         void Save()
@@ -286,9 +286,9 @@ namespace RetailMobile
 
         void FillHeaderCalcValues()
         {
-            tbHtrnNetValue.Text = header.HtrnNetVal.ToString(PreferencesUtil.DecimalFormat);
-            tbHtrnVatValue.Text = header.HtrnVatVal.ToString(PreferencesUtil.DecimalFormat);
-            tbHtrnTotValue.Text = header.HtrnTotValue.ToString(PreferencesUtil.DecimalFormat);
+            tbHtrnNetValue.Text = header.HtrnNetVal.ToString(Common.DecimalFormat);
+            tbHtrnVatValue.Text = header.HtrnVatVal.ToString(Common.DecimalFormat);
+            tbHtrnTotValue.Text = header.HtrnTotValue.ToString(Common.DecimalFormat);
         }
 
         TransDetAdapter.SelectedDetail selectedDetail = null;

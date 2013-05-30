@@ -36,8 +36,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                style="@style/myEditTextStyle" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/layoutPort"
@@ -59,8 +58,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                style="@style/myEditTextStyle" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/layoutSyncModel"
@@ -82,8 +80,52 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                style="@style/myEditTextStyle" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layoutSyncUser"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="44dp">
+            <TextView
+                android:id="@+id/lblSyncUser"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/lblSyncUser"
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
+            <EditText
+                android:id="@+id/tbSyncUser"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/myEditTextStyle" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layoutSyncPass"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="44dp">
+            <TextView
+                android:id="@+id/lblSyncPass"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/lblSyncPass"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+            <EditText
+                android:id="@+id/tbSyncPass"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="textPassword"
+                style="@style/myEditTextStyle" />
         </LinearLayout>
     </LinearLayout>
     <Button

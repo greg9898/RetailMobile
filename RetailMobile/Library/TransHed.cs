@@ -77,7 +77,7 @@ namespace RetailMobile.Library
 
         public string TransDateText { get
             {
-                return TransDate.ToShortDateString();//TransDate.ToString(PreferencesUtil.DateFormatDateOnly);
+                return TransDate.ToShortDateString();//TransDate.ToString(Common.DateFormatDateOnly);
             } }
 
         public void MarkDetailDeleted(TransDet d)

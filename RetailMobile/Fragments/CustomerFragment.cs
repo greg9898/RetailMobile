@@ -9,6 +9,7 @@ namespace RetailMobile
 {
     public class CustomerFragment : BaseFragment
     {
+        const int SAVE_BUTTON = 765;
         TabHost mTabHost;
         TextView tbCustCode;
         TextView tbCustName;
@@ -35,14 +36,16 @@ namespace RetailMobile
 
             actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
             actionBar.SetTitle(this.Activity.GetString (Resource.String.miCustomers));
+            actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
+            actionBar.ClearButtons();
+            actionBar.AddButtonRight(SAVE_BUTTON, this.Activity.GetString(Resource.String.btnSave), Resource.Drawable.save_48);
             view.FindViewById<FrameLayout>(Resource.Id.realtabcontent).Visibility = ViewStates.Gone;
 
             customer = CustomerInfo.GetCustomer(Activity, this.ObjectId);
             
             tbCustCode = (TextView)view.FindViewById(Resource.Id.tbCustomerCode);
             tbCustName = (TextView)view.FindViewById(Resource.Id.tbCustomerName);
-            Button btnSave = (Button)view.FindViewById(Resource.Id.btnSave);
-            btnSave.Click += new EventHandler(btnSave_Click);
+         
             tbCustCode.Text = customer.Code;
             tbCustName.Text = customer.Name;
 
@@ -50,11 +53,38 @@ namespace RetailMobile
             statisticTabByDate = StatisticTabByDate.NewInstance(this.ObjectId);
 
             mTabHost = (TabHost)view.FindViewById(Resource.Id.tabhost);
-            mTabHost.TabChanged += tabHost_HandleTabChanged; 
+            mTabHost.TabChanged += TabHostHandleTabChanged; 
             mTabHost.Setup();
             InitializeTab(view);
             
             return view;
+        }
+
+        void ActionBarButtonClicked(int id)
+        {
+            if (id == SAVE_BUTTON)
+            {
+                try
+                {
+                    Save();
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("ActionBarButtonClicked SAVE_BUTTON", "ActionBarButtonClicked SAVE_BUTTON " + ex.Message);
+                }
+            }
+        }
+
+        public override void OnDestroyView()
+        {
+            actionBar.ActionButtonClicked -= new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
+            base.OnDestroyView();
+        }
+
+        public override void OnPause()
+        {
+            actionBar.ActionButtonClicked -= new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
+            base.OnPause();
         }
 
         public override void OnCreate(Bundle p0)
@@ -64,7 +94,7 @@ namespace RetailMobile
             mTabHost = (TabHost)this.Activity.FindViewById(Resource.Id.tabhost);
         }
 
-        void tabHost_HandleTabChanged(object sender, TabHost.TabChangeEventArgs e)
+        void TabHostHandleTabChanged(object sender, TabHost.TabChangeEventArgs e)
         {
             if (e.TabId.Equals("Monthly"))
             {
@@ -75,9 +105,10 @@ namespace RetailMobile
                 PushFragments(statisticTabByDate);
             }
         }
-		/*
-     * Initialize the tabs and set views and identifiers for the tabs
-     */
+        /// <summary>
+        /// Initialize the tabs and set views and identifiers for the tabs
+        /// </summary>
+        /// <param name="view">View.</param>
         public void InitializeTab(View view)
         {		
             TabHost.TabSpec spec1 = mTabHost.NewTabSpec("Monthly");
@@ -100,9 +131,7 @@ namespace RetailMobile
             mTabHost.SetCurrentTabByTag("By Date");
             mTabHost.SetCurrentTabByTag("Monthly");
         }
-		/*
-     * adds the fragment to the FrameLayout
-     */
+
         public void PushFragments(Android.Support.V4.App.Fragment fragment)
         {
 
@@ -114,7 +143,7 @@ namespace RetailMobile
             viewCust.FindViewById<FrameLayout>(Resource.Id.realtabcontent).Visibility = ViewStates.Visible;
         }
 
-        void btnSave_Click(object sender, EventArgs e)
+        void Save()
         {
             try
             {
@@ -122,11 +151,12 @@ namespace RetailMobile
                 customer.Name = tbCustName.Text;
                 
                 customer.Save(Activity);
+                Toast.MakeText(this.Activity.ApplicationContext, this.Activity.GetString(Resource.String.CustomerSavedSuccessMsg), ToastLength.Short).Show();
             }
             catch (Exception ex)
             {
                 Log.Error("Save customer failed", ex.Message);
-                throw ex;
+                throw;
             }
         }
     }

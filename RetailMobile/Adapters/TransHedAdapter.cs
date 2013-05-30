@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -37,21 +36,19 @@ namespace RetailMobile
             TextView tbHtrnVatVal = (TextView)view.FindViewById(Resource.Id.tbHtrnVatVal);
             TextView tbCustName = (TextView)view.FindViewById(Resource.Id.tbCustName);
 
-            tbHtrnDate.Text = item.TransDate.ToString(PreferencesUtil.DateFormatDateOnly);
-            tbHtrnNetVal.Text = item.HtrnNetVal.ToString(PreferencesUtil.DecimalFormat);
-            tbHtrnVatVal.Text = item.HtrnVatVal.ToString(PreferencesUtil.DecimalFormat);
+            tbHtrnDate.Text = item.TransDate.ToString(Common.DateFormatDateOnly);
+            tbHtrnNetVal.Text = item.HtrnNetVal.ToString(Common.DecimalFormat);
+            tbHtrnVatVal.Text = item.HtrnVatVal.ToString(Common.DecimalFormat);
             tbCustName.Text = item.CstName;
 
             return view;
         }
-
 		#region IScrollLoadble implementation
 
-		public void LoadData (int page)
-		{
+        public void LoadData(int page)
+        {
 
-		}
-
+        }
 		#endregion
     }
 }

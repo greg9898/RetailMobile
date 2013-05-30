@@ -37,7 +37,7 @@ namespace RetailMobile
             if (lastFocusedControl != null)
             {
                 string lastFocusedControlText = lastFocusedControl.Text;
-                lastFocusedControlText = lastFocusedControlText.Replace(".",System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
+                lastFocusedControlText = lastFocusedControlText.Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
                 lastFocusedControl.Text = (int.Parse(lastFocusedControlText) + 1).ToString();
             }
         }
@@ -47,7 +47,7 @@ namespace RetailMobile
             if (lastFocusedControl != null)
             {
                 string lastFocusedControlText = lastFocusedControl.Text;
-                lastFocusedControlText = lastFocusedControlText.Replace(".",System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
+                lastFocusedControlText = lastFocusedControlText.Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
                 lastFocusedControl.Text = (int.Parse(lastFocusedControlText) - 1).ToString();
             }
         }
@@ -110,10 +110,10 @@ namespace RetailMobile
             holder.lblItemCode.Text = detail.ItemCode;
             holder.lblItemDesc.Text = detail.ItemDesc;
 
-            holder.lblDtrn_unit_price.Text = detail.DtrnUnitPrice.ToString(PreferencesUtil.CurrencyFormat);
+            holder.lblDtrn_unit_price.Text = detail.DtrnUnitPrice.ToString(Common.CurrencyFormat);
 
-            holder.lblDtrn_net_value.Text = detail.DtrnNetValue.ToString(PreferencesUtil.CurrencyFormat);
-            holder.lblDtrn_vat_value.Text = detail.DtrnVatValue.ToString(PreferencesUtil.CurrencyFormat);
+            holder.lblDtrn_net_value.Text = detail.DtrnNetValue.ToString(Common.CurrencyFormat);
+            holder.lblDtrn_vat_value.Text = detail.DtrnVatValue.ToString(Common.CurrencyFormat);
 
             if (disabled)
             {
@@ -147,8 +147,8 @@ namespace RetailMobile
             {
                 if (lblDtrn_net_value != null && lblDtrn_vat_value != null)
                 {
-                    lblDtrn_net_value.Text = Datasource.DtrnNetValue.ToString(PreferencesUtil.CurrencyFormat);
-                    lblDtrn_vat_value.Text = Datasource.DtrnVatValue.ToString(PreferencesUtil.CurrencyFormat);
+                    lblDtrn_net_value.Text = Datasource.DtrnNetValue.ToString(Common.CurrencyFormat);
+                    lblDtrn_vat_value.Text = Datasource.DtrnVatValue.ToString(Common.CurrencyFormat);
                 }
             }
         }
@@ -180,7 +180,7 @@ namespace RetailMobile
                 var builder = new Android.App.AlertDialog.Builder(Activity);
                 builder.SetMessage(questionDelYesNo);
                 builder.SetPositiveButton(Resources.GetText( Resource.String.Yes), delegate(object sender, Android.Content.DialogClickEventArgs args)
-                                          {
+                {
                     TransDet d = adapter.parentView.Header.TransDetList[position];
 
                     //                    adapter.Remove(d);
@@ -189,7 +189,7 @@ namespace RetailMobile
                     adapter.parentView.LoadDetailsAdapter();
                 });
                 builder.SetNegativeButton(Resources.GetText( Resource.String.No), (sender, args) =>
-                                          {
+                {
                     this.Dismiss();
                 });
 
@@ -220,8 +220,8 @@ namespace RetailMobile
                     TransDetAdapter.lastFocusedControl.SetBackgroundResource(Resource.Drawable.my_edit_text_background_focused);
                     TransDetAdapter.lastFocusedControl.RequestFocus();
 
-                    EditText yourEditText= (EditText) sender;
-                    Android.Views.InputMethods.InputMethodManager imm = (Android.Views.InputMethods.InputMethodManager) context.GetSystemService(Android.Content.Context.InputMethodService);
+                    EditText yourEditText = (EditText)sender;
+                    Android.Views.InputMethods.InputMethodManager imm = (Android.Views.InputMethods.InputMethodManager)context.GetSystemService(Android.Content.Context.InputMethodService);
                     imm.ShowSoftInput(yourEditText, Android.Views.InputMethods.ShowFlags.Implicit);
                     break;
             }

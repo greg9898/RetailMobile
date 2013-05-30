@@ -5,6 +5,12 @@ namespace RetailMobile
     public static class Common
     {
         public static int CurrentDealerID = 0;
+        public static string DecimalFormat = "######0.0##";
+        public static string CurrencyFormat = "######0.00";
+        /// <summary>
+        /// dd.MM.yyyy
+        /// </summary>
+        public static string DateFormatDateOnly = "dd.MM.yyyy";
 
         public static DateTime JavaDateToDatetime(Java.Util.Date date)
         {

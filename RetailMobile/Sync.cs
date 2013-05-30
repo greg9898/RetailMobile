@@ -1,7 +1,7 @@
 using System;
 using Android.Content;
-using Com.Ianywhere.Ultralitejni12;
 using Android.Util;
+using Com.Ianywhere.Ultralitejni12;
 
 namespace RetailMobile
 {
@@ -11,13 +11,13 @@ namespace RetailMobile
 
         public static IConnection GetConnection(Context ctx)
         {
-            IConnection DBConnection = null;
+            IConnection dBConnection = null;
             IConfigPersistent Config = DatabaseManager.CreateConfigurationFileAndroid(DatabaseName, ctx);
 
             // Connect to the database - CreateDatabase creates a new database
-            DBConnection = DatabaseManager.Connect(Config);
+            dBConnection = DatabaseManager.Connect(Config);
             //DBConnection = DatabaseManager.CreateDatabase(Config);
-            return DBConnection;
+            return dBConnection;
         }
 
         const string createTableRcustomer = @"
@@ -262,7 +262,9 @@ TABLE rusers)");
             try
             {
                 //SyncParms.HTTP_STREAM, "sa", "Courier109"
-                SyncParms syncParams = cn.CreateSyncParms(0, "sa", PreferencesUtil.SyncModel);
+//               SyncParms syncParams = cn.CreateSyncParms(0, "sa", PreferencesUtil.SyncModel);
+                SyncParms syncParams = cn.CreateSyncParms(0, PreferencesUtil.SyncUser, PreferencesUtil.SyncModel);
+                syncParams.Password = PreferencesUtil.SyncPass;
                 syncParams.Publications = "pblMain1";
 
                 IStreamHTTPParms streamParams = syncParams.StreamParms;
@@ -290,7 +292,8 @@ TABLE rusers)");
             try
             {
                 //SyncParms.HTTP_STREAM, "sa", "Courier109"
-                SyncParms syncParams = cn.CreateSyncParms(0, "sa", PreferencesUtil.SyncModel);
+                SyncParms syncParams = cn.CreateSyncParms(0, PreferencesUtil.SyncUser, PreferencesUtil.SyncModel);
+                syncParams.Password = PreferencesUtil.SyncPass;
                 syncParams.Publications = "pblUsers";
 
                 IStreamHTTPParms streamParams = syncParams.StreamParms;
@@ -317,7 +320,8 @@ TABLE rusers)");
             try
             {
                 //SyncParms.HTTP_STREAM, "sa", "Courier109"
-                SyncParms syncParams = cn.CreateSyncParms(0, "sa", PreferencesUtil.SyncModel);
+                SyncParms syncParams = cn.CreateSyncParms(0, PreferencesUtil.SyncUser, PreferencesUtil.SyncModel);
+                syncParams.Password = PreferencesUtil.SyncPass;
                 syncParams.Publications = "pblUploadTrans";
 
                 IStreamHTTPParms streamParams = syncParams.StreamParms;

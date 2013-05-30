@@ -13,6 +13,7 @@ namespace RetailMobile
     public class CheckableItemsAdapter : ArrayAdapter<Library.ItemInfo>, IScrollLoadble
     {
         public delegate void ItemImageSelectedDelegate(Android.Graphics.Bitmap image);
+
         public event  ItemImageSelectedDelegate  ItemImageSelected;
 
         Activity context = null;
@@ -79,11 +80,11 @@ namespace RetailMobile
                 if (holder.tbItemName != null)
                     holder.tbItemName.Text = item.ItemDesc;
                 if (holder.tbItemLastBuyDate != null)
-                    holder.tbItemLastBuyDate.Text = item.ItemLastBuyDate.ToString(PreferencesUtil.DateFormatDateOnly);
+                    holder.tbItemLastBuyDate.Text = item.ItemLastBuyDate.ToString(Common.DateFormatDateOnly);
                 if (holder.tbItemQtyLeft != null)
-                    holder.tbItemQtyLeft.Text = item.ItemQtyLeft.ToString(PreferencesUtil.DecimalFormat);
+                    holder.tbItemQtyLeft.Text = item.ItemQtyLeft.ToString(Common.DecimalFormat);
                 if (holder.tbItemSaleVal != null)
-                    holder.tbItemSaleVal.Text = item.ItemSaleVal1.ToString(PreferencesUtil.DecimalFormat);
+                    holder.tbItemSaleVal.Text = item.ItemSaleVal1.ToString(Common.DecimalFormat);
 				
                 holder.itemBox.CheckedChange -= new EventHandler<CompoundButton.CheckedChangeEventArgs>(itemBox_CheckedChange);
                 holder.itemBox.Checked = _checkedItemIds.ContainsKey(item.ItemId);

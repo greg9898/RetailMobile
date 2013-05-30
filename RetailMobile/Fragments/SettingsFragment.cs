@@ -16,6 +16,8 @@ namespace RetailMobile
         EditText tbIP;
         EditText tbPort;
         EditText tbSyncModel;
+        EditText tbSyncUser;
+        EditText tbSyncPass;
         Button btnLogout;
         Button btnSync;
         RetailMobile.Fragments.ItemActionBar actionBar;
@@ -33,6 +35,8 @@ namespace RetailMobile
             tbIP = v.FindViewById<EditText>(Resource.Id.tbIP);
             tbPort = v.FindViewById<EditText>(Resource.Id.tbPort);
             tbSyncModel = v.FindViewById<EditText>(Resource.Id.tbSyncModel);
+            tbSyncUser = v.FindViewById<EditText>(Resource.Id.tbSyncUser);
+            tbSyncPass = v.FindViewById<EditText>(Resource.Id.tbSyncPass);
             btnLogout = v.FindViewById<Button>(Resource.Id.btnLogout);
             btnSync = v.FindViewById<Button>(Resource.Id.btnMainSync);
 
@@ -50,6 +54,8 @@ namespace RetailMobile
             tbIP.Text = PreferencesUtil.IP;
             tbPort.Text = PreferencesUtil.Port.ToString();
             tbSyncModel.Text = PreferencesUtil.SyncModel;
+            tbSyncUser.Text = PreferencesUtil.SyncUser;
+            tbSyncPass.Text = PreferencesUtil.SyncPass;
 
             btnSync.Click += new EventHandler(btnSync_Click);
             btnLogout.Click += new EventHandler(btnLogout_Click);
@@ -117,6 +123,8 @@ namespace RetailMobile
                         PreferencesUtil.IP = tbIP.Text;
                         PreferencesUtil.Port = int.Parse(tbPort.Text);
                         PreferencesUtil.SyncModel = tbSyncModel.Text;
+                        PreferencesUtil.SyncUser = tbSyncUser.Text;
+                        PreferencesUtil.SyncPass = tbSyncPass.Text;
                         PreferencesUtil.SavePreferences(this.Activity);
 
                         Toast.MakeText(this.Activity.ApplicationContext, "Saved", ToastLength.Short).Show();
@@ -131,7 +139,7 @@ namespace RetailMobile
                     }
                     catch (Exception ex)
                     {
-                        Android.Util.Log.Error("exception", ex.Message);
+                        Android.Util.Log.Error("ActionBarButtonClicked SAVE_BUTTON", ex.Message);
                     }
                     break;
             }

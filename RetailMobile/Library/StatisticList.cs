@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Android.Content;
 using Com.Ianywhere.Ultralitejni12;
-using Android.Util;
 
 namespace RetailMobile.Library
 {
@@ -10,6 +9,12 @@ namespace RetailMobile.Library
         public static StatisticList GetStatisticListThisMonth(Context ctx, long cstId)
         {
             StatisticList items = new StatisticList();
+
+            if (cstId == 0)
+            {
+                return items;
+            }
+
             using (IConnection conn = Sync.GetConnection(ctx))
             {         
                 string query = @"
@@ -38,8 +43,6 @@ WHERE cst_id = :cstId AND month = " + System.DateTime.Now.Month;
                     Statistic s = new Statistic();
                     s.Fetch(result);
                     items.Add(s);
-
-                    Log.Debug("StatisticList", "StatisticList CstId=" + s.CstId + " Month=" + s.Month);
                 } 
                 
                 ps.Close();
