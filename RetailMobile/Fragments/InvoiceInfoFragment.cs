@@ -10,6 +10,9 @@ namespace RetailMobile
 {
     public class InvoiceInfoFragment : BaseFragment
     {
+        public delegate void InvoiceSavedDelegate(int id);
+        public event InvoiceSavedDelegate InvoiceSaved;
+
         const int SAVE_BUTTON = 764;
         Library.TransHed header;
         TransDetAdapter detailsAdapter;
@@ -53,7 +56,7 @@ namespace RetailMobile
             actionBar.ClearButtons();
             actionBar.AddButtonRight(SAVE_BUTTON, this.Activity.GetString(Resource.String.btnSave), Resource.Drawable.save_48);
             actionBar.SetTitle(this.Activity.GetString(Resource.String.lblInvoice));
-            
+
             Button btnSearchItems = v.FindViewById<Button>(Resource.Id.btnSearchItems);
             Button btnSearchCustomer = v.FindViewById<Button>(Resource.Id.btnSearchCustomer);
             Button btnAddValue = v.FindViewById<Button>(Resource.Id.btnAddValue);
@@ -62,7 +65,7 @@ namespace RetailMobile
             btnSearchItems.Click += new EventHandler(btnSearchItems_Click);
             btnAddValue.Click += btnAddValue_Click;
             btnSubstractValue.Click += btnSubstractValue_Click;
-            
+
             lvDetails = v.FindViewById<ListView>(Resource.Id.lvDetails);
             lvDetails.AddHeaderView(inflater.Inflate (Resource.Layout.TransDetRow_header, null));
 
@@ -77,11 +80,11 @@ namespace RetailMobile
             tbHtrnNetValue = v.FindViewById<EditText>(Resource.Id.tbHtrnNetValue);
             tbHtrnVatValue = v.FindViewById<EditText>(Resource.Id.tbHtrnVatValue);
             tbHtrnTotValue = v.FindViewById<EditText>(Resource.Id.tbHtrnTotValue);
-            
+
             tbCustCode.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbCustCode_TextChanged);
             tbHtrnID.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbHtrnID_TextChanged);
             tbHtrnID.Text = this.ObjectId.ToString();
-            
+
             tbHtrnDate.Focusable = false;
             tbHtrnDate.Click += (object sender, EventArgs e) => {
                 ShowCalendar(v.Context, header.TransDate);
@@ -89,36 +92,36 @@ namespace RetailMobile
 
             LoadDetailsAdapter();
 
-//            if (this.ObjectId > 0)
-//            {
-//                tbCustCode .Enabled = false;
-//                tbHtrnID .Enabled = false;
-//                tbCustDesc.Enabled = false;
-//                tbCustAddress .Enabled = false;
-//                tbCustPhone.Enabled = false;
-//                tbCustDebt .Enabled = false;
-//                tbHtrnExpln .Enabled = false;
-//                tbHtrnDate .Enabled = false;
-//                tbHtrnNetValue .Enabled = false;
-//                tbHtrnVatValue.Enabled = false;
-//                tbHtrnTotValue.Enabled = false;
-//
-//                tbCustCode.Enabled = false;
-//                tbHtrnID.Enabled = false;
-//
-//                tbHtrnDate.Enabled = false;
-//                btnSearchCustomer.Enabled = false;
-//                btnSearchItems.Enabled = false;
-//                lvDetails.Clickable = false;
-//                lvDetails.Focusable = false;
-//                lvDetails.FocusableInTouchMode = false;
-//                btnAddValue.Enabled = false;
-//                btnSubstractValue.Enabled = false;
-//           
-//                HeaderViewListAdapter adapter = (HeaderViewListAdapter)lvDetails.Adapter;
-//                TransDetAdapter origAdapter = (TransDetAdapter)adapter.WrappedAdapter;
-//                origAdapter.Disable();
-//            }
+            // if (this.ObjectId > 0)
+            // {
+            // tbCustCode .Enabled = false;
+            // tbHtrnID .Enabled = false;
+            // tbCustDesc.Enabled = false;
+            // tbCustAddress .Enabled = false;
+            // tbCustPhone.Enabled = false;
+            // tbCustDebt .Enabled = false;
+            // tbHtrnExpln .Enabled = false;
+            // tbHtrnDate .Enabled = false;
+            // tbHtrnNetValue .Enabled = false;
+            // tbHtrnVatValue.Enabled = false;
+            // tbHtrnTotValue.Enabled = false;
+            //
+            // tbCustCode.Enabled = false;
+            // tbHtrnID.Enabled = false;
+            //
+            // tbHtrnDate.Enabled = false;
+            // btnSearchCustomer.Enabled = false;
+            // btnSearchItems.Enabled = false;
+            // lvDetails.Clickable = false;
+            // lvDetails.Focusable = false;
+            // lvDetails.FocusableInTouchMode = false;
+            // btnAddValue.Enabled = false;
+            // btnSubstractValue.Enabled = false;
+            //
+            // HeaderViewListAdapter adapter = (HeaderViewListAdapter)lvDetails.Adapter;
+            // TransDetAdapter origAdapter = (TransDetAdapter)adapter.WrappedAdapter;
+            // origAdapter.Disable();
+            // }
 
             return v;
         }
@@ -139,12 +142,12 @@ namespace RetailMobile
         {
             CalendarView calendarDlg = new CalendarView(ctx, currentDate);
             calendarDlg.DateSlected += new CalendarView.DateSelectedDelegate(d => {
-				//Common.DateFormatDateOnly
-				tbHtrnDate.Text = d.ToShortDateString ();
-				header.TransDate = DateTime.Parse (tbHtrnDate.Text);
-				DateTime now = DateTime.Now;
-				header.TransDate = new DateTime (header.TransDate.Year, header.TransDate.Month, header.TransDate.Day, now.Hour, now.Minute, now.Second);
-			});
+                //Common.DateFormatDateOnly
+                tbHtrnDate.Text = d.ToShortDateString ();
+                header.TransDate = DateTime.Parse (tbHtrnDate.Text);
+                DateTime now = DateTime.Now;
+                header.TransDate = new DateTime (header.TransDate.Year, header.TransDate.Month, header.TransDate.Day, now.Hour, now.Minute, now.Second);
+            });
             calendarDlg.Show();
         }
 
@@ -168,7 +171,7 @@ namespace RetailMobile
             header = new Library.TransHed();
             FillInvoiceFields();
             FillCustomerFields(new Library.CustomerInfo ());
-            
+
             LoadDetailsAdapter();
         }
 
@@ -208,9 +211,14 @@ namespace RetailMobile
             header.TransDate = DateTime.Parse(tbHtrnDate.Text);
             DateTime now = DateTime.Now;
             header.TransDate = new DateTime(header.TransDate.Year, header.TransDate.Month, header.TransDate.Day, now.Hour, now.Minute, now.Second);
-            
+
             header.Save(Activity);
+
+            if (InvoiceSaved != null)
+                InvoiceSaved(header.HtrnId);
+
             InitInvoiceScreen();
+
         }
 
         void tbHtrnID_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
@@ -231,10 +239,10 @@ namespace RetailMobile
             {
                 return;
             }
-            
+
             Log.Debug("tbCustCode_TextChanged", "tbCustCode_TextChanged text=" + ((EditText)sender).Text);
             CustomerInfo c = CustomerInfo.GetCustomer(Activity, ((EditText)sender).Text);
-            
+
             if (tbCustDesc != null)
             {
                 tbCustDesc.Text = c.Name;
@@ -262,11 +270,11 @@ namespace RetailMobile
         private void LoadCustomerData(double custId)
         {
             Library.CustomerInfo c = Library.CustomerInfo.GetCustomer(Activity, custId);
-            
+
             if (tbCustDesc != null)
             {
                 FillCustomerFields(c);
-                
+
                 LoadDetailsAdapter();
             }
         }
@@ -274,13 +282,13 @@ namespace RetailMobile
         private void FillCustomerFields(Library.CustomerInfo c)
         {
             isCustChanging = true;
-            
+
             tbCustDesc.Text = c.Name;
             tbCustAddress.Text = c.CustAddress;
             tbCustCode.Text = c.Code;
             tbCustDebt.Text = c.CustDebt.ToString();
             tbCustPhone.Text = c.CustPhone;
-            
+
             isCustChanging = false;
         }
 
@@ -293,10 +301,10 @@ namespace RetailMobile
 
         TransDetAdapter.SelectedDetail selectedDetail = null;
 
-        public  void LoadDetailsAdapter()
+        public void LoadDetailsAdapter()
         {
             detailsAdapter = new TransDetAdapter(Activity, header.TransDetList, this);
-            detailsAdapter.QtysChangedEvent += () => 
+            detailsAdapter.QtysChangedEvent += () =>
             {
                 FillHeaderCalcValues();
                 //detailsAdapter.NotifyDataSetChanged();
@@ -309,7 +317,7 @@ namespace RetailMobile
             detailsAdapter.DetailFieldSelectedEvent += (selDetail) => {
                 selectedDetail = selDetail;
             };
-            
+
             lvDetails.SetAdapter(detailsAdapter);
 
             FillHeaderCalcValues();
@@ -348,10 +356,10 @@ namespace RetailMobile
                         header.TransDetList.Add(transDet);
                     }
                 }
-                
+
                 LoadDetailsAdapter();
             };
-            
+
             dialogItems.Show();
         }
     }

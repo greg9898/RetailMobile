@@ -76,6 +76,7 @@ namespace RetailMobile
             ft.Replace(Resource.Id.detailInfo_fragment, detailsInfo);
             ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
             ft.Commit();
+            detailsInfo.InvoiceSaved += new InvoiceInfoFragment.InvoiceSavedDelegate(details.InvoiceSaved);
 
             this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Visible;
             this.Activity.FindViewById<LinearLayout>(Resource.Id.layoutDetails).Visibility = ViewStates.Visible;

@@ -129,6 +129,15 @@ namespace RetailMobile
             ShowDetails(position);
         }
 
+        public void InvoiceSaved(int id)
+        {
+            Library.TransHed header = Library.TransHed.GetTransHed(this.Activity, id);
+            ((TransHedAdapter)ListAdapter).Insert(header, 0);
+            ((TransHedAdapter)ListAdapter).NotifyDataSetChanged();
+
+            //((Library.TransHedList)_list).Insert(0,header);
+        }
+
         public void ShowDetails(int index)
         {
             if (index == -1)
@@ -179,9 +188,12 @@ namespace RetailMobile
                             Log.Debug("detailsfragment ShowDetails", "invoiceId =" + invoiceId);
                             var ft = FragmentManager.BeginTransaction();
                             //ft.Replace(Resource.Id.detailInfo_fragment, InvoiceFragment.NewInstance(invoiceId));
-                            ft.Replace(Resource.Id.detailInfo_fragment, InvoiceInfoFragment.NewInstance(invoiceId));
+                            InvoiceInfoFragment invoiceFragment = InvoiceInfoFragment.NewInstance(invoiceId);
+                            ft.Replace(Resource.Id.detailInfo_fragment, invoiceFragment);
                             ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
                             ft.Commit();
+
+                            invoiceFragment.InvoiceSaved += new InvoiceInfoFragment.InvoiceSavedDelegate(InvoiceSaved);
                         }
                         break;
                 }

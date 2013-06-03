@@ -263,10 +263,14 @@ namespace RetailMobile
 
         void tbDtrn_qty1_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
+            try
+            {
             //int index = int.Parse(((EditText)sender).Tag.ToString ());
+            string q = e.Text.ToString().Trim().Replace(",", ".").Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
             int index = ((ViewHolder)((EditText)sender).Tag).position;
             TransDet detail = dataSource[index];
-            string qtyText = e.Text.ToString().Trim();
+            //string qtyText = e.Text.ToString().Trim();
+            string qtyText = q;
             detail.DtrnQty1 = qtyText != "" ? double.Parse(qtyText) : 0;
 
             ((ViewHolder)((EditText)sender).Tag).RefreshRow();
@@ -275,18 +279,31 @@ namespace RetailMobile
             {
                 QtysChangedEvent();
             }
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
 
         void tbDtrn_disc_line1_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
+            try
+            {
+                string q = (sender as EditText).Text.Trim().Replace(",", ".").Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
             //int index = int.Parse(((EditText)sender).Tag.ToString ());
             int index = ((ViewHolder)((EditText)sender).Tag).position;
             TransDet detail = dataSource[index];
-            detail.DtrnDiscLine1 = double.Parse((sender as EditText).Text);
+            //detail.DtrnDiscLine1 = double.Parse((sender as EditText).Text);
+                detail.DtrnDiscLine1 = double.Parse(q);
 
             if (QtysChangedEvent != null)
             {
                 QtysChangedEvent();
+            }
+            }
+            catch(Exception ex)
+            {
             }
         }
 

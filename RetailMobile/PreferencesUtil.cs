@@ -4,18 +4,18 @@ namespace RetailMobile
 {
     public class PreferencesUtil
     {
-        static bool IsDebug = false;
-        static string APP_SHARED_PREFS = "com.alphamobile.RetailPreferences";
-		//87.203.80.42
-		//2439
+        private static bool IsDebug = true;
+        private static string APP_SHARED_PREFS = "com.alphamobile.RetailPreferences";
+        //87.203.80.42
+        //2439
         public static string IP = "";
-		//public static string IP = "77.78.32.118";
-		//public static string IP = "87.203.80.42";
+        //public static string IP = "77.78.32.118";
+        //public static string IP = "87.203.80.42";
         public static int Port = 2489;
         public static string SyncModel = "RetailMobile2";
         public static string SyncUser = "sa";
         public static string SyncPass = "";
-		//public static string SyncModel = "RetailMobile";
+        //public static string SyncModel = "RetailMobile";
         public static string Username = "";
         public static string Password = "";
 
@@ -46,8 +46,8 @@ namespace RetailMobile
             }
             else
             {
-                IP = appSharedPrefs.GetString("IP", "85.72.39.236");
-                Port = appSharedPrefs.GetInt("Port", 2639);
+                IP = appSharedPrefs.GetString("IP", "85.73.254.138");
+                Port = appSharedPrefs.GetInt("Port", 2439);
                 SyncModel = appSharedPrefs.GetString("SyncModel", "RetailMobile3");
             }
             //IP = appSharedPrefs.GetString ("IP", "77.78.32.118");
@@ -55,7 +55,7 @@ namespace RetailMobile
             //Port = appSharedPrefs.GetInt ("Port", 2489);
             //Port = appSharedPrefs.GetInt ("Port", 2639);
             //SyncModel = appSharedPrefs.GetString("SyncModel","RetailMobile");
-//            SyncModel = appSharedPrefs.GetString("SyncModel", "RetailMobile3");
+            // SyncModel = appSharedPrefs.GetString("SyncModel", "RetailMobile3");
             Username = appSharedPrefs.GetString("Username", "");
             Password = appSharedPrefs.GetString("Password", "");
         }

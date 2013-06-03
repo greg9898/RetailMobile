@@ -26,7 +26,8 @@ namespace RetailMobile
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            var item = this.TransHedList[position];
+            //var item = this.TransHedList[position];
+            var item = this.GetItem(position);
             View view = convertView;
             if (view == null)
                 view = context.LayoutInflater.Inflate(Resource.Layout.TransHedRow, null);
