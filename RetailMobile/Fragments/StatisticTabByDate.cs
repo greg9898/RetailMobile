@@ -12,13 +12,17 @@ namespace RetailMobile
     {
         EditText tbStatisticDateFrom;
         EditText tbStatisticDateTo;
+        AutoCompleteTextView tbStatisticCustName;
         Button btnStatisticSearch;
         ScrollView svStatistic ;
+        View viewByDate;
+        string[] customerNames;
 
-        public static StatisticTabByDate NewInstance(long objId)
+        public static StatisticTabByDate NewInstance(long objId, string[] custNames)
         {
             var detailsFrag = new StatisticTabByDate { Arguments = new Bundle() };
             detailsFrag.Arguments.PutLong("ObjectId", objId);
+            detailsFrag.customerNames = custNames;
 
             return detailsFrag;
         }
@@ -32,9 +36,11 @@ namespace RetailMobile
             }
 
             View view = inflater.Inflate(Resource.Layout.StatisticTabByDate, container, false);
+            viewByDate = view;
                      
             tbStatisticDateFrom = view.FindViewById<EditText>(Resource.Id.tbStatisticDateFrom);
             tbStatisticDateTo = view.FindViewById<EditText>(Resource.Id.tbStatisticDateTo);
+            tbStatisticCustName = view.FindViewById<AutoCompleteTextView>(Resource.Id.tbStatisticCustName);
             btnStatisticSearch = view.FindViewById<Button>(Resource.Id.btnStatisticSearch);
 
             if (btnStatisticSearch != null)
@@ -58,11 +64,23 @@ namespace RetailMobile
                 };
             }
 
+            if (tbStatisticCustName != null && ObjectId > 0)
+            {// Resource.Layout.suggestions_row
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.Context, Android.Resource.Layout.SimpleDropDownItem1Line, customerNames);
+                adapter.SetNotifyOnChange(true);
+                tbStatisticCustName.Adapter = adapter;
+                adapter.NotifyDataSetChanged();
+                tbStatisticCustName.Text = CustomerInfo.GetCustomer(view.Context, ObjectId).Name;
+                btnStatisticSearch_Click(btnStatisticSearch, new EventArgs());
+            }
+
             return view;
         }
 
-        void   btnStatisticSearch_Click(object sender, EventArgs e)
+        void btnStatisticSearch_Click(object sender, EventArgs e)
         {
+            svStatistic = (ScrollView)viewByDate.FindViewById(Resource.Id.svStatisticByDate);
+
             DateTime dtFrom;
             DateTime dtTo;
             DateTime.TryParseExact(tbStatisticDateFrom.Text, Common.DateFormatDateOnly, CultureInfo.InvariantCulture, DateTimeStyles.None, out dtFrom);
@@ -70,12 +88,11 @@ namespace RetailMobile
 
             TransCustList transCustList = TransCustList.GetTransCustListStatistic(this.Activity.ApplicationContext, new TransCustList.Criteria()
             {  
-                CustId = (int)this.ObjectId, 
+                CustName = tbStatisticCustName.Text, 
                 DateFrom = dtFrom,
                 DateTo = dtTo,
             });
-            
-            svStatistic = (ScrollView)this.Activity.FindViewById(Resource.Id.svStatisticByDate);
+
             var tblLayout = CreateTableReport(transCustList);
             svStatistic.RemoveAllViews();
             svStatistic.AddView(tblLayout);
@@ -112,7 +129,7 @@ namespace RetailMobile
             tvH.SetTextColor(Android.Content.Res.ColorStateList.ValueOf (Android.Graphics.Color.White));
         }
 
-        TableLayout CreateTableReport(TransCustList transCustList)
+        TableLayout CreateTableReport(System.Collections.Generic.IEnumerable<TransCust> transCustList)
         {
             TableLayout.LayoutParams fillParams = new TableLayout.LayoutParams(ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.FillParent, 1.0f);
             Context ctx = this.Activity.ApplicationContext;
@@ -124,7 +141,7 @@ namespace RetailMobile
             rowHeader.SetBackgroundResource(Resource.Drawable.actionbar_background);
 			
             TextView tvItemKategH = new TextView(ctx);
-            tvItemKategH.Text = "???";//view.Resources.GetText(Resource.String.tvHeaderItemKategory);
+            tvItemKategH.Text = this.Activity.Resources.GetText(Resource.String.tvHeaderStatisticCustName);
             SetHeaderCellStyle(tvItemKategH);
             rowHeader.AddView(tvItemKategH);
 			
@@ -151,10 +168,17 @@ namespace RetailMobile
             foreach (TransCust st in transCustList)
             {
                 TableRow row = new TableRow(ctx);
-                row.SetBackgroundResource(Resource.Drawable.button_selector);
-				
+                if (st.CreditMinusDebit < 0)
+                {
+                    row.SetBackgroundResource(Resource.Drawable.red_background);
+                }
+                else
+                {
+                    row.SetBackgroundResource(Resource.Drawable.button_selector);
+                }
+
                 TextView tvItemKateg = new TextView(ctx);
-                tvItemKateg.Text = "???";
+                tvItemKateg.Text = st.Cst_desc;
                 SetCellStyle(tvItemKateg);
                 row.AddView(tvItemKateg);
 				

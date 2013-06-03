@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetailMobile", "RetailMobile\RetailMobile.csproj", "{B6D94813-CF02-4D55-9634-A4CE53101C62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphView", "GraphView\GraphView.csproj", "{6FEBD275-0894-4D34-8DC3-AC562AA83437}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crashlytics", "Crashlytics\Crashlytics.csproj", "{2E37C733-32FF-4FA7-872F-B93C6961F37D}"
 EndProject
 Global
@@ -29,18 +27,6 @@ Global
 		{2E37C733-32FF-4FA7-872F-B93C6961F37D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2E37C733-32FF-4FA7-872F-B93C6961F37D}.Release|x86.ActiveCfg = Release|Any CPU
 		{2E37C733-32FF-4FA7-872F-B93C6961F37D}.Release|x86.Build.0 = Release|Any CPU
-		{6FEBD275-0894-4D34-8DC3-AC562AA83437}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6FEBD275-0894-4D34-8DC3-AC562AA83437}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6FEBD275-0894-4D34-8DC3-AC562AA83437}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{6FEBD275-0894-4D34-8DC3-AC562AA83437}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{6FEBD275-0894-4D34-8DC3-AC562AA83437}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{6FEBD275-0894-4D34-8DC3-AC562AA83437}.Debug|x86.Build.0 = Debug|Any CPU
-		{6FEBD275-0894-4D34-8DC3-AC562AA83437}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6FEBD275-0894-4D34-8DC3-AC562AA83437}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6FEBD275-0894-4D34-8DC3-AC562AA83437}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{6FEBD275-0894-4D34-8DC3-AC562AA83437}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{6FEBD275-0894-4D34-8DC3-AC562AA83437}.Release|x86.ActiveCfg = Release|Any CPU
-		{6FEBD275-0894-4D34-8DC3-AC562AA83437}.Release|x86.Build.0 = Release|Any CPU
 		{B6D94813-CF02-4D55-9634-A4CE53101C62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B6D94813-CF02-4D55-9634-A4CE53101C62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6D94813-CF02-4D55-9634-A4CE53101C62}.Debug|Any CPU.Deploy.0 = Debug|Any CPU

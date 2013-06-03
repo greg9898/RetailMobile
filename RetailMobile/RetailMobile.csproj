@@ -164,6 +164,8 @@
     <Compile Include="Library\TransCustList.cs" />
     <AndroidResource Include="Resources\values-hdpi\dimens.xml" />
     <Compile Include="Adapters\TransDetAdapter.cs" />
+    <AndroidResource Include="Resources\Drawable\red_background.xml" />
+    <AndroidResource Include="Resources\Layout\suggestions_row.axml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -404,10 +406,6 @@
   </Target>
   -->
   <ItemGroup>
-    <ProjectReference Include="..\GraphView\GraphView.csproj">
-      <Project>{6FEBD275-0894-4D34-8DC3-AC562AA83437}</Project>
-      <Name>GraphView</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Crashlytics\Crashlytics.csproj">
       <Project>{2E37C733-32FF-4FA7-872F-B93C6961F37D}</Project>
       <Name>Crashlytics</Name>

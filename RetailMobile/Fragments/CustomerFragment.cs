@@ -18,14 +18,16 @@ namespace RetailMobile
         StatisticTabMonthly statisticTabMonthly;
         StatisticTabByDate statisticTabByDate;
         View viewCust;
+        string[] customerNames;
 
-        public static CustomerFragment NewInstance(long objId)
+        public static CustomerFragment NewInstance(long objId, string[] custNames)
         {
             var detailsFrag = new CustomerFragment
             {
                 Arguments = new Bundle ()
             };
             detailsFrag.Arguments.PutLong("ObjectId", objId);
+            detailsFrag.customerNames = custNames;
             return detailsFrag;
         }
 
@@ -50,7 +52,7 @@ namespace RetailMobile
             tbCustName.Text = customer.Name;
 
             statisticTabMonthly = StatisticTabMonthly.NewInstance(this.ObjectId);
-            statisticTabByDate = StatisticTabByDate.NewInstance(this.ObjectId);
+            statisticTabByDate = StatisticTabByDate.NewInstance(this.ObjectId, customerNames);
 
             mTabHost = (TabHost)view.FindViewById(Resource.Id.tabhost);
             mTabHost.TabChanged += TabHostHandleTabChanged; 

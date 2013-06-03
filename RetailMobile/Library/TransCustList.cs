@@ -13,6 +13,7 @@ namespace RetailMobile.Library
             public DateTime DateFrom;
             public DateTime DateTo;
             public int CustId;
+            public string CustName;
         }
 
         public static TransCustList GetTransCustList(Context ctx, Criteria c)
@@ -78,8 +79,10 @@ SELECT cst_id,
        sum(case when dtrn_type = 1 " + dateCondition + @" then coalesce(dtrn_net_value,0) + coalesce(dtrn_vat_value,0) else 0 end) as credit,
        sum(case when dtrn_type = 2 " + dateCondition + @" then coalesce(dtrn_net_value,0) + coalesce(dtrn_vat_value,0) else 0 end) as debit,
        sum(case when dtrn_type = 1 then coalesce(dtrn_net_value,0) + coalesce(dtrn_vat_value,0) else 0 end) -
-       sum(case when dtrn_type = 2 then coalesce(dtrn_net_value,0) + coalesce(dtrn_vat_value,0) else 0 end) as crdb
- FROM rtranscust
+       sum(case when dtrn_type = 2 then coalesce(dtrn_net_value,0) + coalesce(dtrn_vat_value,0) else 0 end) as crdb,
+       rcustomer.cst_desc
+FROM rtranscust
+JOIN rcustomer ON rcustomer.id = cst_id
 WHERE 1 = 1 ";
 
                 if (c.CustId > 0)
@@ -87,7 +90,14 @@ WHERE 1 = 1 ";
                     query += " AND cst_id = :cst_id ";
                 }
 
-                query += " group by cst_id ";
+                if (c.CustName != "")
+                {                  
+                    query += " AND rcustomer.cst_desc like \'" + c.CustName + "%\'";
+                }
+
+                query += @" 
+group by cst_id,
+         rcustomer.cst_desc ";
 
                 IPreparedStatement ps = conn.PrepareStatement(query);
                
@@ -106,33 +116,18 @@ WHERE 1 = 1 ";
                     ps.Set("date_to", c.DateTo.Date.ToString("yyyy-MM-dd HH:mm:ss"));
                 }
 
-                Log.Debug("rtranscust", query);
+//                Log.Debug("rtranscust", query);
                 IResultSet result = ps.ExecuteQuery();
 
                 while (result.Next())
                 {
                     items.Add(TransCust.GetTransCustStat (result));
                 }
-
+               
                 ps.Close();
                 conn.Release();
             }
-          
-//            for (int i=0; i<40; i++)
-//            {
-//                TransCust s = new TransCust();
-//                s.CstId = c.CustId;
-//                s.Credit = i * 3.26m;
-//                s.Debit = i * 3.114m;
-//                s.CreditMinusDebit = i * 0.462m;
-//                s.DtrnDate = DateTime.Now.AddHours(i);
-//
-//                if ((c.DateFrom == DateTime.MinValue || s.DtrnDate > c.DateFrom) && (c.DateTo == DateTime.MinValue || s.DtrnDate <= c.DateTo))
-//                {
-//                    items.Add(s);
-//                }
-//            }
-           
+
             return items;
         }
     }

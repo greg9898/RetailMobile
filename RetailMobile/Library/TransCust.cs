@@ -31,6 +31,12 @@ namespace RetailMobile.Library
 
         public decimal  CreditMinusDebit{ get; set; }
 
+        public   string Cst_desc
+        {
+            get;
+            set;
+        }
+
         public TransCust()
         {
         }
@@ -47,7 +53,7 @@ namespace RetailMobile.Library
                 DtrnType = result.GetString ("dtrn_type"),
                 DtrnNetValue =  (decimal)result.GetDouble  ("dtrn_net_value"),
                 DtrnVatValue = (decimal)result.GetDouble ("dtrn_vat_value"),
-                DtrnDate =Common.JavaDateToDatetime( result.GetDate ("dtrn_date")),
+                DtrnDate = Common.JavaDateToDatetime( result.GetDate ("dtrn_date")),
                 HtrnId = result.GetInt ("htrn_id"),
             };
         }
@@ -60,6 +66,7 @@ namespace RetailMobile.Library
                 Credit =  (decimal)result.GetDouble  ("credit"),
                 Debit = (decimal)result.GetDouble ("debit"),
                 CreditMinusDebit = (decimal)result.GetDouble ("crdb"),
+                Cst_desc = result.GetString("cst_desc")
             };
         }
     }

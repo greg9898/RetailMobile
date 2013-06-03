@@ -4,8 +4,8 @@ namespace RetailMobile
 {
     public class PreferencesUtil
     {
-        private static bool IsDebug = false;
-        private static string APP_SHARED_PREFS = "com.alphamobile.RetailPreferences";
+        static bool IsDebug = false;
+        static string APP_SHARED_PREFS = "com.alphamobile.RetailPreferences";
 		//87.203.80.42
 		//2439
         public static string IP = "";

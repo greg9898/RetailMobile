@@ -1,11 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
@@ -167,8 +162,11 @@ namespace RetailMobile
 
                         if (detailFragment == null || detailFragment.ObjectId != custId)
                         {
+                            Library.CustomerInfoList custList = (Library.CustomerInfoList)_list;
+                            System.Collections.Generic.List<string> custNamesList = new System.Collections.Generic.List<string>(custList.Count);
+                            custList.ForEach(c=>custNamesList.Add( c.Name));
                             var ft = FragmentManager.BeginTransaction();
-                            ft.Replace(Resource.Id.detailInfo_fragment, CustomerFragment.NewInstance(custId));
+                            ft.Replace(Resource.Id.detailInfo_fragment, CustomerFragment.NewInstance(custId, custNamesList.ToArray()));
                             ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
                             ft.Commit();
                         }

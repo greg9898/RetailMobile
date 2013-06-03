@@ -28,7 +28,7 @@
   <string name="tvHeaderItemKategory">Item Category</string> 
   <string name="tvHeaderAmountCurr">Amount current</string> 
   <string name="tvHeaderAmountPrev">Amount previous</string> 
-  <string name="lblStatisticByDateCaption">Caption..</string> 
+  <string name="lblStatisticByDateCustName">Customer</string> 
   <string name="lblStatisticDateFrom">from</string> 
   <string name="lblStatisticDateTo">to</string> 
   <string name="lblStatisticByMonth">Month</string> 
@@ -36,6 +36,7 @@
   <string name="btnStatisticSearch">Search</string> 
   <string name="tvHeaderStatisticCredit">Credit</string> 
   <string name="tvHeaderStatisticDebit">Debit</string> 
+  <string name="tvHeaderStatisticCustName">Customer</string> 
   <string name="tvHeaderStatisticCreditMinusDebit">Credit-Debit</string> 
     <string name="lblCustomerStatisticCaption">Statistics:</string> 
   
