@@ -4,17 +4,11 @@ namespace RetailMobile
 {
     public class PreferencesUtil
     {
-<<<<<<< Upstream, based on origin/master
-        private static bool IsDebug = true;
-        private static string APP_SHARED_PREFS = "com.alphamobile.RetailPreferences";
-        //87.203.80.42
-        //2439
-=======
+
         static bool IsDebug = true;
         static string APP_SHARED_PREFS = "com.alphamobile.RetailPreferences";
 		//87.203.80.42
 		//2439
->>>>>>> da3b64e  - show customer names in statistics tab2 as first column  - search by customer name with suggestive drop down
         public static string IP = "";
         //public static string IP = "77.78.32.118";
         //public static string IP = "87.203.80.42";
