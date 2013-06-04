@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/listStyle">
-    <TextView
-        android:id="@+id/tbItemCode"
-        style="@style/listRowTextViewStyle"
-        android:text="tbItemCode"
-        android:layout_marginLeft="2dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tbItemCode"
+    style="@style/listStyle"
+    android:textColor="@android:color/white"
+    android:text="tbItemCode"
+    android:layout_marginLeft="2dp"
+    android:layout_height="wrap_content" />

@@ -65,8 +65,8 @@ namespace RetailMobile
             }
 
             if (tbStatisticCustName != null && ObjectId > 0)
-            {// Resource.Layout.suggestions_row
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.Context, Android.Resource.Layout.SimpleDropDownItem1Line, customerNames);
+            {//  Android.Resource.Layout.SimpleDropDownItem1Line
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.Context, Resource.Layout.suggestions_row, customerNames);
                 adapter.SetNotifyOnChange(true);
                 tbStatisticCustName.Adapter = adapter;
                 adapter.NotifyDataSetChanged();
