@@ -11,6 +11,7 @@ namespace RetailMobile
     public class InvoiceInfoFragment : BaseFragment
     {
         public delegate void InvoiceSavedDelegate(int id);
+
         public event InvoiceSavedDelegate InvoiceSaved;
 
         const int SAVE_BUTTON = 764;
@@ -255,7 +256,7 @@ namespace RetailMobile
 
         void btnSearchCustomer_Click(object sender, EventArgs e)
         {
-            CustomerSelectDialog custDlg = new CustomerSelectDialog(Activity, Resource.Style.cust_dialogWrap);
+            CustomerSelectDialog custDlg = new CustomerSelectDialog(Activity, Resource.Style.actionDialog);
             custDlg.Window.SetLayout(WindowManagerLayoutParams.FillParent, WindowManagerLayoutParams.FillParent);
 
             custDlg.DismissEvent += (s, ee) =>

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-
 using Android.Content;
 using Android.Util;
 using Com.Ianywhere.Ultralitejni12;
@@ -27,6 +26,8 @@ WHERE 1=1 ";
                 {
                     query += " AND cst_desc like \'" + crit.CustName + "%\'";
                 }
+
+                query += " ORDER BY cst_desc ";
 				
                 Log.Debug("GetCustomerInfoList", query);
                 IPreparedStatement ps = conn.PrepareStatement(query);
@@ -47,15 +48,16 @@ WHERE 1=1 ";
 			
             return customers;
         }
-		
+
         public class Criteria
         {
             public string CustName;
             public string CustCode;
-			
+
             public Criteria()
             {
             }
+
             public Criteria(string custName, string custCode)
             {
                 CustName = custName;

@@ -43,7 +43,7 @@ namespace RetailMobile
             {
                 IP = appSharedPrefs.GetString("IP", "77.78.32.118");
                 Port = appSharedPrefs.GetInt("Port", 2489);
-                SyncModel = appSharedPrefs.GetString("SyncModel", "RetailMobile2");
+                SyncModel = appSharedPrefs.GetString("SyncModel", "RetailMobilePatra");
             }
             else
             {

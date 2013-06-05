@@ -1,120 +1,102 @@
-<?xml version="1.0" encoding="utf-8"?> 
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent"
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    
-	<fragment
-		android:id="@+id/ActionBarDialog1"
+    <fragment
+        android:id="@+id/ActionBarDialog1"
         android:layout_width="match_parent"
         android:layout_height="@dimen/action_bar_height"
         class="RetailMobile.Fragments.ItemActionBar" />
-            
-<LinearLayout 
-	android:layout_below="@id/ActionBarDialog1"
-    android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:weightSum="1">    
-    <ListView
-        android:id="@+id/lvItems"
-        style="@style/fillParent"
-        android:layout_weight="0.3"
-        android:divider="@android:color/black"
-        android:dividerHeight="1dp" />
-    <RelativeLayout
-        android:orientation="vertical"
-        style="@style/fillParent"
-        android:layout_weight="0.7"
-        android:layout_marginTop="30dp"
-        android:background="@android:color/white">
-        <Button
-            android:id="@+id/btnOK"
-            style="@style/mainButtonStyle"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:text="@string/btnOK" />
-         <Button
-            android:id="@+id/btnClose"
-            style="@style/mainButtonStyle"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-	        android:layout_below="@id/btnOK"
-	        android:layout_marginTop="1dp"
-            android:text="@string/btnClose" />        
-        <TextView
-            android:id="@+id/lblItemName"
-            style="@style/fillWidth"
-            android:text="@string/lblItemName"
-            android:layout_below="@id/btnClose"
-            android:layout_marginTop="1dp"
-            android:textColor="@android:color/black" />
-        <EditText
-            android:id="@+id/tbSearch"
-            style="@style/myEditTextStyle"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/lblItemName" />
-        <TextView
-            android:id="@+id/lblItemRetVal"
-            style="@style/fillWidth"
-            android:text="@string/lblItemRetVal"
-            android:textColor="@android:color/black"
-            android:layout_below="@id/tbSearch" />
-        <EditText
-            android:id="@+id/tbRetVal"
-            android:inputType="numberDecimal"
-            style="@style/myEditTextStyle"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/lblItemRetVal" />
-        <TextView
-            android:id="@+id/lblItemCategory1"
-            style="@style/fillWidth"
-            android:text="@string/lblItemCategory1"
-            android:layout_below="@id/tbRetVal"
-            android:textColor="@android:color/black" />
-        <Spinner
-            android:id="@+id/cbCateg1"
-            android:layout_below="@id/lblItemCategory1"
-            style="@style/mySpinnerStyle"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:spinnerMode="dropdown" />
-        <TextView
-            android:id="@+id/lblItemCategory2"
-            style="@style/fillWidth"
-            android:text="@string/lblItemCategory2"
-            android:layout_below="@id/cbCateg1"
-            android:textColor="@android:color/black" />
-        <Spinner
-            android:id="@+id/cbCateg2"
-            android:layout_below="@id/lblItemCategory2"
-            style="@style/mySpinnerStyle"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:spinnerMode="dropdown" />
-        <TextView
-            android:id="@+id/lblItemSelectedInfo"
-            style="@style/fillWidth"
-            android:text=""
-            android:layout_below="@id/cbCateg2"
-            android:textColor="@android:color/black" />
-         <RelativeLayout
-            android:id="@+id/layoutItem"
+    <LinearLayout
+        android:layout_below="@id/ActionBarDialog1"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:weightSum="1">
+        <ListView
+            android:id="@+id/lvItems"
             style="@style/fillParent"
-            android:layout_below="@id/lblItemSelectedInfo">
-				<ImageView
-        			android:id="@+id/imgItemSelected"
-            		style="@style/fillParent"
-            		android:gravity="left|top"/>
-            	<Button
-            		android:id="@+id/btnShowImage"
-            		style="@style/mainButtonStyle"
-            		android:layout_width="wrap_content"
-    				android:layout_height="wrap_content"
-    				android:text="@string/btnFullSizeImage"/>
+            android:layout_weight="0.3"
+            android:divider="@android:color/black"
+            android:dividerHeight="1dp" />
+        <RelativeLayout
+            android:orientation="vertical"
+            style="@style/fillParent"
+            android:layout_weight="0.7"
+            android:layout_marginTop="30dp"
+            android:background="@android:color/white">
+            <TextView
+                android:id="@+id/lblItemName"
+                style="@style/fillWidth"
+                android:text="@string/lblItemName"
+                android:layout_marginTop="1dp"
+                android:textColor="@android:color/black" />
+            <EditText
+                android:id="@+id/tbSearch"
+                style="@style/myEditTextStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/lblItemName" />
+            <TextView
+                android:id="@+id/lblItemRetVal"
+                style="@style/fillWidth"
+                android:text="@string/lblItemRetVal"
+                android:textColor="@android:color/black"
+                android:layout_below="@id/tbSearch" />
+            <EditText
+                android:id="@+id/tbRetVal"
+                android:inputType="numberDecimal"
+                style="@style/myEditTextStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/lblItemRetVal" />
+            <TextView
+                android:id="@+id/lblItemCategory1"
+                style="@style/fillWidth"
+                android:text="@string/lblItemCategory1"
+                android:layout_below="@id/tbRetVal"
+                android:textColor="@android:color/black" />
+            <Spinner
+                android:id="@+id/cbCateg1"
+                android:layout_below="@id/lblItemCategory1"
+                style="@style/mySpinnerStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown" />
+            <TextView
+                android:id="@+id/lblItemCategory2"
+                style="@style/fillWidth"
+                android:text="@string/lblItemCategory2"
+                android:layout_below="@id/cbCateg1"
+                android:textColor="@android:color/black" />
+            <Spinner
+                android:id="@+id/cbCateg2"
+                android:layout_below="@id/lblItemCategory2"
+                style="@style/mySpinnerStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown" />
+            <TextView
+                android:id="@+id/lblItemSelectedInfo"
+                style="@style/fillWidth"
+                android:text=""
+                android:layout_below="@id/cbCateg2"
+                android:textColor="@android:color/black" />
+            <RelativeLayout
+                android:id="@+id/layoutItem"
+                style="@style/fillParent"
+                android:layout_below="@id/lblItemSelectedInfo">
+                <ImageView
+                    android:id="@+id/imgItemSelected"
+                    style="@style/fillParent"
+                    android:gravity="left|top" />
+                <Button
+                    android:id="@+id/btnShowImage"
+                    style="@style/mainButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btnFullSizeImage" />
             </RelativeLayout>
-        
-       
-    </RelativeLayout>
-</LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
 </RelativeLayout>

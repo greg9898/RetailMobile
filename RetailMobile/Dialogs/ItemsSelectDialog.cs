@@ -1,11 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Util;
@@ -15,29 +11,27 @@ namespace RetailMobile
 {
     public class ItemsSelectDialog : Dialog
     {
-        private const int OK_BUTTON = 53345;
-        private const int CANCEL_BUTTON = 53346;
+        const int OK_BUTTON = 53345;
+        const int CANCEL_BUTTON = 53346;
         Context currentContext;
         Activity activity;
         TransHed transHed;
         ListView lvItems;
         EditText tbSearch;
         EditText tbRetVal;
-        Button btnClose;
         Spinner cbCateg1;
         Spinner cbCateg2;
         Dictionary<int, int> _checkedItems = new Dictionary<int, int>();
         CheckableItemsAdapter adapterItems;
         ItemInfoList itemInfoList;
         bool scrollLoading = false;
-        private int currentPage = 0;
-        private int previousTotal = 0;
+        int currentPage = 0;
+        int previousTotal = 0;
         ImageView imgItemSelected;
         Button btnShowImage;
         RetailMobile.Fragments.ItemActionBar actionBar;
 
-        public ItemsSelectDialog(Activity context, int theme, TransHed header)
-            : base(context, theme)
+        public ItemsSelectDialog(Activity context, int theme, TransHed header) : base(context, theme)
         {
             currentContext = context;
             transHed = header;
@@ -47,15 +41,12 @@ namespace RetailMobile
             // this.Window.SetLayout(RelativeLayout.LayoutParams.FillParent, RelativeLayout.LayoutParams.FillParent);
 
             actionBar = (RetailMobile.Fragments.ItemActionBar)((Android.Support.V4.App.FragmentActivity)activity).SupportFragmentManager.FindFragmentById(Resource.Id.ActionBarDialog1);
-            //actionBar = FindViewById<RetailMobile.Fragments.ItemActionBar>(Resource.Id.ActionBarDialog);
             actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
             actionBar.ClearButtons();
             actionBar.AddButtonRight(OK_BUTTON, currentContext.GetString(Resource.String.btnOK), Resource.Drawable.tick_16);
             actionBar.AddButtonLeft(CANCEL_BUTTON, currentContext.GetString(Resource.String.btnClose), Resource.Drawable.close_icon64);
             actionBar.SetTitle(currentContext.GetString(Resource.String.miItems));
             
-            Button btnOK = FindViewById<Button>(Resource.Id.btnOK);
-            btnClose = FindViewById<Button>(Resource.Id.btnClose);
             lvItems = FindViewById<ListView>(Resource.Id.lvItems);
             tbSearch = FindViewById<EditText>(Resource.Id.tbSearch);
             tbRetVal = FindViewById<EditText>(Resource.Id.tbRetVal);
@@ -64,14 +55,10 @@ namespace RetailMobile
             imgItemSelected = FindViewById<ImageView>(Resource.Id.imgItemSelected);
             btnShowImage = FindViewById<Button>(Resource.Id.btnShowImage);
 
-            btnOK.Visibility = ViewStates.Gone;
-            btnClose.Visibility = ViewStates.Gone;
-
             btnShowImage.Click += new EventHandler(btnShowImage_Click);
 
             tbSearch.AfterTextChanged += new EventHandler<Android.Text.AfterTextChangedEventArgs>(tbSearch_AfterTextChanged);
             tbRetVal.AfterTextChanged += new EventHandler<Android.Text.AfterTextChangedEventArgs>(tbSearch_AfterTextChanged);
-            btnClose.Click += new EventHandler(btnCloseItems_Click);
             
             List<KeyValuePair<int, string>> categ1List = AddCategoryList(1);
             List<KeyValuePair<int, string>> categ2List = AddCategoryList(2);
@@ -88,15 +75,10 @@ namespace RetailMobile
             
             lvItems.FocusChange += new EventHandler<View.FocusChangeEventArgs>(lvItems_FocusChange);
             lvItems.AddHeaderView(context.LayoutInflater.Inflate (Resource.Layout.item_row_checkable_header, null));
-            
-            btnOK.Click += new EventHandler(btnOKItem_Click);
 
-//          itemInfoList = new ItemInfoList ();
-//		    itemInfoList.LoadItems (this.Context); no need of initial loading here
 
             adapterItems = new CheckableItemsAdapter(activity, new ItemInfoList());
             adapterItems.ItemImageSelected += new CheckableItemsAdapter.ItemImageSelectedDelegate(ItemImageSelected);
-            //adapterItems.LoadData(0);
             lvItems.Adapter = adapterItems;
 
             adapterItems.SingleItemSelectedEvent += () =>
@@ -112,8 +94,6 @@ namespace RetailMobile
                 lblItemSelectedInfo.Text = item.ItemDesc;
                 imgItemSelected.SetImageResource(Resource.Drawable.night);//todo
             };
-
-            //ItemInfoList.LoadAdapterItems(context,0,adapterItems, new Library.ItemInfoList.Criteria());
 
             lvItems.Scroll += new EventHandler<AbsListView.ScrollEventArgs>((o,e) => {
 				if (scrollLoading && e.TotalItemCount > previousTotal) {
@@ -162,7 +142,6 @@ namespace RetailMobile
             }
         }
 
-
         public void ItemImageSelected(Android.Graphics.Bitmap image)
         {
             imgItemSelected.SetImageBitmap(image);
@@ -192,19 +171,6 @@ namespace RetailMobile
         void cbCateg1_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             ReloadItems();
-        }
-
-        void btnOKItem_Click(object sender, EventArgs e)
-        {
-            HeaderViewListAdapter adapter = (HeaderViewListAdapter)lvItems.Adapter;
-            CheckableItemsAdapter origAdapter = (CheckableItemsAdapter)adapter.WrappedAdapter;
-
-            if (origAdapter.CheckedItemIds.Count > 0)
-            {
-                _checkedItems = origAdapter.CheckedItemIds;
-            
-                Dismiss();
-            }
         }
 
         void btnShowImage_Click(object sender, EventArgs e)
@@ -253,11 +219,6 @@ namespace RetailMobile
             {
                 Log.Debug("btnViewImage_Click", ex.Message);
             }
-        }
-
-        void btnCloseItems_Click(object sender, EventArgs e)
-        {
-            Cancel();
         }
 
         void tbSearch_AfterTextChanged(object sender, Android.Text.AfterTextChangedEventArgs e)

@@ -5,7 +5,7 @@
         android:id="@+id/layout_checkable_item_info"
         style="@style/fillParent"
         android:layout_width="0dp"
-        android:layout_weight="0.7">
+        android:layout_weight="0.9">
         <TextView
             android:id="@+id/lblHeaderImgItem"
             android:layout_width="40dip"
@@ -22,21 +22,26 @@
                 style="@style/listRowTextViewHeaderStyle"
                 android:text="@string/lblHeaderItemCode"
                 android:layout_marginLeft="5dp"
-                android:layout_weight="0.3" />
+                android:visibility="gone"
+                android:layout_weight="0" />
             <TextView
                 android:id="@+id/lblHeaderItemName"
                 style="@style/listRowTextViewHeaderStyle"
                 android:text="@string/lblHeaderItemName"
-                android:layout_weight="0.8" />
+                android:layout_weight="1.1" />
             <TextView
                 android:id="@+id/lblHeaderItemSaleVal"
                 style="@style/listRowTextViewHeaderStyle"
                 android:text="@string/lblHeaderItemSaleVal"
+                android:gravity="right"
+                android:layout_marginRight="10dp"
                 android:layout_weight="0.3" />
             <TextView
                 android:id="@+id/lblHeaderItemQtyLeft"
                 style="@style/listRowTextViewHeaderStyle"
                 android:text="@string/lblHeaderItemQtyLeft"
+                android:gravity="right"
+                android:layout_marginRight="20dp"
                 android:layout_weight="0.3" />
             <TextView
                 android:id="@+id/lblHeaderItemLastBuyDate"
@@ -49,8 +54,7 @@
         android:id="@+id/lblHeaderQty"
         android:text="@string/lblHeaderQty"
         style="@style/listRowTextViewHeaderStyle"
-        android:layout_marginLeft="45dp"
+        android:layout_marginRight="15dp"
         android:layout_width="0dp"
-        android:layout_weight="0.2"
-        android:layout_gravity="right" />
+        android:layout_weight="0.1" />
 </LinearLayout>
