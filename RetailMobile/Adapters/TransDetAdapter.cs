@@ -3,19 +3,20 @@ using Android.App;
 using Android.Views;
 using Android.Widget;
 using RetailMobile.Library;
+using Android.Util;
 
 namespace RetailMobile
 {
     public class TransDetAdapter : ArrayAdapter<Library.TransDet>, GestureDetector.IOnGestureListener, View.IOnTouchListener
     { 
-        bool disabled = false;
+        bool disabled = true;
         public static EditText lastFocusedControl;
-        Android.Support.V4.App.FragmentActivity context = null;
+        Android.Support.V4.App.FragmentActivity context;
         EditText tbDtrn_qty1;
         EditText tbDtrn_disc_line1;
         TransDetList dataSource;
         InvoiceInfoFragment parentView;
-        private GestureDetector _gestureDetector;
+        GestureDetector _gestureDetector;
 
         public delegate void QtysChangedDeletegate();
 
@@ -38,7 +39,7 @@ namespace RetailMobile
             if (lastFocusedControl != null)
             {
                 string lastFocusedControlText = lastFocusedControl.Text;
-                lastFocusedControlText = lastFocusedControlText.Replace(",",".").Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
+                lastFocusedControlText = lastFocusedControlText.Replace(",", ".").Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
                 lastFocusedControl.Text = (decimal.Parse(lastFocusedControlText) + 1).ToString();
             }
         }
@@ -48,11 +49,11 @@ namespace RetailMobile
             if (lastFocusedControl != null)
             {
                 string lastFocusedControlText = lastFocusedControl.Text;
-                lastFocusedControlText = lastFocusedControlText.Replace(",",".").Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
+                lastFocusedControlText = lastFocusedControlText.Replace(",", ".").Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
                 lastFocusedControl.Text = (decimal.Parse(lastFocusedControlText) - 1).ToString();
             }
         }
-        static EditText lastEdit = null;
+//        static EditText lastEdit = null;
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
@@ -72,6 +73,7 @@ namespace RetailMobile
                 holder = new ViewHolder();
                 holder.position = position;
 
+                holder.ll_bottom = view.FindViewById<LinearLayout>(Resource.Id.ll_bottom);
                 holder.lblItemCode = (TextView)view.FindViewById(Resource.Id.lblDtrn_ItemCode);
                 holder.lblItemDesc = (TextView)view.FindViewById(Resource.Id.tbItemDesc);
                 holder.tbDtrn_qty1 = view.FindViewById<EditText>(Resource.Id.tbDtrn_qty1);
@@ -86,6 +88,7 @@ namespace RetailMobile
                 view.Tag = holder;
 
                 view.LongClick += rowView_HandleLongClick;
+//                view.Click += row_Click;
 
                 holder.tbDtrn_qty1.Tag = holder;
                 holder.tbDtrn_qty1.FocusableInTouchMode = true;
@@ -123,12 +126,12 @@ namespace RetailMobile
                     }
                 });
 
-               // holder.tbDtrn_qty1.Touch += new EventHandler<View.TouchEventArgs>((o,e)=>
-               // {
-                    //lastEdit = ((EditText)o);
-                  //  _gestureDetector.OnTouchEvent(e.Event);
+                // holder.tbDtrn_qty1.Touch += new EventHandler<View.TouchEventArgs>((o,e)=>
+                // {
+                //lastEdit = ((EditText)o);
+                //  _gestureDetector.OnTouchEvent(e.Event);
 
-               // });
+                // });
                 holder.tbDtrn_qty1.SetOnTouchListener(this);
 
                 //holder.tbDtrn_disc_line1.Tag = position;
@@ -159,9 +162,17 @@ namespace RetailMobile
                 holder.tbDtrn_qty1.Enabled = false;
                 holder.tbDtrn_disc_line1.Focusable = false;
                 holder.tbDtrn_qty1.Focusable = false;
+                holder.ll_bottom.Visibility = ViewStates.Gone;
             }
 
             return view;
+        }
+
+        void row_Click(object sender, EventArgs e)
+        {
+            View row = sender as View;
+            ViewHolder holder = row.Tag as ViewHolder;
+            holder.ll_bottom.Visibility = holder.ll_bottom.Visibility == ViewStates.Gone ? ViewStates.Visible : ViewStates.Gone;
         }
 
         public void Disable()
@@ -179,6 +190,7 @@ namespace RetailMobile
             public EditText tbDtrn_disc_line1;
             public TextView lblDtrn_net_value ;
             public TextView lblDtrn_vat_value;
+            public LinearLayout ll_bottom;
             public int position;
 
             public void RefreshRow()
@@ -220,9 +232,6 @@ namespace RetailMobile
                 builder.SetPositiveButton(Resources.GetText( Resource.String.Yes), delegate(object sender, Android.Content.DialogClickEventArgs args)
                 {
                     TransDet d = adapter.parentView.Header.TransDetList[position];
-
-                    //                    adapter.Remove(d);
-                    //                    adapter.NotifyDataSetChanged();
                     adapter.parentView.Header.MarkDetailDeleted(d);
                     adapter.parentView.LoadDetailsAdapter();
                 });
@@ -245,26 +254,24 @@ namespace RetailMobile
             TransDetAdapter.lastFocusedControl = (EditText)sender;
             TransDetAdapter.lastFocusedControl.SetBackgroundResource(Resource.Drawable.my_edit_text_background_focused);
         }
-
-        private void EditTextTouchUp(object sender, View.TouchEventArgs e)
-        {           
-            //          if (MotionEventActions.Up == e.Event.Action ) {  disallow text edit ?
-            switch (e.Event.Action & MotionEventActions.Mask)
-            {
-                case MotionEventActions.Up:
-                    if (TransDetAdapter.lastFocusedControl != null)
-                        TransDetAdapter.lastFocusedControl.SetBackgroundResource(Resource.Drawable.my_edit_text_background_normal);
-                    TransDetAdapter.lastFocusedControl = (EditText)sender;
-                    TransDetAdapter.lastFocusedControl.SetBackgroundResource(Resource.Drawable.my_edit_text_background_focused);
-                    TransDetAdapter.lastFocusedControl.RequestFocus();
-
-                    EditText yourEditText = (EditText)sender;
-                    Android.Views.InputMethods.InputMethodManager imm = (Android.Views.InputMethods.InputMethodManager)context.GetSystemService(Android.Content.Context.InputMethodService);
-                    imm.ShowSoftInput(yourEditText, Android.Views.InputMethods.ShowFlags.Implicit);
-                    break;
-            }
-        }
-
+//        void EditTextTouchUp(object sender, View.TouchEventArgs e)
+//        {           
+//            //          if (MotionEventActions.Up == e.Event.Action ) {  disallow text edit ?
+//            switch (e.Event.Action & MotionEventActions.Mask)
+//            {
+//                case MotionEventActions.Up:
+//                    if (TransDetAdapter.lastFocusedControl != null)
+//                        TransDetAdapter.lastFocusedControl.SetBackgroundResource(Resource.Drawable.my_edit_text_background_normal);
+//                    TransDetAdapter.lastFocusedControl = (EditText)sender;
+//                    TransDetAdapter.lastFocusedControl.SetBackgroundResource(Resource.Drawable.my_edit_text_background_focused);
+//                    TransDetAdapter.lastFocusedControl.RequestFocus();
+//
+//                    EditText yourEditText = (EditText)sender;
+//                    Android.Views.InputMethods.InputMethodManager imm = (Android.Views.InputMethods.InputMethodManager)context.GetSystemService(Android.Content.Context.InputMethodService);
+//                    imm.ShowSoftInput(yourEditText, Android.Views.InputMethods.ShowFlags.Implicit);
+//                    break;
+//            }
+//        }
         #region IOnTouchListener implementation
 
         public bool OnTouch(View v, MotionEvent e)
@@ -286,7 +293,6 @@ namespace RetailMobile
             _gestureDetector.OnTouchEvent(e);
             return true;
         }
-
         #endregion
 
         void tbQty_HandleFocusChange(object sender, View.FocusChangeEventArgs e)
@@ -327,24 +333,24 @@ namespace RetailMobile
         {
             try
             {
-            //int index = int.Parse(((EditText)sender).Tag.ToString ());
-            string q = e.Text.ToString().Trim().Replace(",", ".").Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
-            int index = ((ViewHolder)((EditText)sender).Tag).position;
-            TransDet detail = dataSource[index];
-            //string qtyText = e.Text.ToString().Trim();
-            string qtyText = q;
-            detail.DtrnQty1 = qtyText != "" ? double.Parse(qtyText) : 0;
+                //int index = int.Parse(((EditText)sender).Tag.ToString ());
+                string q = e.Text.ToString().Trim().Replace(",", ".").Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
+                int index = ((ViewHolder)((EditText)sender).Tag).position;
+                TransDet detail = dataSource[index];
+                //string qtyText = e.Text.ToString().Trim();
+                string qtyText = q;
+                detail.DtrnQty1 = qtyText != "" ? double.Parse(qtyText) : 0;
 
-            ((ViewHolder)((EditText)sender).Tag).RefreshRow();
+                ((ViewHolder)((EditText)sender).Tag).RefreshRow();
 
-            if (QtysChangedEvent != null)
-            {
-                QtysChangedEvent();
+                if (QtysChangedEvent != null)
+                {
+                    QtysChangedEvent();
+                }
             }
-            }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-
+                Log.Debug("tbDtrn_qty1_TextChanged", ex.Message);
             }
         }
 
@@ -353,23 +359,22 @@ namespace RetailMobile
             try
             {
                 string q = (sender as EditText).Text.Trim().Replace(",", ".").Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
-            //int index = int.Parse(((EditText)sender).Tag.ToString ());
-            int index = ((ViewHolder)((EditText)sender).Tag).position;
-            TransDet detail = dataSource[index];
-            //detail.DtrnDiscLine1 = double.Parse((sender as EditText).Text);
+                //int index = int.Parse(((EditText)sender).Tag.ToString ());
+                int index = ((ViewHolder)((EditText)sender).Tag).position;
+                TransDet detail = dataSource[index];
+                //detail.DtrnDiscLine1 = double.Parse((sender as EditText).Text);
                 detail.DtrnDiscLine1 = double.Parse(q);
 
-            if (QtysChangedEvent != null)
-            {
-                QtysChangedEvent();
+                if (QtysChangedEvent != null)
+                {
+                    QtysChangedEvent();
+                }
             }
-            }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+                Log.Debug("tbDtrn_disc_line1_TextChanged", ex.Message);
             }
         }
-
-     
         #region IOnGestureListener implementation
 
         public bool OnDown(MotionEvent e)
@@ -401,7 +406,6 @@ namespace RetailMobile
         {
             return false;
         }
-
         #endregion
 
         public class SelectedDetail

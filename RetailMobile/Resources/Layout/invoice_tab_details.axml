@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutDetails"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_margin="2dp">
+    <Button
+        android:id="@+id/btnAddValue"
+        android:layout_width="@dimen/button_height"
+        android:layout_height="@dimen/button_height"
+        android:background="@drawable/plus_64" />
+    <Button
+        android:id="@+id/btnSubstractValue"
+        android:layout_width="@dimen/button_height"
+        android:layout_height="@dimen/button_height"
+        android:layout_toRightOf="@id/btnAddValue"
+        android:layout_marginLeft="2dp"
+        android:background="@drawable/minus_64" />
+    <TextView
+        android:id="@+id/lblDetailsCaption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/lblDetailsCaption"
+        android:layout_alignBaseline="@id/btnAddValue"
+        android:textSize="@dimen/caption_text_size"
+        android:textColor="@color/caption_text" />
+    <Button
+        android:id="@+id/btnSearchItems"
+        android:layout_width="@dimen/button_height"
+        android:layout_height="@dimen/button_height"
+        android:background="@drawable/search_128"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" />
+    <ListView
+        android:id="@+id/lvDetails"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/btnSearchItems" />
+</RelativeLayout>

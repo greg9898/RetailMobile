@@ -1,340 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tabhost"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:padding="4dp"
+    android:layout_weight="1">
     <LinearLayout
-        android:id="@+id/layoutHeader"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp">
-        <RelativeLayout
-            android:id="@+id/layoutCustomerInfo"
+        android:layout_height="fill_parent">
+        <TabWidget
+            android:id="@android:id/tabs"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="1dp"
-            android:background="@drawable/border">
-            <Button
-                android:id="@+id/btnSearchCustomer"
-                android:layout_width="@dimen/button_height"
-                android:layout_height="@dimen/button_height"
-                android:background="@drawable/search_128"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true" />
-            <TextView
-                android:id="@+id/lblCustomerCaption"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="@dimen/caption_text_size"
-                android:layout_toRightOf="@id/imgCustomersIcon"
-                android:text="@string/lblCustomerCaption"
-                android:textColor="@android:color/black" />
-            <LinearLayout
-                style="@style/fillWidth"
-                android:layout_below="@id/btnSearchCustomer"
-                android:orientation="vertical">
-                <LinearLayout
-                    style="@style/fillWidth"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="2dp"
-                    android:weightSum="3">
-                    <TextView
-                        android:id="@+id/lblCustCode"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/lblCustomerCode"
-                        android:textSize="@dimen/normal_text_size"
-                        android:textColor="@android:color/black" />
-                    <EditText
-                        style="@style/myEditTextStyle"
-                        android:id="@+id/tbCustCode1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2" />
-                </LinearLayout>
-                <LinearLayout
-                    style="@style/fillWidth"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="2dp"
-                    android:weightSum="3">
-                    <TextView
-                        android:id="@+id/lblCustName"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/lblCustomerName"
-                        android:textSize="@dimen/normal_text_size"
-                        android:textColor="@android:color/black" />
-                    <EditText
-                        style="@style/myEditTextStyle"
-                        android:id="@+id/tbCustName1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2" />
-                </LinearLayout>
-                <LinearLayout
-                    style="@style/fillWidth"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="2dp"
-                    android:weightSum="3">
-                    <TextView
-                        android:id="@+id/lblCustAddress"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/lblCustomerAddress"
-                        android:textSize="@dimen/normal_text_size"
-                        android:textColor="@android:color/black" />
-                    <EditText
-                        style="@style/myEditTextStyle"
-                        android:id="@+id/tbCustAddress"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2" />
-                </LinearLayout>
-                <LinearLayout
-                    style="@style/fillWidth"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="2dp"
-                    android:weightSum="3">
-                    <TextView
-                        android:id="@+id/lblCustPhone"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/lblCustomerPhone"
-                        android:textSize="@dimen/normal_text_size"
-                        android:textColor="@android:color/black" />
-                    <EditText
-                        style="@style/myEditTextStyle"
-                        android:id="@+id/tbCustPhone"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2" />
-                </LinearLayout>
-                <LinearLayout
-                    style="@style/fillWidth"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="2dp"
-                    android:weightSum="3">
-                    <TextView
-                        android:id="@+id/lblCustDebt"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/lblCustDebt"
-                        android:textSize="@dimen/normal_text_size"
-                        android:textColor="@android:color/black" />
-                    <EditText
-                        style="@style/myEditTextStyle"
-                        android:id="@+id/tbCustDebt"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2" />
-                </LinearLayout>
-            </LinearLayout>
-        </RelativeLayout>
-        <View
-            android:layout_width="1dp"
+            android:tabStripEnabled="true"
+            android:layout_marginBottom="-6dp"
+            android:layout_weight="0" />
+        <LinearLayout
+            android:id="@+id/tabSelectedLine"
+            android:layout_width="fill_parent"
+            android:layout_height="6dip"
+            android:background="#449def" />
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="@color/action_bar1"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp" />
-        <RelativeLayout
-            android:id="@+id/layoutInvoiceInfo"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="2dp"
-            android:layout_alignBottom="@id/layoutCustomerInfo"
-            android:background="@drawable/border">
-            <TextView
-                android:id="@+id/lblInvoiceInfoCaption"
-                android:layout_toRightOf="@id/imgInvoiceIcon"
-                android:text="@string/lblInvoiceInfoCaption"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <FrameLayout
+                android:id="@+id/realtabcontent"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="@dimen/caption_text_size"
-                android:textColor="@android:color/black" />
-            <LinearLayout
-                style="@style/fillWidth"
-                android:layout_marginTop="@dimen/button_height"
-                android:orientation="vertical">
-                <LinearLayout
-                    style="@style/fillWidth"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="2dp"
-                    android:weightSum="3">
-                    <TextView
-                        android:id="@+id/lblHtrnID"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/normal_text_size"
-                        android:textColor="@android:color/black"
-                        android:text="@string/lblHtrnID" />
-                    <EditText
-                        style="@style/myEditTextStyle"
-                        android:id="@+id/tbHtrnID"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2" />
-                </LinearLayout>
-                <LinearLayout
-                    style="@style/fillWidth"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="2dp"
-                    android:weightSum="3">
-                    <TextView
-                        android:id="@+id/lblHtrnDate"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/normal_text_size"
-                        android:textColor="@android:color/black"
-                        android:text="@string/lblHtrnDate" />
-                    <EditText
-                        style="@style/myEditTextStyle"
-                        android:id="@+id/tbHtrnDate"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2" />
-                </LinearLayout>
-                <LinearLayout
-                    style="@style/fillWidth"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="2dp"
-                    android:weightSum="3">
-                    <TextView
-                        android:id="@+id/lblHtrnExpln"
-                        android:text="@string/lblHtrnExpl"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/normal_text_size"
-                        android:textColor="@android:color/black" />
-                    <EditText
-                        style="@style/myEditTextStyle"
-                        android:id="@+id/tbHtrnExpln"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2" />
-                </LinearLayout>
-                <LinearLayout
-                    style="@style/fillWidth"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="2dp"
-                    android:weightSum="3">
-                    <TextView
-                        android:id="@+id/lblHtrnNetValue"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/normal_text_size"
-                        android:textColor="@android:color/black"
-                        android:text="@string/lblHtrnNetValue" />
-                    <EditText
-                        style="@style/myEditTextStyle"
-                        android:id="@+id/tbHtrnNetValue"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2" />
-                </LinearLayout>
-                <LinearLayout
-                    style="@style/fillWidth"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="2dp"
-                    android:weightSum="3">
-                    <TextView
-                        android:id="@+id/lblHtrnVatValue"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/normal_text_size"
-                        android:textColor="@android:color/black"
-                        android:text="@string/lblHtrnVatValue" />
-                    <EditText
-                        style="@style/myEditTextStyle"
-                        android:id="@+id/tbHtrnVatValue"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2" />
-                </LinearLayout>
-                <LinearLayout
-                    style="@style/fillWidth"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="2dp"
-                    android:weightSum="3">
-                    <TextView
-                        android:id="@+id/lblHtrnTotValue"
-                        android:text="@string/lblHtrnTotValue"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/normal_text_size"
-                        android:textColor="@android:color/black" />
-                    <EditText
-                        style="@style/myEditTextStyle"
-                        android:id="@+id/tbHtrnTotValue"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2" />
-                </LinearLayout>
-            </LinearLayout>
-        </RelativeLayout>
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+        </FrameLayout>
     </LinearLayout>
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/action_bar1"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp" />
-    <RelativeLayout
-        android:id="@+id/layoutDetails"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_margin="2dp">
-        <Button
-            android:id="@+id/btnAddValue"
-            android:layout_width="@dimen/button_height"
-            android:layout_height="@dimen/button_height"
-            android:background="@drawable/plus_64" />
-        <Button
-            android:id="@+id/btnSubstractValue"
-            android:layout_width="@dimen/button_height"
-            android:layout_height="@dimen/button_height"
-            android:layout_toRightOf="@id/btnAddValue"
-            android:layout_marginLeft="2dp"
-            android:background="@drawable/minus_64" />
-        <TextView
-            android:id="@+id/lblDetailsCaption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="@string/lblDetailsCaption"
-            android:layout_alignBaseline="@id/btnAddValue"
-            android:textSize="@dimen/caption_text_size"
-            android:textColor="@color/caption_text" />
-        <Button
-            android:id="@+id/btnSearchItems"
-            android:layout_width="@dimen/button_height"
-            android:layout_height="@dimen/button_height"
-            android:background="@drawable/search_128"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true" />
-        <ListView
-            android:id="@+id/lvDetails"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_below="@id/btnSearchItems" />
-    </RelativeLayout>
-</LinearLayout>
+</TabHost>

@@ -5,7 +5,8 @@
         android:id="@+id/tbHtrnDate"
         style="@style/listRowTextViewStyle"
         android:layout_weight="0.4"
-        android:layout_marginLeft="5dp" />
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="2dp" />
     <TextView
         android:id="@+id/tbCustName"
         style="@style/listRowTextViewStyle"

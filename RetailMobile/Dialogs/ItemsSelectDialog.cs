@@ -38,7 +38,6 @@ namespace RetailMobile
             activity = context;
             //SetTitle(context.GetString (Resource.String.miItems));
             SetContentView(Resource.Layout.dialog_item_search);
-            // this.Window.SetLayout(RelativeLayout.LayoutParams.FillParent, RelativeLayout.LayoutParams.FillParent);
 
             actionBar = (RetailMobile.Fragments.ItemActionBar)((Android.Support.V4.App.FragmentActivity)activity).SupportFragmentManager.FindFragmentById(Resource.Id.ActionBarDialog1);
             actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
@@ -75,7 +74,6 @@ namespace RetailMobile
             
             lvItems.FocusChange += new EventHandler<View.FocusChangeEventArgs>(lvItems_FocusChange);
             lvItems.AddHeaderView(context.LayoutInflater.Inflate (Resource.Layout.item_row_checkable_header, null));
-
 
             adapterItems = new CheckableItemsAdapter(activity, new ItemInfoList());
             adapterItems.ItemImageSelected += new CheckableItemsAdapter.ItemImageSelectedDelegate(ItemImageSelected);
@@ -235,7 +233,7 @@ namespace RetailMobile
             base.Dismiss();
         }
 
-        private void ReloadItems()
+        void ReloadItems()
         {
             currentPage = 0;
             int cbCateg1Id = ((SpinnerAdapter<int, string>)cbCateg1.Adapter).GetSelectedValue(cbCateg1.SelectedItemPosition);
@@ -262,6 +260,12 @@ namespace RetailMobile
                 RetVal = retVal,
                 CstId = transHed.CstId
             };
+
+            if (itemInfoList != null && itemInfoList.CurrentCriteria.Category1 == crit.Category1 && itemInfoList.CurrentCriteria.Category2 == crit.Category2 && 
+                itemInfoList.CurrentCriteria.CstId == crit.CstId && itemInfoList.CurrentCriteria.ItemDesc == crit.ItemDesc && itemInfoList.CurrentCriteria.RetVal == crit.RetVal)
+            {
+                return;
+            }
 
             //itemInfoList = ItemInfoList.GetItemInfoList(activity,crit);
             itemInfoList = new ItemInfoList();

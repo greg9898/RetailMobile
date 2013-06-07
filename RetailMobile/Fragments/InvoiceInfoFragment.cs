@@ -4,7 +4,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using RetailMobile.Library;
-using Android.Content;
+using RetailMobile.Fragments;
 
 namespace RetailMobile
 {
@@ -15,21 +15,12 @@ namespace RetailMobile
         public event InvoiceSavedDelegate InvoiceSaved;
 
         const int SAVE_BUTTON = 764;
-        Library.TransHed header;
-        TransDetAdapter detailsAdapter;
-        ListView lvDetails;
-        EditText tbCustDesc;
-        EditText tbHtrnExpln;
-        EditText tbHtrnID;
-        EditText tbCustCode;
-        EditText tbCustAddress;
-        EditText tbCustPhone;
-        EditText tbCustDebt;
-        EditText tbHtrnDate;
-        EditText tbHtrnNetValue;
-        EditText tbHtrnVatValue;
-        EditText tbHtrnTotValue;
-        RetailMobile.Fragments.ItemActionBar actionBar;
+        TransHed header = new TransHed();
+        TabHost tabHost;
+        ItemActionBar actionBar;
+        View view;
+        InvoiceTabHeader invoiceTabHeader;
+        InvoiceTabDetails invoiceTabDetails;
 
         public static InvoiceInfoFragment NewInstance(long objId)
         {
@@ -40,91 +31,54 @@ namespace RetailMobile
 
         public Library.TransHed Header
         {
-            get
-            {
-                return header;
-            }
+            get { return header;}
+            set{ header = value;}
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             View v = inflater.Inflate(Resource.Layout.InvoiceScreen, container, false);
-
-            header = new Library.TransHed();
+            view = v;
 
             actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
             actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
             actionBar.ClearButtons();
             actionBar.AddButtonRight(SAVE_BUTTON, this.Activity.GetString(Resource.String.btnSave), Resource.Drawable.save_48);
             actionBar.SetTitle(this.Activity.GetString(Resource.String.lblInvoice));
+            
+            invoiceTabHeader = InvoiceTabHeader.NewInstance(this);
+            invoiceTabDetails = InvoiceTabDetails.NewInstance(this);
+            invoiceTabDetails.DetailsChanged += invoiceTabDetails_DetailsChanged;
+            invoiceTabHeader.CustomerChanged += invoiceTabHeader_CustomerChanged;
 
-            Button btnSearchItems = v.FindViewById<Button>(Resource.Id.btnSearchItems);
-            Button btnSearchCustomer = v.FindViewById<Button>(Resource.Id.btnSearchCustomer);
-            Button btnAddValue = v.FindViewById<Button>(Resource.Id.btnAddValue);
-            Button btnSubstractValue = v.FindViewById<Button>(Resource.Id.btnSubstractValue);
-            btnSearchCustomer.Click += new EventHandler(btnSearchCustomer_Click);
-            btnSearchItems.Click += new EventHandler(btnSearchItems_Click);
-            btnAddValue.Click += btnAddValue_Click;
-            btnSubstractValue.Click += btnSubstractValue_Click;
-
-            lvDetails = v.FindViewById<ListView>(Resource.Id.lvDetails);
-            lvDetails.AddHeaderView(inflater.Inflate (Resource.Layout.TransDetRow_header, null));
-
-            tbCustCode = v.FindViewById<EditText>(Resource.Id.tbCustCode1);
-            tbHtrnID = v.FindViewById<EditText>(Resource.Id.tbHtrnID);
-            tbCustDesc = v.FindViewById<EditText>(Resource.Id.tbCustName1);
-            tbCustAddress = v.FindViewById<EditText>(Resource.Id.tbCustAddress);
-            tbCustPhone = v.FindViewById<EditText>(Resource.Id.tbCustPhone);
-            tbCustDebt = v.FindViewById<EditText>(Resource.Id.tbCustDebt);
-            tbHtrnExpln = v.FindViewById<EditText>(Resource.Id.tbHtrnExpln);
-            tbHtrnDate = v.FindViewById<EditText>(Resource.Id.tbHtrnDate);
-            tbHtrnNetValue = v.FindViewById<EditText>(Resource.Id.tbHtrnNetValue);
-            tbHtrnVatValue = v.FindViewById<EditText>(Resource.Id.tbHtrnVatValue);
-            tbHtrnTotValue = v.FindViewById<EditText>(Resource.Id.tbHtrnTotValue);
-
-            tbCustCode.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbCustCode_TextChanged);
-            tbHtrnID.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbHtrnID_TextChanged);
-            tbHtrnID.Text = this.ObjectId.ToString();
-
-            tbHtrnDate.Focusable = false;
-            tbHtrnDate.Click += (object sender, EventArgs e) => {
-                ShowCalendar(v.Context, header.TransDate);
-            };
-
-            LoadDetailsAdapter();
-
-            // if (this.ObjectId > 0)
-            // {
-            // tbCustCode .Enabled = false;
-            // tbHtrnID .Enabled = false;
-            // tbCustDesc.Enabled = false;
-            // tbCustAddress .Enabled = false;
-            // tbCustPhone.Enabled = false;
-            // tbCustDebt .Enabled = false;
-            // tbHtrnExpln .Enabled = false;
-            // tbHtrnDate .Enabled = false;
-            // tbHtrnNetValue .Enabled = false;
-            // tbHtrnVatValue.Enabled = false;
-            // tbHtrnTotValue.Enabled = false;
-            //
-            // tbCustCode.Enabled = false;
-            // tbHtrnID.Enabled = false;
-            //
-            // tbHtrnDate.Enabled = false;
-            // btnSearchCustomer.Enabled = false;
-            // btnSearchItems.Enabled = false;
-            // lvDetails.Clickable = false;
-            // lvDetails.Focusable = false;
-            // lvDetails.FocusableInTouchMode = false;
-            // btnAddValue.Enabled = false;
-            // btnSubstractValue.Enabled = false;
-            //
-            // HeaderViewListAdapter adapter = (HeaderViewListAdapter)lvDetails.Adapter;
-            // TransDetAdapter origAdapter = (TransDetAdapter)adapter.WrappedAdapter;
-            // origAdapter.Disable();
-            // }
+            tabHost = (TabHost)view.FindViewById(Resource.Id.tabhost);
+            tabHost.TabChanged += TabHostHandleTabChanged; 
+            tabHost.Setup();
+            InitializeTab();               
 
             return v;
+        }
+
+        public  void LoadDetailsAdapter()
+        {
+            invoiceTabDetails.LoadDetailsAdapter();
+        }
+
+        void invoiceTabHeader_CustomerChanged()
+        {            
+            LoadDetailsAdapter();
+        }
+
+        void invoiceTabDetails_DetailsChanged()
+        {
+            invoiceTabHeader.FillHeaderCalcValues();
+        }
+
+        public override void OnCreate(Bundle p0)
+        {
+            base.OnCreate(p0);
+
+            tabHost = (TabHost)this.Activity.FindViewById(Resource.Id.tabhost);
         }
 
         public override void OnDestroyView()
@@ -139,17 +93,49 @@ namespace RetailMobile
             actionBar.ActionButtonClicked -= new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
         }
 
-        void ShowCalendar(Android.Content.Context ctx, DateTime currentDate)
+        public void InitializeTab()
+        {       
+            TabHost.TabSpec spec1 = tabHost.NewTabSpec("Info");
+            spec1.SetContent(Resource.Id.realtabcontent);
+            spec1.SetIndicator(this.Activity. LayoutInflater.Inflate( Resource.Layout.invoice_tab_button_header, null));
+            tabHost.AddTab(spec1);     
+
+            TabHost.TabSpec spec2 = tabHost.NewTabSpec("Details");
+            spec2.SetContent(Resource.Id.realtabcontent);
+            spec2.SetIndicator(this.Activity. LayoutInflater.Inflate( Resource.Layout.invoice_tab_button_details, null));
+            tabHost.AddTab(spec2);
+
+            for (int i = 0; i < tabHost.TabWidget.ChildCount; i++)
+            {
+                View tab = tabHost.TabWidget.GetChildAt(i);
+                tab.SetBackgroundResource(Resource.Drawable.main_button_selector);
+                tab.SetMinimumHeight(18);
+            }
+
+            tabHost.SetCurrentTabByTag("Details");
+            tabHost.SetCurrentTabByTag("Info");
+        }
+
+        void TabHostHandleTabChanged(object sender, TabHost.TabChangeEventArgs e)
         {
-            CalendarView calendarDlg = new CalendarView(ctx, currentDate);
-            calendarDlg.DateSlected += new CalendarView.DateSelectedDelegate(d => {
-                //Common.DateFormatDateOnly
-                tbHtrnDate.Text = d.ToShortDateString ();
-                header.TransDate = DateTime.Parse (tbHtrnDate.Text);
-                DateTime now = DateTime.Now;
-                header.TransDate = new DateTime (header.TransDate.Year, header.TransDate.Month, header.TransDate.Day, now.Hour, now.Minute, now.Second);
-            });
-            calendarDlg.Show();
+            if (e.TabId.Equals("Info"))
+            {
+                PushFragments(invoiceTabHeader);
+            }
+            else if (e.TabId.Equals("Details"))
+            {
+                PushFragments(invoiceTabDetails);
+            }
+        }
+
+        public void PushFragments(Android.Support.V4.App.Fragment fragment)
+        {
+            var ft = FragmentManager.BeginTransaction();        
+            ft.Replace(Resource.Id.realtabcontent, fragment);
+            ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+            ft.Commit();
+
+            view.FindViewById<FrameLayout>(Resource.Id.realtabcontent).Visibility = ViewStates.Visible;
         }
 
         void ActionBarButtonClicked(int id)
@@ -167,22 +153,17 @@ namespace RetailMobile
             }
         }
 
-        void InitInvoiceScreen()
+        void ResetInvoiceScreen()
         {
             header = new Library.TransHed();
-            FillInvoiceFields();
-            FillCustomerFields(new Library.CustomerInfo ());
 
-            LoadDetailsAdapter();
-        }
+            invoiceTabHeader.FillInvoiceFields();
+            invoiceTabHeader.FillCustomerFields(new Library.CustomerInfo ());
 
-        void FillInvoiceFields()
-        {
-            tbHtrnExpln.Text = header.HtrnExpl;
-            tbHtrnDate.Text = header.TransDateText;
-            tbHtrnNetValue.Text = header.HtrnNetVal.ToString(Common.DecimalFormat);
-            tbHtrnVatValue.Text = header.HtrnVatVal.ToString(Common.DecimalFormat);
-            tbHtrnTotValue.Text = header.HtrnTotValue.ToString(Common.DecimalFormat);
+            invoiceTabDetails.LoadDetailsAdapter();
+
+            tabHost.SetCurrentTabByTag("Details");
+            tabHost.SetCurrentTabByTag("Info");
         }
 
         void Save()
@@ -198,170 +179,15 @@ namespace RetailMobile
                 Toast.MakeText(this.Activity, "Choose details!", ToastLength.Short).Show();
                 return;
             }
-
-            if (tbHtrnNetValue.Text.Trim() == "")
-            {
-                tbHtrnNetValue.Text = "0";
-            }
-            if (tbHtrnVatValue.Text == "")
-            {
-                tbHtrnVatValue.Text = "0";
-            }
-
-            header.HtrnExpl = tbHtrnExpln.Text;
-            header.TransDate = DateTime.Parse(tbHtrnDate.Text);
-            DateTime now = DateTime.Now;
-            header.TransDate = new DateTime(header.TransDate.Year, header.TransDate.Month, header.TransDate.Day, now.Hour, now.Minute, now.Second);
-
+            
+            invoiceTabHeader.SetDataToHeader();
+           
             header.Save(Activity);
 
             if (InvoiceSaved != null)
                 InvoiceSaved(header.HtrnId);
 
-            InitInvoiceScreen();
-
-        }
-
-        void tbHtrnID_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
-        {
-            header = Library.TransHed.GetTransHed(Activity, double.Parse(((EditText)sender).Text));
-            if (header != null && tbHtrnExpln != null)
-            {
-                FillInvoiceFields();
-                LoadCustomerData(header.CstId);
-            }
-        }
-
-        bool isCustChanging = false;
-
-        void tbCustCode_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
-        {
-            if (isCustChanging)
-            {
-                return;
-            }
-
-            Log.Debug("tbCustCode_TextChanged", "tbCustCode_TextChanged text=" + ((EditText)sender).Text);
-            CustomerInfo c = CustomerInfo.GetCustomer(Activity, ((EditText)sender).Text);
-
-            if (tbCustDesc != null)
-            {
-                tbCustDesc.Text = c.Name;
-                tbCustAddress.Text = c.CustAddress;
-                tbCustDebt.Text = c.CustDebt.ToString();
-                tbCustPhone.Text = c.CustPhone;
-                header.CstId = c.CustID;
-            }
-        }
-
-        void btnSearchCustomer_Click(object sender, EventArgs e)
-        {
-            CustomerSelectDialog custDlg = new CustomerSelectDialog(Activity, Resource.Style.actionDialog);
-            custDlg.Window.SetLayout(WindowManagerLayoutParams.FillParent, WindowManagerLayoutParams.FillParent);
-
-            custDlg.DismissEvent += (s, ee) =>
-            {
-                header.CstId = custDlg.CustId;
-                Log.Debug("btnSearchCustomer_Click", " header.cst_id =" + custDlg.CustId);
-                LoadCustomerData(custDlg.CustId);
-            };
-            custDlg.Show();
-        }
-
-        private void LoadCustomerData(double custId)
-        {
-            Library.CustomerInfo c = Library.CustomerInfo.GetCustomer(Activity, custId);
-
-            if (tbCustDesc != null)
-            {
-                FillCustomerFields(c);
-
-                LoadDetailsAdapter();
-            }
-        }
-
-        private void FillCustomerFields(Library.CustomerInfo c)
-        {
-            isCustChanging = true;
-
-            tbCustDesc.Text = c.Name;
-            tbCustAddress.Text = c.CustAddress;
-            tbCustCode.Text = c.Code;
-            tbCustDebt.Text = c.CustDebt.ToString();
-            tbCustPhone.Text = c.CustPhone;
-
-            isCustChanging = false;
-        }
-
-        void FillHeaderCalcValues()
-        {
-            tbHtrnNetValue.Text = header.HtrnNetVal.ToString(Common.DecimalFormat);
-            tbHtrnVatValue.Text = header.HtrnVatVal.ToString(Common.DecimalFormat);
-            tbHtrnTotValue.Text = header.HtrnTotValue.ToString(Common.DecimalFormat);
-        }
-
-        TransDetAdapter.SelectedDetail selectedDetail = null;
-
-        public void LoadDetailsAdapter()
-        {
-            detailsAdapter = new TransDetAdapter(Activity, header.TransDetList, this);
-            detailsAdapter.QtysChangedEvent += () =>
-            {
-                FillHeaderCalcValues();
-                //detailsAdapter.NotifyDataSetChanged();
-
-                //if (TransDetAdapter.lastFocusedControl != null)
-                //{
-                //TransDetAdapter.lastFocusedControl.RequestFocus();
-                //}
-            };
-            detailsAdapter.DetailFieldSelectedEvent += (selDetail) => {
-                selectedDetail = selDetail;
-            };
-
-            lvDetails.SetAdapter(detailsAdapter);
-
-            FillHeaderCalcValues();
-        }
-
-        void btnSubstractValue_Click(object sender, EventArgs e)
-        {
-            detailsAdapter.SubstractValue();
-        }
-
-        void btnAddValue_Click(object sender, EventArgs e)
-        {
-            detailsAdapter.AddValue();
-        }
-
-        ItemsSelectDialog dialogItems;
-
-        void btnSearchItems_Click(object sender, EventArgs e)
-        {
-            dialogItems = new ItemsSelectDialog(Activity, Resource.Style.actionDialog, header);
-            dialogItems.Window.SetLayout(WindowManagerLayoutParams.FillParent, WindowManagerLayoutParams.FillParent);
-            dialogItems.DismissEvent += (s, ee) =>
-            {
-                foreach (int itemId in dialogItems.CheckedItemIds.Keys)
-                {
-                    TransDet detOld = header.TransDetList.GetByItemId(itemId);
-
-                    if (detOld != null)
-                    {
-                        detOld.LoadItemInfo(Activity, itemId, (int)detOld.DtrnQty1 + dialogItems.CheckedItemIds[itemId], header.CstId);
-                    }
-                    else
-                    {
-                        TransDet transDet = new TransDet();
-                        transDet.LoadItemInfo(Activity, itemId, dialogItems.CheckedItemIds[itemId], header.CstId);
-                        header.TransDetList.Add(transDet);
-                    }
-                }
-
-                LoadDetailsAdapter();
-            };
-
-            dialogItems.Show();
+            ResetInvoiceScreen();
         }
     }
 }

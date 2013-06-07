@@ -1,11 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
@@ -31,7 +24,7 @@ namespace RetailMobile
             View view = convertView;
             if (view == null)
                 view = context.LayoutInflater.Inflate(Resource.Layout.TransHedRow, null);
-
+          
             TextView tbHtrnDate = (TextView)view.FindViewById(Resource.Id.tbHtrnDate);
             TextView tbHtrnNetVal = (TextView)view.FindViewById(Resource.Id.tbHtrnNetVal);
             TextView tbHtrnVatVal = (TextView)view.FindViewById(Resource.Id.tbHtrnVatVal);
@@ -43,6 +36,11 @@ namespace RetailMobile
             tbCustName.Text = item.CstName;
 
             return view;
+        }
+
+        public bool ContainsId(int id)
+        {
+            return TransHedList.Contains(id);
         }
 		#region IScrollLoadble implementation
 

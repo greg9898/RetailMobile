@@ -166,6 +166,12 @@
     <Compile Include="Adapters\TransDetAdapter.cs" />
     <AndroidResource Include="Resources\Drawable\red_background.xml" />
     <AndroidResource Include="Resources\Layout\suggestions_row.axml" />
+    <AndroidResource Include="Resources\Layout\invoice_tab_header.axml" />
+    <AndroidResource Include="Resources\Layout\invoice_tab_details.axml" />
+    <Compile Include="Fragments\InvoiceTabHeader.cs" />
+    <Compile Include="Fragments\InvoiceTabDetails.cs" />
+    <AndroidResource Include="Resources\Layout\invoice_tab_button_header.axml" />
+    <AndroidResource Include="Resources\Layout\invoice_tab_button_details.axml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

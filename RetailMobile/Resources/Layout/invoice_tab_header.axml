@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutHeader"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp">
+    <RelativeLayout
+        android:id="@+id/layoutCustomerInfo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="1dp"
+        android:background="@drawable/border">
+        <Button
+            android:id="@+id/btnSearchCustomer"
+            android:layout_width="@dimen/button_height"
+            android:layout_height="@dimen/button_height"
+            android:background="@drawable/search_128"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true" />
+        <TextView
+            android:id="@+id/lblCustomerCaption"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/caption_text_size"
+            android:text="@string/lblCustomerCaption"
+            android:textColor="@android:color/black" />
+        <LinearLayout
+            style="@style/fillWidth"
+            android:layout_below="@id/btnSearchCustomer"
+            android:orientation="vertical">
+            <LinearLayout
+                style="@style/fillWidth"
+                android:orientation="horizontal"
+                android:layout_marginTop="2dp"
+                android:weightSum="3">
+                <TextView
+                    android:id="@+id/lblCustCode"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/lblCustomerCode"
+                    android:textSize="@dimen/normal_text_size"
+                    android:textColor="@android:color/black" />
+                <EditText
+                    style="@style/myEditTextStyle"
+                    android:id="@+id/tbCustCode1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" />
+            </LinearLayout>
+            <LinearLayout
+                style="@style/fillWidth"
+                android:orientation="horizontal"
+                android:layout_marginTop="2dp"
+                android:weightSum="3">
+                <TextView
+                    android:id="@+id/lblCustName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/lblCustomerName"
+                    android:textSize="@dimen/normal_text_size"
+                    android:textColor="@android:color/black" />
+                <EditText
+                    style="@style/myEditTextStyle"
+                    android:id="@+id/tbCustName1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" />
+            </LinearLayout>
+            <LinearLayout
+                style="@style/fillWidth"
+                android:orientation="horizontal"
+                android:layout_marginTop="2dp"
+                android:weightSum="3">
+                <TextView
+                    android:id="@+id/lblCustAddress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/lblCustomerAddress"
+                    android:textSize="@dimen/normal_text_size"
+                    android:textColor="@android:color/black" />
+                <EditText
+                    style="@style/myEditTextStyle"
+                    android:id="@+id/tbCustAddress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" />
+            </LinearLayout>
+            <LinearLayout
+                style="@style/fillWidth"
+                android:orientation="horizontal"
+                android:layout_marginTop="2dp"
+                android:weightSum="3">
+                <TextView
+                    android:id="@+id/lblCustPhone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/lblCustomerPhone"
+                    android:textSize="@dimen/normal_text_size"
+                    android:textColor="@android:color/black" />
+                <EditText
+                    style="@style/myEditTextStyle"
+                    android:id="@+id/tbCustPhone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" />
+            </LinearLayout>
+            <LinearLayout
+                style="@style/fillWidth"
+                android:orientation="horizontal"
+                android:layout_marginTop="2dp"
+                android:weightSum="3">
+                <TextView
+                    android:id="@+id/lblCustDebt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/lblCustDebt"
+                    android:textSize="@dimen/normal_text_size"
+                    android:textColor="@android:color/black" />
+                <EditText
+                    style="@style/myEditTextStyle"
+                    android:id="@+id/tbCustDebt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+    <View
+        android:layout_width="1dp"
+        android:layout_height="fill_parent"
+        android:background="@color/action_bar1"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp" />
+    <RelativeLayout
+        android:id="@+id/layoutInvoiceInfo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="2dp"
+        android:layout_alignBottom="@id/layoutCustomerInfo"
+        android:background="@drawable/border">
+        <TextView
+            android:id="@+id/lblInvoiceInfoCaption"
+            android:text="@string/lblInvoiceInfoCaption"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/caption_text_size"
+            android:textColor="@android:color/black" />
+        <LinearLayout
+            style="@style/fillWidth"
+            android:layout_marginTop="@dimen/button_height"
+            android:orientation="vertical">
+            <LinearLayout
+                style="@style/fillWidth"
+                android:orientation="horizontal"
+                android:layout_marginTop="2dp"
+                android:weightSum="3">
+                <TextView
+                    android:id="@+id/lblHtrnID"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/normal_text_size"
+                    android:textColor="@android:color/black"
+                    android:text="@string/lblHtrnID" />
+                <EditText
+                    style="@style/myEditTextStyle"
+                    android:id="@+id/tbHtrnID"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" />
+            </LinearLayout>
+            <LinearLayout
+                style="@style/fillWidth"
+                android:orientation="horizontal"
+                android:layout_marginTop="2dp"
+                android:weightSum="3">
+                <TextView
+                    android:id="@+id/lblHtrnDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/normal_text_size"
+                    android:textColor="@android:color/black"
+                    android:text="@string/lblHtrnDate" />
+                <EditText
+                    style="@style/myEditTextStyle"
+                    android:id="@+id/tbHtrnDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" />
+            </LinearLayout>
+            <LinearLayout
+                style="@style/fillWidth"
+                android:orientation="horizontal"
+                android:layout_marginTop="2dp"
+                android:weightSum="3">
+                <TextView
+                    android:id="@+id/lblHtrnExpln"
+                    android:text="@string/lblHtrnExpl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/normal_text_size"
+                    android:textColor="@android:color/black" />
+                <EditText
+                    style="@style/myEditTextStyle"
+                    android:id="@+id/tbHtrnExpln"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" />
+            </LinearLayout>
+            <LinearLayout
+                style="@style/fillWidth"
+                android:orientation="horizontal"
+                android:layout_marginTop="2dp"
+                android:weightSum="3">
+                <TextView
+                    android:id="@+id/lblHtrnNetValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/normal_text_size"
+                    android:textColor="@android:color/black"
+                    android:text="@string/lblHtrnNetValue" />
+                <EditText
+                    style="@style/myEditTextStyle"
+                    android:id="@+id/tbHtrnNetValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" />
+            </LinearLayout>
+            <LinearLayout
+                style="@style/fillWidth"
+                android:orientation="horizontal"
+                android:layout_marginTop="2dp"
+                android:weightSum="3">
+                <TextView
+                    android:id="@+id/lblHtrnVatValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/normal_text_size"
+                    android:textColor="@android:color/black"
+                    android:text="@string/lblHtrnVatValue" />
+                <EditText
+                    style="@style/myEditTextStyle"
+                    android:id="@+id/tbHtrnVatValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" />
+            </LinearLayout>
+            <LinearLayout
+                style="@style/fillWidth"
+                android:orientation="horizontal"
+                android:layout_marginTop="2dp"
+                android:weightSum="3">
+                <TextView
+                    android:id="@+id/lblHtrnTotValue"
+                    android:text="@string/lblHtrnTotValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/normal_text_size"
+                    android:textColor="@android:color/black" />
+                <EditText
+                    style="@style/myEditTextStyle"
+                    android:id="@+id/tbHtrnTotValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

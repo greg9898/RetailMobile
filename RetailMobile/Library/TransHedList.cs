@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -49,6 +48,19 @@ LEFT OUTER JOIN rcustomer ON rcustomer.id = rtrans_hed.cust_id ");
             }
             
             return headers;
+        }
+
+        public bool Contains(int id)
+        {
+            foreach (TransHed h in this)
+            {
+                if (h.HtrnId == id)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

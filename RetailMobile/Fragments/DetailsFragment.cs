@@ -133,11 +133,13 @@ namespace RetailMobile
 
         public void InvoiceSaved(int id)
         {
-            Library.TransHed header = Library.TransHed.GetTransHed(this.Activity, id);
-            ((TransHedAdapter)ListAdapter).Insert(header, 0);
-            ((TransHedAdapter)ListAdapter).NotifyDataSetChanged();
+            if (!((TransHedAdapter)ListAdapter).ContainsId(id))
+            {
+                Library.TransHed header = Library.TransHed.GetTransHed(this.Activity, id);
+                ((TransHedAdapter)ListAdapter).Insert(header, 0);
+            }
 
-            //((Library.TransHedList)_list).Insert(0,header);
+            ((TransHedAdapter)ListAdapter).NotifyDataSetChanged();
         }
 
         public void ShowDetails(int index)
