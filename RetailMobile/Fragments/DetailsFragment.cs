@@ -68,8 +68,10 @@ namespace RetailMobile
                 {
                     var ft = FragmentManager.BeginTransaction();
                     //ft.Replace(Resource.Id.detailInfo_fragment, InvoiceFragment.NewInstance(invoiceId));
-                    ft.Replace(Resource.Id.detailInfo_fragment, InvoiceInfoFragment.NewInstance(0));
+                    InvoiceInfoFragment invoiceFragment = InvoiceInfoFragment.NewInstance(0);
+                    ft.Replace(Resource.Id.detailInfo_fragment, invoiceFragment);
                     ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+                    invoiceFragment.InvoiceSaved += new InvoiceInfoFragment.InvoiceSavedDelegate(InvoiceSaved);
                     ft.Commit();
                 }
                 catch (Exception ex)
@@ -181,7 +183,8 @@ namespace RetailMobile
                         }
                         break;
                     case (int)MainMenu.MenuItems.Invoices:
-                        long invoiceId = (long)((Library.TransHedList)_list)[index].HtrnId;//?
+                        //long invoiceId = (long)((Library.TransHedList)_list)[index].HtrnId;//?
+                        long invoiceId = (long)((TransHedAdapter)this.ListView.Adapter).GetItem(index).HtrnId;
 
                         if (detailFragment == null || detailFragment.ObjectId != invoiceId)
                         {

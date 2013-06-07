@@ -6,7 +6,7 @@ using RetailMobile.Library;
 
 namespace RetailMobile
 {
-    public class TransDetAdapter : ArrayAdapter<Library.TransDet>
+    public class TransDetAdapter : ArrayAdapter<Library.TransDet>, GestureDetector.IOnGestureListener, View.IOnTouchListener
     { 
         bool disabled = false;
         public static EditText lastFocusedControl;
@@ -15,6 +15,7 @@ namespace RetailMobile
         EditText tbDtrn_disc_line1;
         TransDetList dataSource;
         InvoiceInfoFragment parentView;
+        private GestureDetector _gestureDetector;
 
         public delegate void QtysChangedDeletegate();
 
@@ -37,8 +38,8 @@ namespace RetailMobile
             if (lastFocusedControl != null)
             {
                 string lastFocusedControlText = lastFocusedControl.Text;
-                lastFocusedControlText = lastFocusedControlText.Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
-                lastFocusedControl.Text = (int.Parse(lastFocusedControlText) + 1).ToString();
+                lastFocusedControlText = lastFocusedControlText.Replace(",",".").Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
+                lastFocusedControl.Text = (decimal.Parse(lastFocusedControlText) + 1).ToString();
             }
         }
 
@@ -47,10 +48,11 @@ namespace RetailMobile
             if (lastFocusedControl != null)
             {
                 string lastFocusedControlText = lastFocusedControl.Text;
-                lastFocusedControlText = lastFocusedControlText.Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
-                lastFocusedControl.Text = (int.Parse(lastFocusedControlText) - 1).ToString();
+                lastFocusedControlText = lastFocusedControlText.Replace(",",".").Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
+                lastFocusedControl.Text = (decimal.Parse(lastFocusedControlText) - 1).ToString();
             }
         }
+        static EditText lastEdit = null;
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
@@ -91,7 +93,43 @@ namespace RetailMobile
                 holder.tbDtrn_qty1.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbDtrn_qty1_TextChanged);            
                 //holder.tbDtrn_qty1.FocusChange += new EventHandler(tbQty_HandleFocusChange);
                 holder.tbDtrn_qty1.FocusChange += tbQty_HandleFocusChange;
+                //holder.tbDtrn_qty1.SetOnTouchListener(new View.IOnTouchListener());
                 //holder.tbDtrn_qty1.Touch += new EventHandler<View.TouchEventArgs>(EditTextTouchUp);
+                //holder.tbDtrn_qty1.on
+                //holder.tbDtrn_qty1.
+                /*GestureDetector gestureDetector = new GestureDetector(new itge
+                GestureDetector gestureDetector = new GestureDetector(new GestureDetector.SimpleOnGestureListener() {
+                    public boolean onDoubleTap(MotionEvent e) {
+                        Log.e("", "Open new activty here");
+                        return true;
+                    }
+                });
+
+                tv.setOnTouchListener(new OnTouchListener() {
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return gestureDetector.onTouchEvent(event);
+                    }
+                });*/
+                _gestureDetector = new GestureDetector(this);
+                _gestureDetector.DoubleTap += new EventHandler<GestureDetector.DoubleTapEventArgs>((o,e)=>{
+                    //((EditText)o).SelectAll();
+                    Android.Util.Log.Debug("double tap", "Double tapped");
+                    if(lastFocusedControl != null)
+                    {
+                        Android.Util.Log.Debug("double tap", "Last focused not null");
+                        lastFocusedControl.SelectAll();
+
+                        lastFocusedControl.PostDelayed(new Action(()=>{lastFocusedControl.SelectAll();}),500);
+                    }
+                });
+
+               // holder.tbDtrn_qty1.Touch += new EventHandler<View.TouchEventArgs>((o,e)=>
+               // {
+                    //lastEdit = ((EditText)o);
+                  //  _gestureDetector.OnTouchEvent(e.Event);
+
+               // });
+                holder.tbDtrn_qty1.SetOnTouchListener(this);
 
                 //holder.tbDtrn_disc_line1.Tag = position;
                 holder.tbDtrn_disc_line1.Tag = holder;
@@ -227,6 +265,30 @@ namespace RetailMobile
             }
         }
 
+        #region IOnTouchListener implementation
+
+        public bool OnTouch(View v, MotionEvent e)
+        {
+            switch (e.Action & MotionEventActions.Mask)
+            {
+                case MotionEventActions.Up:
+                    if (TransDetAdapter.lastFocusedControl != null)
+                        TransDetAdapter.lastFocusedControl.SetBackgroundResource(Resource.Drawable.my_edit_text_background_normal);
+                    TransDetAdapter.lastFocusedControl = (EditText)v;
+                    TransDetAdapter.lastFocusedControl.SetBackgroundResource(Resource.Drawable.my_edit_text_background_focused);
+                    TransDetAdapter.lastFocusedControl.RequestFocus();
+
+                    EditText yourEditText = (EditText)v;
+                    Android.Views.InputMethods.InputMethodManager imm = (Android.Views.InputMethods.InputMethodManager)context.GetSystemService(Android.Content.Context.InputMethodService);
+                    imm.ShowSoftInput(yourEditText, Android.Views.InputMethods.ShowFlags.Implicit);
+                    break;
+            }
+            _gestureDetector.OnTouchEvent(e);
+            return true;
+        }
+
+        #endregion
+
         void tbQty_HandleFocusChange(object sender, View.FocusChangeEventArgs e)
         {          
             if (DetailFieldSelectedEvent != null)
@@ -306,6 +368,41 @@ namespace RetailMobile
             {
             }
         }
+
+     
+        #region IOnGestureListener implementation
+
+        public bool OnDown(MotionEvent e)
+        {
+            return false;
+        }
+
+        public bool OnFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
+        {
+            return false;
+        }
+
+        public void OnLongPress(MotionEvent e)
+        {
+
+        }
+
+        public bool OnScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
+        {
+            return false;
+        }
+
+        public void OnShowPress(MotionEvent e)
+        {
+
+        }
+
+        public bool OnSingleTapUp(MotionEvent e)
+        {
+            return false;
+        }
+
+        #endregion
 
         public class SelectedDetail
         {

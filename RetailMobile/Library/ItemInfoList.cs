@@ -143,9 +143,9 @@ WHERE 1 = 1  ";
                 if (c.CstId > 0)
                 {
                     fields += @",
-    ritemlast.last_date";
+    ritemlast.last_date";//OUTER
                     joinLastDate = @"
-LEFT OUTER JOIN ritemlast ON ritemlast.item_id = ritems.id AND ritemlast.cst_id = " + c.CstId;
+LEFT JOIN ritemlast ON ritemlast.item_id = ritems.id AND ritemlast.cst_id = " + c.CstId;
                 }
                 int offset = 1 + page * 30;
                 string query = @"

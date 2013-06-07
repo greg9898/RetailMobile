@@ -4,11 +4,10 @@ namespace RetailMobile
 {
     public class PreferencesUtil
     {
-
-        static bool IsDebug = true;
-        static string APP_SHARED_PREFS = "com.alphamobile.RetailPreferences";
-		//87.203.80.42
-		//2439
+        private static bool IsDebug = false;
+        private static string APP_SHARED_PREFS = "com.alphamobile.RetailPreferences";
+        //87.203.80.42
+        //2439
         public static string IP = "";
         //public static string IP = "77.78.32.118";
         //public static string IP = "87.203.80.42";
@@ -47,7 +46,7 @@ namespace RetailMobile
             }
             else
             {
-                IP = appSharedPrefs.GetString("IP", "85.73.254.138");
+                IP = appSharedPrefs.GetString("IP", "");
                 Port = appSharedPrefs.GetInt("Port", 2439);
                 SyncModel = appSharedPrefs.GetString("SyncModel", "RetailMobile3");
             }
