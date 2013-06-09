@@ -46,14 +46,20 @@ namespace RetailMobile.Fragments
 
         public void ShowProgress()
         {
-            btnSync.Visibility = ViewStates.Invisible;
-            pbSync.Visibility = ViewStates.Visible;
+            if(btnSync != null && pbSync != null)
+            {
+                btnSync.Visibility = ViewStates.Invisible;
+                pbSync.Visibility = ViewStates.Visible;
+            }
         }
 
         public void HideProgress()
         {
-            btnSync.Visibility = ViewStates.Visible;
-            pbSync.Visibility = ViewStates.Invisible;
+            if(btnSync != null && pbSync != null)
+            {
+                btnSync.Visibility = ViewStates.Visible;
+                pbSync.Visibility = ViewStates.Invisible;
+            }
         }
 
         void btnSync_Click(object sender, EventArgs e)

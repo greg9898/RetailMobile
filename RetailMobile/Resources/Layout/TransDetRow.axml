@@ -33,7 +33,7 @@
             android:minWidth="20dp"
             android:gravity="right"
             android:text="tbDtrn_qty1"
-            android:selectAllOnFocus="true"
+            android:selectAllOnFocus="true"            
             android:layout_weight="0.5" />
         <EditText
             android:id="@+id/tbDtrn_disc_line1"

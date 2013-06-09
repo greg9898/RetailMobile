@@ -47,7 +47,8 @@ namespace RetailMobile.Fragments
 
         public void SetTitle(string title)
         {
-            titleView.Text = title;
+            if(titleView != null)
+                titleView.Text = title;
         }
 
         public void AddButtonLeft(int id, string text, int resourceID)
@@ -62,9 +63,12 @@ namespace RetailMobile.Fragments
 
         public void ClearButtons()
         {
-            ButtonsAdded.Clear();
-            leftButtons.RemoveAllViews();
-            rightButtons.RemoveAllViews();
+            if(ButtonsAdded != null)
+                ButtonsAdded.Clear();
+            if(leftButtons != null)
+                leftButtons.RemoveAllViews();
+            if(rightButtons != null)
+                rightButtons.RemoveAllViews();
         }
 
         void AddButton(ViewGroup parent, int id, string text, int resourceID)

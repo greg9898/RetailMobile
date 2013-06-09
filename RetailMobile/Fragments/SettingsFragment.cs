@@ -77,6 +77,7 @@ namespace RetailMobile
 
         void btnSync_Click(object sender, EventArgs e)
         {
+            //throw new Java.Lang.Exception(new Java.Lang.Throwable("Zaaaek"));
             //btnSync.Text = this.Activity.GetString(Resource.String.SynchronizationInProgress);
             ((MainMenu)this.Activity).ShowProgressBar();
             Task.Factory.StartNew(() => Sync.Synchronize (this.Activity)

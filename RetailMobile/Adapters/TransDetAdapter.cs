@@ -9,14 +9,14 @@ namespace RetailMobile
 {
     public class TransDetAdapter : ArrayAdapter<Library.TransDet>, GestureDetector.IOnGestureListener, View.IOnTouchListener
     { 
-        bool disabled = true;
+        bool disabled = false;
         public static EditText lastFocusedControl;
         Android.Support.V4.App.FragmentActivity context;
         EditText tbDtrn_qty1;
         EditText tbDtrn_disc_line1;
         TransDetList dataSource;
         InvoiceInfoFragment parentView;
-        GestureDetector _gestureDetector;
+        //GestureDetector _gestureDetector;
 
         public delegate void QtysChangedDeletegate();
 
@@ -82,6 +82,8 @@ namespace RetailMobile
                 holder.lblDtrn_net_value = view.FindViewById<TextView>(Resource.Id.lblDtrn_net_value);
                 holder.lblDtrn_vat_value = view.FindViewById<TextView>(Resource.Id.lblDtrn_vat_value);
 
+               
+
                 tbDtrn_disc_line1 = holder.tbDtrn_disc_line1;
                 tbDtrn_qty1 = holder.tbDtrn_qty1;
 
@@ -96,24 +98,8 @@ namespace RetailMobile
                 holder.tbDtrn_qty1.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbDtrn_qty1_TextChanged);            
                 //holder.tbDtrn_qty1.FocusChange += new EventHandler(tbQty_HandleFocusChange);
                 holder.tbDtrn_qty1.FocusChange += tbQty_HandleFocusChange;
-                //holder.tbDtrn_qty1.SetOnTouchListener(new View.IOnTouchListener());
-                //holder.tbDtrn_qty1.Touch += new EventHandler<View.TouchEventArgs>(EditTextTouchUp);
-                //holder.tbDtrn_qty1.on
-                //holder.tbDtrn_qty1.
-                /*GestureDetector gestureDetector = new GestureDetector(new itge
-                GestureDetector gestureDetector = new GestureDetector(new GestureDetector.SimpleOnGestureListener() {
-                    public boolean onDoubleTap(MotionEvent e) {
-                        Log.e("", "Open new activty here");
-                        return true;
-                    }
-                });
-
-                tv.setOnTouchListener(new OnTouchListener() {
-                    public boolean onTouch(View v, MotionEvent event) {
-                        return gestureDetector.onTouchEvent(event);
-                    }
-                });*/
-                _gestureDetector = new GestureDetector(this);
+       
+                /*_gestureDetector = new GestureDetector(this);
                 _gestureDetector.DoubleTap += new EventHandler<GestureDetector.DoubleTapEventArgs>((o,e)=>{
                     //((EditText)o).SelectAll();
                     Android.Util.Log.Debug("double tap", "Double tapped");
@@ -122,16 +108,10 @@ namespace RetailMobile
                         Android.Util.Log.Debug("double tap", "Last focused not null");
                         lastFocusedControl.SelectAll();
 
-                        lastFocusedControl.PostDelayed(new Action(()=>{lastFocusedControl.SelectAll();}),500);
+                        lastFocusedControl.PostDelayed(new Action(()=>{lastFocusedControl.SelectAll();}),100);
                     }
-                });
-
-                // holder.tbDtrn_qty1.Touch += new EventHandler<View.TouchEventArgs>((o,e)=>
-                // {
-                //lastEdit = ((EditText)o);
-                //  _gestureDetector.OnTouchEvent(e.Event);
-
-                // });
+                });*/
+                              
                 holder.tbDtrn_qty1.SetOnTouchListener(this);
 
                 //holder.tbDtrn_disc_line1.Tag = position;
@@ -141,6 +121,8 @@ namespace RetailMobile
                 holder.tbDtrn_disc_line1.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbDtrn_disc_line1_TextChanged);
                 holder.tbDtrn_disc_line1.FocusChange += tbQty_HandleFocusChange;
                 holder.Datasource = detail;
+
+                holder.tbDtrn_disc_line1.SetOnTouchListener(this);
                 //holder.tbDtrn_disc_line1.Touch += new EventHandler<View.TouchEventArgs>(EditTextTouchUp);
             }
             else
@@ -164,6 +146,12 @@ namespace RetailMobile
                 holder.tbDtrn_qty1.Focusable = false;
                 holder.ll_bottom.Visibility = ViewStates.Gone;
             }
+
+            holder.tbDtrn_qty1.FocusableInTouchMode = true;
+            holder.tbDtrn_qty1.Focusable = true;
+
+            holder.tbDtrn_disc_line1.FocusableInTouchMode = true;
+            holder.tbDtrn_disc_line1.Focusable = true;
 
             return view;
         }
@@ -287,10 +275,13 @@ namespace RetailMobile
 
                     EditText yourEditText = (EditText)v;
                     Android.Views.InputMethods.InputMethodManager imm = (Android.Views.InputMethods.InputMethodManager)context.GetSystemService(Android.Content.Context.InputMethodService);
-                    imm.ShowSoftInput(yourEditText, Android.Views.InputMethods.ShowFlags.Implicit);
+                    imm.ShowSoftInput(yourEditText, Android.Views.InputMethods.ShowFlags.Forced);
+                    if(lastFocusedControl != null)
+                        lastFocusedControl.PostDelayed(new Action(()=>{lastFocusedControl.SelectAll();}),100);
                     break;
             }
-            _gestureDetector.OnTouchEvent(e);
+
+            //_gestureDetector.OnTouchEvent(e);
             return true;
         }
         #endregion
