@@ -31,8 +31,17 @@ namespace RetailMobile
         {   
             base.OnCreate(bundle);
 
+            /*AppDomain.CurrentDomain.UnhandledException +=  new UnhandledExceptionEventHandler((o,e)=>
+            {
+                Android.Util.Log.Debug("e : ",e.ToString() );
+                Android.Util.Log.Debug("e.ExceptionObject: ",e.ExceptionObject.ToString() );
+                Crashlytics.Android.Crashlytics1.Log(e.ToString());
+                Crashlytics.Android.Crashlytics1.Log(e.ExceptionObject.ToString());
+            });*/
+
             AndroidEnvironment.UnhandledExceptionRaiser += (sender, e) => {
-                Common.LogException(e.Exception);// proper solution not yet found :/
+                //Common.LogException(e.Exception);// proper solution not yet found :/
+                RetailMobile.Error.LogError(this, e.Exception.Message, e.Exception.StackTrace);
             };
 
             PreferencesUtil.LoadSettings(this);

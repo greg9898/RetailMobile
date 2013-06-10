@@ -172,6 +172,7 @@
     <Compile Include="Fragments\InvoiceTabDetails.cs" />
     <AndroidResource Include="Resources\Layout\invoice_tab_button_header.axml" />
     <AndroidResource Include="Resources\Layout\invoice_tab_button_details.axml" />
+    <Compile Include="Library\Error.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

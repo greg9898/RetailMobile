@@ -154,6 +154,7 @@ namespace RetailMobile
             if (tbCustDesc != null)
             {
                 FillCustomerFields(c);
+                tbCustCode.Text = c.Code;
                 FillInvoiceFields();
 
                 if (CustomerChanged != null)
@@ -169,7 +170,7 @@ namespace RetailMobile
 
             tbCustDesc.Text = c.Name;
             tbCustAddress.Text = c.CustAddress;
-            tbCustCode.Text = c.Code;
+            //tbCustCode.Text = c.Code;
             tbCustDebt.Text = c.CustDebt.ToString();
             tbCustPhone.Text = c.CustPhone;
 

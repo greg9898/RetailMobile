@@ -16,7 +16,7 @@ namespace RetailMobile
 
             // Connect to the database - CreateDatabase creates a new database
             dBConnection = DatabaseManager.Connect(Config);
-            //DBConnection = DatabaseManager.CreateDatabase(Config);
+            //dBConnection = DatabaseManager.CreateDatabase(Config);
             return dBConnection;
         }
 
@@ -121,8 +121,8 @@ PRIMARY KEY ( id ASC )
                     Log.Error("Connection error", ex.Message);
                     connected = false;
                 }
-                if (connected)
-                    return;
+                //if (connected)
+                    //return;
 
                 // Connect to the database - CreateDatabase creates a new database
                 DBConnection = DatabaseManager.CreateDatabase(Config);
@@ -204,6 +204,16 @@ PRIMARY KEY ( deal_id ASC )
                 PreparedStatement.Execute();
                 PreparedStatement.Close();
 
+                PreparedStatement = DBConnection.PrepareStatement(@"CREATE TABLE IF NOT EXISTS rerrors (
+error_id INTEGER NOT NULL DEFAULT AUTOINCREMENT,
+message VARCHAR(512) NOT NULL,
+stack VARCHAR(4096) NOT NULL,
+error_date VARCHAR(64) NULL,
+PRIMARY KEY ( error_id ASC )
+)");
+                PreparedStatement.Execute();
+                PreparedStatement.Close();
+
                 PreparedStatement = DBConnection.PrepareStatement(createTableRtransDet);
 
                 PreparedStatement.Execute();
@@ -211,6 +221,11 @@ PRIMARY KEY ( deal_id ASC )
 
                 PreparedStatement = DBConnection.PrepareStatement(createTableRtransHed);
 
+                PreparedStatement.Execute();
+                PreparedStatement.Close();
+
+                PreparedStatement = DBConnection.PrepareStatement(@" CREATE PUBLICATION pblErrors (
+TABLE rerrors)");
                 PreparedStatement.Execute();
                 PreparedStatement.Close();
 
@@ -323,6 +338,34 @@ TABLE rusers)");
                 SyncParms syncParams = cn.CreateSyncParms(0, PreferencesUtil.SyncUser, PreferencesUtil.SyncModel);
                 syncParams.Password = PreferencesUtil.SyncPass;
                 syncParams.Publications = "pblUploadTrans";
+
+                IStreamHTTPParms streamParams = syncParams.StreamParms;
+                streamParams.Host = PreferencesUtil.IP;
+                streamParams.Port = PreferencesUtil.Port;
+
+                cn.Synchronize(syncParams);
+                cn.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                Android.Util.Log.Error("UltraliteApplication", string.Format("An error has occurred: {0}", ex.Message));
+            }
+            finally
+            {
+                cn.Release();
+            }
+        }
+
+        public static void SyncErrors(Context ctx)
+        {
+            IConnection cn = GetConnection(ctx);
+            try
+            {
+                //SyncParms.HTTP_STREAM, "sa", "Courier109"
+                SyncParms syncParams = cn.CreateSyncParms(0, PreferencesUtil.SyncUser, PreferencesUtil.SyncModel);
+                syncParams.Password = PreferencesUtil.SyncPass;
+                syncParams.Publications = "pblErrors";
 
                 IStreamHTTPParms streamParams = syncParams.StreamParms;
                 streamParams.Host = PreferencesUtil.IP;
