@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="layout-default-land"
+        android:text="layout-sw600dp-land"
         android:textSize="@dimen/caption_text_size" />
     <LinearLayout
         android:layout_width="0dp"

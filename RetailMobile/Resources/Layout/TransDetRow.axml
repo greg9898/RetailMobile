@@ -1,94 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/listStyle">
-    <LinearLayout
-        android:id="@+id/ll_top"
-        android:minHeight="@dimen/list_row_height"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:weightSum="10">
-        <TextView
-            android:id="@+id/lblDtrn_ItemCode"
-            style="@style/listRowTextViewStyle"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_weight="0.9"
-            android:text="lblDtrn_ItemCode" />
-        <TextView
-            android:id="@+id/tbItemDesc"
-            style="@style/listRowTextViewStyle"
-            android:layout_weight="6.6"
-            android:ellipsize="marquee"
-            android:singleLine="true"
-            android:text="tbItemDesc" />
-        <EditText
-            android:id="@+id/tbDtrn_qty1"
-            android:inputType="numberDecimal"
-            style="@style/myEditTextStyle"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
-            android:layout_marginRight="10dp"
-            android:minWidth="20dp"
-            android:gravity="right"
-            android:text="tbDtrn_qty1"
-            android:selectAllOnFocus="true"            
-            android:layout_weight="0.5" />
-        <EditText
-            android:id="@+id/tbDtrn_disc_line1"
-            android:inputType="numberDecimal"
-            style="@style/myEditTextStyle"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
-            android:layout_marginRight="10dp"
-            android:minWidth="20dp"
-            android:gravity="right"
-            android:text="tbDtrn_disc_line1"
-            android:selectAllOnFocus="true"
-            android:layout_weight="0.5" />
-        <TextView
-            android:id="@+id/lblDtrn_unit_price"
-            style="@style/listRowTextViewStyle"
-            android:layout_width="30dp"
-            android:layout_marginRight="10dp"
-            android:minWidth="20dp"
-            android:gravity="right"
-            android:text="lblDtrn_unit_price"
-            android:layout_weight="0.5" />
-        <TextView
-            android:id="@+id/lblDtrn_net_value"
-            style="@style/listRowTextViewStyle"
-            android:layout_width="30dp"
-            android:layout_marginRight="10dp"
-            android:minWidth="20dp"
-            android:gravity="right"
-            android:text="lblDtrn_net_value"
-            android:layout_weight="0.5" />
-        <TextView
-            android:id="@+id/lblDtrn_vat_value"
-            style="@style/listRowTextViewStyle"
-            android:layout_width="30dp"
-            android:layout_marginRight="10dp"
-            android:minWidth="20dp"
-            android:gravity="right"
-            android:text="lblDtrn_vat_value"
-            android:layout_weight="0.5" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/ll_bottom"
-        android:minHeight="@dimen/list_row_height"
-        android:layout_below="@id/ll_top"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:weightSum="10">
-        <TextView
-            android:id="@+id/lblDtrn_ItemCodebelow"
-            style="@style/listRowTextViewStyle"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="10"
-            android:text="lblDtrn_ItemCode bottom" />
-    </LinearLayout>
-</RelativeLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/listStyle"
+    android:weightSum="10">
+    <TextView
+        android:id="@+id/lblDtrn_ItemCode"
+        style="@style/listRowTextViewStyle"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_weight="0.9"
+        android:text="lblDtrn_ItemCode" />
+    <TextView
+        android:id="@+id/tbItemDesc"
+        style="@style/listRowTextViewStyle"
+        android:layout_weight="6.6"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="tbItemDesc" />
+    <EditText
+        android:id="@+id/tbDtrn_qty1"
+        android:inputType="numberDecimal"
+        style="@style/myEditTextStyle"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginRight="10dp"
+        android:minWidth="20dp"
+        android:gravity="right"
+        android:text="tbDtrn_qty1"
+        android:selectAllOnFocus="true"
+        android:layout_weight="0.5" />
+    <EditText
+        android:id="@+id/tbDtrn_disc_line1"
+        android:inputType="numberDecimal"
+        style="@style/myEditTextStyle"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginRight="10dp"
+        android:minWidth="20dp"
+        android:gravity="right"
+        android:text="tbDtrn_disc_line1"
+        android:selectAllOnFocus="true"
+        android:layout_weight="0.5" />
+    <TextView
+        android:id="@+id/lblDtrn_unit_price"
+        style="@style/listRowTextViewStyle"
+        android:layout_width="30dp"
+        android:layout_marginRight="10dp"
+        android:minWidth="20dp"
+        android:gravity="right"
+        android:text="lblDtrn_unit_price"
+        android:layout_weight="0.5" />
+    <TextView
+        android:id="@+id/lblDtrn_net_value"
+        style="@style/listRowTextViewStyle"
+        android:layout_width="30dp"
+        android:layout_marginRight="10dp"
+        android:minWidth="20dp"
+        android:gravity="right"
+        android:text="lblDtrn_net_value"
+        android:layout_weight="0.5" />
+    <TextView
+        android:id="@+id/lblDtrn_vat_value"
+        style="@style/listRowTextViewStyle"
+        android:layout_width="30dp"
+        android:layout_marginRight="10dp"
+        android:minWidth="20dp"
+        android:gravity="right"
+        android:text="lblDtrn_vat_value"
+        android:layout_weight="0.5" />
+</LinearLayout>

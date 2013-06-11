@@ -11,8 +11,6 @@ namespace RetailMobile
     [Activity(Label = "Settings Fragment")]
 	public class SettingsFragment : BaseFragment
     {
-        const int SAVE_BUTTON = 423;
-        const int BACK_BUTTON = 72224;
         EditText tbIP;
         EditText tbPort;
         EditText tbSyncModel;
@@ -21,12 +19,7 @@ namespace RetailMobile
         Button btnLogout;
         Button btnSync;
         RetailMobile.Fragments.ItemActionBar actionBar;
-
-        public override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
-
-        }
+        bool isTabletLand;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -60,14 +53,14 @@ namespace RetailMobile
             btnSync.Click += new EventHandler(btnSync_Click);
             btnLogout.Click += new EventHandler(btnLogout_Click);
 
-            this.Activity.FindViewById<LinearLayout>(Resource.Id.layoutList).Visibility = ViewStates.Gone;
-
-            actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
+            isTabletLand = this.Activity.FindViewById<LinearLayout>(Resource.Id.LayoutMenu) != null;
+            
+            this.actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar); 
             actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
             actionBar.ClearButtons();
             //string save = this.Activity.GetString(Resource.String.btnSave);
-            actionBar.AddButtonRight(SAVE_BUTTON, "", Resource.Drawable.save_48);
-            actionBar.AddButtonLeft(BACK_BUTTON, "", Resource.Drawable.back_48);
+            actionBar.AddButtonRight(Buttons.SETTINGS_SAVE_BUTTON, "", Resource.Drawable.save_48);
+            actionBar.AddButtonLeft(Buttons.SETTINGS_BACK_BUTTON, "", Resource.Drawable.back_48);
 
             string title = this.Activity.GetString(Resource.String.Settings);
             actionBar.SetTitle(title);
@@ -77,25 +70,19 @@ namespace RetailMobile
 
         void btnSync_Click(object sender, EventArgs e)
         {
-            //throw new Java.Lang.Exception(new Java.Lang.Throwable("Zaaaek"));
-            //throw(new Exception("zaiko baiko"));
-            //btnSync.Text = this.Activity.GetString(Resource.String.SynchronizationInProgress);
             ((MainMenu)this.Activity).ShowProgressBar();
             Task.Factory.StartNew(() => Sync.Synchronize (this.Activity)
             ).ContinueWith(task => this.Activity.RunOnUiThread (() => { 
 				((MainMenu)this.Activity).HideProgressBar ();
 				Toast.MakeText (this.Activity.ApplicationContext, this.Activity.GetString (Resource.String.SynchronizationComplete), ToastLength.Short).Show ();
-			})
-            );//.ContinueWith(task => this.Activity.RunOnUiThread(() => this.btnSync.Text = this.Activity.GetString(Resource.String.SynchronizationComplete)));
-
-            //Sync.Synchronize(this.Activity);
+			}));
         }
 
         void btnLogout_Click(object sender, EventArgs e)
         {
             Common.CurrentDealerID = 0;
             this.Activity.FindViewById<LinearLayout>(Resource.Id.LayoutMenu).Visibility = ViewStates.Invisible;
-            var ft = ((Android.Support.V4.App.FragmentActivity)this.Activity).SupportFragmentManager.BeginTransaction();
+            var ft = this.Activity.SupportFragmentManager.BeginTransaction();
             ft.Replace(Resource.Id.detailInfo_fragment, new LoginFragment());
             ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
             ft.Commit();
@@ -105,7 +92,7 @@ namespace RetailMobile
         {
             switch (id)
             {
-                case BACK_BUTTON:            
+                case Buttons.SETTINGS_BACK_BUTTON:     
                     if (Common.CurrentDealerID == 0)
                     {
                         if (this.Activity == null)
@@ -119,7 +106,7 @@ namespace RetailMobile
                         ft.Commit();
                     } 
                     break;
-                case SAVE_BUTTON:
+                case Buttons.SETTINGS_SAVE_BUTTON:
                     try
                     {
                         PreferencesUtil.IP = tbIP.Text;

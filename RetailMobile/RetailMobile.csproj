@@ -173,6 +173,29 @@
     <AndroidResource Include="Resources\Layout\invoice_tab_button_header.axml" />
     <AndroidResource Include="Resources\Layout\invoice_tab_button_details.axml" />
     <Compile Include="Library\Error.cs" />
+    <AndroidResource Include="Resources\layout-port\MainMenu.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout-land\MainMenu.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout-sw600dp-port\MainMenu.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout-sw600dp\MainMenu.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout-sw600dp-land\MainMenu.axml" />
+    <Compile Include="Buttons.cs" />
+    <AndroidResource Include="Resources\Layout\InvoiceScreen.axml" />
+    <AndroidResource Include="Resources\layout-sw600dp-port\main_action_bar.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Drawable\menu_32.png" />
+    <AndroidResource Include="Resources\layout-sw600dp-land\TransHedRow.axml" />
+    <AndroidResource Include="Resources\layout-sw600dp-port\TransHedRow.axml" />
+    <AndroidResource Include="Resources\layout-sw600dp\TransHedRow.axml" />
+    <AndroidResource Include="Resources\Drawable\settings_64.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -181,9 +204,6 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\Layout\InvoiceDetailRow.axml" />
-    <AndroidResource Include="Resources\Layout\InvoiceScreen.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\Layout\ItemDetails.axml" />
     <AndroidResource Include="Resources\Layout\ItemInfoRow.axml" />
     <AndroidResource Include="Resources\Layout\ItemSearch.axml" />
@@ -194,13 +214,7 @@
     <AndroidResource Include="Resources\Layout\CustomerDetails.axml" />
     <AndroidResource Include="Resources\Layout\CustomerInfoRow.axml" />
     <AndroidResource Include="Resources\Layout\CustomersList.axml" />
-    <AndroidResource Include="Resources\layout-land\MainMenu.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\Layout\MainMenuRow.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout-port\MainMenu.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\Layout\MainMenu.axml">
@@ -383,6 +397,9 @@
   <ItemGroup>
     <Folder Include="Interfaces\" />
     <Folder Include="Resources\values-hdpi\" />
+    <Folder Include="Resources\layout-port\" />
+    <Folder Include="Resources\layout-sw600dp\" />
+    <Folder Include="Resources\layout-sw600dp-port\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidJavaLibrary Include="lib\UltraLiteJNI12.jar" />

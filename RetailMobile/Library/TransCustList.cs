@@ -92,7 +92,7 @@ WHERE 1 = 1 ";
 
                 if (c.CustName != "")
                 {                  
-                    query += " AND rcustomer.cst_desc like \'" + c.CustName + "%\'";
+                    query += " AND rcustomer.cst_desc like :cst_desc ";
                 }
 
                 query += @" 
@@ -114,6 +114,11 @@ group by cst_id,
                 if (c.DateTo > DateTime.MinValue)
                 {
                     ps.Set("date_to", c.DateTo.Date.ToString("yyyy-MM-dd HH:mm:ss"));
+                }
+
+                if (c.CustName != "")
+                {     
+                    ps.Set("cst_desc", c.CustName + "%");
                 }
 
 //                Log.Debug("rtranscust", query);

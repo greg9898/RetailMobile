@@ -14,13 +14,13 @@ namespace RetailMobile
 
         public event InvoiceSavedDelegate InvoiceSaved;
 
-        const int SAVE_BUTTON = 764;
         TransHed header = new TransHed();
         TabHost tabHost;
         ItemActionBar actionBar;
         View view;
         InvoiceTabHeader invoiceTabHeader;
         InvoiceTabDetails invoiceTabDetails;
+        bool isTabletLand;
 
         public static InvoiceInfoFragment NewInstance(long objId)
         {
@@ -40,11 +40,18 @@ namespace RetailMobile
             View v = inflater.Inflate(Resource.Layout.InvoiceScreen, container, false);
             view = v;
 
+            isTabletLand = this.Activity.FindViewById<LinearLayout>(Resource.Id.LayoutMenu) != null;
+
             actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
             actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
             actionBar.ClearButtons();
-            actionBar.AddButtonRight(SAVE_BUTTON, this.Activity.GetString(Resource.String.btnSave), Resource.Drawable.save_48);
+            actionBar.AddButtonRight(Buttons.INVOICE_SAVE_BUTTON, this.Activity.GetString(Resource.String.btnSave), Resource.Drawable.save_48);
             actionBar.SetTitle(this.Activity.GetString(Resource.String.lblInvoice));
+
+            if (!isTabletLand)
+            {
+                actionBar.AddButtonLeft(Buttons.DETAILS_ADD_BUTTON, "", Resource.Drawable.add_48);
+            }
             
             invoiceTabHeader = InvoiceTabHeader.NewInstance(this);
             invoiceTabDetails = InvoiceTabDetails.NewInstance(this);
@@ -140,7 +147,7 @@ namespace RetailMobile
 
         void ActionBarButtonClicked(int id)
         {
-            if (id == SAVE_BUTTON)
+            if (id == Buttons.INVOICE_SAVE_BUTTON)
             {
                 try
                 {
@@ -149,6 +156,23 @@ namespace RetailMobile
                 catch (Exception ex)
                 {
                     Log.Error("ActionBarButtonClicked SAVE_BUTTON", "ActionBarButtonClicked SAVE_BUTTON " + ex.Message);
+                }
+            }
+            else  if (id == Buttons.DETAILS_ADD_BUTTON)
+            {
+                try
+                {
+                    var ft = FragmentManager.BeginTransaction();
+                    //ft.Replace(Resource.Id.detailInfo_fragment, InvoiceFragment.NewInstance(invoiceId));
+                    InvoiceInfoFragment invoiceFragment = InvoiceInfoFragment.NewInstance(0);
+                    ft.Replace(Resource.Id.detailInfo_fragment, invoiceFragment);
+                    ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+                    invoiceFragment.InvoiceSaved += new InvoiceInfoFragment.InvoiceSavedDelegate(InvoiceSaved);
+                    ft.Commit();
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("exception", ex.Message);
                 }
             }
         }

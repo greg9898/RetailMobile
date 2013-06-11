@@ -121,8 +121,8 @@ PRIMARY KEY ( id ASC )
                     Log.Error("Connection error", ex.Message);
                     connected = false;
                 }
-                //if (connected)
-                    //return;
+                if (connected)
+                    return;
 
                 // Connect to the database - CreateDatabase creates a new database
                 DBConnection = DatabaseManager.CreateDatabase(Config);

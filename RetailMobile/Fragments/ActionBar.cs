@@ -1,11 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
@@ -21,8 +15,13 @@ namespace RetailMobile.Fragments
 
         public event SyncCLickedDelegate SyncClicked;
 
+        public delegate void MenuClickedDelegate();
+
+        public event MenuClickedDelegate MenuClicked;
+
         Button btnSync;
         Button btnSettings;
+        Button btnMenu;
         ProgressBar pbSync;
 
         public override void OnActivityCreated(Bundle savedInstanceState)
@@ -37,16 +36,48 @@ namespace RetailMobile.Fragments
             btnSync.Click += new EventHandler(btnSync_Click);
 
             btnSettings = v.FindViewById<Button>(Resource.Id.btnSettings);
-            btnSettings.Click += new EventHandler(btnSettings_Click);
-
+            if (btnSettings != null)
+            {
+                btnSettings.Click += new EventHandler(btnSettings_Click);
+            }
+            btnMenu = v.FindViewById<Button>(Resource.Id.btnMenu);
+            if (btnMenu != null)
+            {
+                btnMenu.Click += new EventHandler(btnMenu_Click);
+            }
             pbSync = v.FindViewById<ProgressBar>(Resource.Id.pbSync1);
 
             return v;
         }
 
+        public ViewStates ButtonSettingsVisibility
+        {
+            get{ return btnSettings.Visibility;}
+            set{ btnSettings.Visibility = value;}
+        }
+
+        public ViewStates ButtonMenuVisibility
+        {
+            get{ return btnMenu.Visibility;}
+            set
+            {
+                if (btnMenu != null)
+                {
+                    btnMenu.Visibility = value;
+
+                    if (btnMenu.Visibility == ViewStates.Visible)
+                    {
+                        TextView lblCaption = this.Activity.FindViewById<TextView>(Resource.Id.lblCaption);
+                        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(lblCaption.LayoutParameters);
+                        lp.AddRule(LayoutRules.RightOf, btnMenu.Id);
+                    }
+                }
+            }
+        }
+
         public void ShowProgress()
         {
-            if(btnSync != null && pbSync != null)
+            if (btnSync != null && pbSync != null)
             {
                 btnSync.Visibility = ViewStates.Invisible;
                 pbSync.Visibility = ViewStates.Visible;
@@ -55,7 +86,7 @@ namespace RetailMobile.Fragments
 
         public void HideProgress()
         {
-            if(btnSync != null && pbSync != null)
+            if (btnSync != null && pbSync != null)
             {
                 btnSync.Visibility = ViewStates.Visible;
                 pbSync.Visibility = ViewStates.Invisible;
@@ -72,6 +103,12 @@ namespace RetailMobile.Fragments
         {
             if (SettingsClicked != null)
                 SettingsClicked();
+        }
+
+        void btnMenu_Click(object sender, EventArgs e)
+        {
+            if (MenuClicked != null)
+                MenuClicked();
         }
 
         public static   RelativeLayout.LayoutParams ButtonLayoutParams(Android.Content.Res.Resources r)

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/listStyle"
+    android:orientation="vertical">
+        <TextView
+            android:id="@+id/tbCustName"
+            android:text="tbCustName"
+            style="@style/listRowTextViewStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tbHtrnDate"
+            style="@style/listRowTextViewStyle"
+            android:text="tbHtrnDate"
+            android:layout_weight="1" />
+        <TextView
+            android:id="@+id/tbHtrnNetVal"
+            android:text="tbHtrnNetVal"
+            style="@style/listRowTextViewStyle"
+            android:gravity="right"
+            android:layout_weight="0.5" />
+        <TextView
+            android:id="@+id/tbHtrnVatVal"
+            android:text="tbHtrnVatVal"
+            style="@style/listRowTextViewStyle"
+            android:gravity="right"
+            android:layout_weight="0.5" />
+    </LinearLayout>
+</LinearLayout>

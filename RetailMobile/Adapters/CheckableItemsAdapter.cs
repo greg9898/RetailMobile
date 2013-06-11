@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Android.App;
 using Android.Views;
 using Android.Widget;
-using Android.OS;
 using RetailMobile.Library;
 using Android.Util;
 
@@ -13,6 +11,7 @@ namespace RetailMobile
     public class CheckableItemsAdapter : ArrayAdapter<Library.ItemInfo>, IScrollLoadble, View.IOnTouchListener
     {
         public static EditText lastFocusedControl;
+
         public delegate void ItemImageSelectedDelegate(Android.Graphics.Bitmap image);
 
         public event  ItemImageSelectedDelegate  ItemImageSelected;
@@ -24,112 +23,114 @@ namespace RetailMobile
 
         public delegate void SingleItemSelectedDeletegate();
 
-            public delegate void SingleItemFocusedDeletegate(ItemInfo item);
+        public delegate void SingleItemFocusedDeletegate(ItemInfo item);
 
-            public event SingleItemFocusedDeletegate SingleItemFocusedEvent;
-            public event SingleItemSelectedDeletegate SingleItemSelectedEvent;
+        public event SingleItemFocusedDeletegate SingleItemFocusedEvent;
+        public event SingleItemSelectedDeletegate SingleItemSelectedEvent;
 
-            public CheckableItemsAdapter(Activity context, Library.ItemInfoList list)
+        public CheckableItemsAdapter(Activity context, Library.ItemInfoList list)
             : base(context, Resource.Layout.item_row_checkable, list)
-            {
-                this.context = context;
+        {
+            this.context = context;
             
-                _itemInfoList = list;
+            _itemInfoList = list;
+        }
+
+        public override View GetView(int position, View convertView, ViewGroup parent)
+        {
+            View view = convertView;
+            ViewHolder holder;
+
+            if (view == null)
+            {
+                view = context.LayoutInflater.Inflate(Resource.Layout.item_row_checkable, null);
+
+                holder = new ViewHolder();
+                holder.itemBox = view.FindViewById<CheckBox>(Resource.Id.checkBox);
+                holder.btnItemImage = view.FindViewById<Button>(Resource.Id.btnItemImage);
+                holder.tbQty = view.FindViewById<EditText>(Resource.Id.tbQty);
+                holder.tbItemCode = (TextView)view.FindViewById(Resource.Id.tbItemCode);
+                holder.tbItemName = (TextView)view.FindViewById(Resource.Id.tbItemName);
+                holder.tbItemLastBuyDate = (TextView)view.FindViewById(Resource.Id.tbItemLastBuyDate);
+                holder.tbItemSaleVal = (TextView)view.FindViewById(Resource.Id.tbItemSaleVal);
+                holder.tbItemQtyLeft = (TextView)view.FindViewById(Resource.Id.tbItemQtyLeft);
+                holder.layout_checkable_item = view.FindViewById<RelativeLayout>(Resource.Id.layout_checkable_item_info);
+
+                holder.tbQty.SetOnTouchListener(this);
+
+                view.Tag = holder;
             }
+            else
+            {			
+                holder = (ViewHolder)view.Tag;
+            }
+            
+            ItemInfo item = this.GetItem(position);
 
-            public override View GetView(int position, View convertView, ViewGroup parent)
+            if (item == null)
             {
-                View view = convertView;
-                ViewHolder holder;
-
-                if (view == null)
-                {
-                    view = context.LayoutInflater.Inflate(Resource.Layout.item_row_checkable, null);
-
-                    holder = new ViewHolder();
-                    holder.itemBox = view.FindViewById<CheckBox>(Resource.Id.checkBox);
-                    holder.btnItemImage = view.FindViewById<Button>(Resource.Id.btnItemImage);
-                    holder.tbQty = view.FindViewById<EditText>(Resource.Id.tbQty);
-                    holder.tbItemCode = (TextView)view.FindViewById(Resource.Id.tbItemCode);
-                    holder.tbItemName = (TextView)view.FindViewById(Resource.Id.tbItemName);
-                    holder.tbItemLastBuyDate = (TextView)view.FindViewById(Resource.Id.tbItemLastBuyDate);
-                    holder.tbItemSaleVal = (TextView)view.FindViewById(Resource.Id.tbItemSaleVal);
-                    holder.tbItemQtyLeft = (TextView)view.FindViewById(Resource.Id.tbItemQtyLeft);
-                    holder.layout_checkable_item = view.FindViewById<RelativeLayout>(Resource.Id.layout_checkable_item_info);
-
-                    holder.tbQty.SetOnTouchListener(this);
-
-                    view.Tag = holder;
-                }
-                else
-                {			
-                    holder = (ViewHolder)view.Tag;
-                }
-            
-                ItemInfo item = this.GetItem(position);
-
-                if (item == null)
-                {
-                    return view;
-                }
-		
-                try
-                {
-                    if (holder.btnItemImage != null)
-                        holder.btnItemImage.SetBackgroundDrawable(new Android.Graphics.Drawables.BitmapDrawable(item.ItemImage));
-                    holder.btnItemImage.Click += new EventHandler(btnItemImageClicked);
-                    if (holder.tbItemCode != null)
-                        holder.tbItemCode.Text = item.item_cod;
-                    if (holder.tbItemName != null)
-                        holder.tbItemName.Text = item.ItemDesc;
-                    if (holder.tbItemLastBuyDate != null)
-                        holder.tbItemLastBuyDate.Text = item.ItemLastBuyDate.ToString(Common.DateFormatDateOnly);
-                    if (holder.tbItemQtyLeft != null)
-                        holder.tbItemQtyLeft.Text = item.ItemQtyLeft.ToString(Common.DecimalFormat);
-                    if (holder.tbItemSaleVal != null)
-                        holder.tbItemSaleVal.Text = item.ItemSaleVal1.ToString(Common.DecimalFormat);
-				
-                    holder.itemBox.CheckedChange -= new EventHandler<CompoundButton.CheckedChangeEventArgs>(itemBox_CheckedChange);
-                    holder.itemBox.Checked = _checkedItemIds.ContainsKey(item.ItemId);
-                    holder.itemBox.Tag = position;
-                    holder.itemBox.CheckedChange += new EventHandler<CompoundButton.CheckedChangeEventArgs>(itemBox_CheckedChange);
-                holder.position = position;
-            
-                    holder.layout_checkable_item.Tag = position;
-                    holder.layout_checkable_item.Touch += new EventHandler<View.TouchEventArgs>(layout_checkable_item_Touch);
-            
-                    holder.tbQty.Tag = holder;//position;
-                    holder.tbQty.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbQty_TextChanged);
-                }
-                catch (Exception ex)
-                {
-                    Log.Error("exception", ex.Message);
-                }
-
                 return view;
             }
-
-            public void btnItemImageClicked(object sender, EventArgs e)
+		
+            try
             {
-                Android.Graphics.Bitmap image = ((Android.Graphics.Drawables.BitmapDrawable)((Button)sender).Background).Bitmap;
-                //show image in default image viewer
-                //_itemInfoList.show//
-                if (ItemImageSelected != null)
-                    ItemImageSelected(image);
+                if (holder.btnItemImage != null)
+                    holder.btnItemImage.SetBackgroundDrawable(new Android.Graphics.Drawables.BitmapDrawable(item.ItemImage));
+                holder.btnItemImage.Click += new EventHandler(btnItemImageClicked);
+                if (holder.tbItemCode != null)
+                    holder.tbItemCode.Text = item.item_cod;
+                if (holder.tbItemName != null)
+                    holder.tbItemName.Text = item.ItemDesc;
+                if (holder.tbItemLastBuyDate != null)
+                    holder.tbItemLastBuyDate.Text = item.ItemLastBuyDate.ToString(Common.DateFormatDateOnly);
+                if (holder.tbItemQtyLeft != null)
+                    holder.tbItemQtyLeft.Text = item.ItemQtyLeft.ToString(Common.DecimalFormat);
+                if (holder.tbItemSaleVal != null)
+                    holder.tbItemSaleVal.Text = item.ItemSaleVal1.ToString(Common.DecimalFormat);
+				
+                holder.itemBox.CheckedChange -= new EventHandler<CompoundButton.CheckedChangeEventArgs>(itemBox_CheckedChange);
+                holder.itemBox.Checked = _checkedItemIds.ContainsKey(item.ItemId);
+                holder.itemBox.Tag = position;
+                holder.itemBox.CheckedChange += new EventHandler<CompoundButton.CheckedChangeEventArgs>(itemBox_CheckedChange);
+                holder.position = position;
+            
+                holder.layout_checkable_item.Tag = position;
+                holder.layout_checkable_item.Touch += new EventHandler<View.TouchEventArgs>(layout_checkable_item_Touch);
+            
+                holder.tbQty.Tag = holder;//position;
+                holder.tbQty.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbQty_TextChanged);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("CheckableItemsAdapter getView", ex.Message);
             }
 
-            class ViewHolder:Java.Lang.Object
+            return view;
+        }
+
+        public void btnItemImageClicked(object sender, EventArgs e)
+        {
+            //show image in default image viewer
+            //_itemInfoList.show//
+            if (ItemImageSelected != null)
             {
-                public Button btnItemImage;
-                public	CheckBox itemBox;
-                public	EditText tbQty ;
-                public	TextView tbItemCode;
-                public	TextView tbItemName ;
-                public	TextView tbItemLastBuyDate;
-                public	TextView tbItemSaleVal ;
-                public	TextView tbItemQtyLeft;
-                public	RelativeLayout layout_checkable_item;
-                public int position = 0;
+                Android.Graphics.Bitmap image = ((Android.Graphics.Drawables.BitmapDrawable)((Button)sender).Background).Bitmap;
+                ItemImageSelected(image);
+            }
+        }
+
+        class ViewHolder:Java.Lang.Object
+        {
+            public Button btnItemImage;
+            public	CheckBox itemBox;
+            public	EditText tbQty ;
+            public	TextView tbItemCode;
+            public	TextView tbItemName ;
+            public	TextView tbItemLastBuyDate;
+            public	TextView tbItemSaleVal ;
+            public	TextView tbItemQtyLeft;
+            public	RelativeLayout layout_checkable_item;
+            public int position = 0;
         }
 		/* variable for counting two successive up-down events */
         int clickCount = 0;
@@ -175,7 +176,6 @@ namespace RetailMobile
                             }
 
                             clickCount = 0;
-                            duration = 0;
                         }
                         else
                         {
@@ -209,7 +209,7 @@ namespace RetailMobile
                     _checkedItemIds[item.ItemId] = item.ItemQty;
                 }
 
-                if (holder.itemBox.Checked == false)
+                if (!holder.itemBox.Checked)
                     holder.itemBox.Checked = true;
             }            
         }
@@ -275,7 +275,6 @@ namespace RetailMobile
 
             return true;
         }
-
         #endregion
 
     }

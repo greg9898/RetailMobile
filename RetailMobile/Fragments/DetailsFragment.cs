@@ -8,12 +8,11 @@ using Android.Support.V4.App;
 
 namespace RetailMobile
 {
-    internal class DetailsFragment : Android.Support.V4.App.ListFragment
+    class DetailsFragment : Android.Support.V4.App.ListFragment
     {
-        const int ADD_BUTTON = 12287;
         RetailMobile.Fragments.ItemActionBar actionBar;
-        System.Collections.ICollection _list = null;
-        private int _currentObjId = -1;
+        System.Collections.ICollection _list;
+        int _currentObjId = -1;
         bool _isDualPane = true;
 
         public static DetailsFragment NewInstance(int objId)
@@ -29,18 +28,18 @@ namespace RetailMobile
             get { return Arguments.GetInt("idLvl1", -1); }
         }
 
-        bool scrollLoading = false;
-        private int currentPage = 0;
-        private int previousTotal = 0;
+        bool scrollLoading;
+        int currentPage;
+        int previousTotal;
 		//IScrollLoadble LoadableAdapter;
 
         public override void OnViewCreated(View p0, Bundle p1)
         {
             base.OnViewCreated(p0, p1);
 
-            actionBar = (RetailMobile.Fragments.ItemActionBar)((Android.Support.V4.App.FragmentActivity)this.Activity).SupportFragmentManager.FindFragmentById(Resource.Id.ActionBarList);
+            actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBarList);
             actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
-            actionBar.AddButtonRight(ADD_BUTTON, "", Resource.Drawable.add_48);
+            actionBar.AddButtonRight(Buttons.DETAILS_ADD_BUTTON, "", Resource.Drawable.add_48);
 
             //this.ListView.SetOnScrollListener(new EndlessScrollListener((IScrollLoadble)this.ListView.Adapter));
             //this.ListView.Scroll += new EventHandler<AbsListView.ScrollEventArgs>();
@@ -62,7 +61,7 @@ namespace RetailMobile
 
         void ActionBarButtonClicked(int id)
         {
-            if (id == ADD_BUTTON)
+            if (id == Buttons.DETAILS_ADD_BUTTON)
             {
                 try
                 {
@@ -92,6 +91,9 @@ namespace RetailMobile
             }
 
             ListView.ChoiceMode = ChoiceMode.Single;
+
+            var detInfo = Activity.FindViewById<View>(Resource.Id.detailInfo_fragment);
+            _isDualPane = detInfo != null && detInfo.Visibility == ViewStates.Visible;
 
             switch (ParentObjId)
             {

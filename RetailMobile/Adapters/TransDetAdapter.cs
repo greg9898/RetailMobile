@@ -73,7 +73,6 @@ namespace RetailMobile
                 holder = new ViewHolder();
                 holder.position = position;
 
-                holder.ll_bottom = view.FindViewById<LinearLayout>(Resource.Id.ll_bottom);
                 holder.lblItemCode = (TextView)view.FindViewById(Resource.Id.lblDtrn_ItemCode);
                 holder.lblItemDesc = (TextView)view.FindViewById(Resource.Id.tbItemDesc);
                 holder.tbDtrn_qty1 = view.FindViewById<EditText>(Resource.Id.tbDtrn_qty1);
@@ -82,15 +81,12 @@ namespace RetailMobile
                 holder.lblDtrn_net_value = view.FindViewById<TextView>(Resource.Id.lblDtrn_net_value);
                 holder.lblDtrn_vat_value = view.FindViewById<TextView>(Resource.Id.lblDtrn_vat_value);
 
-               
-
                 tbDtrn_disc_line1 = holder.tbDtrn_disc_line1;
                 tbDtrn_qty1 = holder.tbDtrn_qty1;
 
                 view.Tag = holder;
 
                 view.LongClick += rowView_HandleLongClick;
-//                view.Click += row_Click;
 
                 holder.tbDtrn_qty1.Tag = holder;
                 holder.tbDtrn_qty1.FocusableInTouchMode = true;
@@ -144,7 +140,6 @@ namespace RetailMobile
                 holder.tbDtrn_qty1.Enabled = false;
                 holder.tbDtrn_disc_line1.Focusable = false;
                 holder.tbDtrn_qty1.Focusable = false;
-                holder.ll_bottom.Visibility = ViewStates.Gone;
             }
 
             holder.tbDtrn_qty1.FocusableInTouchMode = true;
@@ -154,13 +149,6 @@ namespace RetailMobile
             holder.tbDtrn_disc_line1.Focusable = true;
 
             return view;
-        }
-
-        void row_Click(object sender, EventArgs e)
-        {
-            View row = sender as View;
-            ViewHolder holder = row.Tag as ViewHolder;
-            holder.ll_bottom.Visibility = holder.ll_bottom.Visibility == ViewStates.Gone ? ViewStates.Visible : ViewStates.Gone;
         }
 
         public void Disable()
@@ -178,7 +166,6 @@ namespace RetailMobile
             public EditText tbDtrn_disc_line1;
             public TextView lblDtrn_net_value ;
             public TextView lblDtrn_vat_value;
-            public LinearLayout ll_bottom;
             public int position;
 
             public void RefreshRow()
@@ -276,8 +263,8 @@ namespace RetailMobile
                     EditText yourEditText = (EditText)v;
                     Android.Views.InputMethods.InputMethodManager imm = (Android.Views.InputMethods.InputMethodManager)context.GetSystemService(Android.Content.Context.InputMethodService);
                     imm.ShowSoftInput(yourEditText, Android.Views.InputMethods.ShowFlags.Forced);
-                    if(lastFocusedControl != null)
-                        lastFocusedControl.PostDelayed(new Action(()=>{lastFocusedControl.SelectAll();}),100);
+                    if (lastFocusedControl != null)
+                        lastFocusedControl.PostDelayed(new Action(()=>{lastFocusedControl.SelectAll();}), 100);
                     break;
             }
 

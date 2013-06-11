@@ -1,39 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/listStyle">
-    <ImageView
-        android:id="@+id/imgCustomer"
-        android:layout_width="40dip"
-        android:layout_height="40dip"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp"
-        android:layout_marginLeft="5dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/no_icon" />
-    <LinearLayout
-        style="@style/fillParent"
-        android:layout_toRightOf="@id/imgCustomer">
-        <TextView
-            android:id="@+id/tbCustCode"
-            android:text="tbCustCode"
-            style="@style/listRowTextViewStyle"
-            android:layout_weight="0.5"
-            android:layout_marginLeft="5dp" />
-        <TextView
-            android:id="@+id/tbCustName"
-            android:text="tbCustName"
-            style="@style/listRowTextViewStyle"
-            android:layout_weight="1" />
-        <TextView
-            android:id="@+id/tbCustTaxNum"
-            android:text="tbCustTaxNum"
-            style="@style/listRowTextViewStyle"
-            android:layout_weight="1" />
-        <TextView
-            android:id="@+id/tbCustDebt"
-            android:text="tbCustDebt"
-            style="@style/listRowTextViewStyle"
-            android:layout_weight="0.5" />
-    </LinearLayout>
-</RelativeLayout>
+    <TextView
+        android:id="@+id/tbCustCode"
+        android:text="tbCustCode"
+        style="@style/listRowTextViewStyle"
+        android:layout_weight="0.3"
+        android:layout_marginLeft="5dp" />
+    <TextView
+        android:id="@+id/tbCustName"
+        android:text="tbCustName"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        style="@style/listRowTextViewStyle"
+        android:layout_weight="1" />
+</LinearLayout>

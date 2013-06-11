@@ -76,7 +76,7 @@ namespace RetailMobile
         void tbHtrnID_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
             double hedId = double.Parse(((EditText)sender).Text);
-            if (invoiceParentView.Header.HtrnId == hedId)
+            if (invoiceParentView == null || invoiceParentView.Header.HtrnId == hedId)
             {
                 return;
             }
@@ -104,7 +104,10 @@ namespace RetailMobile
             {
                 FillCustomerFields(c);
 
-                invoiceParentView.Header.CstId = c.CustID;
+                if (invoiceParentView != null)
+                {
+                    invoiceParentView.Header.CstId = c.CustID;
+                }
             }
         }
 
@@ -127,6 +130,11 @@ namespace RetailMobile
 
         public  void FillInvoiceFields()
         {
+            if (invoiceParentView == null)
+            {
+                return;
+            }
+
             tbHtrnExpln.Text = invoiceParentView.Header.HtrnExpl;
             tbHtrnDate.Text = invoiceParentView.Header.TransDateText;
       

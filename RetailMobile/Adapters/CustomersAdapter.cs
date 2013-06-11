@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -12,7 +11,7 @@ using Android.Widget;
 
 namespace RetailMobile
 {
-    public class CustomersAdapter : ArrayAdapter<Library.CustomerInfo>, IScrollLoadble 
+    public class CustomersAdapter : ArrayAdapter<Library.CustomerInfo>, IScrollLoadble
     {
         Activity context = null;
         Library.CustomerInfoList customerInfoList;
@@ -34,27 +33,25 @@ namespace RetailMobile
 
             TextView tbCustCode = (TextView)view.FindViewById(Resource.Id.tbCustCode);
             TextView tbCustName = (TextView)view.FindViewById(Resource.Id.tbCustName);
-            TextView tbCustTaxNum = (TextView)view.FindViewById(Resource.Id.tbCustTaxNum);
-            TextView tbCustDebt = (TextView)view.FindViewById(Resource.Id.tbCustDebt);
-
-            tbCustTaxNum.Visibility = ViewStates.Gone;
-            tbCustDebt.Visibility = ViewStates.Gone;
+//            TextView tbCustTaxNum = (TextView)view.FindViewById(Resource.Id.tbCustTaxNum);
+//            TextView tbCustDebt = (TextView)view.FindViewById(Resource.Id.tbCustDebt);
+//
+//            tbCustTaxNum.Visibility = ViewStates.Gone;
+//            tbCustDebt.Visibility = ViewStates.Gone;
 
             tbCustCode.Text = item.Code;
             tbCustName.Text = item.Name;
-            tbCustTaxNum.Text = item.CustTaxNum;
-            tbCustDebt.Text = item.CustDebt.ToString();
+//            tbCustTaxNum.Text = item.CustTaxNum;
+//            tbCustDebt.Text = item.CustDebt.ToString();
 
             return view;
         }
-
 		#region IScrollLoadble implementation
 
-		public void LoadData (int page)
-		{
+        public void LoadData(int page)
+        {
 
-		}
-
+        }
 		#endregion
     }
 }

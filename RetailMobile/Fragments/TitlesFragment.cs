@@ -1,13 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Android.Support.V4.App;
@@ -18,14 +10,18 @@ namespace RetailMobile
     {
         public enum MenuItems
         {
-            Items = 0,
-            Customers = 1,
-            Invoices = 2,
+            Items = 0
+,
+            Customers = 1
+,
+            Invoices = 2
+,
             CheckableItemsTest = 3
         }
 
-        private bool _isDualPane = false;
-        private int _currentObjId = -1;
+        bool _isDualPane ;
+        int _currentObjId = -1;
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -65,7 +61,7 @@ namespace RetailMobile
             ShowDetails(position);
         }
 
-        private void ShowDetails(int objId)
+        void ShowDetails(int objId)
         {
             if (objId == -1)
             {
@@ -103,8 +99,6 @@ namespace RetailMobile
             }
             else
             {
-                // Otherwise we need to launch a new Activity to display
-                // the dialog fragment with selected text.
                 var intent = new Intent();
                 intent.SetClass(Activity, typeof(DetailsActivity));
                 intent.PutExtra("idLvl1", objId);

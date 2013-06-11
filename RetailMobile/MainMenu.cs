@@ -1,7 +1,6 @@
 using System;
 using Android.App;
 using Android.Content;
-using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -10,8 +9,7 @@ using Android.Support.V4.App;
 
 namespace RetailMobile
 {
-    [Activity(Label = "Ασυρματη Παραγγελιοληψια", MainLauncher = true, Icon = "@drawable/retail", Theme = "@android:style/Theme.Light.NoTitleBar.Fullscreen"
-              ,ScreenOrientation = ScreenOrientation.Landscape)]
+    [Activity(Label = "Ασυρματη Παραγγελιοληψια", MainLauncher = true, Icon = "@drawable/retail", Theme = "@android:style/Theme.Light.NoTitleBar.Fullscreen")]
     public class MainMenu : Android.Support.V4.App.FragmentActivity
     {
         public enum MenuItems
@@ -26,6 +24,7 @@ namespace RetailMobile
         }
 
         RetailMobile.Fragments.ActionBar myActionBar;
+        bool _isTabletLand = true;
 
         protected override void OnCreate(Bundle bundle)
         {   
@@ -50,41 +49,110 @@ namespace RetailMobile
             Crashlytics.Android.Crashlytics1.Start(this);
 
             SetContentView(Resource.Layout.MainMenu);
-            myActionBar = (RetailMobile.Fragments.ActionBar)SupportFragmentManager.FindFragmentById(Resource.Id.ActionBarMain);
+            _isTabletLand = this.FindViewById<LinearLayout>(Resource.Id.LayoutMenu) != null;
+     
+            myActionBar = (RetailMobile.Fragments.ActionBar)SupportFragmentManager.FindFragmentById(Resource.Id.ActionBarMain);       
             myActionBar.SyncClicked += new Fragments.ActionBar.SyncCLickedDelegate(MyActionBar_SyncClicked);
+            myActionBar.MenuClicked += new RetailMobile.Fragments.ActionBar.MenuClickedDelegate(MenuClicked);
+            myActionBar.SettingsClicked += new RetailMobile.Fragments.ActionBar.SettingsCLickedDelegate(SettingsClicked);
+
+            if (!_isTabletLand)
+            {
+                InitPopupMenu();
+            }
 
             ShowProgressBar();
+
             System.Threading.Tasks.Task.Factory.StartNew(() => Sync.SyncUsers(this)).ContinueWith(task => this.RunOnUiThread(() => HideProgressBar()));
-            //Sync.SyncUsers(this);
-            //RetailMobile.LoginFragment loginFragment = (RetailMobile.LoginFragment)SupportFragmentManager.FindFragmentById(Resource.Id.detail);
 
             if (!string.IsNullOrEmpty(PreferencesUtil.Username) && !string.IsNullOrEmpty(PreferencesUtil.Password) &&
                 LoginFragment.Login(this, PreferencesUtil.Username, PreferencesUtil.Password))
             {
-                this.FindViewById<LinearLayout>(Resource.Id.LayoutMenu).Visibility = ViewStates.Visible;
                 this.FindViewById<LinearLayout>(Resource.Id.layoutList).Visibility = ViewStates.Visible;
-                this.FindViewById<LinearLayout>(Resource.Id.layoutDetails).Visibility = ViewStates.Visible;
                 this.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Visible;
-                
-                DetailsFragment details = DetailsFragment.NewInstance((int)MainMenu.MenuItems.Invoices);
+                this.FindViewById<LinearLayout>(Resource.Id.layoutDetails).Visibility = ViewStates.Visible;
+
                 var ft = SupportFragmentManager.BeginTransaction();
-                ft.Replace(Resource.Id.details_fragment, details);
+                ft.Replace(Resource.Id.details_fragment, DetailsFragment.NewInstance((int)MainMenu.MenuItems.Invoices));
                 ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
                 ft.Commit();
                 
                 ft = SupportFragmentManager.BeginTransaction();
-                //ft.Replace(Resource.Id.detailInfo_fragment, InvoiceFragment.NewInstance(invoiceId));
                 ft.Replace(Resource.Id.detailInfo_fragment, InvoiceInfoFragment.NewInstance(0));
                 ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
                 ft.Commit();
+
+                if (_isTabletLand)
+                {
+                    this.FindViewById<LinearLayout>(Resource.Id.LayoutMenu).Visibility = ViewStates.Visible;
+                }
+                else
+                {
+                    myActionBar.ButtonMenuVisibility = ViewStates.Visible;
+                    myActionBar.ButtonSettingsVisibility = ViewStates.Gone;
+                }
             }
             else
             {
+                if (!_isTabletLand)
+                {
+                    myActionBar.ButtonMenuVisibility = ViewStates.Gone;
+                }
+
                 var ft = SupportFragmentManager.BeginTransaction();
                 ft.Replace(Resource.Id.detailInfo_fragment, new LoginFragment());
                 ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
                 ft.Commit();
             }
+        }
+
+        void InitPopupMenu()
+        {
+            int layoutWidth = (Resources.DisplayMetrics.WidthPixels * 31) / 100;
+            int layoutHeight = 4 * ((int)Resources.GetDimension(Resource.Dimension.main_menu_icon_size) + 2);
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(layoutWidth, layoutHeight);
+            lp.AddRule(LayoutRules.Below, myActionBar.Id);
+            lp.TopMargin = (int)Resources.GetDimension(Resource.Dimension.action_bar_height);
+
+            RelativeLayout popupMenu = this.FindViewById<RelativeLayout>(Resource.Id.popupMenu);
+            popupMenu.LayoutParameters = lp;
+            popupMenu.SetBackgroundResource(Resource.Drawable.actionbar_background);
+
+            MainMenuFragment mainmenupopup_fragment = (MainMenuFragment)SupportFragmentManager.FindFragmentById(Resource.Id.mainmenupopup_fragment);  
+            mainmenupopup_fragment.IsPopupMenu = true;
+
+            Button btnSettings = this.FindViewById<Button>(Resource.Id.btnSettingsMain);
+            btnSettings.Touch += (object sender, View.TouchEventArgs e) => { 
+                switch (e.Event.Action & MotionEventActions.Mask)
+                {
+                    case MotionEventActions.Up:
+                        popupMenu.Visibility = ViewStates.Gone;
+                        SettingsClicked();
+                        break;
+                }
+            };
+        }
+
+        void SettingsClicked()
+        {
+            this.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Gone;
+            var ft = SupportFragmentManager.BeginTransaction();
+            ft.Replace(Resource.Id.detailInfo_fragment, new SettingsFragment());
+
+            ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+            ft.Commit();
+        }
+
+        void MenuClicked()
+        {
+            RelativeLayout popupMenu = this.FindViewById<RelativeLayout>(Resource.Id.popupMenu);
+            if (popupMenu.Visibility == ViewStates.Visible)
+            {
+                popupMenu.Visibility = ViewStates.Gone;
+                return;
+            }
+
+            popupMenu.Visibility = ViewStates.Visible;
         }
 
         public void ShowProgressBar()
