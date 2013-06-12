@@ -12,6 +12,7 @@ namespace RetailMobile
         Button btnListCustomers;
         DetailsFragment details;
         bool isPopupMenu;
+        Common.Layouts layout ;
 
         public bool IsPopupMenu
         {
@@ -50,17 +51,35 @@ namespace RetailMobile
             btnListItems.Click += new EventHandler(btnListItems_Click);
             btnListCustomers.Click += new EventHandler(btnListCustomers_Click);
 
+            if (this.Resources.Configuration.Orientation == Android.Content.Res.Orientation.Landscape)
+            {
+                layout = this.Activity.FindViewById<LinearLayout>(Resource.Id.LayoutMenu) != null ? Common.Layouts.Sw600Land : Common.Layouts.Land;
+            }
+            else
+            {
+                layout = this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.menuLoginFragment) == null ? Common.Layouts.Sw600Port : Common.Layouts.Port;
+            }   
+
             return v;
         }
 
         void SettingsClicked()
         {
-            this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Gone;
-            var ft = FragmentManager.BeginTransaction();
-            ft.Replace(Resource.Id.detailInfo_fragment, new SettingsFragment());
+            if (layout == Common.Layouts.Land || layout == Common.Layouts.Port)
+            {                
+                var intent = new Android.Content.Intent();
+                intent.SetClass(this.Activity, typeof(SettingsFragmentActivity));
+                StartActivity(intent);
+            }
+            else
+            {
+                this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Gone;
+                var ft = FragmentManager.BeginTransaction();
+                ft.Replace(Resource.Id.detailInfo_fragment, new SettingsFragment());
 
-            ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
-            ft.Commit();
+                ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+                ft.Commit();
+            }
         }
 
         void btnListInvoices_Click(object sender, EventArgs e)

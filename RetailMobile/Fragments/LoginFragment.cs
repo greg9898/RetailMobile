@@ -12,14 +12,32 @@ namespace RetailMobile
         TextView tbUsername;
         TextView tbPassword;
         Button btnLogin;
+        Common.Layouts layout ;
+
+        public override void OnCreate(Bundle p0)
+        {
+            base.OnCreate(p0);
+        }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             View view = inflater.Inflate(Resource.Layout.LoginFragment, container, false);
 
-            this.actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
-            this.actionBar.SetTitle(this.Activity.GetString(Resource.String.btnLogin));
-            this.actionBar.ClearButtons();
+            if (this.Resources.Configuration.Orientation == Android.Content.Res.Orientation.Landscape)
+            {
+                layout = this.Activity.FindViewById<LinearLayout>(Resource.Id.LayoutMenu) != null ? Common.Layouts.Sw600Land : Common.Layouts.Land;
+            }
+            else
+            {
+                layout = this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.menuLoginFragment) == null ? Common.Layouts.Sw600Port : Common.Layouts.Port;
+            }   
+
+            if (layout != Common.Layouts.Port)
+            {
+                this.actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
+                this.actionBar.SetTitle(this.Activity.GetString(Resource.String.btnLogin));
+                this.actionBar.ClearButtons();
+            }
 
             this.tbUsername = (TextView)view.FindViewById(Resource.Id.tbUsername);
             this.tbPassword = (TextView)view.FindViewById(Resource.Id.tbPassword);

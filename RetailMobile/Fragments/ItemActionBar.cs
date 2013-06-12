@@ -1,11 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
@@ -47,7 +42,7 @@ namespace RetailMobile.Fragments
 
         public void SetTitle(string title)
         {
-            if(titleView != null)
+            if (titleView != null)
                 titleView.Text = title;
         }
 
@@ -63,11 +58,11 @@ namespace RetailMobile.Fragments
 
         public void ClearButtons()
         {
-            if(ButtonsAdded != null)
+            if (ButtonsAdded != null)
                 ButtonsAdded.Clear();
-            if(leftButtons != null)
+            if (leftButtons != null)
                 leftButtons.RemoveAllViews();
-            if(rightButtons != null)
+            if (rightButtons != null)
                 rightButtons.RemoveAllViews();
         }
 

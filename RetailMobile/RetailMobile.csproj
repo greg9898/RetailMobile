@@ -78,7 +78,6 @@
     <Compile Include="Fragments\InvoiceInfoFragment.cs" />
     <Compile Include="Fragments\ItemFragment.cs" />
     <Compile Include="Fragments\CustomerFragment.cs" />
-    <Compile Include="Fragments\DetailsActivity.cs" />
     <Compile Include="Fragments\DetailsFragment.cs" />
     <Compile Include="Fragments\TitlesFragment.cs">
       <SubType>Code</SubType>
@@ -196,6 +195,10 @@
     <AndroidResource Include="Resources\layout-sw600dp-port\TransHedRow.axml" />
     <AndroidResource Include="Resources\layout-sw600dp\TransHedRow.axml" />
     <AndroidResource Include="Resources\Drawable\settings_64.png" />
+    <Compile Include="Fragments\FragmentActivities\DetailsActivity.cs" />
+    <Compile Include="Fragments\FragmentActivities\LoginFragmentActivity.cs" />
+    <AndroidResource Include="Resources\Layout\mainmenu_popup.axml" />
+    <Compile Include="Fragments\FragmentActivities\SettingsFragmentActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -400,6 +403,7 @@
     <Folder Include="Resources\layout-port\" />
     <Folder Include="Resources\layout-sw600dp\" />
     <Folder Include="Resources\layout-sw600dp-port\" />
+    <Folder Include="Fragments\FragmentActivities\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidJavaLibrary Include="lib\UltraLiteJNI12.jar" />

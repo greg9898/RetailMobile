@@ -4,6 +4,17 @@ namespace RetailMobile
 {
     public static class Common
     {
+        public enum Layouts
+        {
+            Land
+,
+            Port
+,
+            Sw600Land
+,
+            Sw600Port
+        }
+
         public static int CurrentDealerID = 0;
         public static string DecimalFormat = "######0.0##";
         public static string CurrencyFormat = "######0.00";
