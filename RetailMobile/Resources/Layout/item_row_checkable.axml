@@ -54,9 +54,7 @@
     </RelativeLayout>
     <EditText
         android:id="@+id/tbQty"
-        android:inputType="number"
-        android:digits="0123456789"
-        android:numeric="integer"
+        android:inputType="numberDecimal"
         android:selectAllOnFocus="true"
         android:text="1"
         style="@style/myEditTextStyle"

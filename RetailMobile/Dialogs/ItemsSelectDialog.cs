@@ -21,7 +21,7 @@ namespace RetailMobile
         EditText tbRetVal;
         Spinner cbCateg1;
         Spinner cbCateg2;
-        Dictionary<int, int> _checkedItems = new Dictionary<int, int>();
+        Dictionary<int, double> _checkedItems = new Dictionary<int, double>();
         CheckableItemsAdapter adapterItems;
         ItemInfoList itemInfoList;
         bool scrollLoading = false;
@@ -303,7 +303,7 @@ namespace RetailMobile
             };
         }
 
-        public Dictionary<int, int> CheckedItemIds
+        public Dictionary<int, double> CheckedItemIds
         {
             get { return _checkedItems; }
         }

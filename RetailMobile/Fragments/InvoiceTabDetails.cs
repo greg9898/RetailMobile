@@ -105,7 +105,7 @@ namespace RetailMobile
 
                     if (detOld != null)
                     {
-                        detOld.LoadItemInfo(Activity, itemId, (int)detOld.DtrnQty1 + dialogItems.CheckedItemIds[itemId], invoiceParentView.Header.CstId);
+                        detOld.LoadItemInfo(Activity, itemId, (double)detOld.DtrnQty1 + dialogItems.CheckedItemIds[itemId], invoiceParentView.Header.CstId);
                     }
                     else
                     {

@@ -19,7 +19,7 @@ namespace RetailMobile
         Activity context = null;
         ItemInfoList _itemInfoList;
         public ItemsSelectDialog Parent;
-        Dictionary<int, int> _checkedItemIds = new Dictionary<int, int>();
+        Dictionary<int, double> _checkedItemIds = new Dictionary<int, double>();
 
         public delegate void SingleItemSelectedDeletegate();
 
@@ -199,8 +199,10 @@ namespace RetailMobile
             int index = int.Parse(holder.position.ToString ());
 
             Library.ItemInfo item = this.GetItem(index);
-            int res = 0;
-            if (int.TryParse(((EditText)sender).Text, out res))
+            double res = 0;
+            string q = ((EditText)sender).Text;
+            q = q.ToString().Trim().Replace(",", ".").Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
+            if (double.TryParse(q, out res))
             {
                 item.ItemQty = res;
 
@@ -237,7 +239,7 @@ namespace RetailMobile
             }
         }
 
-        public Dictionary<int, int> CheckedItemIds
+        public Dictionary<int, double> CheckedItemIds
         {
             get { return _checkedItemIds; }
         }

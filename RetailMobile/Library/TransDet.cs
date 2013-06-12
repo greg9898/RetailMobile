@@ -86,7 +86,7 @@ namespace RetailMobile.Library
 
         public int ItemVatId { get; set; }
 
-        public void LoadItemInfo(Context ctx, decimal itemId, int qty, double cstId)
+        public void LoadItemInfo(Context ctx, decimal itemId, double qty, double cstId)
         {
             Log.Debug("LoadItemInfo", "itemID=" + itemId + ",qty=" + qty);
             

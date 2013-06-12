@@ -17,7 +17,7 @@ namespace RetailMobile.Library
     {
         public int ItemId { get; set; }
 
-        public int ItemQty
+        public double ItemQty
         {
             get;
             set;

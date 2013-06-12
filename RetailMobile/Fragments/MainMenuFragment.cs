@@ -65,13 +65,13 @@ namespace RetailMobile
 
         void SettingsClicked()
         {
-            if (layout == Common.Layouts.Land || layout == Common.Layouts.Port)
+            /*if (layout == Common.Layouts.Land || layout == Common.Layouts.Port)
             {                
                 var intent = new Android.Content.Intent();
                 intent.SetClass(this.Activity, typeof(SettingsFragmentActivity));
                 StartActivity(intent);
             }
-            else
+            else*/
             {
                 this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Gone;
                 var ft = FragmentManager.BeginTransaction();
