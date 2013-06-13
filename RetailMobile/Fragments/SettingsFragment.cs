@@ -19,6 +19,7 @@ namespace RetailMobile
         Button btnLogout;
         Button btnSync;
         RetailMobile.Fragments.ItemActionBar actionBar;
+        bool isTabletLand;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -52,6 +53,8 @@ namespace RetailMobile
             btnSync.Click += new EventHandler(btnSync_Click);
             btnLogout.Click += new EventHandler(btnLogout_Click);
 
+            isTabletLand = this.Activity.FindViewById<LinearLayout>(Resource.Id.LayoutMenu) != null;
+            
             this.actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar); 
             actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
             actionBar.ClearButtons();

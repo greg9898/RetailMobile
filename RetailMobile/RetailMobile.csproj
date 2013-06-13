@@ -100,7 +100,6 @@
     <Compile Include="MainMenu.cs" />
     <Compile Include="PreferencesUtil.cs" />
     <AndroidResource Include="Resources\Drawable\menu_caption_background.xml" />
-    <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Adapters\SpinnerAdapter.cs" />
     <Compile Include="Sync.cs" />
@@ -199,6 +198,9 @@
     <Compile Include="Fragments\FragmentActivities\LoginFragmentActivity.cs" />
     <AndroidResource Include="Resources\Layout\mainmenu_popup.axml" />
     <Compile Include="Fragments\FragmentActivities\SettingsFragmentActivity.cs" />
+    <Compile Include="Resource.Designer.cs">
+      <DependentUpon>CustomerDetails.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

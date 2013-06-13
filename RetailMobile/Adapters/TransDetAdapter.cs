@@ -60,7 +60,8 @@ namespace RetailMobile
             View view = convertView;
             ViewHolder holder;
 
-            TransDet detail = dataSource[position];
+            //TransDet detail = dataSource[position];
+            TransDet detail = this.GetItem(position);
 
             if (detail == null)
             {
@@ -81,21 +82,31 @@ namespace RetailMobile
                 holder.lblDtrn_net_value = view.FindViewById<TextView>(Resource.Id.lblDtrn_net_value);
                 holder.lblDtrn_vat_value = view.FindViewById<TextView>(Resource.Id.lblDtrn_vat_value);
 
-                tbDtrn_disc_line1 = holder.tbDtrn_disc_line1;
-                tbDtrn_qty1 = holder.tbDtrn_qty1;
+                //holder.tbDtrn_disc_line1.Touch += new EventHandler<View.TouchEventArgs>(EditTextTouchUp);
+            }
+            else
+            {            
+                holder = (ViewHolder)view.Tag;
+                holder.position = position;
+            }
 
-                view.Tag = holder;
 
-                view.LongClick += rowView_HandleLongClick;
 
-                holder.tbDtrn_qty1.Tag = holder;
-                holder.tbDtrn_qty1.FocusableInTouchMode = true;
-                holder.tbDtrn_qty1.Text = detail.DtrnQty1.ToString("#######0.0");
-                holder.tbDtrn_qty1.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbDtrn_qty1_TextChanged);            
-                //holder.tbDtrn_qty1.FocusChange += new EventHandler(tbQty_HandleFocusChange);
-                holder.tbDtrn_qty1.FocusChange += tbQty_HandleFocusChange;
-       
-                /*_gestureDetector = new GestureDetector(this);
+            tbDtrn_disc_line1 = holder.tbDtrn_disc_line1;
+            tbDtrn_qty1 = holder.tbDtrn_qty1;
+
+            view.Tag = holder;
+
+            view.LongClick += rowView_HandleLongClick;
+
+            holder.tbDtrn_qty1.Tag = holder;
+            holder.tbDtrn_qty1.FocusableInTouchMode = true;
+            holder.tbDtrn_qty1.Text = detail.DtrnQty1.ToString("#######0.0");
+            holder.tbDtrn_qty1.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbDtrn_qty1_TextChanged);            
+            //holder.tbDtrn_qty1.FocusChange += new EventHandler(tbQty_HandleFocusChange);
+            holder.tbDtrn_qty1.FocusChange += tbQty_HandleFocusChange;
+
+            /*_gestureDetector = new GestureDetector(this);
                 _gestureDetector.DoubleTap += new EventHandler<GestureDetector.DoubleTapEventArgs>((o,e)=>{
                     //((EditText)o).SelectAll();
                     Android.Util.Log.Debug("double tap", "Double tapped");
@@ -107,24 +118,18 @@ namespace RetailMobile
                         lastFocusedControl.PostDelayed(new Action(()=>{lastFocusedControl.SelectAll();}),100);
                     }
                 });*/
-                              
-                holder.tbDtrn_qty1.SetOnTouchListener(this);
 
-                //holder.tbDtrn_disc_line1.Tag = position;
-                holder.tbDtrn_disc_line1.Tag = holder;
-                holder.tbDtrn_disc_line1.FocusableInTouchMode = true;
-                holder.tbDtrn_disc_line1.Text = detail.DtrnDiscLine1.ToString();
-                holder.tbDtrn_disc_line1.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbDtrn_disc_line1_TextChanged);
-                holder.tbDtrn_disc_line1.FocusChange += tbQty_HandleFocusChange;
-                holder.Datasource = detail;
+            holder.tbDtrn_qty1.SetOnTouchListener(this);
 
-                holder.tbDtrn_disc_line1.SetOnTouchListener(this);
-                //holder.tbDtrn_disc_line1.Touch += new EventHandler<View.TouchEventArgs>(EditTextTouchUp);
-            }
-            else
-            {            
-                holder = (ViewHolder)view.Tag;
-            }
+            //holder.tbDtrn_disc_line1.Tag = position;
+            holder.tbDtrn_disc_line1.Tag = holder;
+            holder.tbDtrn_disc_line1.FocusableInTouchMode = true;
+            holder.tbDtrn_disc_line1.Text = detail.DtrnDiscLine1.ToString();
+            holder.tbDtrn_disc_line1.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbDtrn_disc_line1_TextChanged);
+            holder.tbDtrn_disc_line1.FocusChange += tbQty_HandleFocusChange;
+            holder.Datasource = detail;
+
+            holder.tbDtrn_disc_line1.SetOnTouchListener(this);
 
             holder.lblItemCode.Text = detail.ItemCode;
             holder.lblItemDesc.Text = detail.ItemDesc;

@@ -133,10 +133,8 @@ WHERE 1 = 1  ";
 
         public static void LoadAdapterItems(Context ctx, int page, ArrayAdapter<ItemInfo> adapter, Criteria c)
         {
-            //Criteria c = new Criteria();
             using (IConnection conn = Sync.GetConnection(ctx))
             {
-                //string query = "SELECT item_id, item_cod, item_desc FROM items WHERE 1=1 ";
                 string joinLastDate = "";
                 string fields = "";
 				

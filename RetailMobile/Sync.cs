@@ -152,17 +152,18 @@ PRIMARY KEY ( id ASC )
                 PreparedStatement.Execute();
                 PreparedStatement.Close();
 
+                PreparedStatement = DBConnection.PrepareStatement(createTableRitems);
+                PreparedStatement.Execute();
+                PreparedStatement.Close();
+
                 PreparedStatement = DBConnection.PrepareStatement(@"CREATE TABLE IF NOT EXISTS ritemlast (
 id INTEGER NOT NULL,
 cst_id INTEGER NOT NULL,
 item_id INTEGER NOT NULL,
 last_date DATE NOT NULL,
-PRIMARY KEY ( id ASC, item_id ASC )
+PRIMARY KEY ( id ASC, item_id ASC ),
+FOREIGN KEY(item_id) REFERENCES ritems(id)
 )");
-                PreparedStatement.Execute();
-                PreparedStatement.Close();
-
-                PreparedStatement = DBConnection.PrepareStatement(createTableRitems);
                 PreparedStatement.Execute();
                 PreparedStatement.Close();
 
