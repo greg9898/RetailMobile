@@ -45,12 +45,12 @@ namespace RetailMobile
             actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
             actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
             actionBar.ClearButtons();
-            actionBar.AddButtonRight(Buttons.INVOICE_SAVE_BUTTON, this.Activity.GetString(Resource.String.btnSave), Resource.Drawable.save_48);
+            actionBar.AddButtonRight(ControlIds.INVOICE_SAVE_BUTTON, this.Activity.GetString(Resource.String.btnSave), Resource.Drawable.save_48);
             actionBar.SetTitle(this.Activity.GetString(Resource.String.lblInvoice));
 
             if (!isTabletLand)
             {
-                actionBar.AddButtonLeft(Buttons.DETAILS_ADD_BUTTON, "", Resource.Drawable.add_48);
+                actionBar.AddButtonLeft(ControlIds.DETAILS_ADD_BUTTON, "", Resource.Drawable.add_48);
             }
             
             invoiceTabHeader = InvoiceTabHeader.NewInstance(this);
@@ -147,7 +147,7 @@ namespace RetailMobile
 
         void ActionBarButtonClicked(int id)
         {
-            if (id == Buttons.INVOICE_SAVE_BUTTON)
+            if (id == ControlIds.INVOICE_SAVE_BUTTON)
             {
                 try
                 {
@@ -158,7 +158,7 @@ namespace RetailMobile
                     Log.Error("ActionBarButtonClicked SAVE_BUTTON", "ActionBarButtonClicked SAVE_BUTTON " + ex.Message);
                 }
             }
-            else  if (id == Buttons.DETAILS_ADD_BUTTON)
+            else  if (id == ControlIds.DETAILS_ADD_BUTTON)
             {
                 try
                 {

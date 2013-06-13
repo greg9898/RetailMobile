@@ -19,7 +19,6 @@ namespace RetailMobile
         Button btnLogout;
         Button btnSync;
         RetailMobile.Fragments.ItemActionBar actionBar;
-        bool isTabletLand;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -53,14 +52,12 @@ namespace RetailMobile
             btnSync.Click += new EventHandler(btnSync_Click);
             btnLogout.Click += new EventHandler(btnLogout_Click);
 
-            isTabletLand = this.Activity.FindViewById<LinearLayout>(Resource.Id.LayoutMenu) != null;
-            
             this.actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar); 
             actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
             actionBar.ClearButtons();
             //string save = this.Activity.GetString(Resource.String.btnSave);
-            actionBar.AddButtonRight(Buttons.SETTINGS_SAVE_BUTTON, "", Resource.Drawable.save_48);
-            actionBar.AddButtonLeft(Buttons.SETTINGS_BACK_BUTTON, "", Resource.Drawable.back_48);
+            actionBar.AddButtonRight(ControlIds.SETTINGS_SAVE_BUTTON, "", Resource.Drawable.save_48);
+            actionBar.AddButtonLeft(ControlIds.SETTINGS_BACK_BUTTON, "", Resource.Drawable.back_48);
 
             string title = this.Activity.GetString(Resource.String.Settings);
             actionBar.SetTitle(title);
@@ -92,7 +89,7 @@ namespace RetailMobile
         {
             switch (id)
             {
-                case Buttons.SETTINGS_BACK_BUTTON:     
+                case ControlIds.SETTINGS_BACK_BUTTON:     
                     if (Common.CurrentDealerID == 0)
                     {
                         if (this.Activity == null)
@@ -106,7 +103,7 @@ namespace RetailMobile
                         ft.Commit();
                     } 
                     break;
-                case Buttons.SETTINGS_SAVE_BUTTON:
+                case ControlIds.SETTINGS_SAVE_BUTTON:
                     try
                     {
                         PreferencesUtil.IP = tbIP.Text;

@@ -39,7 +39,7 @@ namespace RetailMobile
 
             actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBarList);
             actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
-            actionBar.AddButtonRight(Buttons.DETAILS_ADD_BUTTON, "", Resource.Drawable.add_48);
+            actionBar.AddButtonRight(ControlIds.DETAILS_ADD_BUTTON, "", Resource.Drawable.add_48);
 
             //this.ListView.SetOnScrollListener(new EndlessScrollListener((IScrollLoadble)this.ListView.Adapter));
             //this.ListView.Scroll += new EventHandler<AbsListView.ScrollEventArgs>();
@@ -61,7 +61,7 @@ namespace RetailMobile
 
         void ActionBarButtonClicked(int id)
         {
-            if (id == Buttons.DETAILS_ADD_BUTTON)
+            if (id == ControlIds.DETAILS_ADD_BUTTON)
             {
                 try
                 {

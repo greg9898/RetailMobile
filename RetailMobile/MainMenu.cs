@@ -10,7 +10,8 @@ using Android.Util;
 
 namespace RetailMobile
 {
-    [Activity(Label = "Ασυρματη Παραγγελιοληψια", MainLauncher = true, Icon = "@drawable/retail", Theme = "@android:style/Theme.Light.NoTitleBar.Fullscreen")]
+    [Activity(Label = "Ασυρματη Παραγγελιοληψια", MainLauncher = true, Icon = "@drawable/retail", Theme = "@android:style/Theme.Light.NoTitleBar.Fullscreen" 
+              ,ScreenOrientation = Android.Content.PM.ScreenOrientation.Landscape)]
     public class MainMenu : Android.Support.V4.App.FragmentActivity
     {
         public enum MenuItems
@@ -106,14 +107,8 @@ namespace RetailMobile
                 {
                     myActionBar.ButtonMenuVisibility = ViewStates.Gone;
                 }
-
-                if (layout == Common.Layouts.Port)
-                { 
-//                    var intent = new Intent();
-//                    intent.SetClass(this, typeof(LoginFragmentActivity));
-//                    StartActivity(intent);
-                }
-                else
+                layout = Common.Layouts.Sw600Port;//skip
+                if (layout != Common.Layouts.Port)
                 {
                     var ft = SupportFragmentManager.BeginTransaction();
                     ft.Replace(Resource.Id.detailInfo_fragment, new LoginFragment());
@@ -152,6 +147,7 @@ namespace RetailMobile
 
         void SettingsClicked()
         {
+            layout = Common.Layouts.Sw600Port;//skip
             if (layout == Common.Layouts.Land || layout == Common.Layouts.Port)
             {                
                 var intent = new Android.Content.Intent();

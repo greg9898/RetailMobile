@@ -32,6 +32,7 @@ namespace RetailMobile
                 layout = this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.menuLoginFragment) == null ? Common.Layouts.Sw600Port : Common.Layouts.Port;
             }   
 
+            layout = Common.Layouts.Sw600Port;//skip
             if (layout != Common.Layouts.Port)
             {
                 this.actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);

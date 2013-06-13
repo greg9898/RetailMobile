@@ -25,7 +25,7 @@ namespace RetailMobile.Fragments
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            View v = inflater.Inflate(Resource.Layout.items_action_bar, container, true);
+            View v = inflater.Inflate(Resource.Layout.items_action_bar, container, false);
             titleView = v.FindViewById<TextView>(Resource.Id.lblCaption);
             ButtonsAdded = new List<int>();
             leftButtons = v.FindViewById<LinearLayout>(Resource.Id.LeftButtons);
