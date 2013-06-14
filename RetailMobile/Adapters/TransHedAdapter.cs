@@ -1,12 +1,14 @@
 using Android.App;
 using Android.Views;
 using Android.Widget;
+using RetailMobile.Library;
+using Android.Util;
 
 namespace RetailMobile
 {
     public class TransHedAdapter : ArrayAdapter<Library.TransHed>, IScrollLoadble
     {
-        Activity context = null;
+        Activity context;
         Library.TransHedList TransHedList;
 
         public TransHedAdapter(Activity context, Library.TransHedList list)
@@ -36,6 +38,11 @@ namespace RetailMobile
             tbCustName.Text = item.CstName;
 
             return view;
+        }
+
+        public void InsertIntoTransHedList(TransHed h, int index)
+        {
+            TransHedList.Insert(index, h);
         }
 
         public bool ContainsId(int id)

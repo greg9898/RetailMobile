@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="ver">0dp</dimen>
+    <dimen name="isTablet">0dp</dimen>
+    
     <dimen name="action_bar_height">30dp</dimen>
     <dimen name="action_bar_button_height">30dp</dimen>
     <dimen name="action_bar_button_width">33dp</dimen>

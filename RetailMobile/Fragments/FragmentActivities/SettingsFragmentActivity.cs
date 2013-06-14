@@ -1,7 +1,5 @@
 using Android.App;
 using Android.OS;
-using Android.Widget;
-using Android.Views;
 
 namespace RetailMobile
 {
@@ -12,21 +10,26 @@ namespace RetailMobile
         {
             base.OnCreate(bundle);
 
-            FrameLayout frameContent = new FrameLayout(this);
-            FrameLayout frameFrgmtActionbar = new FrameLayout(this);
-            frameFrgmtActionbar.Id = ControlIds.SETTINGS_FRAGMENT_ACTIVITY_ITEMACTIONBAR_ID;
-            FrameLayout frameFrgmtSettings = new FrameLayout(this);
-            frameFrgmtSettings.Id = ControlIds.SETTINGS_FRAGMENT_ACTIVITY_SETTINGS_ID;
+            SetContentView(Resource.Layout.settings_fragment_activity);
 
-            SetContentView(frameContent, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent));
-
-            frameContent.AddView(frameFrgmtActionbar);
-            frameContent.AddView(frameFrgmtSettings);
-
-            Android.Support.V4.App.FragmentTransaction ft = SupportFragmentManager.BeginTransaction();
-            ft.Replace(frameFrgmtActionbar.Id, new RetailMobile.Fragments.ItemActionBar());
-            ft.Replace(frameFrgmtSettings.Id, new SettingsFragment());
-            ft.Commit();
+//            FrameLayout frameContent = new FrameLayout(this);
+//            FrameLayout frameFrgmtActionbar = new FrameLayout(this);
+//            frameFrgmtActionbar.Id = ControlIds.SETTINGS_FRAGMENT_ACTIVITY_ITEMACTIONBAR_ID;
+//            FrameLayout frameFrgmtSettings = new FrameLayout(this);
+//            frameFrgmtSettings.Id = ControlIds.SETTINGS_FRAGMENT_ACTIVITY_SETTINGS_ID;
+//
+//            SetContentView(frameContent, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent));
+//
+//            frameContent.AddView(frameFrgmtActionbar);
+//            frameContent.AddView(frameFrgmtSettings);
+//
+//            Android.Support.V4.App.FragmentTransaction ft = SupportFragmentManager.BeginTransaction();
+//            ft.Replace(frameFrgmtActionbar.Id, new RetailMobile.Fragments.ItemActionBar());
+//            ft.Commit();
+//            
+//            ft = SupportFragmentManager.BeginTransaction();
+//            ft.Replace(frameFrgmtSettings.Id, new SettingsFragment());
+//            ft.Commit();
            
         }
     }

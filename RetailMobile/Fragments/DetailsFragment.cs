@@ -39,7 +39,7 @@ namespace RetailMobile
 
             actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBarList);
             actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
-            actionBar.AddButtonRight(ControlIds.DETAILS_ADD_BUTTON, "", Resource.Drawable.add_48);
+            actionBar.AddButtonRight(ControlIds.INVOICE_ADD_BUTTON, "", Resource.Drawable.add_48);
 
             //this.ListView.SetOnScrollListener(new EndlessScrollListener((IScrollLoadble)this.ListView.Adapter));
             //this.ListView.Scroll += new EventHandler<AbsListView.ScrollEventArgs>();
@@ -61,7 +61,7 @@ namespace RetailMobile
 
         void ActionBarButtonClicked(int id)
         {
-            if (id == ControlIds.DETAILS_ADD_BUTTON)
+            if (id == ControlIds.INVOICE_ADD_BUTTON)
             {
                 try
                 {
@@ -82,7 +82,6 @@ namespace RetailMobile
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
-            Log.Debug("DetailsFragment", "OnActivityCreated");
             base.OnActivityCreated(savedInstanceState);
 
             if (savedInstanceState != null)
@@ -139,6 +138,7 @@ namespace RetailMobile
             {
                 Library.TransHed header = Library.TransHed.GetTransHed(this.Activity, id);
                 ((TransHedAdapter)ListAdapter).Insert(header, 0);
+                ((TransHedAdapter)ListAdapter).InsertIntoTransHedList(header, 0);
             }
 
             ((TransHedAdapter)ListAdapter).NotifyDataSetChanged();
@@ -192,7 +192,6 @@ namespace RetailMobile
 
                         if (detailFragment == null || detailFragment.ObjectId != invoiceId)
                         {
-                            Log.Debug("detailsfragment ShowDetails", "invoiceId =" + invoiceId);
                             var ft = FragmentManager.BeginTransaction();
                             //ft.Replace(Resource.Id.detailInfo_fragment, InvoiceFragment.NewInstance(invoiceId));
                             InvoiceInfoFragment invoiceFragment = InvoiceInfoFragment.NewInstance(invoiceId);

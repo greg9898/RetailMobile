@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using Android.Support.V4.App;
+using Android.Util;
 
 namespace RetailMobile
 {
@@ -19,10 +20,11 @@ namespace RetailMobile
         Button btnLogout;
         Button btnSync;
         RetailMobile.Fragments.ItemActionBar actionBar;
-        bool isTabletLand;
+        Common.Layouts layout ;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
+            Log.Debug("SettingsFragment ", "OnCreateView");
             View v = inflater.Inflate(Resource.Layout.SettingsFragment, container, false);
 
             tbIP = v.FindViewById<EditText>(Resource.Id.tbIP);
@@ -52,10 +54,10 @@ namespace RetailMobile
 
             btnSync.Click += new EventHandler(btnSync_Click);
             btnLogout.Click += new EventHandler(btnLogout_Click);
-
-            isTabletLand = this.Activity.FindViewById<LinearLayout>(Resource.Id.LayoutMenu) != null;
             
             this.actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar); 
+            
+            Log.Debug("SettingsFragment ", "actionBar=" + actionBar);
             actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
             actionBar.ClearButtons();
             //string save = this.Activity.GetString(Resource.String.btnSave);
@@ -100,10 +102,19 @@ namespace RetailMobile
                             return; //?
                         }
 
+//                        if (layout == Common.Layouts.Land || layout == Common.Layouts.Port)
+//                        {                
+//                            var intent = new Android.Content.Intent();
+//                            intent.SetClass(this.Activity, typeof(LoginFragmentActivity));
+//                            StartActivity(intent);
+//                        }
+//                        else
+//                        {
                         var ft = this.Activity.SupportFragmentManager.BeginTransaction();
                         ft.Replace(Resource.Id.detailInfo_fragment, new LoginFragment());
                         ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
                         ft.Commit();
+//                        }
                     } 
                     break;
                 case ControlIds.SETTINGS_SAVE_BUTTON:

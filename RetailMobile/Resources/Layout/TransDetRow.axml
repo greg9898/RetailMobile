@@ -8,6 +8,8 @@
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
         android:layout_weight="0.9"
+        android:ellipsize="marquee"
+        android:singleLine="true"
         android:text="lblDtrn_ItemCode" />
     <TextView
         android:id="@+id/tbItemDesc"

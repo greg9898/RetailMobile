@@ -1,4 +1,5 @@
 using System;
+using Android.Util;
 
 namespace RetailMobile
 {
@@ -105,6 +106,48 @@ namespace RetailMobile
                 Android.Util.Log.Error("LogException unable to save file", e.Message);
             }
         }
+/// <summary>
+        /// Checks if the device is a tablet or a phone
+/// </summary>
+/// <returns>The tablet device.</returns>
+/// <param name="activityContext">Activity context.</param>
+        public static bool isTabletDevice(Android.Content.Context activityContext)
+        {
+            bool isTablet = (int)activityContext.Resources.GetDimension(Resource.Dimension.isTablet) == 600 ? true : false;
+        
+            Log.Debug("isTabletDevice", "isTablet=" + isTablet);
+            return isTablet;
+
+//            Log.Debug("isTabletDevice", "ScreenLayout=" + Enum.GetName(typeof(Android.Content.Res.ScreenLayout), activityContext.Resources.Configuration.ScreenLayout));
+//            // Verifies if the Generalized Size of the device is XLARGE to be considered a Tablet
+//            bool xlarge = activityContext.Resources.Configuration.ScreenLayout == Android.Content.Res.ScreenLayout.SizeXlarge;
+//            Log.Debug("isTabletDevice", "xlarge=" + xlarge);
+//
+//            // If XLarge, checks if the Generalized Density is at least MDPI (160dpi)
+//            if (xlarge)
+//            {
+//                Android.Util.DisplayMetrics metrics = new  Android.Util.DisplayMetrics();
+//                Android.App.Activity activity = (Android.App.Activity)activityContext;
+//                activity.WindowManager.DefaultDisplay.GetMetrics(metrics);
+//
+//                // MDPI=160, DEFAULT=160, DENSITY_HIGH=240, DENSITY_MEDIUM=160,
+//                // DENSITY_TV=213, DENSITY_XHIGH=320
+//                if (metrics.DensityDpi == Android.Util.DisplayMetricsDensity.Default || metrics.DensityDpi == Android.Util.DisplayMetricsDensity.High
+//                    || metrics.DensityDpi == Android.Util.DisplayMetricsDensity.Medium || metrics.DensityDpi == Android.Util.DisplayMetricsDensity.Xhigh
+//                    || (int)metrics.DensityDpi == 213)
+//                {
+//                    Log.Debug("isTabletDevice", "=true");
+//                    // Yes, this is a tablet!
+//                    return true;
+//                }
+//            }
+//
+//            return false;
+        }
+
+        public static bool isPortrait(Android.Content.Context activityContext)
+        {
+            return  activityContext.Resources.Configuration.Orientation == Android.Content.Res.Orientation.Portrait;
+        }
     }
 }
-

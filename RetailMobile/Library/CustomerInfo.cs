@@ -33,6 +33,11 @@ namespace RetailMobile.Library
         public static CustomerInfo GetCustomer(Context ctx, string code)
         {
             CustomerInfo info = new CustomerInfo();
+
+            if (code == "")
+            {
+                return info;
+            }
 			
             using (IConnection conn = Sync.GetConnection(ctx))
             {

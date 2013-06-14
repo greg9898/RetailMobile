@@ -97,7 +97,7 @@ namespace RetailMobile
                 return;
             }
 
-            Log.Debug("tbCustCode_TextChanged", "tbCustCode_TextChanged text=" + ((EditText)sender).Text);
+            Log.Debug("tbCustCode_TextChanged", " text=" + ((EditText)sender).Text);
             CustomerInfo c = CustomerInfo.GetCustomer(Activity, ((EditText)sender).Text);
 
             if (tbCustDesc != null)
@@ -121,11 +121,15 @@ namespace RetailMobile
                 if (custDlg.CustId > 0)
                 {
                     invoiceParentView.Header.CstId = custDlg.CustId;
-                    Log.Debug("btnSearchCustomer_Click", " header.cst_id =" + custDlg.CustId);
                     LoadCustomerData(custDlg.CustId);
                 }
             };
             custDlg.Show();
+        }
+
+        public void ResetFields()
+        {
+            LoadCustomerData(0);
         }
 
         public  void FillInvoiceFields()
@@ -162,7 +166,7 @@ namespace RetailMobile
             if (tbCustDesc != null)
             {
                 FillCustomerFields(c);
-                tbCustCode.Text = c.Code;
+                //tbCustCode.Text = c.Code;
                 FillInvoiceFields();
 
                 if (CustomerChanged != null)
@@ -178,7 +182,7 @@ namespace RetailMobile
 
             tbCustDesc.Text = c.Name;
             tbCustAddress.Text = c.CustAddress;
-            //tbCustCode.Text = c.Code;
+            tbCustCode.Text = c.Code;
             tbCustDebt.Text = c.CustDebt.ToString();
             tbCustPhone.Text = c.CustPhone;
 

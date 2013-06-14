@@ -240,12 +240,7 @@ namespace RetailMobile
             int cbCateg2Id = ((SpinnerAdapter<int, string>)cbCateg2.Adapter).GetSelectedValue(cbCateg2.SelectedItemPosition);
             decimal retVal = 0;
             decimal.TryParse(tbRetVal.Text.Trim (), out retVal);
-            
-            Log.Debug("ReloadItems tbSearch.Text=", tbSearch.Text);
-            Log.Debug("ReloadItems cbCateg1Value=", cbCateg1Id.ToString());
-            Log.Debug("ReloadItems cbCateg2Value=", cbCateg2Id.ToString());
-            Log.Debug("ReloadItems retVal=", retVal.ToString());
-            
+                        
             if (cbCateg1Id == 0 & cbCateg2Id == 0 && retVal == 0 && tbSearch.Text == "")
             {
                 lvItems.Adapter = new CheckableItemsAdapter(activity, new Library.ItemInfoList());

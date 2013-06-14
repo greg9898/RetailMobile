@@ -90,8 +90,6 @@ namespace RetailMobile
                 holder.position = position;
             }
 
-
-
             tbDtrn_disc_line1 = holder.tbDtrn_disc_line1;
             tbDtrn_qty1 = holder.tbDtrn_qty1;
 
@@ -347,6 +345,8 @@ namespace RetailMobile
                 TransDet detail = dataSource[index];
                 //detail.DtrnDiscLine1 = double.Parse((sender as EditText).Text);
                 detail.DtrnDiscLine1 = double.Parse(q);
+
+                ((ViewHolder)((EditText)sender).Tag).RefreshRow();
 
                 if (QtysChangedEvent != null)
                 {

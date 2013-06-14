@@ -208,8 +208,8 @@ WHERE id = :htrn_id");
         {
             IPreparedStatement ps = conn.PrepareStatement(@"
 SELECT rtrans_det.id, rtrans_det.htrn_id, rtrans_det.dtrn_num, rtrans_det.item_id,
-ritems.item_cod, ritems.item_desc,
-rtrans_det.qty1, rtrans_det.unit_price, rtrans_det.disc_line1, rtrans_det.net_value, rtrans_det.vat_value
+rtrans_det.qty1, rtrans_det.unit_price, rtrans_det.disc_line1, rtrans_det.net_value, rtrans_det.vat_value,
+ritems.item_cod, ritems.item_desc, ritems.item_vat
 FROM rtrans_det
 JOIN ritems ON ritems.id = rtrans_det.item_id
 WHERE htrn_id = :htrn_id ");

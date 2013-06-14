@@ -74,7 +74,6 @@ namespace RetailMobile
                 var detailFragment = FragmentManager.FindFragmentById(Resource.Id.detailInfo_fragment);
                 if (detailFragment != null)
                 {
-                    Android.Util.Log.Debug(this.Class.Name, "ShowDetails   ft.Remove(detailFragment);");
                     ft.Remove(detailFragment);
                     ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
                     ft.Commit();

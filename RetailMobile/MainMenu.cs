@@ -10,7 +10,8 @@ using Android.Util;
 
 namespace RetailMobile
 {
-    [Activity(Label = "Ασυρματη Παραγγελιοληψια", MainLauncher = true, Icon = "@drawable/retail", Theme = "@android:style/Theme.Light.NoTitleBar.Fullscreen")]
+    [Activity(Label = "Ασυρματη Παραγγελιοληψια", MainLauncher = true, Icon = "@drawable/retail", Theme = "@android:style/Theme.Light.NoTitleBar.Fullscreen" 
+              ,ScreenOrientation = Android.Content.PM.ScreenOrientation.Landscape)]
     public class MainMenu : Android.Support.V4.App.FragmentActivity
     {
         public enum MenuItems
@@ -25,7 +26,6 @@ namespace RetailMobile
         }
 
         RetailMobile.Fragments.ActionBar myActionBar;
-        Common.Layouts layout ;
 
         protected override void OnCreate(Bundle bundle)
         {   
@@ -42,10 +42,7 @@ namespace RetailMobile
             AndroidEnvironment.UnhandledExceptionRaiser += (sender, e) => {
                 RetailMobile.Error.LogError(this, e.Exception.Message, e.Exception.StackTrace);
             };
-
-            int ver = (int)Resources.GetDimension(Resource.Dimension.ver);
-            Log.Debug("[[Dimens]]", "ver=" + ver);
-
+                       
             PreferencesUtil.LoadSettings(this);
             Sync.GenerateDatabase(this);
 
@@ -58,17 +55,17 @@ namespace RetailMobile
             myActionBar.MenuClicked += new RetailMobile.Fragments.ActionBar.MenuClickedDelegate(MenuClicked);
             myActionBar.SettingsClicked += new RetailMobile.Fragments.ActionBar.SettingsCLickedDelegate(SettingsClicked);
 
-            if (this.Resources.Configuration.Orientation == Android.Content.Res.Orientation.Landscape)
-            {
-                layout = this.FindViewById<LinearLayout>(Resource.Id.LayoutMenu) != null ? Common.Layouts.Sw600Land : Common.Layouts.Land;
-            }
-            else
-            {
-                layout = this.SupportFragmentManager.FindFragmentById(Resource.Id.menuLoginFragment) == null ? Common.Layouts.Sw600Port : Common.Layouts.Port;
-
-                InitPopupMenu();
-            }     
-
+//            if (Common.isPortrait(this))
+//            {
+//                InitPopupMenu();
+//            }
+//            else
+//            {
+//              
+//            }    
+//
+//            bool isTablet = Common.isTabletDevice(this);
+//
             ShowProgressBar();
 
             System.Threading.Tasks.Task.Factory.StartNew(() => Sync.SyncUsers(this)).ContinueWith(task => this.RunOnUiThread(() => HideProgressBar()));
@@ -76,6 +73,8 @@ namespace RetailMobile
             if (!string.IsNullOrEmpty(PreferencesUtil.Username) && !string.IsNullOrEmpty(PreferencesUtil.Password) &&
                 LoginFragment.Login(this, PreferencesUtil.Username, PreferencesUtil.Password))
             {
+//                if (isTablet)
+//                {
                 this.FindViewById<LinearLayout>(Resource.Id.layoutList).Visibility = ViewStates.Visible;
                 this.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Visible;
                 this.FindViewById<LinearLayout>(Resource.Id.layoutDetails).Visibility = ViewStates.Visible;
@@ -90,36 +89,37 @@ namespace RetailMobile
                 ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
                 ft.Commit();
 
-                if (this.Resources.Configuration.Orientation == Android.Content.Res.Orientation.Landscape)
-                {
-                    this.FindViewById<LinearLayout>(Resource.Id.LayoutMenu).Visibility = ViewStates.Visible;
-                }
-                else
-                {
-                    myActionBar.ButtonMenuVisibility = ViewStates.Visible;
-                    myActionBar.ButtonSettingsVisibility = ViewStates.Gone;
-                }
+//                    if (this.Resources.Configuration.Orientation == Android.Content.Res.Orientation.Landscape)
+//                    {
+                this.FindViewById<LinearLayout>(Resource.Id.LayoutMenu).Visibility = ViewStates.Visible;
+//                    }
+//                    else
+//                    {
+//                        myActionBar.ButtonMenuVisibility = ViewStates.Visible;
+//                        myActionBar.ButtonSettingsVisibility = ViewStates.Gone;
+//                    }
+//                }
+//                else
+//                {
+//                    var intent = new Android.Content.Intent();
+//                    intent.SetClass(this, typeof(TransactionFragmentActivity));
+//                    StartActivity(intent);
+//                }
             }
             else
             {
-                if (this.Resources.Configuration.Orientation == Android.Content.Res.Orientation.Portrait)
-                {
-                    myActionBar.ButtonMenuVisibility = ViewStates.Gone;
-                }
+//                if (isTablet)
+//                {
+                myActionBar.ButtonMenuVisibility = ViewStates.Gone;
+//                }
 
-                if (layout == Common.Layouts.Port)
-                { 
-//                    var intent = new Intent();
-//                    intent.SetClass(this, typeof(LoginFragmentActivity));
-//                    StartActivity(intent);
-                }
-                else
-                {
-                    var ft = SupportFragmentManager.BeginTransaction();
-                    ft.Replace(Resource.Id.detailInfo_fragment, new LoginFragment());
-                    ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
-                    ft.Commit();
-                }
+//                if (!Common.isPortrait(this))
+//                {
+                var ft = SupportFragmentManager.BeginTransaction();
+                ft.Replace(Resource.Id.detailInfo_fragment, new LoginFragment());
+                ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+                ft.Commit();
+//                }
             }
         }
 
@@ -152,21 +152,21 @@ namespace RetailMobile
 
         void SettingsClicked()
         {
-            if (layout == Common.Layouts.Land || layout == Common.Layouts.Port)
-            {                
-                var intent = new Android.Content.Intent();
-                intent.SetClass(this, typeof(SettingsFragmentActivity));
-                StartActivity(intent);
-            }
-            else
-            {
-                this.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Gone;
-                var ft = SupportFragmentManager.BeginTransaction();
-                ft.Replace(Resource.Id.detailInfo_fragment, new SettingsFragment());
+//            if (Common.isTabletDevice(this))
+//            {                
+            this.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Gone;
+            var ft = SupportFragmentManager.BeginTransaction();
+            ft.Replace(Resource.Id.detailInfo_fragment, new SettingsFragment());
 
-                ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
-                ft.Commit();
-            }
+            ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+            ft.Commit(); 
+//            }
+//            else
+//            {
+//                var intent = new Android.Content.Intent();
+//                intent.SetClass(this, typeof(SettingsFragmentActivity));
+//                StartActivity(intent);
+//            }
         }
 
         void MenuClicked()

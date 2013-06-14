@@ -82,7 +82,23 @@ namespace RetailMobile.Library
 
         public double DtrnVatValue { get; set; }
 
-        public double ItemVatValue { get; set; }
+        public double ItemVatValue
+        { 
+            get
+            {           
+                switch (ItemVatId)
+                {
+                    case 1:
+                        return 0;
+                    case 2:
+                        return 13;
+                    case 3:
+                        return 23;
+                } 
+
+                return 0;
+            }
+        }
 
         public int ItemVatId { get; set; }
 
@@ -101,20 +117,7 @@ namespace RetailMobile.Library
             //            ItemVatId = GetItemVatId(ctx, ItemId);
             DtrnUnitPrice = (double)item.ItemSaleVal1;
             ItemVatId = item.ItemVatId;
-            
-            switch (ItemVatId)
-            {
-                case 1:
-                    ItemVatValue = 0;
-                    break;
-                case 2:
-                    ItemVatValue = 13;
-                    break;
-                case 3:
-                    ItemVatValue = 23;
-                    break;
-            }
-            
+                       
             CalcDiscount(ctx, cstId);
         }
 
@@ -164,8 +167,10 @@ namespace RetailMobile.Library
             ItemDesc = result.GetString("item_desc");
             DtrnUnitPrice = result.GetDouble("unit_price");
             DtrnQty1 = result.GetDouble("qty1");
+            DtrnDiscLine1 = result.GetDouble("disc_line1");
             DtrnNetValue = result.GetDouble("net_value");
             DtrnVatValue = result.GetDouble("vat_value");
+            ItemVatId = result.GetInt("item_vat");
 
             IsNew = false;
         }

@@ -16,7 +16,7 @@ namespace RetailMobile
 
         public event  ItemImageSelectedDelegate  ItemImageSelected;
 
-        Activity context = null;
+        Activity context;
         ItemInfoList _itemInfoList;
         public ItemsSelectDialog Parent;
         Dictionary<int, double> _checkedItemIds = new Dictionary<int, double>();

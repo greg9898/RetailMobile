@@ -160,7 +160,6 @@
     <AndroidResource Include="Resources\Drawable\statistics_month.png" />
     <Compile Include="Library\TransCust.cs" />
     <Compile Include="Library\TransCustList.cs" />
-    <AndroidResource Include="Resources\values-hdpi\dimens.xml" />
     <Compile Include="Adapters\TransDetAdapter.cs" />
     <AndroidResource Include="Resources\Drawable\red_background.xml" />
     <AndroidResource Include="Resources\Layout\suggestions_row.axml" />
@@ -184,7 +183,6 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout-sw600dp-land\MainMenu.axml" />
-    <Compile Include="Buttons.cs" />
     <AndroidResource Include="Resources\Layout\InvoiceScreen.axml" />
     <AndroidResource Include="Resources\layout-sw600dp-port\main_action_bar.axml">
       <SubType>AndroidResource</SubType>
@@ -198,9 +196,12 @@
     <Compile Include="Fragments\FragmentActivities\LoginFragmentActivity.cs" />
     <AndroidResource Include="Resources\Layout\mainmenu_popup.axml" />
     <Compile Include="Fragments\FragmentActivities\SettingsFragmentActivity.cs" />
-    <Compile Include="Resource.Designer.cs">
-      <DependentUpon>CustomerDetails.cs</DependentUpon>
-    </Compile>
+    <Compile Include="ConrolIds.cs" />
+    <Compile Include="Fragments\FragmentActivities\TransactionFragmentActivity.cs" />
+    <AndroidResource Include="Resources\Layout\settings_fragment_activity.axml" />
+    <Compile Include="Resources\Resource.Designer.cs" />
+    <AndroidResource Include="Resources\Layout\transaction_frmt_activity.axml" />
+    <AndroidResource Include="Resources\values-sw600dp\dimens.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -401,11 +402,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
-    <Folder Include="Resources\values-hdpi\" />
     <Folder Include="Resources\layout-port\" />
     <Folder Include="Resources\layout-sw600dp\" />
     <Folder Include="Resources\layout-sw600dp-port\" />
     <Folder Include="Fragments\FragmentActivities\" />
+    <Folder Include="Resources\values-sw600dp\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidJavaLibrary Include="lib\UltraLiteJNI12.jar" />
