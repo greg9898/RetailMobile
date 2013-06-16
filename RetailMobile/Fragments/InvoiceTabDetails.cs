@@ -116,6 +116,10 @@ namespace RetailMobile
                 }
 
                 LoadDetailsAdapter();
+                if (DetailsChanged != null)
+                {
+                    DetailsChanged();
+                }
             };
 
             dialogItems.Show();

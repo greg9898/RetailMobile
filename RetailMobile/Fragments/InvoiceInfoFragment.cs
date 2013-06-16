@@ -112,10 +112,11 @@ namespace RetailMobile
             TabHost.TabSpec spec1 = tabHost.NewTabSpec("Info");
             spec1.SetContent(Resource.Id.realtabcontent);
             spec1.SetIndicator(this.Activity. LayoutInflater.Inflate( Resource.Layout.invoice_tab_button_header, null));
-            tabHost.AddTab(spec1);     
+            tabHost.AddTab(spec1);
 
             TabHost.TabSpec spec2 = tabHost.NewTabSpec("Details");
-            spec2.SetContent(Resource.Id.realtabcontent);
+            //spec2.SetContent(Resource.Id.realtabcontent);
+            spec2.SetContent(Resource.Id.tab2);
             spec2.SetIndicator(this.Activity. LayoutInflater.Inflate( Resource.Layout.invoice_tab_button_details, null));
             tabHost.AddTab(spec2);
 
@@ -126,20 +127,31 @@ namespace RetailMobile
                 tab.SetMinimumHeight(18);
             }
 
-            tabHost.SetCurrentTabByTag("Details");
-            tabHost.SetCurrentTabByTag("Info");
+            //tabHost.SetCurrentTabByTag("Details");
+            //tabHost.SetCurrentTabByTag("Info");
+
+            var ft = FragmentManager.BeginTransaction();        
+            ft.Replace(Resource.Id.realtabcontent, invoiceTabHeader);
+            ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+            ft.Commit();
+
+            var ft1 = FragmentManager.BeginTransaction();        
+            ft1.Replace(Resource.Id.tab2, invoiceTabDetails);
+            ft1.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+            ft1.Commit();
+
         }
 
         void TabHostHandleTabChanged(object sender, TabHost.TabChangeEventArgs e)
         {
-            if (e.TabId.Equals("Info"))
+            /*if (e.TabId.Equals("Info"))
             {
                 PushFragments(invoiceTabHeader);
             }
             else if (e.TabId.Equals("Details"))
             {
                 PushFragments(invoiceTabDetails);
-            }
+            }*/
         }
 
         public void PushFragments(Android.Support.V4.App.Fragment fragment)
@@ -197,12 +209,16 @@ namespace RetailMobile
         {
             header = new Library.TransHed();
 
-            invoiceTabHeader.ResetFields();
+            //tabHost.SetCurrentTabByTag("Details");
+            //tabHost.SetCurrentTabByTag("Info");
 
+            //invoiceTabHeader.ResetFields();
+
+            invoiceTabHeader.InitHeader();
             invoiceTabDetails.LoadDetailsAdapter();
-         
-            tabHost.SetCurrentTabByTag("Details");
-            tabHost.SetCurrentTabByTag("Info");
+
+            //invoiceTabHeader.InitHeader();
+            //invoiceTabDetails.LoadDetailsAdapter();
         }
 
         void Save()
@@ -220,10 +236,10 @@ namespace RetailMobile
             }
             
             invoiceTabHeader.SetDataToHeader();
-           
+            bool isNew = header.IsNew;
             header.Save(Activity);
 
-            if (InvoiceSaved != null)
+            if (isNew && InvoiceSaved != null)
                 InvoiceSaved(header.HtrnId);
 
             ResetInvoiceScreen();

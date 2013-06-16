@@ -212,7 +212,8 @@ rtrans_det.qty1, rtrans_det.unit_price, rtrans_det.disc_line1, rtrans_det.net_va
 ritems.item_cod, ritems.item_desc, ritems.item_vat
 FROM rtrans_det
 JOIN ritems ON ritems.id = rtrans_det.item_id
-WHERE htrn_id = :htrn_id ");
+WHERE htrn_id = :htrn_id
+ORDER BY rtrans_det.id");
             ps.Set("htrn_id", transHed.HtrnId);
             
             IResultSet result = ps.ExecuteQuery();

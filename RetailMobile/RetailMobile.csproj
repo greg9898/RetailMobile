@@ -201,7 +201,6 @@
     <AndroidResource Include="Resources\Layout\settings_fragment_activity.axml" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <AndroidResource Include="Resources\Layout\transaction_frmt_activity.axml" />
-    <AndroidResource Include="Resources\values-sw600dp\dimens.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

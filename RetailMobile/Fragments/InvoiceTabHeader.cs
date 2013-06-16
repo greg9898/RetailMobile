@@ -59,7 +59,8 @@ namespace RetailMobile
             tbHtrnVatValue = v.FindViewById<EditText>(Resource.Id.tbHtrnVatValue);
             tbHtrnTotValue = v.FindViewById<EditText>(Resource.Id.tbHtrnTotValue);
 
-            tbCustCode.TextChanged += tbCustCode_TextChanged;
+            //tbCustCode.TextChanged += tbCustCode_TextChanged;
+            tbCustCode.TextChanged += new EventHandler<Android.Text.TextChangedEventArgs>(tbCustCode_TextChanged);
             tbHtrnID.TextChanged += tbHtrnID_TextChanged;
             tbHtrnID.Text = this.ObjectId.ToString();
 
@@ -75,7 +76,10 @@ namespace RetailMobile
 
         void tbHtrnID_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
+            if (init)
+                return;
             double hedId = double.Parse(((EditText)sender).Text);
+
             if (invoiceParentView == null || invoiceParentView.Header.HtrnId == hedId)
             {
                 return;
@@ -92,8 +96,17 @@ namespace RetailMobile
 
         void tbCustCode_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
+            if (init)
+                return;
             if (isCustChanging)
             {
+                return;
+            }
+
+            if (string.IsNullOrEmpty(((EditText)sender).Text))
+            {
+                FillCustomerFields(new CustomerInfo());
+                invoiceParentView.Header.CstId = 0;
                 return;
             }
 
@@ -166,7 +179,7 @@ namespace RetailMobile
             if (tbCustDesc != null)
             {
                 FillCustomerFields(c);
-                //tbCustCode.Text = c.Code;
+                tbCustCode.Text = c.Code;
                 FillInvoiceFields();
 
                 if (CustomerChanged != null)
@@ -176,13 +189,25 @@ namespace RetailMobile
             }
         }
 
+        bool init = false;
+        public void InitHeader()
+        {
+            init = true;
+            tbHtrnID.Text = "0";
+            FillInvoiceFields();
+            tbCustCode.Text = "";
+            FillCustomerFields(new Library.CustomerInfo ());
+            init = false;
+        }
+
         public void FillCustomerFields(Library.CustomerInfo c)
         {
             isCustChanging = true;
 
             tbCustDesc.Text = c.Name;
             tbCustAddress.Text = c.CustAddress;
-            tbCustCode.Text = c.Code;
+            //NE RAZKOMENTIRAI, NE MOJE DA SE LOADVA CUSTOMER PO KOD!!!!
+            //tbCustCode.Text = c.Code;
             tbCustDebt.Text = c.CustDebt.ToString();
             tbCustPhone.Text = c.CustPhone;
 
