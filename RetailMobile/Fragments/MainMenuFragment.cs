@@ -2,6 +2,7 @@ using System;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using Android.Util;
 
 namespace RetailMobile
 {
@@ -38,10 +39,15 @@ namespace RetailMobile
         {
             base.OnActivityCreated(savedInstanceState);
             View v = inflater.Inflate(Resource.Layout.FragmentMainMenu, container, false);
-      
-            RetailMobile.Fragments.ActionBar bar = (RetailMobile.Fragments.ActionBar)this.FragmentManager.FindFragmentById(Resource.Id.ActionBarMain);
-            bar.SettingsClicked += new RetailMobile.Fragments.ActionBar.SettingsCLickedDelegate(SettingsClicked);
 
+            bool isTablet = Common.isTabletDevice(this.Activity);
+      
+            if (this.Resources.Configuration.Orientation == Android.Content.Res.Orientation.Landscape)
+            {
+                RetailMobile.Fragments.ActionBar bar = (RetailMobile.Fragments.ActionBar)this.FragmentManager.FindFragmentById(Resource.Id.ActionBarMain);
+                bar.SettingsClicked += new RetailMobile.Fragments.ActionBar.SettingsCLickedDelegate(SettingsClicked);
+            }
+      
             btnListInvoices = v.FindViewById<Button>(Resource.Id.btnAddInvoice);
             btnListItems = v.FindViewById<Button>(Resource.Id.btnAddItem);
             btnListCustomers = v.FindViewById<Button>(Resource.Id.btnAddCustomer);
@@ -55,21 +61,21 @@ namespace RetailMobile
 
         void SettingsClicked()
         {
-//            if (Common.isTabletDevice(this.Activity))
-//            {                
-            this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Gone;
-            var ft = FragmentManager.BeginTransaction();
-            ft.Replace(Resource.Id.detailInfo_fragment, new SettingsFragment());
+            if (Common.isTabletDevice(this.Activity))
+            {                
+                this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Gone;
+                var ft = FragmentManager.BeginTransaction();
+                ft.Replace(Resource.Id.detailInfo_fragment, new SettingsFragment());
 
-            ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
-            ft.Commit();
-//            }
-//            else
-//            {
-//                var intent = new Android.Content.Intent();
-//                intent.SetClass(this.Activity, typeof(SettingsFragmentActivity));
-//                StartActivity(intent);
-//            }
+                ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+                ft.Commit();
+            }
+            else
+            {
+                var intent = new Android.Content.Intent();
+                intent.SetClass(this.Activity, typeof(SettingsFragmentActivity));
+                StartActivity(intent);
+            }
         }
 
         void btnListInvoices_Click(object sender, EventArgs e)

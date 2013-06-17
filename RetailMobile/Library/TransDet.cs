@@ -33,7 +33,6 @@ namespace RetailMobile.Library
             set
             {
                 dtrnQty1 = value;
-
                 CalcValues();
             }
         }
@@ -50,11 +49,11 @@ namespace RetailMobile.Library
             {
                 dtrnDiscLine1 = value;
 
-                if (DtrnDiscLine1 > 0)
+                if (dtrnDiscLine1 > 0)
                 {
-                    dtrnDiscValue1 = System.Math.Round((DtrnQty1 * DtrnUnitPrice) * (DtrnDiscLine1 / 100), 2);
+                    dtrnDiscValue1 = System.Math.Round((DtrnQty1 * DtrnUnitPrice) * (dtrnDiscLine1 / 100), 2);
                 }
-
+                
                 CalcValues();
             }
         }
@@ -69,11 +68,11 @@ namespace RetailMobile.Library
             {
                 dtrnDiscLine2 = value;
 
-                if (DtrnDiscLine2 > 0)
+                if (dtrnDiscLine2 > 0)
                 {
-                    dtrnDiscValue2 = System.Math.Round(((1 * DtrnUnitPrice) - dtrnDiscValue1) * (DtrnDiscLine2 / 100), 2);
+                    dtrnDiscValue2 = System.Math.Round(((1 * DtrnUnitPrice) - dtrnDiscValue1) * (dtrnDiscLine2 / 100), 2);
                 }
-
+                
                 CalcValues();
             }
         }
@@ -111,7 +110,7 @@ namespace RetailMobile.Library
             ItemId = item.ItemId;
             ItemCode = item.item_cod;
             ItemDesc = item.ItemDesc;
-            DtrnQty1 = qty;
+            dtrnQty1 = qty;
             
             //            DtrnUnitPrice = GetItemPrice(ctx, ItemId);
             //            ItemVatId = GetItemVatId(ctx, ItemId);
@@ -131,22 +130,22 @@ namespace RetailMobile.Library
 
             if (cstId > 0)
             {
-                DtrnDiscLine1 = GetDiscount(ctx, ItemId, (long)cstId);
-                DtrnDiscLine2 = GetDiscount2(ctx, ItemId, (long)cstId);
+                dtrnDiscLine1 = GetDiscount(ctx, ItemId, (long)cstId);
+                dtrnDiscLine2 = GetDiscount2(ctx, ItemId, (long)cstId);
 
-                if (DtrnDiscLine1 > 0)
+                if (dtrnDiscLine1 > 0)
                 {
-                    dtrnDiscValue1 = System.Math.Round((DtrnQty1 * DtrnUnitPrice) * (DtrnDiscLine1 / 100), 2);
+                    dtrnDiscValue1 = System.Math.Round((DtrnQty1 * DtrnUnitPrice) * (dtrnDiscLine1 / 100), 2);
                 }
-                if (DtrnDiscLine2 > 0)
+                if (dtrnDiscLine2 > 0)
                 {
-                    dtrnDiscValue2 = System.Math.Round(((1 * DtrnUnitPrice) - dtrnDiscValue1) * (DtrnDiscLine2 / 100), 2);
+                    dtrnDiscValue2 = System.Math.Round(((1 * DtrnUnitPrice) - dtrnDiscValue1) * (dtrnDiscLine2 / 100), 2);
                 }
             }
             else
             {
-                DtrnDiscLine1 = 0;
-                DtrnDiscLine2 = 0;
+                dtrnDiscLine1 = 0;
+                dtrnDiscLine2 = 0;
             }
             
             CalcValues();
@@ -158,7 +157,7 @@ namespace RetailMobile.Library
             DtrnVatValue = System.Math.Round((DtrnNetValue) * ((100 + ItemVatValue) / 100) - DtrnNetValue, 2);
         }
 
-        public  void Fetch(IResultSet result)
+        public void Fetch(IResultSet result)
         {
             DtrnId = result.GetInt("id");
             HtrnId = result.GetInt("htrn_id");
@@ -166,8 +165,8 @@ namespace RetailMobile.Library
             ItemCode = result.GetString("item_cod");
             ItemDesc = result.GetString("item_desc");
             DtrnUnitPrice = result.GetDouble("unit_price");
-            DtrnQty1 = result.GetDouble("qty1");
-            DtrnDiscLine1 = result.GetDouble("disc_line1");
+            dtrnQty1 = result.GetDouble("qty1");
+            dtrnDiscLine1 = result.GetDouble("disc_line1");
             DtrnNetValue = result.GetDouble("net_value");
             DtrnVatValue = result.GetDouble("vat_value");
             ItemVatId = result.GetInt("item_vat");

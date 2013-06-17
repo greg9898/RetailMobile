@@ -39,7 +39,7 @@ namespace RetailMobile
             View v = inflater.Inflate(Resource.Layout.InvoiceScreen, container, false);
             view = v;
 
-//            bool isTablet = Common.isTabletDevice(this.Activity);
+            bool isTablet = Common.isTabletDevice(this.Activity);
 
             actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
             actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
@@ -47,18 +47,18 @@ namespace RetailMobile
             actionBar.AddButtonRight(ControlIds.INVOICE_SAVE_BUTTON, this.Activity.GetString(Resource.String.btnSave), Resource.Drawable.save_48);
             actionBar.SetTitle(this.Activity.GetString(Resource.String.lblInvoice));
 
-//            if (isTablet)
-//            {
-//                if (this.Resources.Configuration.Orientation == Android.Content.Res.Orientation.Portrait)
-//                {
-//                    actionBar.AddButtonLeft(ControlIds.INVOICE_ADD_BUTTON, "", Resource.Drawable.add_48);
-//                }
-//            }
-//            else
-//            {
-//                actionBar.AddButtonLeft(ControlIds.INVOICE_MAINMENU_BUTTON, "", Resource.Drawable.menu_32);
-//                actionBar.AddButtonLeft(ControlIds.INVOICE_ADD_BUTTON, "", Resource.Drawable.add_48);
-//            }
+            if (isTablet)
+            {
+                if (this.Resources.Configuration.Orientation == Android.Content.Res.Orientation.Portrait)
+                {
+                    actionBar.AddButtonLeft(ControlIds.INVOICE_ADD_BUTTON, "", Resource.Drawable.add_48);
+                }
+            }
+            else
+            {
+                actionBar.AddButtonLeft(ControlIds.INVOICE_MAINMENU_BUTTON, "", Resource.Drawable.menu_32);
+                actionBar.AddButtonLeft(ControlIds.INVOICE_ADD_BUTTON, "", Resource.Drawable.add_48);
+            }
             
             invoiceTabHeader = InvoiceTabHeader.NewInstance(this);
             invoiceTabDetails = InvoiceTabDetails.NewInstance(this);
@@ -66,11 +66,67 @@ namespace RetailMobile
             invoiceTabHeader.CustomerChanged += invoiceTabHeader_CustomerChanged;
 
             tabHost = (TabHost)view.FindViewById(Resource.Id.tabhost);
-            tabHost.TabChanged += TabHostHandleTabChanged; 
             tabHost.Setup();
-            InitializeTab();               
+            InitializeTab();   
+
+            if (Common.isPortrait(this.Activity))
+            {
+//                MainMenuPopup.InitPopupMenu(this.Activity, actionBar.Id);
+//                InitPopupMenu();
+            }
+            else
+            {
+
+            }             
 
             return v;
+        }
+
+        void InitPopupMenu()
+        {
+            int layoutWidth = (Resources.DisplayMetrics.WidthPixels * 31) / 100;
+            int layoutHeight = 4 * ((int)Resources.GetDimension(Resource.Dimension.main_menu_icon_size) + 2);
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(layoutWidth, layoutHeight);
+            lp.AddRule(LayoutRules.Below, actionBar.Id);
+            lp.TopMargin = (int)Resources.GetDimension(Resource.Dimension.action_bar_height);
+
+            RelativeLayout popupMenu = this.Activity.FindViewById<RelativeLayout>(Resource.Id.popupMenu);
+            Log.Debug("invoiceInfoFr InitPopupMenu", "popupMenu=", popupMenu);
+            popupMenu.LayoutParameters = lp;
+            popupMenu.SetBackgroundResource(Resource.Drawable.actionbar_background);
+
+            MainMenuFragment mainmenupopup_fragment = (MainMenuFragment)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.mainmenupopup_fragment);  
+            mainmenupopup_fragment.IsPopupMenu = true;
+
+            Button btnSettings = this.Activity.FindViewById<Button>(Resource.Id.btnSettingsMain);
+            btnSettings.Touch += (object sender, View.TouchEventArgs e) => { 
+                switch (e.Event.Action & MotionEventActions.Mask)
+                {
+                    case MotionEventActions.Up:
+                        popupMenu.Visibility = ViewStates.Gone;
+                        SettingsClicked();
+                        break;
+                }
+            };
+        }
+
+        void SettingsClicked()
+        {
+            if (Common.isTabletDevice(this.Activity))
+            {                
+                this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Gone;
+                var ft = FragmentManager.BeginTransaction();
+                ft.Replace(Resource.Id.detailInfo_fragment, new SettingsFragment());
+
+                ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+                ft.Commit();
+            }
+            else
+            {
+                var intent = new Android.Content.Intent();
+                intent.SetClass(this.Activity, typeof(SettingsFragmentActivity));
+                StartActivity(intent);
+            }
         }
 
         public  void LoadDetailsAdapter()
@@ -115,7 +171,6 @@ namespace RetailMobile
             tabHost.AddTab(spec1);
 
             TabHost.TabSpec spec2 = tabHost.NewTabSpec("Details");
-            //spec2.SetContent(Resource.Id.realtabcontent);
             spec2.SetContent(Resource.Id.tab2);
             spec2.SetIndicator(this.Activity. LayoutInflater.Inflate( Resource.Layout.invoice_tab_button_details, null));
             tabHost.AddTab(spec2);
@@ -127,9 +182,6 @@ namespace RetailMobile
                 tab.SetMinimumHeight(18);
             }
 
-            //tabHost.SetCurrentTabByTag("Details");
-            //tabHost.SetCurrentTabByTag("Info");
-
             var ft = FragmentManager.BeginTransaction();        
             ft.Replace(Resource.Id.realtabcontent, invoiceTabHeader);
             ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
@@ -138,30 +190,7 @@ namespace RetailMobile
             var ft1 = FragmentManager.BeginTransaction();        
             ft1.Replace(Resource.Id.tab2, invoiceTabDetails);
             ft1.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
-            ft1.Commit();
-
-        }
-
-        void TabHostHandleTabChanged(object sender, TabHost.TabChangeEventArgs e)
-        {
-            /*if (e.TabId.Equals("Info"))
-            {
-                PushFragments(invoiceTabHeader);
-            }
-            else if (e.TabId.Equals("Details"))
-            {
-                PushFragments(invoiceTabDetails);
-            }*/
-        }
-
-        public void PushFragments(Android.Support.V4.App.Fragment fragment)
-        {
-            var ft = FragmentManager.BeginTransaction();        
-            ft.Replace(Resource.Id.realtabcontent, fragment);
-            ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
-            ft.Commit();
-
-            view.FindViewById<FrameLayout>(Resource.Id.realtabcontent).Visibility = ViewStates.Visible;
+            ft1.Commit(); 
         }
 
         void ActionBarButtonClicked(int id)
@@ -195,12 +224,8 @@ namespace RetailMobile
                     }
                     break;
                 case ControlIds.INVOICE_MAINMENU_BUTTON:
-                    View viewPopup = this.Activity.LayoutInflater.Inflate(Resource.Layout.mainmenu_popup, null, false);
-                    Button btnMenu = this.Activity.FindViewById<Button>(Resource.Id.btnSettingsMain);
-                    PopupWindow pw = new PopupWindow(viewPopup, 100, 100, true);
-//                    popUp.SetWindowLayoutMode(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
-//                    pw.ShowAsDropDown(btnMenu);
-                    pw.ShowAtLocation(this.view, GravityFlags.Left, 1, (int)this.Activity.Resources.GetDimension(Resource.Dimension.action_bar_height)); 
+                    RelativeLayout popupMenu = this.Activity.FindViewById<RelativeLayout>(Resource.Id.popupMenu);
+                    popupMenu.Visibility = popupMenu.Visibility == ViewStates.Visible ? ViewStates.Gone : ViewStates.Visible;
                     break;
             }
         }
@@ -209,16 +234,8 @@ namespace RetailMobile
         {
             header = new Library.TransHed();
 
-            //tabHost.SetCurrentTabByTag("Details");
-            //tabHost.SetCurrentTabByTag("Info");
-
-            //invoiceTabHeader.ResetFields();
-
             invoiceTabHeader.InitHeader();
             invoiceTabDetails.LoadDetailsAdapter();
-
-            //invoiceTabHeader.InitHeader();
-            //invoiceTabDetails.LoadDetailsAdapter();
         }
 
         void Save()

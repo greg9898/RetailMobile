@@ -201,13 +201,13 @@
     <AndroidResource Include="Resources\Layout\settings_fragment_activity.axml" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <AndroidResource Include="Resources\Layout\transaction_frmt_activity.axml" />
+    <AndroidResource Include="Resources\values-sw600dp\dimens.xml" />
+    <Compile Include="Dialogs\MainMenuPopup.cs" />
+    <AndroidResource Include="Resources\layout-port\dialog_customer_search.axml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
-    <AndroidResource Include="Resources\layout-land\InvoiceScreen.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\Layout\InvoiceDetailRow.axml" />
     <AndroidResource Include="Resources\Layout\ItemDetails.axml" />
     <AndroidResource Include="Resources\Layout\ItemInfoRow.axml" />

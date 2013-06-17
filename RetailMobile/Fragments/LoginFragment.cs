@@ -3,6 +3,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using RetailMobile.Library;
+using Android.Util;
 
 namespace RetailMobile
 {
@@ -22,12 +23,12 @@ namespace RetailMobile
         {
             View view = inflater.Inflate(Resource.Layout.LoginFragment, container, false);
 
-//            if (layout != Common.Layouts.Port)
-//            {
-            this.actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
-            this.actionBar.SetTitle(this.Activity.GetString(Resource.String.btnLogin));
-            this.actionBar.ClearButtons();
-//            }
+            if (this.Resources.Configuration.Orientation == Android.Content.Res.Orientation.Landscape)
+            {
+                this.actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
+                this.actionBar.SetTitle(this.Activity.GetString(Resource.String.btnLogin));
+                this.actionBar.ClearButtons();
+            }
 
             this.tbUsername = (TextView)view.FindViewById(Resource.Id.tbUsername);
             this.tbPassword = (TextView)view.FindViewById(Resource.Id.tbPassword);
@@ -44,42 +45,43 @@ namespace RetailMobile
 
             if (LoginFragment.Login(this.Activity, username, password))
             {
-//                bool isTablet = Common.isTabletDevice(this.Activity);
-//
-//                if (isTablet)
-//                {
-                this.Activity.FindViewById<LinearLayout>(Resource.Id.layoutList).Visibility = ViewStates.Visible;
-                this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Visible;
-                this.Activity.FindViewById<LinearLayout>(Resource.Id.layoutDetails).Visibility = ViewStates.Visible;
+                bool isTablet = Common.isTabletDevice(this.Activity);
 
-                DetailsFragment details = DetailsFragment.NewInstance((int)MainMenu.MenuItems.Invoices);
-                var ft = FragmentManager.BeginTransaction();
-                ft.Replace(Resource.Id.details_fragment, details);
-                ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
-                ft.Commit();
-                ft = FragmentManager.BeginTransaction();
-                ft.Replace(Resource.Id.detailInfo_fragment, InvoiceInfoFragment.NewInstance(0));
-                ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
-                ft.Commit();
+                if (isTablet)
+                {
+                    this.Activity.FindViewById<LinearLayout>(Resource.Id.layoutList).Visibility = ViewStates.Visible;
+                    this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Visible;
+                    this.Activity.FindViewById<LinearLayout>(Resource.Id.layoutDetails).Visibility = ViewStates.Visible;
 
-//                    if (isTabletLand)
-//                    {    
-                this.Activity.FindViewById<LinearLayout>(Resource.Id.LayoutMenu).Visibility = ViewStates.Visible;              
-//                    }
-//                    else
-//                    { 
-//                        RetailMobile.Fragments.ActionBar myActionBar = (RetailMobile.Fragments.ActionBar)Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBarMain);       
-//
-//                        myActionBar.ButtonMenuVisibility = ViewStates.Visible;
-//                        myActionBar.ButtonSettingsVisibility = ViewStates.Gone;
-//                    }
-//                }
-//                else
-//                {
-//                    var intent = new Android.Content.Intent();
-//                    intent.SetClass(this.Activity, typeof(TransactionFragmentActivity));
-//                    StartActivity(intent);
-//                }               
+                    DetailsFragment details = DetailsFragment.NewInstance((int)MainMenu.MenuItems.Invoices);
+                    var ft = FragmentManager.BeginTransaction();
+                    ft.Replace(Resource.Id.details_fragment, details);
+                    ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+                    ft.Commit();
+
+                    ft = FragmentManager.BeginTransaction();
+                    ft.Replace(Resource.Id.detailInfo_fragment, InvoiceInfoFragment.NewInstance(0));
+                    ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+                    ft.Commit();
+
+                    if (this.Resources.Configuration.Orientation == Android.Content.Res.Orientation.Landscape)
+                    {    
+                        this.Activity.FindViewById<LinearLayout>(Resource.Id.LayoutMenu).Visibility = ViewStates.Visible;              
+                    }
+                    else
+                    { 
+                        RetailMobile.Fragments.ActionBar myActionBar = (RetailMobile.Fragments.ActionBar)Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBarMain);       
+
+                        myActionBar.ButtonMenuVisibility = ViewStates.Visible;
+                        myActionBar.ButtonSettingsVisibility = ViewStates.Gone;
+                    }
+                }
+                else
+                {
+                    var intent = new Android.Content.Intent();
+                    intent.SetClass(this.Activity, typeof(TransactionFragmentActivity));
+                    StartActivity(intent);
+                }               
             }
             else
             {

@@ -20,7 +20,6 @@ namespace RetailMobile
         Button btnLogout;
         Button btnSync;
         RetailMobile.Fragments.ItemActionBar actionBar;
-        Common.Layouts layout ;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -102,19 +101,19 @@ namespace RetailMobile
                             return; //?
                         }
 
-//                        if (layout == Common.Layouts.Land || layout == Common.Layouts.Port)
-//                        {                
-//                            var intent = new Android.Content.Intent();
-//                            intent.SetClass(this.Activity, typeof(LoginFragmentActivity));
-//                            StartActivity(intent);
-//                        }
-//                        else
-//                        {
-                        var ft = this.Activity.SupportFragmentManager.BeginTransaction();
-                        ft.Replace(Resource.Id.detailInfo_fragment, new LoginFragment());
-                        ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
-                        ft.Commit();
-//                        }
+                        if (Common.isTabletDevice(this.Activity))
+                        {                
+                            var intent = new Android.Content.Intent();
+                            intent.SetClass(this.Activity, typeof(LoginFragmentActivity));
+                            StartActivity(intent);
+                        }
+                        else
+                        {
+                            var ft = this.Activity.SupportFragmentManager.BeginTransaction();
+                            ft.Replace(Resource.Id.detailInfo_fragment, new LoginFragment());
+                            ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+                            ft.Commit();
+                        }
                     } 
                     break;
                 case ControlIds.SETTINGS_SAVE_BUTTON:

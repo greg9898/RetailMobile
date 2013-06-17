@@ -140,11 +140,6 @@ namespace RetailMobile
             custDlg.Show();
         }
 
-        public void ResetFields()
-        {
-            LoadCustomerData(0);
-        }
-
         public  void FillInvoiceFields()
         {
             if (invoiceParentView == null)
@@ -189,7 +184,8 @@ namespace RetailMobile
             }
         }
 
-        bool init = false;
+        bool init;
+
         public void InitHeader()
         {
             init = true;
