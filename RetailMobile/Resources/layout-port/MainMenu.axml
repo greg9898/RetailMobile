@@ -27,10 +27,10 @@
 					class="RetailMobile.LoginFragment" />
 		</LinearLayout>
 	</LinearLayout>
-<!-- 	<include  
-			android:id="@+id/popupMenu"
-			layout="@layout/mainmenu_popup" /> -->
-	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ 	<include  
+			android:id="@+id/include_mainmenu_popup"
+			layout="@layout/mainmenu_popup" /> 
+	<!-- <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			android:id="@+id/popupMenu"
 			android:visibility="gone"
 			android:layout_marginTop="@dimen/action_bar_height"
@@ -69,5 +69,5 @@
 					android:gravity="left|center"
 					android:text="@string/Settings" />
 		</RelativeLayout>
-	</RelativeLayout>
+	</RelativeLayout> -->
 </RelativeLayout>

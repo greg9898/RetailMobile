@@ -103,16 +103,16 @@ namespace RetailMobile
 
                         if (Common.isTabletDevice(this.Activity))
                         {                
-                            var intent = new Android.Content.Intent();
-                            intent.SetClass(this.Activity, typeof(LoginFragmentActivity));
-                            StartActivity(intent);
-                        }
-                        else
-                        {
                             var ft = this.Activity.SupportFragmentManager.BeginTransaction();
                             ft.Replace(Resource.Id.detailInfo_fragment, new LoginFragment());
                             ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
-                            ft.Commit();
+                            ft.Commit(); 
+                        }
+                        else
+                        {
+                            var intent = new Android.Content.Intent();
+                            intent.SetClass(this.Activity, typeof(LoginFragmentActivity));
+                            StartActivity(intent);
                         }
                     } 
                     break;
@@ -130,10 +130,19 @@ namespace RetailMobile
 
                         if (Common.CurrentDealerID == 0)
                         {
-                            var ft = this.Activity.SupportFragmentManager.BeginTransaction();
-                            ft.Replace(Resource.Id.detailInfo_fragment, new LoginFragment());
-                            ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
-                            ft.Commit();
+                            if (Common.isTabletDevice(this.Activity))
+                            {
+                                var ft = this.Activity.SupportFragmentManager.BeginTransaction();
+                                ft.Replace(Resource.Id.detailInfo_fragment, new LoginFragment());
+                                ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+                                ft.Commit();
+                            }
+                            else
+                            {
+                                var intent = new Android.Content.Intent();
+                                intent.SetClass(this.Activity, typeof(LoginFragmentActivity));
+                                StartActivity(intent);
+                            }
                         }
                     }
                     catch (Exception ex)

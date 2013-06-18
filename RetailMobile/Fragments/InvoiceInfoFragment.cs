@@ -72,7 +72,7 @@ namespace RetailMobile
             if (Common.isPortrait(this.Activity))
             {
 //                MainMenuPopup.InitPopupMenu(this.Activity, actionBar.Id);
-//                InitPopupMenu();
+                InitPopupMenu();
             }
             else
             {
@@ -90,8 +90,8 @@ namespace RetailMobile
             lp.AddRule(LayoutRules.Below, actionBar.Id);
             lp.TopMargin = (int)Resources.GetDimension(Resource.Dimension.action_bar_height);
 
-            RelativeLayout popupMenu = this.Activity.FindViewById<RelativeLayout>(Resource.Id.popupMenu);
-            Log.Debug("invoiceInfoFr InitPopupMenu", "popupMenu=", popupMenu);
+            RelativeLayout popupMenu = this.Activity.FindViewById<RelativeLayout>(Resource.Id.popup_mainmenu_inner);
+            Log.Debug("invoiceInfoFr InitPopupMenu", "popupMenu=" + (popupMenu != null));
             popupMenu.LayoutParameters = lp;
             popupMenu.SetBackgroundResource(Resource.Drawable.actionbar_background);
 
@@ -224,7 +224,7 @@ namespace RetailMobile
                     }
                     break;
                 case ControlIds.INVOICE_MAINMENU_BUTTON:
-                    RelativeLayout popupMenu = this.Activity.FindViewById<RelativeLayout>(Resource.Id.popupMenu);
+                    RelativeLayout popupMenu = this.Activity.FindViewById<RelativeLayout>(Resource.Id.popup_mainmenu_inner);
                     popupMenu.Visibility = popupMenu.Visibility == ViewStates.Visible ? ViewStates.Gone : ViewStates.Visible;
                     break;
             }

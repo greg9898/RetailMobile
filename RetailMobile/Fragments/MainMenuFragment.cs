@@ -101,7 +101,7 @@ namespace RetailMobile
 
             if (isPopupMenu)
             {
-                this.Activity.FindViewById<RelativeLayout>(Resource.Id.popupMenu).Visibility = ViewStates.Gone;
+                this.Activity.FindViewById<RelativeLayout>(Resource.Id.popup_mainmenu_inner).Visibility = ViewStates.Gone;
             }
         }
 
@@ -127,7 +127,7 @@ namespace RetailMobile
 
             if (isPopupMenu)
             {
-                this.Activity.FindViewById<RelativeLayout>(Resource.Id.popupMenu).Visibility = ViewStates.Gone;
+                this.Activity.FindViewById<RelativeLayout>(Resource.Id.popup_mainmenu_inner).Visibility = ViewStates.Gone;
             }
         }
 
@@ -154,7 +154,7 @@ namespace RetailMobile
 
             if (isPopupMenu)
             {
-                this.Activity.FindViewById<RelativeLayout>(Resource.Id.popupMenu).Visibility = ViewStates.Gone;
+                this.Activity.FindViewById<RelativeLayout>(Resource.Id.popup_mainmenu_inner).Visibility = ViewStates.Gone;
             }
         }
 

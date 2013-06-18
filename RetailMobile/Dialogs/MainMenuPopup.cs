@@ -17,7 +17,7 @@ namespace RetailMobile
             lp.TopMargin = (int)ctx.Resources.GetDimension(Resource.Dimension.action_bar_height);
             
             Log.Debug("InitPopupMenu", " before popupMenu=");
-            RelativeLayout popupMenu = ctx.FindViewById<RelativeLayout>(Resource.Id.popupMenu);
+            RelativeLayout popupMenu = ctx.FindViewById<RelativeLayout>(Resource.Id.popup_mainmenu_inner);
             Log.Debug("InitPopupMenu", "popupMenu=" + popupMenu);
             popupMenu.LayoutParameters = lp;
             popupMenu.SetBackgroundResource(Resource.Drawable.actionbar_background);

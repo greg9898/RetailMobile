@@ -11,7 +11,7 @@ using Android.Util;
 namespace RetailMobile
 {
     [Activity(Label = "Ασυρματη Παραγγελιοληψια", MainLauncher = true, Icon = "@drawable/retail", Theme = "@android:style/Theme.Light.NoTitleBar.Fullscreen" 
-              ,ScreenOrientation = Android.Content.PM.ScreenOrientation.Landscape)]
+             /* ,ScreenOrientation = Android.Content.PM.ScreenOrientation.Landscape*/)]
     public class MainMenu : Android.Support.V4.App.FragmentActivity
     {
         public enum MenuItems
@@ -129,8 +129,8 @@ namespace RetailMobile
             lp.AddRule(LayoutRules.Below, myActionBar.Id);
             lp.TopMargin = (int)Resources.GetDimension(Resource.Dimension.action_bar_height);
 
-            RelativeLayout popupMenu = this.FindViewById<RelativeLayout>(Resource.Id.popupMenu);
-            Log.Debug("MainMenu InitPopupMenu", "popupMenu=", popupMenu);
+            RelativeLayout popupMenu = this.FindViewById<RelativeLayout>(Resource.Id.popup_mainmenu_inner);
+            Log.Debug("MainMenu InitPopupMenu", "popupMenu=" + (popupMenu != null));
             popupMenu.LayoutParameters = lp;
             popupMenu.SetBackgroundResource(Resource.Drawable.actionbar_background);
 
@@ -170,7 +170,7 @@ namespace RetailMobile
 
         void MenuClicked()
         {
-            RelativeLayout popupMenu = this.FindViewById<RelativeLayout>(Resource.Id.popupMenu);
+            RelativeLayout popupMenu = this.FindViewById<RelativeLayout>(Resource.Id.popup_mainmenu_inner);
             if (popupMenu.Visibility == ViewStates.Visible)
             {
                 popupMenu.Visibility = ViewStates.Gone;

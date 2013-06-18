@@ -114,7 +114,7 @@ namespace RetailMobile
         public static bool isTabletDevice(Android.Content.Context activityContext)
         {
             bool isTablet = (int)activityContext.Resources.GetDimension(Resource.Dimension.isTablet) == 600 ? true : false;
-            return true;
+//            return true;
             return isTablet;
 
 //            Log.Debug("isTabletDevice", "ScreenLayout=" + Enum.GetName(typeof(Android.Content.Res.ScreenLayout), activityContext.Resources.Configuration.ScreenLayout));
@@ -146,7 +146,7 @@ namespace RetailMobile
 
         public static bool isPortrait(Android.Content.Context activityContext)
         {
-            return false;
+//            return false;
             return  activityContext.Resources.Configuration.Orientation == Android.Content.Res.Orientation.Portrait;
         }
     }

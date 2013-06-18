@@ -59,8 +59,11 @@
 					android:layout_height="fill_parent" />
 		</LinearLayout>
 	</LinearLayout>
+	<!--  	<include  
+			android:id="@+id/include_mainmenu_popup"
+			layout="@layout/mainmenu_popup" />  -->
 	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			android:id="@+id/popupMenu"
+			android:id="@+id/popup_mainmenu_inner"
 			android:visibility="gone"
 			android:layout_marginTop="@dimen/action_bar_height"
 			android:layout_width="0dp"
