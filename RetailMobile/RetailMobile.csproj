@@ -205,6 +205,8 @@
     <Compile Include="Dialogs\MainMenuPopup.cs" />
     <AndroidResource Include="Resources\layout-port\dialog_customer_search.axml" />
     <AndroidResource Include="Resources\layout-port\InvoiceScreen.axml" />
+    <AndroidResource Include="Resources\layout-sw600dp-port\InvoiceScreen.axml" />
+    <AndroidResource Include="Resources\layout-sw600dp\InvoiceScreen.axml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

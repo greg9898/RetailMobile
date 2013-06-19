@@ -13,7 +13,7 @@ namespace RetailMobile
         RetailMobile.Fragments.ItemActionBar actionBar;
         System.Collections.ICollection _list;
         int _currentObjId = -1;
-        bool _isDualPane = true;
+        bool isTablet;
 
         public static DetailsFragment NewInstance(int objId)
         {
@@ -36,8 +36,16 @@ namespace RetailMobile
         public override void OnViewCreated(View p0, Bundle p1)
         {
             base.OnViewCreated(p0, p1);
-
-            actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBarList);
+            isTablet = Common.isTabletDevice(this.Activity);
+         
+            if (isTablet)
+            {
+                actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBarList);
+            }
+            else
+            {
+                actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentByTag("ItemActionBar");
+            }
             actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
             actionBar.AddButtonRight(ControlIds.INVOICE_ADD_BUTTON, "", Resource.Drawable.add_48);
 
@@ -90,9 +98,6 @@ namespace RetailMobile
             }
 
             ListView.ChoiceMode = ChoiceMode.Single;
-
-            var detInfo = Activity.FindViewById<View>(Resource.Id.detailInfo_fragment);
-            _isDualPane = detInfo != null && detInfo.Visibility == ViewStates.Visible;
 
             switch (ParentObjId)
             {
@@ -151,7 +156,7 @@ namespace RetailMobile
                 return;
             }
 
-            if (_isDualPane)
+            if (isTablet)
             {
                 // We can display everything in place with fragments.
                 // Have the list highlight this item and show the data.

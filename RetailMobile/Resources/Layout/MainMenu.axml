@@ -1,56 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="horizontal"
-    android:background="@drawable/parentBackground">
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:layout_weight="0.3">
-        <TextView
-            android:id="@+id/lblDetailsCaption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="layout-default-land"
-            android:textSize="@dimen/caption_text_size" />
-        <fragment
-            class="RetailMobile.Fragments.ActionBar"
-            android:id="@+id/ActionBarMain"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <fragment
-            class="RetailMobile.MainMenuFragment"
-            android:id="@+id/titles_fragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:layout_weight="0.7">
-        <fragment
-            class="RetailMobile.Fragments.ActionBar"
-            android:id="@+id/ActionBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id="@+id/details_fragment" />
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:id="@+id/detailInfo_fragment" />
-        </LinearLayout>
-    </LinearLayout>
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:orientation="horizontal"
+		android:background="@drawable/parentBackground">
+	<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="0dp"
+			android:layout_height="fill_parent"
+			android:layout_weight="0.3">
+		<TextView
+				android:id="@+id/lblDetailsCaption"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerHorizontal="true"
+				android:text="layout-default-land"
+				android:textSize="@dimen/caption_text_size" />
+		<fragment
+				class="RetailMobile.Fragments.ActionBar"
+				android:id="@+id/ActionBarMain"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
+		<fragment
+				class="RetailMobile.MainMenuFragment"
+				android:id="@+id/titles_fragment"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" />
+	</LinearLayout>
+	<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="0dp"
+			android:layout_height="fill_parent"
+			android:layout_weight="0.7">
+		<fragment
+				class="RetailMobile.Fragments.ActionBar"
+				android:id="@+id/ActionBar"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
+		<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent">
+			<FrameLayout
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:id="@+id/details_fragment" />
+			<FrameLayout
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="2"
+					android:id="@+id/detailInfo_fragment" />
+		</LinearLayout>
+	</LinearLayout>
 </LinearLayout>

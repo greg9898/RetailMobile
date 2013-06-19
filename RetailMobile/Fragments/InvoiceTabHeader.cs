@@ -106,7 +106,10 @@ namespace RetailMobile
             if (string.IsNullOrEmpty(((EditText)sender).Text))
             {
                 FillCustomerFields(new CustomerInfo());
-                invoiceParentView.Header.CstId = 0;
+                if (invoiceParentView != null)
+                {
+                    invoiceParentView.Header.CstId = 0;
+                }
                 return;
             }
 

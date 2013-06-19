@@ -20,6 +20,7 @@ namespace RetailMobile
         View view;
         InvoiceTabHeader invoiceTabHeader;
         InvoiceTabDetails invoiceTabDetails;
+        bool isTablet;
 
         public static InvoiceInfoFragment NewInstance(long objId)
         {
@@ -39,9 +40,16 @@ namespace RetailMobile
             View v = inflater.Inflate(Resource.Layout.InvoiceScreen, container, false);
             view = v;
 
-            bool isTablet = Common.isTabletDevice(this.Activity);
+            isTablet = Common.isTabletDevice(this.Activity);
 
-            actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
+            if (isTablet)
+            {
+                actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
+            }
+            else
+            {
+                actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentByTag("ItemActionBar");
+            }
             actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
             actionBar.ClearButtons();
             actionBar.AddButtonRight(ControlIds.INVOICE_SAVE_BUTTON, this.Activity.GetString(Resource.String.btnSave), Resource.Drawable.save_48);
@@ -69,15 +77,13 @@ namespace RetailMobile
             tabHost.Setup();
             InitializeTab();   
 
-            if (Common.isPortrait(this.Activity))
+            if (isTablet)
             {
-//                MainMenuPopup.InitPopupMenu(this.Activity, actionBar.Id);
-                InitPopupMenu();
-            }
-            else
-            {
-
-            }             
+                if (Common.isPortrait(this.Activity))
+                {
+                    InitPopupMenu();
+                }
+            }       
 
             return v;
         }
@@ -112,7 +118,7 @@ namespace RetailMobile
 
         void SettingsClicked()
         {
-            if (Common.isTabletDevice(this.Activity))
+            if (isTablet)
             {                
                 this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Gone;
                 var ft = FragmentManager.BeginTransaction();
@@ -129,7 +135,7 @@ namespace RetailMobile
             }
         }
 
-        public  void LoadDetailsAdapter()
+        public void LoadDetailsAdapter()
         {
             invoiceTabDetails.LoadDetailsAdapter();
         }
@@ -224,8 +230,20 @@ namespace RetailMobile
                     }
                     break;
                 case ControlIds.INVOICE_MAINMENU_BUTTON:
-                    RelativeLayout popupMenu = this.Activity.FindViewById<RelativeLayout>(Resource.Id.popup_mainmenu_inner);
-                    popupMenu.Visibility = popupMenu.Visibility == ViewStates.Visible ? ViewStates.Gone : ViewStates.Visible;
+                    if (isTablet)
+                    {
+                        RelativeLayout popupMenu = this.Activity.FindViewById<RelativeLayout>(Resource.Id.popup_mainmenu_inner);
+                        popupMenu.Visibility = popupMenu.Visibility == ViewStates.Visible ? ViewStates.Gone : ViewStates.Visible;
+                    }
+                    else
+                    {
+                        var ft = this.Activity.SupportFragmentManager.BeginTransaction();
+                        ft.Replace(Resource.Id.actionbar_phone_fragment, new RetailMobile.Fragments.ActionBar(), "ActionBarMain");
+                        ft.Replace(Resource.Id.content_phone_fragment, new MainMenuFragment());
+                        ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+                        ft.Commit();
+                    }
+
                     break;
             }
         }

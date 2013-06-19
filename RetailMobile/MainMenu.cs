@@ -49,25 +49,24 @@ namespace RetailMobile
             Crashlytics.Android.Crashlytics1.Start(this);
 
             SetContentView(Resource.Layout.MainMenu);
-            
-            myActionBar = (RetailMobile.Fragments.ActionBar)SupportFragmentManager.FindFragmentById(Resource.Id.ActionBarMain);       
-            myActionBar.SyncClicked += new Fragments.ActionBar.SyncCLickedDelegate(MyActionBar_SyncClicked);
-            myActionBar.MenuClicked += new RetailMobile.Fragments.ActionBar.MenuClickedDelegate(MenuClicked);
-            myActionBar.SettingsClicked += new RetailMobile.Fragments.ActionBar.SettingsCLickedDelegate(SettingsClicked);
-
-            if (Common.isPortrait(this))
-            {
-//                MainMenuPopup.InitPopupMenu(this, myActionBar.Id);
-                InitPopupMenu();
-            }
-            else
-            {
-              
-            }    
 
             bool isTablet = Common.isTabletDevice(this);
 
-            ShowProgressBar();
+            if (isTablet)
+            {
+                myActionBar = (RetailMobile.Fragments.ActionBar)SupportFragmentManager.FindFragmentById(Resource.Id.ActionBarMain);       
+                myActionBar.SyncClicked += new Fragments.ActionBar.SyncCLickedDelegate(MyActionBar_SyncClicked);
+                myActionBar.MenuClicked += new RetailMobile.Fragments.ActionBar.MenuClickedDelegate(MenuClicked);
+                myActionBar.SettingsClicked += new RetailMobile.Fragments.ActionBar.SettingsCLickedDelegate(SettingsClicked);
+
+                ShowProgressBar();
+
+                if (Common.isPortrait(this))
+                {
+                    // MainMenuPopup.InitPopupMenu(this, myActionBar.Id);
+                    InitPopupMenu();
+                }
+            }
 
             System.Threading.Tasks.Task.Factory.StartNew(() => Sync.SyncUsers(this)).ContinueWith(task => this.RunOnUiThread(() => HideProgressBar()));
 
@@ -102,9 +101,15 @@ namespace RetailMobile
                 }
                 else
                 {
-                    var intent = new Android.Content.Intent();
-                    intent.SetClass(this, typeof(TransactionFragmentActivity));
-                    StartActivity(intent);
+//                    var intent = new Android.Content.Intent();
+//                    intent.SetClass(this, typeof(TransactionFragmentActivity));
+//                    StartActivity(intent);
+
+                    var ft = SupportFragmentManager.BeginTransaction();
+                    ft.Replace(Resource.Id.actionbar_phone_fragment, new RetailMobile.Fragments.ItemActionBar(), "ItemActionBar");
+                    ft.Replace(Resource.Id.content_phone_fragment, InvoiceInfoFragment.NewInstance(0));
+                    ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+                    ft.Commit();
                 }
             }
             else
@@ -117,6 +122,22 @@ namespace RetailMobile
                     ft.Replace(Resource.Id.detailInfo_fragment, new LoginFragment());
                     ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
                     ft.Commit();
+                }
+                else
+                {
+                    myActionBar = new RetailMobile.Fragments.ActionBar();
+                 
+                    var ft = SupportFragmentManager.BeginTransaction();
+                    ft.Replace(Resource.Id.actionbar_phone_fragment, myActionBar);//new RetailMobile.Fragments.ActionBar()
+                    ft.Replace(Resource.Id.content_phone_fragment, new LoginFragment());
+                    ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+                    ft.Commit();
+
+                    myActionBar.SyncClicked += new Fragments.ActionBar.SyncCLickedDelegate(MyActionBar_SyncClicked);
+                    myActionBar.MenuClicked += new RetailMobile.Fragments.ActionBar.MenuClickedDelegate(MenuClicked);
+                    myActionBar.SettingsClicked += new RetailMobile.Fragments.ActionBar.SettingsCLickedDelegate(SettingsClicked);
+
+                    ShowProgressBar();
                 }
             }
         }

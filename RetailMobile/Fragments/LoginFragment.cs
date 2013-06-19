@@ -9,10 +9,10 @@ namespace RetailMobile
 {
     public class LoginFragment : BaseFragment
     {
-        RetailMobile.Fragments.ItemActionBar actionBar;
         TextView tbUsername;
         TextView tbPassword;
         Button btnLogin;
+        bool isTablet;
 
         public override void OnCreate(Bundle p0)
         {
@@ -22,12 +22,13 @@ namespace RetailMobile
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             View view = inflater.Inflate(Resource.Layout.LoginFragment, container, false);
+            isTablet = Common.isTabletDevice(this.Activity);
 
-            if (this.Resources.Configuration.Orientation == Android.Content.Res.Orientation.Landscape)
+            if (isTablet && !Common.isPortrait(this.Activity))
             {
-                this.actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
-                this.actionBar.SetTitle(this.Activity.GetString(Resource.String.btnLogin));
-                this.actionBar.ClearButtons();
+                RetailMobile.Fragments.ItemActionBar actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
+                actionBar.SetTitle(this.Activity.GetString(Resource.String.btnLogin));
+                actionBar.ClearButtons();
             }
 
             this.tbUsername = (TextView)view.FindViewById(Resource.Id.tbUsername);
@@ -45,8 +46,6 @@ namespace RetailMobile
 
             if (LoginFragment.Login(this.Activity, username, password))
             {
-                bool isTablet = Common.isTabletDevice(this.Activity);
-
                 if (isTablet)
                 {
                     this.Activity.FindViewById<LinearLayout>(Resource.Id.layoutList).Visibility = ViewStates.Visible;
@@ -78,9 +77,15 @@ namespace RetailMobile
                 }
                 else
                 {
-                    var intent = new Android.Content.Intent();
-                    intent.SetClass(this.Activity, typeof(TransactionFragmentActivity));
-                    StartActivity(intent);
+//                    var intent = new Android.Content.Intent();
+//                    intent.SetClass(this.Activity, typeof(TransactionFragmentActivity));
+//                    StartActivity(intent);
+
+                    var ft = this.Activity.SupportFragmentManager.BeginTransaction();
+                    ft.Replace(Resource.Id.actionbar_phone_fragment, new RetailMobile.Fragments.ItemActionBar(), "ItemActionBar");
+                    ft.Replace(Resource.Id.content_phone_fragment, InvoiceInfoFragment.NewInstance(0));
+                    ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+                    ft.Commit();
                 }               
             }
             else

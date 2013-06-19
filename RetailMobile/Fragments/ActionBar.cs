@@ -31,7 +31,7 @@ namespace RetailMobile.Fragments
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            View v = inflater.Inflate(Resource.Layout.main_action_bar, container, true);
+            View v = inflater.Inflate(Resource.Layout.main_action_bar, container, false);
             btnSync = v.FindViewById<Button>(Resource.Id.btnSync);
             btnSync.Click += new EventHandler(btnSync_Click);
 

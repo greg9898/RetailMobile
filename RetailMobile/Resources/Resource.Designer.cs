@@ -449,14 +449,14 @@ namespace RetailMobile
 			// aapt resource value: 0x7f09001f
 			public const int ActionBarDialogCust = 2131296287;
 			
-			// aapt resource value: 0x7f0900ad
-			public const int ActionBarList = 2131296429;
+			// aapt resource value: 0x7f0900b0
+			public const int ActionBarList = 2131296432;
 			
 			// aapt resource value: 0x7f0900a6
 			public const int ActionBarMain = 2131296422;
 			
-			// aapt resource value: 0x7f0900ab
-			public const int LayoutMenu = 2131296427;
+			// aapt resource value: 0x7f0900ae
+			public const int LayoutMenu = 2131296430;
 			
 			// aapt resource value: 0x7f090087
 			public const int LeftButtons = 2131296391;
@@ -464,8 +464,11 @@ namespace RetailMobile
 			// aapt resource value: 0x7f090088
 			public const int RightButtons = 2131296392;
 			
-			// aapt resource value: 0x7f0900b4
-			public const int blueLine = 2131296436;
+			// aapt resource value: 0x7f0900ac
+			public const int actionbar_phone_fragment = 2131296428;
+			
+			// aapt resource value: 0x7f0900b5
+			public const int blueLine = 2131296437;
 			
 			// aapt resource value: 0x7f090037
 			public const int btnAddCustomer = 2131296311;
@@ -491,11 +494,11 @@ namespace RetailMobile
 			// aapt resource value: 0x7f0900a1
 			public const int btnLogin = 2131296417;
 			
-			// aapt resource value: 0x7f0900cd
-			public const int btnLogout = 2131296461;
+			// aapt resource value: 0x7f0900ce
+			public const int btnLogout = 2131296462;
 			
-			// aapt resource value: 0x7f0900bd
-			public const int btnMainSync = 2131296445;
+			// aapt resource value: 0x7f0900be
+			public const int btnMainSync = 2131296446;
 			
 			// aapt resource value: 0x7f0900a5
 			public const int btnMenu = 2131296421;
@@ -509,14 +512,14 @@ namespace RetailMobile
 			// aapt resource value: 0x7f0900a2
 			public const int btnSettings = 2131296418;
 			
-			// aapt resource value: 0x7f0900b7
-			public const int btnSettingsMain = 2131296439;
+			// aapt resource value: 0x7f0900b8
+			public const int btnSettingsMain = 2131296440;
 			
 			// aapt resource value: 0x7f09002e
 			public const int btnShowImage = 2131296302;
 			
-			// aapt resource value: 0x7f0900d8
-			public const int btnStatisticSearch = 2131296472;
+			// aapt resource value: 0x7f0900d9
+			public const int btnStatisticSearch = 2131296473;
 			
 			// aapt resource value: 0x7f09003f
 			public const int btnSubstractValue = 2131296319;
@@ -553,6 +556,9 @@ namespace RetailMobile
 			
 			// aapt resource value: 0x7f090071
 			public const int checkBox = 2131296369;
+			
+			// aapt resource value: 0x7f0900ad
+			public const int content_phone_fragment = 2131296429;
 			
 			// aapt resource value: 0x7f090005
 			public const int date = 2131296261;
@@ -593,8 +599,8 @@ namespace RetailMobile
 			// aapt resource value: 0x7f090033
 			public const int imgItems = 2131296307;
 			
-			// aapt resource value: 0x7f0900b6
-			public const int imgSettings = 2131296438;
+			// aapt resource value: 0x7f0900b7
+			public const int imgSettings = 2131296439;
 			
 			// aapt resource value: 0x7f090039
 			public const int img_statistic_month = 2131296313;
@@ -617,8 +623,8 @@ namespace RetailMobile
 			// aapt resource value: 0x7f09003b
 			public const int invoice_tab_button_header = 2131296315;
 			
-			// aapt resource value: 0x7f0900b9
-			public const int ivMenuIcon = 2131296441;
+			// aapt resource value: 0x7f0900ba
+			public const int ivMenuIcon = 2131296442;
 			
 			// aapt resource value: 0x7f090085
 			public const int layoutAct = 2131296389;
@@ -641,8 +647,8 @@ namespace RetailMobile
 			// aapt resource value: 0x7f090089
 			public const int layoutHeaderFilter = 2131296393;
 			
-			// aapt resource value: 0x7f0900be
-			public const int layoutIP = 2131296446;
+			// aapt resource value: 0x7f0900bf
+			public const int layoutIP = 2131296447;
 			
 			// aapt resource value: 0x7f09004f
 			public const int layoutInvoiceInfo = 2131296335;
@@ -659,23 +665,23 @@ namespace RetailMobile
 			// aapt resource value: 0x7f09009e
 			public const int layoutItemPrices = 2131296414;
 			
-			// aapt resource value: 0x7f0900ac
-			public const int layoutList = 2131296428;
+			// aapt resource value: 0x7f0900af
+			public const int layoutList = 2131296431;
 			
-			// aapt resource value: 0x7f0900c1
-			public const int layoutPort = 2131296449;
+			// aapt resource value: 0x7f0900c2
+			public const int layoutPort = 2131296450;
 			
-			// aapt resource value: 0x7f0900c4
-			public const int layoutSyncModel = 2131296452;
+			// aapt resource value: 0x7f0900c5
+			public const int layoutSyncModel = 2131296453;
 			
-			// aapt resource value: 0x7f0900ca
-			public const int layoutSyncPass = 2131296458;
+			// aapt resource value: 0x7f0900cb
+			public const int layoutSyncPass = 2131296459;
 			
-			// aapt resource value: 0x7f0900c7
-			public const int layoutSyncUser = 2131296455;
+			// aapt resource value: 0x7f0900c8
+			public const int layoutSyncUser = 2131296456;
 			
-			// aapt resource value: 0x7f0900bc
-			public const int layoutTop = 2131296444;
+			// aapt resource value: 0x7f0900bd
+			public const int layoutTop = 2131296445;
 			
 			// aapt resource value: 0x7f090069
 			public const int layout_checkable_item_info = 2131296361;
@@ -731,23 +737,23 @@ namespace RetailMobile
 			// aapt resource value: 0x7f090040
 			public const int lblDetailsCaption = 2131296320;
 			
-			// aapt resource value: 0x7f0900e3
-			public const int lblDtrnQty = 2131296483;
-			
-			// aapt resource value: 0x7f0900dc
-			public const int lblDtrn_ItemCode = 2131296476;
-			
 			// aapt resource value: 0x7f0900e4
-			public const int lblDtrn_disc_line1 = 2131296484;
+			public const int lblDtrnQty = 2131296484;
 			
-			// aapt resource value: 0x7f0900e1
-			public const int lblDtrn_net_value = 2131296481;
+			// aapt resource value: 0x7f0900dd
+			public const int lblDtrn_ItemCode = 2131296477;
 			
-			// aapt resource value: 0x7f0900e0
-			public const int lblDtrn_unit_price = 2131296480;
+			// aapt resource value: 0x7f0900e5
+			public const int lblDtrn_disc_line1 = 2131296485;
 			
 			// aapt resource value: 0x7f0900e2
-			public const int lblDtrn_vat_value = 2131296482;
+			public const int lblDtrn_net_value = 2131296482;
+			
+			// aapt resource value: 0x7f0900e1
+			public const int lblDtrn_unit_price = 2131296481;
+			
+			// aapt resource value: 0x7f0900e3
+			public const int lblDtrn_vat_value = 2131296483;
 			
 			// aapt resource value: 0x7f09008a
 			public const int lblFilter = 2131296394;
@@ -800,8 +806,8 @@ namespace RetailMobile
 			// aapt resource value: 0x7f090059
 			public const int lblHtrnVatValue = 2131296345;
 			
-			// aapt resource value: 0x7f0900bf
-			public const int lblIP = 2131296447;
+			// aapt resource value: 0x7f0900c0
+			public const int lblIP = 2131296448;
 			
 			// aapt resource value: 0x7f090050
 			public const int lblInvoiceInfoCaption = 2131296336;
@@ -839,32 +845,32 @@ namespace RetailMobile
 			// aapt resource value: 0x7f09007b
 			public const int lblLongDesc = 2131296379;
 			
-			// aapt resource value: 0x7f0900c2
-			public const int lblPort = 2131296450;
-			
-			// aapt resource value: 0x7f0900d0
-			public const int lblStatisticByDate = 2131296464;
-			
-			// aapt resource value: 0x7f0900d2
-			public const int lblStatisticByDateCustName = 2131296466;
+			// aapt resource value: 0x7f0900c3
+			public const int lblPort = 2131296451;
 			
 			// aapt resource value: 0x7f0900d1
-			public const int lblStatisticByMonth = 2131296465;
+			public const int lblStatisticByDate = 2131296465;
 			
-			// aapt resource value: 0x7f0900d4
-			public const int lblStatisticDateFrom = 2131296468;
+			// aapt resource value: 0x7f0900d3
+			public const int lblStatisticByDateCustName = 2131296467;
 			
-			// aapt resource value: 0x7f0900d6
-			public const int lblStatisticDateTo = 2131296470;
+			// aapt resource value: 0x7f0900d2
+			public const int lblStatisticByMonth = 2131296466;
 			
-			// aapt resource value: 0x7f0900c5
-			public const int lblSyncModel = 2131296453;
+			// aapt resource value: 0x7f0900d5
+			public const int lblStatisticDateFrom = 2131296469;
 			
-			// aapt resource value: 0x7f0900cb
-			public const int lblSyncPass = 2131296459;
+			// aapt resource value: 0x7f0900d7
+			public const int lblStatisticDateTo = 2131296471;
 			
-			// aapt resource value: 0x7f0900c8
-			public const int lblSyncUser = 2131296456;
+			// aapt resource value: 0x7f0900c6
+			public const int lblSyncModel = 2131296454;
+			
+			// aapt resource value: 0x7f0900cc
+			public const int lblSyncPass = 2131296460;
+			
+			// aapt resource value: 0x7f0900c9
+			public const int lblSyncUser = 2131296457;
 			
 			// aapt resource value: 0x7f090007
 			public const int linearLayout1 = 2131296263;
@@ -878,8 +884,8 @@ namespace RetailMobile
 			// aapt resource value: 0x7f09000d
 			public const int linearLayout5 = 2131296269;
 			
-			// aapt resource value: 0x7f0900af
-			public const int login_fragment_layout = 2131296431;
+			// aapt resource value: 0x7f0900ab
+			public const int login_fragment_layout = 2131296427;
 			
 			// aapt resource value: 0x7f090020
 			public const int lvCustomers = 2131296288;
@@ -890,26 +896,23 @@ namespace RetailMobile
 			// aapt resource value: 0x7f090022
 			public const int lvItems = 2131296290;
 			
+			// aapt resource value: 0x7f0900b2
+			public const int mainLayout = 2131296434;
+			
 			// aapt resource value: 0x7f0900b1
-			public const int mainLayout = 2131296433;
+			public const int mainMenuLayout = 2131296433;
 			
-			// aapt resource value: 0x7f0900ae
-			public const int mainMenuLayout = 2131296430;
-			
-			// aapt resource value: 0x7f0900b3
-			public const int mainmenupopup_fragment = 2131296435;
-			
-			// aapt resource value: 0x7f0900b0
-			public const int menuLoginFragment = 2131296432;
+			// aapt resource value: 0x7f0900b4
+			public const int mainmenupopup_fragment = 2131296436;
 			
 			// aapt resource value: 0x7f090035
 			public const int miCustomers = 2131296309;
 			
-			// aapt resource value: 0x7f0900e9
-			public const int miDelete = 2131296489;
+			// aapt resource value: 0x7f0900ea
+			public const int miDelete = 2131296490;
 			
-			// aapt resource value: 0x7f0900e8
-			public const int miEdit = 2131296488;
+			// aapt resource value: 0x7f0900e9
+			public const int miEdit = 2131296489;
 			
 			// aapt resource value: 0x7f09002f
 			public const int miInvoices = 2131296303;
@@ -917,11 +920,11 @@ namespace RetailMobile
 			// aapt resource value: 0x7f090032
 			public const int miItems = 2131296306;
 			
-			// aapt resource value: 0x7f0900e7
-			public const int miNew = 2131296487;
+			// aapt resource value: 0x7f0900e8
+			public const int miNew = 2131296488;
 			
-			// aapt resource value: 0x7f0900b5
-			public const int miSettings = 2131296437;
+			// aapt resource value: 0x7f0900b6
+			public const int miSettings = 2131296438;
 			
 			// aapt resource value: 0x7f090003
 			public const int next = 2131296259;
@@ -929,11 +932,11 @@ namespace RetailMobile
 			// aapt resource value: 0x7f0900a4
 			public const int pbSync1 = 2131296420;
 			
-			// aapt resource value: 0x7f0900b8
-			public const int popup_mainmenu = 2131296440;
+			// aapt resource value: 0x7f0900b9
+			public const int popup_mainmenu = 2131296441;
 			
-			// aapt resource value: 0x7f0900b2
-			public const int popup_mainmenu_inner = 2131296434;
+			// aapt resource value: 0x7f0900b3
+			public const int popup_mainmenu_inner = 2131296435;
 			
 			// aapt resource value: 0x7f090001
 			public const int previous = 2131296257;
@@ -941,17 +944,17 @@ namespace RetailMobile
 			// aapt resource value: 0x7f090018
 			public const int realtabcontent = 2131296280;
 			
-			// aapt resource value: 0x7f0900bb
-			public const int settings_fragment = 2131296443;
+			// aapt resource value: 0x7f0900bc
+			public const int settings_fragment = 2131296444;
 			
-			// aapt resource value: 0x7f0900cf
-			public const int statistic_tab_button_month = 2131296463;
+			// aapt resource value: 0x7f0900d0
+			public const int statistic_tab_button_month = 2131296464;
+			
+			// aapt resource value: 0x7f0900db
+			public const int svStatistic = 2131296475;
 			
 			// aapt resource value: 0x7f0900da
-			public const int svStatistic = 2131296474;
-			
-			// aapt resource value: 0x7f0900d9
-			public const int svStatisticByDate = 2131296473;
+			public const int svStatisticByDate = 2131296474;
 			
 			// aapt resource value: 0x7f090067
 			public const int tab2 = 2131296359;
@@ -1004,11 +1007,11 @@ namespace RetailMobile
 			// aapt resource value: 0x7f09005f
 			public const int tbDetUnitPrice = 2131296351;
 			
-			// aapt resource value: 0x7f0900df
-			public const int tbDtrn_disc_line1 = 2131296479;
+			// aapt resource value: 0x7f0900e0
+			public const int tbDtrn_disc_line1 = 2131296480;
 			
-			// aapt resource value: 0x7f0900de
-			public const int tbDtrn_qty1 = 2131296478;
+			// aapt resource value: 0x7f0900df
+			public const int tbDtrn_qty1 = 2131296479;
 			
 			// aapt resource value: 0x7f09008c
 			public const int tbFilterCode = 2131296396;
@@ -1025,8 +1028,8 @@ namespace RetailMobile
 			// aapt resource value: 0x7f090052
 			public const int tbHtrnID = 2131296338;
 			
-			// aapt resource value: 0x7f0900e5
-			public const int tbHtrnNetVal = 2131296485;
+			// aapt resource value: 0x7f0900e6
+			public const int tbHtrnNetVal = 2131296486;
 			
 			// aapt resource value: 0x7f090058
 			public const int tbHtrnNetValue = 2131296344;
@@ -1034,14 +1037,14 @@ namespace RetailMobile
 			// aapt resource value: 0x7f09005c
 			public const int tbHtrnTotValue = 2131296348;
 			
-			// aapt resource value: 0x7f0900e6
-			public const int tbHtrnVatVal = 2131296486;
+			// aapt resource value: 0x7f0900e7
+			public const int tbHtrnVatVal = 2131296487;
 			
 			// aapt resource value: 0x7f09005a
 			public const int tbHtrnVatValue = 2131296346;
 			
-			// aapt resource value: 0x7f0900c0
-			public const int tbIP = 2131296448;
+			// aapt resource value: 0x7f0900c1
+			public const int tbIP = 2131296449;
 			
 			// aapt resource value: 0x7f09009c
 			public const int tbItemCateg1 = 2131296412;
@@ -1055,8 +1058,8 @@ namespace RetailMobile
 			// aapt resource value: 0x7f090083
 			public const int tbItemDebt = 2131296387;
 			
-			// aapt resource value: 0x7f0900dd
-			public const int tbItemDesc = 2131296477;
+			// aapt resource value: 0x7f0900de
+			public const int tbItemDesc = 2131296478;
 			
 			// aapt resource value: 0x7f09006f
 			public const int tbItemLastBuyDate = 2131296367;
@@ -1085,8 +1088,8 @@ namespace RetailMobile
 			// aapt resource value: 0x7f0900a0
 			public const int tbPassword = 2131296416;
 			
-			// aapt resource value: 0x7f0900c3
-			public const int tbPort = 2131296451;
+			// aapt resource value: 0x7f0900c4
+			public const int tbPort = 2131296452;
 			
 			// aapt resource value: 0x7f090070
 			public const int tbQty = 2131296368;
@@ -1103,29 +1106,29 @@ namespace RetailMobile
 			// aapt resource value: 0x7f090099
 			public const int tbSearchItemName = 2131296409;
 			
-			// aapt resource value: 0x7f0900d3
-			public const int tbStatisticCustName = 2131296467;
+			// aapt resource value: 0x7f0900d4
+			public const int tbStatisticCustName = 2131296468;
 			
-			// aapt resource value: 0x7f0900d5
-			public const int tbStatisticDateFrom = 2131296469;
+			// aapt resource value: 0x7f0900d6
+			public const int tbStatisticDateFrom = 2131296470;
 			
-			// aapt resource value: 0x7f0900d7
-			public const int tbStatisticDateTo = 2131296471;
+			// aapt resource value: 0x7f0900d8
+			public const int tbStatisticDateTo = 2131296472;
 			
-			// aapt resource value: 0x7f0900c6
-			public const int tbSyncModel = 2131296454;
+			// aapt resource value: 0x7f0900c7
+			public const int tbSyncModel = 2131296455;
 			
-			// aapt resource value: 0x7f0900cc
-			public const int tbSyncPass = 2131296460;
+			// aapt resource value: 0x7f0900cd
+			public const int tbSyncPass = 2131296461;
 			
-			// aapt resource value: 0x7f0900c9
-			public const int tbSyncUser = 2131296457;
+			// aapt resource value: 0x7f0900ca
+			public const int tbSyncUser = 2131296458;
 			
 			// aapt resource value: 0x7f09009f
 			public const int tbUsername = 2131296415;
 			
-			// aapt resource value: 0x7f0900ce
-			public const int tbValue = 2131296462;
+			// aapt resource value: 0x7f0900cf
+			public const int tbValue = 2131296463;
 			
 			// aapt resource value: 0x7f090063
 			public const int tblDetVatValue = 2131296355;
@@ -1136,11 +1139,11 @@ namespace RetailMobile
 			// aapt resource value: 0x7f0900a7
 			public const int titles_fragment = 2131296423;
 			
-			// aapt resource value: 0x7f0900db
-			public const int transaction_fragment = 2131296475;
+			// aapt resource value: 0x7f0900dc
+			public const int transaction_fragment = 2131296476;
 			
-			// aapt resource value: 0x7f0900ba
-			public const int tvMenuCaption = 2131296442;
+			// aapt resource value: 0x7f0900bb
+			public const int tvMenuCaption = 2131296443;
 			
 			static Id()
 			{
