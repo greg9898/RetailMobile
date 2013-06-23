@@ -135,6 +135,7 @@ namespace RetailMobile.Library
                     {
                         CustID = set.GetInt(0);
                     }
+                    set.Close();
                 }
                 else
                 {

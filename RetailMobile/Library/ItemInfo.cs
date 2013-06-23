@@ -50,7 +50,7 @@ namespace RetailMobile.Library
             ItemQty = 1;
         }
 
-        public static ItemInfo GetItem(Context ctx, decimal itemID)
+        public static ItemInfo GetItem(Context ctx, decimal itemID, bool loadImage)
         {
             ItemInfo info = new ItemInfo();
 
@@ -98,33 +98,82 @@ info.item_buy_val1 = Convert.ToDecimal(result.GetDouble("item_buy_val1"));*/
                     info.ItemSaleVal1 = Convert.ToDecimal(result.GetDouble("unit_price"));
                     info.ItemQtyLeft = Convert.ToDecimal(result.GetDouble("item_qty_left"));
                     info.ItemVatId = result.GetInt("item_vat");
-
-                    byte[] signatureBytes = result.GetBytes("item_image");
-                    try
+                    if(loadImage)
                     {
-                        if (signatureBytes.Length > 0)
+                        byte[] signatureBytes = result.GetBytes("item_image");
+                        try
                         {
-                            info.ItemImage = Android.Graphics.BitmapFactory.DecodeByteArray(signatureBytes,
-                            0, signatureBytes.Length);
+                            if (signatureBytes.Length > 0)
+                            {
+                                info.ItemImage = Android.Graphics.BitmapFactory.DecodeByteArray(signatureBytes,
+                                0, signatureBytes.Length);
+                            }
+                            else
+                            {
+                                info.ItemImage = null;
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
                             info.ItemImage = null;
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        info.ItemImage = null;
                     }
 
                     Log.Debug("item_vat", "item_vat=" + info.ItemVatId);
                 }
 
+                result.Close();
                 ps.Close();
                 conn.Release();
             }
 
             return info;
+        }
+
+        public static Android.Graphics.Bitmap GetItemImage(Context ctx, int itemID)
+        {
+            Android.Graphics.Bitmap res = null;
+            using (IConnection conn = Sync.GetConnection(ctx))
+            {
+                IPreparedStatement ps = conn.PrepareStatement(@"SELECT
+item_image
+FROM ritems WHERE id = :ItemID");
+                ps.Set("ItemID", itemID.ToString());
+
+                IResultSet result = ps.ExecuteQuery();
+
+                if (result.Next())
+                {
+                    byte[] signatureBytes = result.GetBytes("item_image");
+                    try
+                    {
+                        if (signatureBytes.Length > 0)
+                        {
+                            /*Android.Graphics.Bitmap bmp = Android.Graphics.BitmapFactory.DecodeByteArray(signatureBytes,
+                                                                                            0, signatureBytes.Length);
+                            res = Android.Graphics.Bitmap.CreateScaledBitmap(bmp,256,256,true);
+                            bmp.Recycle();*/
+                            res = Android.Graphics.BitmapFactory.DecodeByteArray(signatureBytes,
+                                                                                 0, signatureBytes.Length);
+                        }
+                        else
+                        {
+                            res = null;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        res = null;
+                    }
+
+                }
+
+                result.Close();
+                ps.Close();
+                conn.Release();
+            }
+
+            return res;
         }
     }
 }

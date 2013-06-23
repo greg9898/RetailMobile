@@ -4,7 +4,7 @@ namespace RetailMobile
 {
     public class PreferencesUtil
     {
-        private static bool IsDebug = true;
+        private static bool IsDebug = false;
         private static string APP_SHARED_PREFS = "com.alphamobile.RetailPreferences";
         //87.203.80.42
         //2439
@@ -46,9 +46,9 @@ namespace RetailMobile
             }
             else
             {
-                IP = appSharedPrefs.GetString("IP", "");
+                IP = appSharedPrefs.GetString("IP", "94.64.120.133");
                 Port = appSharedPrefs.GetInt("Port", 2439);
-                SyncModel = appSharedPrefs.GetString("SyncModel", "RetailMobile3");
+                SyncModel = appSharedPrefs.GetString("SyncModel", "Android");
             }
             //IP = appSharedPrefs.GetString ("IP", "77.78.32.118");
             //IP = appSharedPrefs.GetString("IP","");

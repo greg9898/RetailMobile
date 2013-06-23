@@ -105,7 +105,7 @@ namespace RetailMobile.Library
         {
             Log.Debug("LoadItemInfo", "itemID=" + itemId + ",qty=" + qty);
             
-            ItemInfo item = ItemInfo.GetItem(ctx, itemId);
+            ItemInfo item = ItemInfo.GetItem(ctx, itemId, false);
             
             ItemId = item.ItemId;
             ItemCode = item.item_cod;

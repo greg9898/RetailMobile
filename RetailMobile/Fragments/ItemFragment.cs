@@ -32,7 +32,7 @@ namespace RetailMobile
             actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
             actionBar.SetTitle(this.Activity.GetString (Resource.String.miItems));
 
-            item = ItemInfo.GetItem(Activity, ObjectId);
+            item = ItemInfo.GetItem(Activity, ObjectId, true);
 
             View view = inflater.Inflate(Resource.Layout.ItemDetails, container, false);
 

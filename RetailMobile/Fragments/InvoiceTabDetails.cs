@@ -50,6 +50,8 @@ namespace RetailMobile
             return v;
         }
 
+
+
         public void LoadDetailsAdapter()
         {
             if (this.Activity == null)

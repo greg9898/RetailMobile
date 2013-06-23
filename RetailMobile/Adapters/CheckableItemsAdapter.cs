@@ -75,8 +75,12 @@ namespace RetailMobile
             try
             {
                 if (holder.btnItemImage != null)
+                {
                     holder.btnItemImage.SetBackgroundDrawable(new Android.Graphics.Drawables.BitmapDrawable(item.ItemImage));
-                holder.btnItemImage.Click += new EventHandler(btnItemImageClicked);
+                    holder.btnItemImage.Tag = item.ItemId;
+                    holder.btnItemImage.Click += new EventHandler(btnItemImageClicked);
+                }
+
                 if (holder.tbItemCode != null)
                     holder.tbItemCode.Text = item.item_cod;
                 if (holder.tbItemName != null)
@@ -114,7 +118,9 @@ namespace RetailMobile
             //_itemInfoList.show//
             if (ItemImageSelected != null)
             {
-                Android.Graphics.Bitmap image = ((Android.Graphics.Drawables.BitmapDrawable)((Button)sender).Background).Bitmap;
+                int itemID = ((int)((Button)sender).Tag);
+                Android.Graphics.Bitmap image = ItemInfo.GetItemImage(context, itemID);
+                //Android.Graphics.Bitmap image = ((Android.Graphics.Drawables.BitmapDrawable)((Button)sender).Background).Bitmap;
                 ItemImageSelected(image);
             }
         }

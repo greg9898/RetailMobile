@@ -32,7 +32,7 @@ namespace RetailMobile
             tbItemName = (EditText)FindViewById(Resource.Id.tbItemName);
 
             int ItemID = Intent.GetIntExtra("ItemID", 0);
-            _Item = Library.ItemInfo.GetItem(this, ItemID);
+            _Item = Library.ItemInfo.GetItem(this, ItemID, true);
             DataBind();
             /*DAL.ItemInfo.GetItemInfo(new CriteriaJ(this, ItemID), (o, e) =>
             {

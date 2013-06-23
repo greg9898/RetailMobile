@@ -104,8 +104,11 @@ WHERE 1 = 1  ";
                     {
                         if (signatureBytes.Length > 0)
                         {
-                            item.ItemImage = Android.Graphics.BitmapFactory.DecodeByteArray(signatureBytes,
+                            Android.Graphics.Bitmap img = Android.Graphics.BitmapFactory.DecodeByteArray(signatureBytes,
                             0, signatureBytes.Length);
+                            item.ItemImage = Android.Graphics.Bitmap.CreateScaledBitmap(img,64,64,true);
+                            img.Recycle();
+                            img = null;
                         }
                         else
                         {
@@ -125,7 +128,7 @@ WHERE 1 = 1  ";
                     lastLoadedID = item.ItemId;
                     Add(item);
                 }
-				
+                result.Close();
                 ps.Close();
                 conn.Release();
             }
@@ -200,14 +203,19 @@ WHERE 1 = 1  ";
                     {
                         if (signatureBytes.Length > 0)
                         {
-                            item.ItemImage = Android.Graphics.BitmapFactory.DecodeByteArray(signatureBytes, 0, signatureBytes.Length);
+                            Android.Graphics.Bitmap img = Android.Graphics.BitmapFactory.DecodeByteArray(signatureBytes,
+                                                                                                         0, signatureBytes.Length);
+                            item.ItemImage = Android.Graphics.Bitmap.CreateScaledBitmap(img,64,64,true);
+                            img.Recycle();
+                            img = null;
+
                         }
                         else
                         {
                             item.ItemImage = null;
                         }
                     }
-                    catch
+                    catch (Exception ex)
                     {
                         item.ItemImage = null;
                     }
@@ -220,6 +228,7 @@ WHERE 1 = 1  ";
                     adapter.Add(item);
                 }
 				
+                result.Close();
                 ps.Close();
                 conn.Release();
             }

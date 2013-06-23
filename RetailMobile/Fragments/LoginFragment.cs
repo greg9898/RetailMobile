@@ -65,7 +65,9 @@ namespace RetailMobile
 
                     if (this.Resources.Configuration.Orientation == Android.Content.Res.Orientation.Landscape)
                     {    
-                        this.Activity.FindViewById<LinearLayout>(Resource.Id.LayoutMenu).Visibility = ViewStates.Visible;              
+                        View layoutMenu = this.Activity.FindViewById<LinearLayout>(Resource.Id.LayoutMenu);
+                        if(layoutMenu != null)
+                            layoutMenu.Visibility = ViewStates.Visible;              
                     }
                     else
                     { 

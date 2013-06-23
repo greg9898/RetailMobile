@@ -42,8 +42,10 @@ WHERE 1=1 ";
 					
                     customers.Add(customer);
                 }
-				
+
+                result.Close();
                 ps.Close();
+                conn.Release();
             }
 			
             return customers;

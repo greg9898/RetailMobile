@@ -33,7 +33,7 @@ FROM " + tableName);
                         ItemCategDesc = result.GetString("item_categ_desc")}
                     );
                 }
-                
+                result.Close();
                 ps.Close();
                 conn.Release();
             }

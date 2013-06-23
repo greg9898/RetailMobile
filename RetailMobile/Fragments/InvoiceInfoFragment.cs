@@ -97,6 +97,9 @@ namespace RetailMobile
             lp.TopMargin = (int)Resources.GetDimension(Resource.Dimension.action_bar_height);
 
             RelativeLayout popupMenu = this.Activity.FindViewById<RelativeLayout>(Resource.Id.popup_mainmenu_inner);
+            if (popupMenu == null)
+                return;
+
             Log.Debug("invoiceInfoFr InitPopupMenu", "popupMenu=" + (popupMenu != null));
             popupMenu.LayoutParameters = lp;
             popupMenu.SetBackgroundResource(Resource.Drawable.actionbar_background);
@@ -141,7 +144,7 @@ namespace RetailMobile
         }
 
         void invoiceTabHeader_CustomerChanged()
-        {            
+        {
             LoadDetailsAdapter();
         }
 

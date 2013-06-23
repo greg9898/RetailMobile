@@ -142,7 +142,16 @@ namespace RetailMobile
 
         public void ItemImageSelected(Android.Graphics.Bitmap image)
         {
-            imgItemSelected.SetImageBitmap(image);
+            if (imgItemSelected.Drawable != null)
+            {
+                Android.Graphics.Bitmap bmp = ((Android.Graphics.Drawables.BitmapDrawable)imgItemSelected.Drawable).Bitmap;
+                imgItemSelected.SetImageBitmap(image);
+                bmp.Recycle();
+            }
+            else
+            {
+                imgItemSelected.SetImageBitmap(image);
+            }
         }
 
         void lvItems_FocusChange(object sender, View.FocusChangeEventArgs e)
@@ -293,8 +302,8 @@ namespace RetailMobile
                 ImageView imgItemSelected = FindViewById<ImageView>(Resource.Id.imgItemSelected);
                 lblItemSelectedInfo.Text = item.ItemDesc;
                 //tincho da go vidi
-                ItemInfo itemInfo = ItemInfo.GetItem(currentContext, item.ItemId);
-                imgItemSelected.SetImageBitmap(itemInfo.ItemImage);
+                //ItemInfo itemInfo = ItemInfo.GetItem(currentContext, item.ItemId, false);
+                //imgItemSelected.SetImageBitmap(itemInfo.ItemImage);
             };
         }
 

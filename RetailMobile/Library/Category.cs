@@ -49,7 +49,8 @@ FROM " + tableName + " WHERE id = :CategId");
                     info.Id = result.GetInt("id");
                     info.ItemCategDesc = result.GetString("item_categ_desc");
                 }
-                
+
+                result.Close();
                 ps.Close();
                 conn.Release();
             }
