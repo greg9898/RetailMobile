@@ -16,5 +16,15 @@ namespace RetailMobile.Library
 
             return null;
         }
+
+        public void RefreshNumbers()
+        {
+            int i = 0;
+            foreach (TransDet d in this)
+            {
+                i++;
+                d.DtrnNum = i;
+            }
+        }
     }
 }

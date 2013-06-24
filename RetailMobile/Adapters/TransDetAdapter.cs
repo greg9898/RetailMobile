@@ -129,7 +129,8 @@ namespace RetailMobile
 
             holder.tbDtrn_disc_line1.SetOnTouchListener(this);
 
-            holder.lblItemCode.Text = detail.ItemCode;
+            //holder.lblItemCode.Text = detail.ItemCode;
+            holder.lblItemCode.Text = detail.DtrnNum.ToString();
             holder.lblItemDesc.Text = detail.ItemDesc;
 
             holder.lblDtrn_unit_price.Text = detail.DtrnUnitPrice.ToString(Common.CurrencyFormat);

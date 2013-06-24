@@ -96,6 +96,8 @@ namespace RetailMobile.Library
                 }
                 TransDetListDeleted.Add(d);
             }
+
+            TransDetList.RefreshNumbers();
         }
         #region Customer Info
         public string CustCod;

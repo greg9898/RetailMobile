@@ -113,6 +113,7 @@ namespace RetailMobile
                     {
                         TransDet transDet = new TransDet();
                         transDet.LoadItemInfo(Activity, itemId, dialogItems.CheckedItemIds[itemId], invoiceParentView.Header.CstId);
+                        transDet.DtrnNum = invoiceParentView.Header.TransDetList.Count + 1;
                         invoiceParentView.Header.TransDetList.Add(transDet);
                     }
                 }

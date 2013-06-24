@@ -6,6 +6,7 @@ namespace RetailMobile.Library
 {
     public class TransDet
     {
+
         double dtrnQty1;
         double dtrnDiscLine1;
         double dtrnDiscLine2;
