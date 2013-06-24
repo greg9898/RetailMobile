@@ -47,6 +47,7 @@ namespace RetailMobile
                 CustName = tbCustName.Text
             });
             lvCustomers.Adapter = new CustomersAdapter(activity, custInfoList);
+            GC.Collect();
         }
 
         void ActionBarButtonClicked(int id)

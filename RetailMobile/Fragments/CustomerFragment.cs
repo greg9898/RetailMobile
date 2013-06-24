@@ -58,7 +58,8 @@ namespace RetailMobile
             mTabHost.TabChanged += TabHostHandleTabChanged; 
             mTabHost.Setup();
             InitializeTab(view);
-            
+
+            GC.Collect();
             return view;
         }
 

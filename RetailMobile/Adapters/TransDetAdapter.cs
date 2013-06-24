@@ -151,6 +151,8 @@ namespace RetailMobile
             holder.tbDtrn_disc_line1.FocusableInTouchMode = true;
             holder.tbDtrn_disc_line1.Focusable = true;
 
+            GC.Collect();
+
             return view;
         }
 

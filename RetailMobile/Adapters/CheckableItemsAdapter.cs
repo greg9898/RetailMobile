@@ -109,6 +109,7 @@ namespace RetailMobile
                 Log.Error("CheckableItemsAdapter getView", ex.Message);
             }
 
+            GC.Collect();
             return view;
         }
 

@@ -46,7 +46,9 @@ namespace RetailMobile
             }
             else
             {
-                IP = appSharedPrefs.GetString("IP", "94.64.120.133");
+                //patra
+                //IP = appSharedPrefs.GetString("IP", "94.64.120.133");
+                IP = appSharedPrefs.GetString("IP", "");
                 Port = appSharedPrefs.GetInt("Port", 2439);
                 SyncModel = appSharedPrefs.GetString("SyncModel", "Android");
             }

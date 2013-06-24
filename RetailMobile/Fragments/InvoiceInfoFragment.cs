@@ -85,6 +85,7 @@ namespace RetailMobile
                 }
             }       
 
+            GC.Collect();
             return v;
         }
 

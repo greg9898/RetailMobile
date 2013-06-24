@@ -305,6 +305,8 @@ namespace RetailMobile
                 //ItemInfo itemInfo = ItemInfo.GetItem(currentContext, item.ItemId, false);
                 //imgItemSelected.SetImageBitmap(itemInfo.ItemImage);
             };
+
+            GC.Collect();
         }
 
         public Dictionary<int, double> CheckedItemIds

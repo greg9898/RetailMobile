@@ -43,7 +43,7 @@ namespace RetailMobile
             tbCustName.Text = item.Name;
 //            tbCustTaxNum.Text = item.CustTaxNum;
 //            tbCustDebt.Text = item.CustDebt.ToString();
-
+            GC.Collect();
             return view;
         }
 		#region IScrollLoadble implementation

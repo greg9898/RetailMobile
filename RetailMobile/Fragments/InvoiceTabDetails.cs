@@ -46,7 +46,7 @@ namespace RetailMobile
             lvDetails.AddHeaderView(inflater.Inflate (Resource.Layout.TransDetRow_header, null));
      
             LoadDetailsAdapter();
-
+            GC.Collect();
             return v;
         }
 
