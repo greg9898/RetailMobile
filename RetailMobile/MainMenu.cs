@@ -10,7 +10,7 @@ using Android.Util;
 
 namespace RetailMobile
 {
-    [Activity(Label = "Ασυρματη Παραγγελιοληψια", MainLauncher = true, Icon = "@drawable/retail", Theme = "@android:style/Theme.Light.NoTitleBar.Fullscreen" 
+    [Activity(Label = "Ασυρματη Παραγγελιοληψια", MainLauncher = false, Icon = "@drawable/retail", Theme = "@android:style/Theme.Light.NoTitleBar.Fullscreen" 
               ,ConfigurationChanges=Android.Content.PM.ConfigChanges.Orientation)]
     public class MainMenu : Android.Support.V4.App.FragmentActivity
     {

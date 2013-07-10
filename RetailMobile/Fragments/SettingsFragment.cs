@@ -21,6 +21,28 @@ namespace RetailMobile
         Button btnSync;
         RetailMobile.Fragments.ItemActionBar actionBar;
 
+        private void InitActionBar()
+        {
+            bool showMenuButton = false;
+            actionBar = (RetailMobile.Fragments.ItemActionBar)this.FragmentManager.FindFragmentById(Resource.Id.ActionBar3);
+            if(actionBar == null)
+            {
+                actionBar = (RetailMobile.Fragments.ItemActionBar)this.FragmentManager.FindFragmentById(Resource.Id.ActionBar1);
+                showMenuButton = true;
+            }
+            actionBar.ClearButtons();
+            actionBar.AddButtonRight(ControlIds.SETTINGS_SAVE_BUTTON, "", Resource.Drawable.save_48);
+
+            if(showMenuButton)
+                actionBar.AddButtonLeft(ControlIds.INVOICE_MAINMENU_BUTTON, "", Resource.Drawable.menu_32);
+            else
+                actionBar.AddButtonLeft(ControlIds.SETTINGS_BACK_BUTTON, "", Resource.Drawable.back_48);
+
+            actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
+            string title = this.Activity.GetString(Resource.String.Settings);
+            actionBar.SetTitle(title);
+        }
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             Log.Debug("SettingsFragment ", "OnCreateView");
@@ -37,7 +59,7 @@ namespace RetailMobile
             if (Common.CurrentDealerID == 0)
             {
                 btnLogout.Visibility = ViewStates.Gone;
-                btnSync.Visibility = ViewStates.Gone;
+                btnSync.Visibility = ViewStates.Visible;
             }
             else
             {
@@ -53,38 +75,42 @@ namespace RetailMobile
 
             btnSync.Click += new EventHandler(btnSync_Click);
             btnLogout.Click += new EventHandler(btnLogout_Click);
-            
-            this.actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar); 
-            
-            Log.Debug("SettingsFragment ", "actionBar=" + actionBar);
-            actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
-            actionBar.ClearButtons();
-            //string save = this.Activity.GetString(Resource.String.btnSave);
-            actionBar.AddButtonRight(ControlIds.SETTINGS_SAVE_BUTTON, "", Resource.Drawable.save_48);
-            actionBar.AddButtonLeft(ControlIds.SETTINGS_BACK_BUTTON, "", Resource.Drawable.back_48);
 
-            string title = this.Activity.GetString(Resource.String.Settings);
-            actionBar.SetTitle(title);
-
+            InitActionBar();
             return v;
         }
 
         void btnSync_Click(object sender, EventArgs e)
         {
-            ((MainMenu)this.Activity).ShowProgressBar();
-            Task.Factory.StartNew(() => Sync.Synchronize (this.Activity)
-            ).ContinueWith(task => this.Activity.RunOnUiThread (() => { 
-				((MainMenu)this.Activity).HideProgressBar ();
-				Toast.MakeText (this.Activity.ApplicationContext, this.Activity.GetString (Resource.String.SynchronizationComplete), ToastLength.Short).Show ();
-			}));
+            ((Main)this.Activity).ShowProgressBar();
+            if (Common.CurrentDealerID == 0)
+            {
+                Task.Factory.StartNew(() => Sync.SyncUsers (this.Activity)
+                ).ContinueWith(task => this.Activity.RunOnUiThread (() => { 
+                    ((Main)this.Activity).HideProgressBar ();
+                    Toast.MakeText (this.Activity.ApplicationContext, this.Activity.GetString (Resource.String.SynchronizationComplete), ToastLength.Short).Show ();
+                }));
+            }
+            else
+            {
+                Task.Factory.StartNew(() => Sync.Synchronize (this.Activity)
+                ).ContinueWith(task => this.Activity.RunOnUiThread (() => { 
+				    ((Main)this.Activity).HideProgressBar ();
+				    Toast.MakeText (this.Activity.ApplicationContext, this.Activity.GetString (Resource.String.SynchronizationComplete), ToastLength.Short).Show ();
+			    }));
+            }
         }
 
         void btnLogout_Click(object sender, EventArgs e)
         {
             Common.CurrentDealerID = 0;
-            this.Activity.FindViewById<LinearLayout>(Resource.Id.LayoutMenu).Visibility = ViewStates.Invisible;
+            /*this.Activity.FindViewById<LinearLayout>(Resource.Id.LayoutMenu).Visibility = ViewStates.Invisible;
             var ft = this.Activity.SupportFragmentManager.BeginTransaction();
             ft.Replace(Resource.Id.detailInfo_fragment, new LoginFragment());
+            ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+            ft.Commit();*/
+            var ft = this.Activity.SupportFragmentManager.BeginTransaction();
+            ft.Replace(Resource.Id.fragment1, new LoginFragment());
             ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
             ft.Commit();
         }
@@ -93,6 +119,11 @@ namespace RetailMobile
         {
             switch (id)
             {
+                case ControlIds.SETTINGS_MENU_BUTTON:     
+                    {
+                    ((Main)this.Activity).ToggleMenu();
+                    }
+                    break;
                 case ControlIds.SETTINGS_BACK_BUTTON:     
                     if (Common.CurrentDealerID == 0)
                     {
@@ -101,7 +132,10 @@ namespace RetailMobile
                             return; //?
                         }
 
-                        if (Common.isTabletDevice(this.Activity))
+                        this.Activity.SupportFragmentManager.PopBackStack();
+
+
+                        /*if (Common.isTabletDevice(this.Activity))
                         {                
                             var ft = this.Activity.SupportFragmentManager.BeginTransaction();
                             ft.Replace(Resource.Id.detailInfo_fragment, new LoginFragment());
@@ -113,7 +147,7 @@ namespace RetailMobile
                             var intent = new Android.Content.Intent();
                             intent.SetClass(this.Activity, typeof(LoginFragmentActivity));
                             StartActivity(intent);
-                        }
+                        }*/
                     } 
                     break;
                 case ControlIds.SETTINGS_SAVE_BUTTON:
@@ -130,7 +164,14 @@ namespace RetailMobile
 
                         if (Common.CurrentDealerID == 0)
                         {
-                            if (Common.isTabletDevice(this.Activity))
+                            /*var ft = this.Activity.SupportFragmentManager.BeginTransaction();
+                            ft.Replace(Resource.Id.fragment1, new LoginFragment());
+                            ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+                            ft.Commit(); */
+
+                            this.Activity.SupportFragmentManager.PopBackStack();
+
+                            /*if (Common.isTabletDevice(this.Activity))
                             {
                                 var ft = this.Activity.SupportFragmentManager.BeginTransaction();
                                 ft.Replace(Resource.Id.detailInfo_fragment, new LoginFragment());
@@ -142,7 +183,7 @@ namespace RetailMobile
                                 var intent = new Android.Content.Intent();
                                 intent.SetClass(this.Activity, typeof(LoginFragmentActivity));
                                 StartActivity(intent);
-                            }
+                            }*/
                         }
                     }
                     catch (Exception ex)

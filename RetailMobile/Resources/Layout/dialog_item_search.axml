@@ -36,7 +36,9 @@
                 style="@style/myEditTextStyle"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/lblItemName" />
+                android:layout_below="@id/lblItemName" >
+                 <requestFocus />
+                 </EditText>
             <TextView
                 android:id="@+id/lblItemRetVal"
                 style="@style/fillWidth"

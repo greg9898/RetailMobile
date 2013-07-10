@@ -2,14 +2,14 @@
 <resources>
     <dimen name="isTablet">0dp</dimen>
     
-    <dimen name="action_bar_height">30dp</dimen>
-    <dimen name="action_bar_button_height">30dp</dimen>
-    <dimen name="action_bar_button_width">33dp</dimen>
+    <dimen name="action_bar_height">40dp</dimen>
+    <dimen name="action_bar_button_height">40dp</dimen>
+    <dimen name="action_bar_button_width">40dp</dimen>
     <dimen name="action_bar_button_top_margin">2dp</dimen>
     <dimen name="action_bar_button_bottom_margin">2dp</dimen>
     <dimen name="action_bar_button_left_margin">2dp</dimen>
     <dimen name="action_bar_button_right_margin">2dp</dimen>
-    <dimen name="action_bar_text_size">13sp</dimen>
+    <dimen name="action_bar_text_size">14sp</dimen>
     
     <dimen name="button_corners_radius">2dp</dimen>
     
@@ -21,7 +21,11 @@
     
     <dimen name="caption_text_size">15sp</dimen>
     
-    <dimen name="list_row_height">26dp</dimen>
-    <dimen name="list_row_text_size">11sp</dimen>
-    <dimen name="button_height">26dp</dimen>
+    <dimen name="list_row_height">36dp</dimen>
+    <dimen name="list_row_text_size">14sp</dimen>
+    <dimen name="button_height">40dp</dimen>
+    
+    <dimen name="slidingmenu_offset">60dp</dimen>
+    <dimen name="list_padding">10dp</dimen>
+    <dimen name="shadow_width">15dp</dimen>
 </resources>

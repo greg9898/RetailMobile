@@ -171,6 +171,7 @@ namespace RetailMobile.Library
             DtrnNetValue = result.GetDouble("net_value");
             DtrnVatValue = result.GetDouble("vat_value");
             ItemVatId = result.GetInt("item_vat");
+            DtrnNum = result.GetInt("dtrn_num");
 
             IsNew = false;
         }

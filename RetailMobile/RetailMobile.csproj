@@ -45,7 +45,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
-    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -207,6 +206,12 @@
     <AndroidResource Include="Resources\layout-port\InvoiceScreen.axml" />
     <AndroidResource Include="Resources\layout-sw600dp-port\InvoiceScreen.axml" />
     <AndroidResource Include="Resources\layout-sw600dp\InvoiceScreen.axml" />
+    <AndroidResource Include="Resources\Layout\main.axml" />
+    <AndroidResource Include="Resources\layout-sw600dp-land\main.axml" />
+    <AndroidResource Include="Resources\Drawable\shadow.xml" />
+    <Compile Include="Main.cs" />
+    <AndroidResource Include="Resources\layout-sw600dp-port\main.axml" />
+    <AndroidResource Include="Resources\layout-sw600dp\main.axml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -442,6 +447,10 @@
     <ProjectReference Include="..\Crashlytics\Crashlytics.csproj">
       <Project>{2E37C733-32FF-4FA7-872F-B93C6961F37D}</Project>
       <Name>Crashlytics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SlideMenu\SlideMenu\SlideMenu.csproj">
+      <Project>{DB8A7D35-8CA4-47B6-B327-BF9565183437}</Project>
+      <Name>SlideMenu</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

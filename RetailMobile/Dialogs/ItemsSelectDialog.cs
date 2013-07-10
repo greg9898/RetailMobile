@@ -5,6 +5,7 @@ using Android.Content;
 using Android.Views;
 using Android.Widget;
 using Android.Util;
+using Android.Views.InputMethods;
 using RetailMobile.Library;
 
 namespace RetailMobile
@@ -110,6 +111,14 @@ namespace RetailMobile
 				}
 			});
 
+        }
+
+        public override void Hide()
+        {
+            /*InputMethodManager imm = (InputMethodManager)currentContext.GetSystemService(
+                Android.Content.Context.InputMethodService);
+            imm.HideSoftInputFromWindow(tbSearch.WindowToken, 0);
+            imm.HideSoftInputFromWindow(tbRetVal.WindowToken, 0);*/
         }
 
         void ActionBarButtonClicked(int id)

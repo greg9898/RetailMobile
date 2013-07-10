@@ -33,24 +33,29 @@ namespace RetailMobile
         int previousTotal;
 		//IScrollLoadble LoadableAdapter;
 
+        private void InitActionBar()
+        {
+            bool showMenuButton = false;
+            actionBar = (RetailMobile.Fragments.ItemActionBar)this.FragmentManager.FindFragmentById(Resource.Id.ActionBar2);
+            if(actionBar == null)
+            {
+                actionBar = (RetailMobile.Fragments.ItemActionBar)this.FragmentManager.FindFragmentById(Resource.Id.ActionBar1);
+                showMenuButton = true;
+            }
+            actionBar.ClearButtons();
+            //actionBar.AddButtonLeft(65, "", Resource.Drawable.menu_32);
+            actionBar.AddButtonRight(ControlIds.INVOICE_ADD_BUTTON, "", Resource.Drawable.add_48);
+            if(showMenuButton)
+                actionBar.AddButtonLeft(ControlIds.INVOICE_MAINMENU_BUTTON, "", Resource.Drawable.menu_32);
+            actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
+        }
+
         public override void OnViewCreated(View p0, Bundle p1)
         {
             base.OnViewCreated(p0, p1);
             isTablet = Common.isTabletDevice(this.Activity);
          
-            if (isTablet)
-            {
-                actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBarList);
-            }
-            else
-            {
-                actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentByTag("ItemActionBar");
-            }
-            actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
-            actionBar.AddButtonRight(ControlIds.INVOICE_ADD_BUTTON, "", Resource.Drawable.add_48);
-
-            //this.ListView.SetOnScrollListener(new EndlessScrollListener((IScrollLoadble)this.ListView.Adapter));
-            //this.ListView.Scroll += new EventHandler<AbsListView.ScrollEventArgs>();
+            InitActionBar();
 
             this.ListView.Scroll += new EventHandler<AbsListView.ScrollEventArgs>((o,e) => {
 				if (scrollLoading && e.TotalItemCount > previousTotal) {
@@ -69,17 +74,32 @@ namespace RetailMobile
 
         void ActionBarButtonClicked(int id)
         {
+            if (id == 65)
+            {
+                ((Main)this.Activity).ToggleMenu();
+            }
+            else
             if (id == ControlIds.INVOICE_ADD_BUTTON)
             {
                 try
                 {
+                    RelativeLayout f1 = this.Activity.FindViewById<RelativeLayout>(Resource.Id.fragment1);
+                    RelativeLayout f3 = this.Activity.FindViewById<RelativeLayout>(Resource.Id.fragment3);
                     var ft = FragmentManager.BeginTransaction();
-                    //ft.Replace(Resource.Id.detailInfo_fragment, InvoiceFragment.NewInstance(invoiceId));
                     InvoiceInfoFragment invoiceFragment = InvoiceInfoFragment.NewInstance(0);
-                    ft.Replace(Resource.Id.detailInfo_fragment, invoiceFragment);
+                    if(f3 != null)
+                    {
+                        ft.Replace(Resource.Id.fragment3, invoiceFragment);
+                    }
+                    else
+                    {
+                        ft.Replace(Resource.Id.fragment1, invoiceFragment);
+                    }
                     ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
                     invoiceFragment.InvoiceSaved += new InvoiceInfoFragment.InvoiceSavedDelegate(InvoiceSaved);
                     ft.Commit();
+
+
                 }
                 catch (Exception ex)
                 {
@@ -156,12 +176,18 @@ namespace RetailMobile
                 return;
             }
 
-            if (isTablet)
-            {
+
                 // We can display everything in place with fragments.
                 // Have the list highlight this item and show the data.
                 ListView.SetItemChecked(index, true);
-                var detailFragment = (BaseFragment)FragmentManager.FindFragmentById(Resource.Id.detailInfo_fragment);
+                int currentFragmentID = 0;
+                var detailFragment = (BaseFragment)FragmentManager.FindFragmentById(Resource.Id.fragment3);
+                currentFragmentID = Resource.Id.fragment3;
+            if (detailFragment == null)
+            {
+                detailFragment = (BaseFragment)FragmentManager.FindFragmentById(Resource.Id.fragment1);
+                currentFragmentID = Resource.Id.fragment1;
+            }
 
                 switch (ParentObjId)
                 {
@@ -172,7 +198,7 @@ namespace RetailMobile
                         if (detailFragment == null || detailFragment.ObjectId != itemId)
                         {
                             var ft = FragmentManager.BeginTransaction();
-                            ft.Replace(Resource.Id.detailInfo_fragment, ItemFragment.NewInstance(itemId));
+                        ft.Replace(currentFragmentID, ItemFragment.NewInstance(itemId));
                             ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
                             ft.Commit();
                         }
@@ -186,7 +212,7 @@ namespace RetailMobile
                             System.Collections.Generic.List<string> custNamesList = new System.Collections.Generic.List<string>(custList.Count);
                             custList.ForEach(c=>custNamesList.Add( c.Name));
                             var ft = FragmentManager.BeginTransaction();
-                            ft.Replace(Resource.Id.detailInfo_fragment, CustomerFragment.NewInstance(custId, custNamesList.ToArray()));
+                        ft.Replace(currentFragmentID, CustomerFragment.NewInstance(custId, custNamesList.ToArray()));
                             ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
                             ft.Commit();
                         }
@@ -200,7 +226,7 @@ namespace RetailMobile
                             var ft = FragmentManager.BeginTransaction();
                             //ft.Replace(Resource.Id.detailInfo_fragment, InvoiceFragment.NewInstance(invoiceId));
                             InvoiceInfoFragment invoiceFragment = InvoiceInfoFragment.NewInstance(invoiceId);
-                            ft.Replace(Resource.Id.detailInfo_fragment, invoiceFragment);
+                        ft.Replace(currentFragmentID, invoiceFragment);
                             ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
                             ft.Commit();
 
@@ -208,16 +234,7 @@ namespace RetailMobile
                         }
                         break;
                 }
-            }
-            else
-            {
-                // Otherwise we need to launch a new Activity to display
-                // the dialog fragment with selected text.
-                var intent = new Intent();
-                intent.SetClass(Activity, typeof(DetailsActivity));
-                intent.PutExtra("idLvl2", index);
-                StartActivity(intent);
-            }
+           
         }
     }
 }

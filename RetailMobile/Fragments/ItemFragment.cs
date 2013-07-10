@@ -21,6 +21,15 @@ namespace RetailMobile
             return detailsFrag;
         }
 
+        private void InitActionBar()
+        {
+            actionBar = (RetailMobile.Fragments.ItemActionBar)this.FragmentManager.FindFragmentById(Resource.Id.ActionBar3);
+            if(actionBar == null)
+                actionBar = (RetailMobile.Fragments.ItemActionBar)this.FragmentManager.FindFragmentById(Resource.Id.ActionBar1);
+            actionBar.ClearButtons();
+            actionBar.SetTitle(this.Activity.GetString (Resource.String.miItems));
+        }
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             if (container == null)
@@ -29,8 +38,7 @@ namespace RetailMobile
                 return null;
             }
 
-            actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
-            actionBar.SetTitle(this.Activity.GetString (Resource.String.miItems));
+            InitActionBar();
 
             item = ItemInfo.GetItem(Activity, ObjectId, true);
 

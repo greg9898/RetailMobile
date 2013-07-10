@@ -79,4 +79,30 @@
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:background="@color/dark_blue" />
+	<RelativeLayout
+        android:id="@+id/miSync"
+        style="@style/menu_background"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imgSync"
+            android:layout_width="@dimen/main_menu_icon_size"
+            android:layout_height="@dimen/main_menu_icon_size"
+            android:src="@drawable/sync_48" />
+        <Button
+            android:id="@+id/btnSync"
+            style="@style/menuButtonStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="64dp"
+            android:layout_toRightOf="@id/imgSync"
+            android:background="@android:color/transparent"
+            android:layout_marginLeft="2dp"
+            android:gravity="left|center"
+            android:text="@string/btnSync" />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/dark_blue" />
+        
 </LinearLayout>

@@ -101,6 +101,8 @@ namespace RetailMobile
             dialogItems.Window.SetLayout(ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.FillParent);
             dialogItems.DismissEvent += (s, ee) =>
             {
+                invoiceParentView.InitActionBar();
+
                 foreach (int itemId in dialogItems.CheckedItemIds.Keys)
                 {
                     TransDet detOld = invoiceParentView.Header.TransDetList.GetByItemId(itemId);

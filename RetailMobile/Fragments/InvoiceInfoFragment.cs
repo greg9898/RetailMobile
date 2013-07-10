@@ -35,39 +35,36 @@ namespace RetailMobile
             set{ header = value;}
         }
 
+        public void InitActionBar()
+        {
+            bool showMenuButton = false;
+            actionBar = (RetailMobile.Fragments.ItemActionBar)this.FragmentManager.FindFragmentById(Resource.Id.ActionBar3);
+            if(actionBar == null)
+            {
+                actionBar = (RetailMobile.Fragments.ItemActionBar)this.FragmentManager.FindFragmentById(Resource.Id.ActionBar1);
+                showMenuButton = true;
+            }
+            actionBar.ClearButtons();
+            actionBar.AddButtonRight(ControlIds.INVOICE_SAVE_BUTTON, this.Activity.GetString(Resource.String.btnSave), Resource.Drawable.save_48);
+
+            if(showMenuButton)
+            {
+                actionBar.AddButtonLeft(ControlIds.INVOICE_MAINMENU_BUTTON, "", Resource.Drawable.menu_32);
+                actionBar.AddButtonLeft(ControlIds.INVOICE_ADD_BUTTON, "", Resource.Drawable.add_48);
+            }
+
+
+            actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
+            actionBar.SetTitle(this.Activity.GetString(Resource.String.lblInvoice));
+        }
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             View v = inflater.Inflate(Resource.Layout.InvoiceScreen, container, false);
             view = v;
 
-            isTablet = Common.isTabletDevice(this.Activity);
+            InitActionBar();
 
-            if (isTablet)
-            {
-                actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
-            }
-            else
-            {
-                actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentByTag("ItemActionBar");
-            }
-            actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
-            actionBar.ClearButtons();
-            actionBar.AddButtonRight(ControlIds.INVOICE_SAVE_BUTTON, this.Activity.GetString(Resource.String.btnSave), Resource.Drawable.save_48);
-            actionBar.SetTitle(this.Activity.GetString(Resource.String.lblInvoice));
-
-            if (isTablet)
-            {
-                if (this.Resources.Configuration.Orientation == Android.Content.Res.Orientation.Portrait)
-                {
-                    actionBar.AddButtonLeft(ControlIds.INVOICE_ADD_BUTTON, "", Resource.Drawable.add_48);
-                }
-            }
-            else
-            {
-                actionBar.AddButtonLeft(ControlIds.INVOICE_MAINMENU_BUTTON, "", Resource.Drawable.menu_32);
-                actionBar.AddButtonLeft(ControlIds.INVOICE_ADD_BUTTON, "", Resource.Drawable.add_48);
-            }
-            
             invoiceTabHeader = InvoiceTabHeader.NewInstance(this);
             invoiceTabDetails = InvoiceTabDetails.NewInstance(this);
             invoiceTabDetails.DetailsChanged += invoiceTabDetails_DetailsChanged;
@@ -77,13 +74,13 @@ namespace RetailMobile
             tabHost.Setup();
             InitializeTab();   
 
-            if (isTablet)
+            /*if (isTablet)
             {
                 if (Common.isPortrait(this.Activity))
                 {
                     InitPopupMenu();
                 }
-            }       
+            }       */
 
             GC.Collect();
             return v;
@@ -234,7 +231,8 @@ namespace RetailMobile
                     }
                     break;
                 case ControlIds.INVOICE_MAINMENU_BUTTON:
-                    if (isTablet)
+                    ((Main)Activity).ToggleMenu();
+                    /*if (isTablet)
                     {
                         RelativeLayout popupMenu = this.Activity.FindViewById<RelativeLayout>(Resource.Id.popup_mainmenu_inner);
                         popupMenu.Visibility = popupMenu.Visibility == ViewStates.Visible ? ViewStates.Gone : ViewStates.Visible;
@@ -246,7 +244,7 @@ namespace RetailMobile
                         ft.Replace(Resource.Id.content_phone_fragment, new MainMenuFragment());
                         ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
                         ft.Commit();
-                    }
+                    }*/
 
                     break;
             }

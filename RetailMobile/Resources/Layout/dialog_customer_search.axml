@@ -43,12 +43,16 @@
                 android:text="@string/lblCustomerName"
                 android:textColor="@android:color/black"
                 android:layout_below="@id/tbCustCode" />
+                
+                
             <EditText
                 android:id="@+id/tbCustName"
                 style="@style/myEditTextStyle"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/lblCustomerName" />
+                android:layout_below="@id/lblCustomerName" >
+                <requestFocus />
+                </EditText>
         </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

@@ -31,16 +31,24 @@ namespace RetailMobile
             return detailsFrag;
         }
 
+        private void InitActionBar()
+        {
+            actionBar = (RetailMobile.Fragments.ItemActionBar)this.FragmentManager.FindFragmentById(Resource.Id.ActionBar3);
+            if(actionBar == null)
+                actionBar = (RetailMobile.Fragments.ItemActionBar)this.FragmentManager.FindFragmentById(Resource.Id.ActionBar1);
+            actionBar.ClearButtons();
+            actionBar.AddButtonRight(SAVE_BUTTON, this.Activity.GetString(Resource.String.btnSave), Resource.Drawable.save_48);
+            actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
+            actionBar.SetTitle(this.Activity.GetString (Resource.String.miCustomers));
+        }
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             View view = inflater.Inflate(Resource.Layout.CustomerDetails, container, false);
             viewCust = view;
 
-            actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
-            actionBar.SetTitle(this.Activity.GetString (Resource.String.miCustomers));
-            actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
-            actionBar.ClearButtons();
-            actionBar.AddButtonRight(SAVE_BUTTON, this.Activity.GetString(Resource.String.btnSave), Resource.Drawable.save_48);
+            InitActionBar();
+
             view.FindViewById<FrameLayout>(Resource.Id.realtabcontent).Visibility = ViewStates.Gone;
 
             customer = CustomerInfo.GetCustomer(Activity, this.ObjectId);

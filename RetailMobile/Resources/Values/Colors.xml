@@ -16,6 +16,7 @@
   <color name="main_background_1">#D0EAF7</color>
   <color name="main_background_2">#D1E4ED</color>
   <color name="caption_text">#495A91</color>
+  <color name="bgr_progress_loading">#772E2E2E</color>
   
 </resources>
 

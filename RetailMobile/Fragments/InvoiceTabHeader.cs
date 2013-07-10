@@ -3,6 +3,7 @@ using Android.Views;
 using Android.Widget;
 using System;
 using Android.Util;
+using Android.Views.InputMethods;
 using RetailMobile.Library;
 
 namespace RetailMobile
@@ -134,10 +135,15 @@ namespace RetailMobile
 
             custDlg.DismissEvent += (s, ee) =>
             {
+                InputMethodManager imm = (InputMethodManager)Activity.GetSystemService(
+                    Android.Content.Context.InputMethodService);
+                imm.HideSoftInputFromWindow(tbHtrnID.WindowToken, 0);
+
                 if (custDlg.CustId > 0)
                 {
                     invoiceParentView.Header.CstId = custDlg.CustId;
                     LoadCustomerData(custDlg.CustId);
+
                 }
             };
             custDlg.Show();

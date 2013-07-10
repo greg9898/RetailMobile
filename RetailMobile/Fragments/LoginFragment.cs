@@ -4,6 +4,7 @@ using Android.Views;
 using Android.Widget;
 using RetailMobile.Library;
 using Android.Util;
+using Android.Views.InputMethods;
 
 namespace RetailMobile
 {
@@ -13,23 +14,26 @@ namespace RetailMobile
         TextView tbPassword;
         Button btnLogin;
         bool isTablet;
+        RetailMobile.Fragments.ItemActionBar actionBar;
 
         public override void OnCreate(Bundle p0)
         {
             base.OnCreate(p0);
         }
 
+        private void InitActionBar()
+        {
+            actionBar = (RetailMobile.Fragments.ItemActionBar)this.FragmentManager.FindFragmentById(Resource.Id.ActionBar1);
+            actionBar.ClearButtons();
+            actionBar.AddButtonLeft(1,"",Resource.Drawable.settings_48);
+            actionBar.ActionButtonClicked += new RetailMobile.Fragments.ItemActionBar.ActionButtonCLickedDelegate(ActionBarButtonClicked);
+        }
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             View view = inflater.Inflate(Resource.Layout.LoginFragment, container, false);
-            isTablet = Common.isTabletDevice(this.Activity);
 
-            if (isTablet && !Common.isPortrait(this.Activity))
-            {
-                RetailMobile.Fragments.ItemActionBar actionBar = (RetailMobile.Fragments.ItemActionBar)this.Activity.SupportFragmentManager.FindFragmentById(Resource.Id.ActionBar);
-                actionBar.SetTitle(this.Activity.GetString(Resource.String.btnLogin));
-                actionBar.ClearButtons();
-            }
+            InitActionBar();
 
             this.tbUsername = (TextView)view.FindViewById(Resource.Id.tbUsername);
             this.tbPassword = (TextView)view.FindViewById(Resource.Id.tbPassword);
@@ -39,6 +43,39 @@ namespace RetailMobile
             return view; 
         }
 
+        private void ActionBarButtonClicked(int buttonID)
+        {
+            if (buttonID == 1)
+            {
+                SettingsClicked();
+            }
+        }
+
+        void SettingsClicked()
+        {
+            RelativeLayout f3 = this.Activity.FindViewById<RelativeLayout>(Resource.Id.fragment3);
+            if(f3 != null)
+            {
+                LinearLayout f2 = this.Activity.FindViewById<LinearLayout>(Resource.Id.layout2);
+                f2.Visibility = ViewStates.Gone;
+                f3.Visibility = ViewStates.Visible;
+
+                var ft = FragmentManager.BeginTransaction();
+                ft.Replace(Resource.Id.fragment3, new SettingsFragment());
+                ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+                ft.AddToBackStack("Settings");
+                ft.Commit();
+            }
+            else
+            {
+                var ft = FragmentManager.BeginTransaction();
+                ft.Replace(Resource.Id.fragment1, new SettingsFragment());
+                ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+                ft.AddToBackStack("Settings");
+                ft.Commit();
+            }
+        }
+
         void btnLogin_Click(object sender, EventArgs e)
         {
             string username = this.tbUsername.Text;
@@ -46,7 +83,52 @@ namespace RetailMobile
 
             if (LoginFragment.Login(this.Activity, username, password))
             {
-                if (isTablet)
+                RelativeLayout f1 = this.Activity.FindViewById<RelativeLayout>(Resource.Id.fragment1);
+                RelativeLayout f2 = this.Activity.FindViewById<RelativeLayout>(Resource.Id.fragment2);
+                RelativeLayout f3 = this.Activity.FindViewById<RelativeLayout>(Resource.Id.fragment3);
+                LinearLayout l2 = this.Activity.FindViewById<LinearLayout>(Resource.Id.layout2);
+                LinearLayout l3 = this.Activity.FindViewById<LinearLayout>(Resource.Id.layout3);
+
+                if (f2 != null && f3 != null)
+                {
+                    f2.Visibility = ViewStates.Visible;
+                    f3.Visibility = ViewStates.Visible;
+                    l2.Visibility = ViewStates.Visible;
+                    l3.Visibility = ViewStates.Visible;
+
+                    var ft = FragmentManager.BeginTransaction();
+                    ft = FragmentManager.BeginTransaction();
+                    ft.Replace(Resource.Id.fragment1, new MainMenuFragment());
+                    ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+                    ft.Commit();
+
+                    DetailsFragment details = DetailsFragment.NewInstance((int)MainMenu.MenuItems.Invoices);
+                    ft = FragmentManager.BeginTransaction();
+                    ft.Replace(Resource.Id.fragment2, details);
+                    ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+                    ft.Commit();
+
+                    ft = FragmentManager.BeginTransaction();
+                    ft.Replace(Resource.Id.fragment3, InvoiceInfoFragment.NewInstance(0));
+                    ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+                    ft.Commit();
+
+                }
+                else
+                {
+                    var ft = FragmentManager.BeginTransaction();
+                    ft = FragmentManager.BeginTransaction();
+                    ft.Replace(Resource.Id.fragment1, InvoiceInfoFragment.NewInstance(0));
+                    ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
+                    ft.Commit();
+                }
+
+                InputMethodManager imm = (InputMethodManager)Activity.GetSystemService(
+                    Android.Content.Context.InputMethodService);
+                imm.HideSoftInputFromWindow(tbPassword.WindowToken, 0);
+                imm.HideSoftInputFromWindow(tbUsername.WindowToken, 0);
+
+                /*if (isTablet)
                 {
                     this.Activity.FindViewById<LinearLayout>(Resource.Id.layoutList).Visibility = ViewStates.Visible;
                     this.Activity.FindViewById<FrameLayout>(Resource.Id.details_fragment).Visibility = ViewStates.Visible;
@@ -88,7 +170,7 @@ namespace RetailMobile
                     ft.Replace(Resource.Id.content_phone_fragment, InvoiceInfoFragment.NewInstance(0));
                     ft.SetTransition(Android.Support.V4.App.FragmentTransaction.TransitFragmentFade);
                     ft.Commit();
-                }               
+                }*/
             }
             else
             {

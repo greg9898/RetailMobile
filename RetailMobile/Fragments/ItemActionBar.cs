@@ -68,6 +68,9 @@ namespace RetailMobile.Fragments
 
         void AddButton(ViewGroup parent, int id, string text, int resourceID)
         {
+            if (ButtonsAdded == null)
+                ButtonsAdded = new List<int>();
+
             if (ButtonsAdded.Contains(id))
                 return;
 
